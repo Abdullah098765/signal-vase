@@ -2,14 +2,18 @@
 'use client'
 
 import './components.css'
-import { useState } from 'react';
+import { useEffect, useRef, useState, createContext, useContext } from 'react';
+import { useMyContext } from '../context/context';
 
 
 import { BellIcon } from '@heroicons/react/solid';
 
 const Navbar = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
+    const { isOpen, setIsOpen } = useMyContext();
+
+    const dropdownRef = useRef(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -18,6 +22,24 @@ const Navbar = () => {
     const closeMenu = () => {
         setIsOpen(false);
     };
+    useEffect(() => {
+        // Add a click event listener to the document body
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                closeMenu();
+            }
+        };
+
+        // Attach the event listener when the dropdown is open
+        if (isOpen) {
+            document.addEventListener('click', handleClickOutside);
+        }
+
+        // Remove the event listener when the dropdown is closed or the component unmounts
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isOpen]);
     return (
         <nav className="bg-gray-900 text-white p-1">
             <div className="container mx-auto flex justify-between items-center">
@@ -76,7 +98,7 @@ const Navbar = () => {
 
                 {/* User Profile */}
                 <div className="flex items-center space-x-4">
-                   
+
                     <div className="relative group">
                         <button
                             onClick={toggleMenu}
