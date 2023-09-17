@@ -6,7 +6,7 @@ const SignalCardList = ({ }) => {
     var signals = [
 
         {
-            id: 1,
+            id: 15565437,
             type: 'Sell', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'BTC/USD',
             strength: 'Strong', // or 'Regular'
@@ -21,7 +21,7 @@ const SignalCardList = ({ }) => {
             rating: 4.5, // out of 5
         },
         {
-            id: 1,
+            id: 6371,
             type: 'Sell', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'LTC/USD',
             strength: 'Strong', // or 'Regular'
@@ -36,7 +36,7 @@ const SignalCardList = ({ }) => {
             rating: 4.5, // out of 5
         },
         {
-            id: 1,
+            id: 164,
             type: 'Buy', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'DOGE/USD',
             strength: 'Strong', // or 'Regular'
@@ -51,7 +51,7 @@ const SignalCardList = ({ }) => {
             rating: 4.5, // out of 5
         },
         {
-            id: 1,
+            id: 13564,
             type: 'Buy', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'ETH/USD',
             strength: 'Strong', // or 'Regular'
@@ -66,7 +66,7 @@ const SignalCardList = ({ }) => {
             rating: 4.5, // out of 5
         },
         {
-            id: 1,
+            id: 146644653,
             type: 'Buy', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'BTC/USD',
             strength: 'Strong', // or 'Regular'
@@ -81,7 +81,7 @@ const SignalCardList = ({ }) => {
             rating: 4.5, // out of 5
         },
         {
-            id: 1,
+            id: 3531,
             type: 'Sell', // or 'Sell', 'Hold', 'Strong Buy', 'Strong Sell', etc.
             pair: 'ETH/USD',
             strength: 'Strong', // or 'Regular'

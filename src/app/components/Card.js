@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import './components.css'
 export default function Card({ signal }) {
     return (
@@ -46,7 +47,7 @@ export default function Card({ signal }) {
 
             {/* User Profile */}
             <div className="mt-2 flex items-center text-sm">
-                <img src={signal.providerAvatar} alt={signal.providerName} className="w-6 h-6 rounded-full" />
+                <Image width={6} height={6}  src={signal.providerAvatar} alt={signal.providerName} className="w-6 h-6 rounded-full" />
                 <p className="ml-2">{signal.providerName}</p>
             </div>
 
