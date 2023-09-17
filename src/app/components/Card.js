@@ -47,7 +47,7 @@ export default function Card({ signal }) {
 
             {/* User Profile */}
             <div className="mt-2 flex items-center text-sm">
-                <Image width={6} height={6}  src={signal.providerAvatar} alt={signal.providerName} className="w-6 h-6 rounded-full" />
+                <img  src={signal.providerAvatar} alt={signal.providerName} className="w-6 h-6 rounded-full" />
                 <p className="ml-2">{signal.providerName}</p>
             </div>
 

@@ -101,7 +101,7 @@ const SignalCardList = ({ }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-0 md:p-5">
             {signals.map((signal) => (
 
-                <Card signal={signal} />
+                <Card signal={signal}  key={signal.id}/>
 
             ))}
 
