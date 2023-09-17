@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import './components.css'
-export default function Card({ signal }) {
+export default function Card({ signal, key }) {
     return (
-        <div className="bg-white  p-3 card">
+        <div className="bg-white  p-3 card" key={key}>
             {/* Signal Type Badge */}
             <div className={`mb-2 ${signal.type === 'Buy' ? 'bg-green-500' : 'bg-red-500'} text-white py-1 px-2 rounded-md text-xs font-semibold inline-block`}>
                 {signal.type}
