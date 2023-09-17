@@ -98,7 +98,7 @@ const Navbar = () => {
                 {/* User Profile */}
                 <div className="flex items-center space-x-4">
 
-                    <div className="relative group">
+                    <div className="absolute right-5 group">
                         <button
                             onClick={toggleMenu}
                             className="flex items-center space-x-2 focus:outline-none"

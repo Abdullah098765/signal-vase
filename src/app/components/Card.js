@@ -58,9 +58,14 @@ export default function Card({ signal }) {
 
             {/* Action Buttons */}
             <div className="mt-2 flex justify-end space-x-2">
-                <button className="bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 text-sm">Copy Signal</button>
-                <button className="bg-gray-300 text-gray-700 px-3 py-1 rounded-full hover:bg-gray-400 text-sm">Details</button>
-            </div>
+                <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
+                    Copy Signal
+                </button>
+
+                {/* Details Button */}
+                <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 text-sm">
+                    Details
+                </button> </div>
         </div>
     )
 }
