@@ -2,7 +2,7 @@ import React from 'react'
 import './components.css'
 export default function Card({ signal }) {
     return (
-        <div className="bg-white shadow-sm rounded-md p-3 card">
+        <div className="bg-white  p-3 card">
             {/* Signal Type Badge */}
             <div className={`mb-2 ${signal.type === 'Buy' ? 'bg-green-500' : 'bg-red-500'} text-white py-1 px-2 rounded-md text-xs font-semibold inline-block`}>
                 {signal.type}
@@ -59,12 +59,12 @@ export default function Card({ signal }) {
             {/* Action Buttons */}
             <div className="mt-2 flex justify-end space-x-2">
                 <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
-                    Copy Signal
+                    Follow Signal
                 </button>
 
                 {/* Details Button */}
                 <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 text-sm">
-                    Details
+                 Signal Details
                 </button> </div>
         </div>
     )
