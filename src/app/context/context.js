@@ -11,11 +11,15 @@ export const useMyContext = () => {
 
 export const MyContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSliderOpen, setIsSliderOpen] = useState(true);
+  const closeSidenav = () => {
+    setIsSliderOpen(!isSliderOpen)
+    console.log(isSliderOpen);
+  };
 
- 
 
   return (
-    <MyContext.Provider value={{ isOpen, setIsOpen }}>
+    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav }}>
       {children}
     </MyContext.Provider>
   );

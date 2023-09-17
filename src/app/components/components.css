@@ -1,33 +1,75 @@
-.search-icon{
-    position: absolute;
-    left: 800px;
+.search-icon {
+  position: absolute;
+  left: 800px;
 }
-.w-120{
-    width: 120%;
+.w-120 {
+  width: 120%;
 }
 /* .profile-pic-nav{
     max-width:100%;
     max-height:100%;
 } */
 
-
 /* styles/Sidebar.css */
 
 .sidebar {
-    width: 250px;
-    transition: transform 0.3s ease;
-  }
-  
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  
-  .submenu {
-    display: block;
-    margin-left: 10px;
-  }
-  
-  .submenu li {
-    padding-left: 10px;
-  }
-  
+  width: 0px;
+  height: 100%;
+  position: unset;
+  overflow-x: hidden;
+  transition: 0.3s;
+}
+
+.open {
+  width: 13rem;
+}
+.close {
+  width: 0rem;
+}
+
+/* styles/Sidebar.css */
+
+/* Webkit-based browsers (Chrome, Safari) */
+.sidebar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #999 #f4f4f4; /* Track and Thumb colors */
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Track background color */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #999; /* Thumb color */
+}
+
+/* Firefox */
+.sidebar {
+  scrollbar-width: thin; /* For Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* styles/Sidebar.css */
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #39393a; /* Thumb color on hover */
+}
+
+/* styles/Sidebar.css */
+
+.sidebar::-webkit-scrollbar-corner {
+  background: #f4f4f4; /* Corner background color */
+}
+
+/* Card Styles */
+
+.card {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+}

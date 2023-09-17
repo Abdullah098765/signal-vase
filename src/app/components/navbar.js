@@ -11,9 +11,8 @@ import { BellIcon } from '@heroicons/react/solid';
 const Navbar = () => {
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen } = useMyContext();
+    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav } = useMyContext();
 
-    const dropdownRef = useRef(null);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -22,31 +21,31 @@ const Navbar = () => {
     const closeMenu = () => {
         setIsOpen(false);
     };
-    useEffect(() => {
-        // Add a click event listener to the document body
-        const handleClickOutside = (event) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                closeMenu();
-            }
-        };
 
-        // Attach the event listener when the dropdown is open
-        if (isOpen) {
-            document.addEventListener('click', handleClickOutside);
-        }
+    const toggleSidenav = () => {
+        setIsOpen(!isOpen);
+    };
 
-        // Remove the event listener when the dropdown is closed or the component unmounts
-        return () => {
-            document.removeEventListener('click', handleClickOutside);
-        };
-    }, [isOpen]);
+
+
     return (
         <nav className="bg-gray-900 text-white p-1">
-            <div className="container mx-auto flex justify-between items-center">
+            <div className="container ml-4 mx-auto flex justify-between items-center">
+
                 {/* Branding or Logo */}
-                <a className="text-2xl font-semibold cursor-pointer">
-                    <img className='max-h-20' src='https://firebasestorage.googleapis.com/v0/b/olx-app-9a451.appspot.com/o/lofgo.PNG?alt=media&token=f6086fb3-a383-4a4d-ab0a-57b628854e37'></img>
-                </a>
+                <div className="text-2xl font-semibold cursor-pointer flex">
+                    <button onClick={
+                        closeSidenav
+                    }
+                        className="hamburger
+                        -icon  focus:outline-none"
+                    >
+                        <div className="w-4 h-0.5 bg-gray-400 mb-1"></div>
+                        <div className="w-3 h-0.5 bg-gray-400 mb-1"></div>
+                        <div className="w-2 h-0.5 bg-gray-400"></div>
+                    </button>
+                    <img className='max-h-20 ml-3' src='https://firebasestorage.googleapis.com/v0/b/olx-app-9a451.appspot.com/o/lofgo.PNG?alt=media&token=f6086fb3-a383-4a4d-ab0a-57b628854e37'></img>
+                </div>
 
                 {/* Search Bar */}
                 <div className="w-1/3 relative">
