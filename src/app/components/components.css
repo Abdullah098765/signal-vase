@@ -15,7 +15,13 @@
 .sidebar {
   width: 0px;
   height: 100%;
-  position: unset;
+  overflow-x: hidden;
+  transition: 0.3s;
+  top: 88px;
+}
+.sidebar-visible {
+  width: 0px;
+  height: 100%;
   overflow-x: hidden;
   transition: 0.3s;
 }

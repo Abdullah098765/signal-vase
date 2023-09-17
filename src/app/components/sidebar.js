@@ -9,9 +9,16 @@ function Sidebar() {
     const { isSliderOpen, setIsSliderOpen, isOpen } = useMyContext();
 
     return (
-        <div>
+        <div >
             {
-                <div className={` absolute  sidebar h-full   transition-transform ${isSliderOpen ? 'translate-x-0 open' : '-translate-x-full close'}`}>
+                <div className={` bg-gray-900   sidebar-visible h-full   transition-transform ${isSliderOpen ? 'translate-x-0 open' : '-translate-x-full close'}`}>
+                </div>
+
+            }
+            {
+
+
+                <div className={` fixed    sidebar h-full   transition-transform ${isSliderOpen ? 'translate-x-0 open' : '-translate-x-full close'}`}>
 
 
                     <div id="Main" class="xl:rounded-br transform  xl:translate-x-0  ease-in-out transition duration-500 flex justify-start items-start h-full  w-full sm:w-52 bg-gray-900 flex-col">
