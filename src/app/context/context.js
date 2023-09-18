@@ -12,6 +12,7 @@ export const useMyContext = () => {
 export const MyContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const closeSidenav = () => {
     setIsSliderOpen(!isSliderOpen)
     console.log(isSliderOpen);
@@ -19,7 +20,7 @@ export const MyContextProvider = ({ children }) => {
 
 
   return (
-    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav }}>
+    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen }}>
       {children}
     </MyContext.Provider>
   );

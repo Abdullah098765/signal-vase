@@ -2,7 +2,7 @@
 'use client'
 
 import './components.css'
-import { useEffect, useRef, useState, createContext, useContext } from 'react';
+import { useEffect, useRef, useState, createContext, useContext, } from 'react';
 import { useMyContext } from '../context/context';
 
 
@@ -11,7 +11,7 @@ import { BellIcon } from '@heroicons/react/solid';
 const Navbar = () => {
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav } = useMyContext();
+    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen } = useMyContext();
 
 
     const toggleMenu = () => {
@@ -78,20 +78,11 @@ const Navbar = () => {
                 {/* Navigation Links */}
                 <div className="space-x-4 flex ">
 
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6 text-gray-100 hover:text-gray-400"
-                        fill=""
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                    </svg>
-                    <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' />
+
+                    <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
+                        Create a Signal
+                    </button>
+                    {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
 
                 </div>
 
@@ -99,7 +90,11 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
 
                     <div className="absolute right-5 group">
-                        <button
+                        {true ? <button onClick={() => {
+                            setIsModalOpen(true)
+                        }} className="bg-gray-700 text-white px-4 py-2 rounded hover:text-blue-400 text-sm ">
+                            Sign In
+                        </button> : <button
                             onClick={toggleMenu}
                             className="flex items-center space-x-2 focus:outline-none"
                         >
@@ -107,7 +102,7 @@ const Navbar = () => {
                             <div className="rounded-full overflow-hidden h-10 w-10">
                                 <img className='profile-pic-nav w-full h-full object-cover object-center' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUKcdDmMmOM4ojyKC7ye7tPaHYMjDtJs3gRg&usqp=CAU'></img>
                             </div>
-                        </button>
+                        </button>}
 
                         {isOpen && (
                             <ul
