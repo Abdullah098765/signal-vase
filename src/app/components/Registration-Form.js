@@ -14,12 +14,42 @@ const RegistrationForm = () => {
     var result = await signInWithPopup(auth, provider)
     console.log(result);
     if (result) {
-console.log(result.user.displayName + " is Signed in.");
+      // console.log(result.user.displayName + " is Signed in.");
+      try {
+        // Send userData to your server to register the user
+        const response = await fetch('http://localhost:3000/api/signUp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(
+            {
+              fireBaseUid: result.user.uid,
+              displayName: result.user.displayName,
+              email: result.user.email, // User's email address
+              photoURL: result.user.photoURL,
+              phone:result.user.phoneNumber
+            }
+          ),
+        });
+
+        if (response.ok) {
+          // User registration on the server was successful
+          console.log('User registered on the server.');
+        } else {
+          // Handle server registration error
+          console.error('Server registration failed.');
+        }
+      } catch (error) {
+        // Handle network or other errors
+        console.error('Error registering user on the server:', error);
+
+      };
+
+
+
     }
-
-
   };
-
 
   const [formData, setFormData] = useState({
     username: '',
