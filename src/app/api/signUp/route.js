@@ -2,8 +2,10 @@ import { NextResponse, NextRequest } from 'next/server'
 import connectDB from '../db.js';
 import Schemas from '../Modals/schemas.js'
 
-
 connectDB();
+
+
+
 
 export async function POST(req, res) {
   var user = await req.json()

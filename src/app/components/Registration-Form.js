@@ -27,7 +27,7 @@ const RegistrationForm = () => {
               fireBaseUid: result.user.uid,
               displayName: result.user.displayName,
               email: result.user.email, // User's email address
-              photoURL: result.user.photoURL,
+              profilePicture: result.user.photoURL,
               phone:result.user.phoneNumber
             }
           ),
