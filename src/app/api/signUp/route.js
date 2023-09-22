@@ -18,13 +18,17 @@ export async function POST(req, res) {
   newUser.save()
     .then(() => {
       console.log('User saved to the database');
+      return NextResponse.json({ a: 'User saved to the database' })
+
     })
     .catch((error) => {
       console.error('Error saving user:', error);
+      return NextResponse.json({ a: 'Error saving user:', error })
+
     });
   // var user = await req.json()
   // console.log( "New User Is Logged in ", user);
-  return NextResponse.json({ a: "user.displayName +' Successfully logged in'" })
+  // return NextResponse.json({ a: "user.displayName +' Successfully logged in'" })
 }
 
 
