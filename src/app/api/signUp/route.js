@@ -1,32 +1,34 @@
-import { NextResponse, NextRequest } from 'next/server'
+// import { NextResponse, NextRequest } from 'next/server'
+// import connectDB from '../db.js';
+// import Schemas from '../Modals/schemas.js'
+
+// connectDB();
+
+
+import { NextResponse, NextRequest } from 'next/server';
 import connectDB from '../db.js';
-import Schemas from '../Modals/schemas.js'
+import Schemas from '../Modals/schemas.js';
 
 connectDB();
 
-
-
-
 export async function POST(req, res) {
-  var user = await req.json()
-
-  const newUser = new Schemas.User(
-    user
-  );
-  console.log(user);
-  // Save the user to the database
-  newUser.save()
-    .then(() => {
-      console.log('User saved to the database');
-      
-    })
-    .catch((error) => {
-      console.error('Error saving user:', error);
-    });
-  // var user = await req.json()
-  // console.log( "New User Is Logged in ", user);
-  return NextResponse.json({ a: "user.displayName +' Successfully logged in'" })
+  try {
+    const user = await req.json();
+    const newUser = new Schemas.User(user);
+    console.log(user);
+    // Save the user to the database
+    await newUser.save();
+    console.log('User saved to the database');
+    // Send a JSON response with a 200 status code (OK)
+    return NextResponse.json({ message: "signed" });
+  } catch (error) {
+    console.error('Error saving user:', error);
+    
+    // Send a JSON response with a 500 status code (Internal Server Error)
+    return NextResponse.json({ error: 'An error occurred while saving the user' }, { status: 500 });
+  }
 }
+
 
 
 

@@ -25,7 +25,7 @@ export default function Card({ signal, key }) {
             </div>
 
             {/* Description */}
-            <p className="mt-2 text-sm">{signal.description}</p>
+            <p className="mt-2 text-sm sdes">{signal.description}</p>
 
             <hr className="my-2 border-gray-300" />
 
