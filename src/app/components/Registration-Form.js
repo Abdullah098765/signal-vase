@@ -17,7 +17,7 @@ const RegistrationForm = () => {
       // console.log(result.user.displayName + " is Signed in.");
       try {
         // Send userData to your server to register the user
-        const response = await fetch('https://signal-hub.vercel.app/api/signUp', {
+        const response = await fetch('http://localhost:3000/api/signUp', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -36,6 +36,8 @@ const RegistrationForm = () => {
         if (response.ok) {
           // User registration on the server was successful
           console.log('User registered on the server.');
+          window.localStorage.setItem('uid', result.user.uid)
+          window.location = 'http://localhost:3000/dashboard?name=' + result.user.uid
         } else {
           // Handle server registration error
           console.error('Server registration failed.');

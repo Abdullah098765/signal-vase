@@ -57,6 +57,18 @@ const userSchema = new mongoose.Schema({
       ref: 'Signal', // If you have a Signal schema.
     },
   ],
+  SuccessfulSignals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Signal', // Reference to the Signal schema.
+    },
+  ],
+  UnsuccessfulSignals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Signal', // Reference to the Signal schema.
+    },
+  ],
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,

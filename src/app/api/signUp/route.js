@@ -20,7 +20,7 @@ export async function POST(req, res) {
     await newUser.save();
     console.log('User saved to the database');
     // Send a JSON response with a 200 status code (OK)
-    return NextResponse.json({ message: "signed" });
+    return NextResponse.json({ message: "signed",MDBid:'' });
   } catch (error) {
     console.error('Error saving user:', error);
     
