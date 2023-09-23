@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from './Card'
+import "./components.css"
 
 const SignalCardList = ({ }) => {
 
@@ -123,7 +123,7 @@ const SignalCardList = ({ }) => {
 </div>
 
 {/* Description */}
-<p className="mt-2 text-sm">{signal.description}</p>
+<p className="mt-2 text-sm sdes">{signal.description}</p>
 
 <hr className="my-2 border-gray-300" />
 

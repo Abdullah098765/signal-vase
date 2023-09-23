@@ -24,7 +24,6 @@
   height: 100%;
   overflow-x: hidden;
   transition: 0.3s;
-  
 }
 
 .open {
@@ -78,8 +77,25 @@
 /* Card Styles */
 
 .card {
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);}
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+}
 
-.sdes{
+.sdes {
   min-height: 58px;
+}
+.group:hover .group-hover\:flex {
+  display: flex !important;
+}
+
+
+/* Only the scroll bar */
+::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.15);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,.3);
 }

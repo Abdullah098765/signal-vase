@@ -11,7 +11,7 @@ import "firebase/auth";
 import { firebaseConfig } from "../../firebaseConfig.js";
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <MyContextProvider>
         <Navbar />
         <div className="flex">

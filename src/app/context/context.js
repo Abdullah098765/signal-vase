@@ -18,9 +18,12 @@ export const MyContextProvider = ({ children }) => {
     console.log(isSliderOpen);
   };
 
+  
+
+
 
   return (
-    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen }}>
+    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen,  }}>
       {children}
     </MyContext.Provider>
   );
