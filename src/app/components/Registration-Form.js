@@ -17,7 +17,7 @@ const RegistrationForm = () => {
       // console.log(result.user.displayName + " is Signed in.");
       try {
         // Send userData to your server to register the user
-        const response = await fetch('http://localhost:3000/api/signUp', {
+        const response = await fetch('http://localhost:5000/signup_user', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const RegistrationForm = () => {
               displayName: result.user.displayName,
               email: result.user.email, // User's email address
               profilePicture: result.user.photoURL,
-              phone:result.user.phoneNumber
+              phone: result.user.phoneNumber
             }
           ),
         });
