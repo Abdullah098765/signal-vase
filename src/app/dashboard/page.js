@@ -1,34 +1,15 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar'
+import MainDashboard from '../components/mainDashboard.js'
 import '../components/components.css'
 import Navbar from '../components/navbar';
-import { MyContextProvider } from '../context/context';
+import { MyContextProvider, useMyContext } from '../context/context';
 
 
-const Dashboard =  () => {
-	const currentURL = new URL(window.location.href);
-	const uid = currentURL.searchParams.get('uid');
-  const [user, setUser] = useState({})
-	var myHeaders = new Headers();
-myHeaders.append("a", "dni");
-myHeaders.append("Content-Type", "application/json");
+const Dashboard = () => {
 
-var raw = JSON.stringify({
-  "uid": uid
-});
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
-
-fetch("http://localhost:3000/api/get-user", requestOptions)
-  .then(response => response.text())
-  .then(result => setUser(JSON.parse(result)))
-  .catch(error => console.log('error', error));
 
 	return (
 		<div className="text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200  w-full">
@@ -36,11 +17,7 @@ fetch("http://localhost:3000/api/get-user", requestOptions)
 				<MyContextProvider>
 					<Navbar />
 					<Sidebar />
-					<div>
-					{user.displayName}
-					<hr/>
-					{user.email}
-					</div>
+					<MainDashboard/>
 				</MyContextProvider >
 
 			</div>

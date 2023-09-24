@@ -35,9 +35,9 @@ const RegistrationForm = () => {
 
         if (response.ok) {
           // User registration on the server was successful
-          console.log('User registered on the server.');
+          console.log('User registered on the server.', response);
           window.localStorage.setItem('uid', result.user.uid)
-          window.location = 'http://localhost:3000/dashboard?name=' + result.user.uid
+          window.location = 'http://localhost:3000/dashboard'
         } else {
           // Handle server registration error
           console.error('Server registration failed.');

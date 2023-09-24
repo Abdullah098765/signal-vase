@@ -4,15 +4,17 @@
 import './components.css'
 import { useEffect, useRef, useState, createContext, useContext, } from 'react';
 import { useMyContext } from '../context/context';
-
-
+import { firebaseConfig } from "../../../firebaseConfig";
 import { BellIcon } from '@heroicons/react/solid';
+import { getAuth, signOut } from 'firebase/auth';
 
 const Navbar = () => {
+    const auth = getAuth();
+    const uid = localStorage.getItem('uid')
+
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen } = useMyContext();
-
+    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user } = useMyContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -90,7 +92,7 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
 
                     <div className="absolute right-5 group">
-                        {true ? <button onClick={() => {
+                        {!localStorage.getItem('uid') ? <button onClick={() => {
                             setIsModalOpen(true)
                         }} className="bg-gray-700 text-white px-4 py-2 rounded hover:text-blue-400 text-sm ">
                             Sign In
@@ -100,7 +102,7 @@ const Navbar = () => {
                         >
 
                             <div className="rounded-full overflow-hidden h-10 w-10">
-                                <img className='profile-pic-nav w-full h-full object-cover object-center' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUKcdDmMmOM4ojyKC7ye7tPaHYMjDtJs3gRg&usqp=CAU'></img>
+                                <img className='profile-pic-nav w-full h-full object-cover object-center' src={user.profilePicture}></img>
                             </div>
                         </button>}
 
@@ -112,7 +114,37 @@ const Navbar = () => {
                                 {/* Add dropdown menu items */}
                                 <li className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Item 1</li>
                                 <li className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Item 2</li>
-                                <li className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Item 3</li>
+                                <li onClick={() => {
+                                    signOut(auth).then(() => {
+                                        // Sign-out successful.
+
+                                        var myHeaders = new Headers();
+                                        myHeaders.append("a", "dni");
+                                        myHeaders.append("Content-Type", "application/json");
+
+                                        var raw = JSON.stringify({
+                                            "uid": uid
+                                        });
+
+                                        var requestOptions = {
+                                            method: 'POST',
+                                            headers: myHeaders,
+                                            body: raw,
+                                            redirect: 'follow'
+                                        };
+
+                                        fetch("http://localhost:3000/api/signout", requestOptions)
+                                            .then(response => response.text())
+                                            .then(result =>
+                                                console.log("User signed out"))
+                                        window.location = 'http://localhost:3000/'
+                                        localStorage.removeItem('uid')
+                                            .catch(error => console.log('error', error));
+                                    }).catch((error) => {
+                                        // An error happened.
+                                        console.error("Sign-out error:", error);
+                                    });
+                                }} className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Delete Account</li>
                             </ul>
                         )}
                     </div>
@@ -120,7 +152,7 @@ const Navbar = () => {
                     {/* Add user profile image here */}
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 };
 

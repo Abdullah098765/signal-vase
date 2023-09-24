@@ -9,7 +9,11 @@ import Modal from "./components/signUp-Model.js";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "../../firebaseConfig.js";
+import { useEffect } from "react";
 export default function Home() {
+
+
+  
   return (
     <div className="">
       <MyContextProvider>

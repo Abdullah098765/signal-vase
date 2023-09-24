@@ -1,7 +1,7 @@
 // context/MyContext.js
 'use client'
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const MyContext = createContext();
 
@@ -10,20 +10,52 @@ export const useMyContext = () => {
 };
 
 export const MyContextProvider = ({ children }) => {
+	const [user, setUser] = useState({})
+
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const closeSidenav = () => {
     setIsSliderOpen(!isSliderOpen)
     console.log(isSliderOpen);
   };
+
+  const getUser = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("a", "dni");
+    myHeaders.append("Content-Type", "application/json");
+  
+    var raw = JSON.stringify({
+        "uid": localStorage.getItem('uid')
+    });
+  
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+  
+    fetch("http://localhost:3000/api/get-user", requestOptions)
+        .then(response => response.text())
+        .then(result => setUser(JSON.parse(result)))
+        .catch(error => console.log('error', error));
+  
+  };
+  useEffect(()=>{
+    getUser()
+  },[])
+
+
 
   
 
 
 
   return (
-    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen,  }}>
+    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen,getUser, setIsModalOpen,user, setUser  }}>
       {children}
     </MyContext.Provider>
   );
