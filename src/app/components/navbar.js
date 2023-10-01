@@ -7,6 +7,7 @@ import { useMyContext } from '../context/context';
 import { firebaseConfig } from "../../../firebaseConfig";
 import { BellIcon } from '@heroicons/react/solid';
 import { getAuth, signOut } from 'firebase/auth';
+import Link from 'next/link';
 
 const Navbar = () => {
     const auth = getAuth();
@@ -81,9 +82,9 @@ const Navbar = () => {
                 <div className="space-x-4 flex ">
 
 
-                    <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
-                        Create a Signal
-                    </button>
+                    {localStorage.getItem('uid') && <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
+                        <Link href={'http://localhost:3000/signal_form'}>Create a Signal</Link>
+                    </button>}
                     {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
 
                 </div>

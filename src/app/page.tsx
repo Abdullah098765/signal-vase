@@ -6,6 +6,7 @@ import { useMyContext } from "./context/context";
 import Sidebar from "./components/sidebar.js";
 import SignalCardList from "./components/cardList.js";
 import Modal from "./components/signUp-Model.js";
+import CreateSignalModal from "./components/createSignalForm.js";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "../../firebaseConfig.js";
@@ -22,6 +23,8 @@ export default function Home() {
           <Sidebar />
           <SignalCardList />
         </div>
+        {/* <CreateSignalModal isOpen={true} onClose={()=>{}} /> */}
+
         <Modal />
       </MyContextProvider>
     </div>

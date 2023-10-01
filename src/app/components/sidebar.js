@@ -21,7 +21,7 @@ function Sidebar() {
             {
 
 
-                <div className={` fixed    sidebar h-full   transition-transform ${isSliderOpen ? 'translate-x-0 open' : '-translate-x-full close'}`}>
+                <div className={` fixed    sidebar h-full   transition-transform ${isSliderOpen  ? 'translate-x-0 open' : '-translate-x-full close'} `}>
 
 
                     <div id="Main" class="xl:rounded-br transform  xl:translate-x-0  ease-in-out transition duration-500 flex justify-start items-start h-full  w-full sm:w-52 bg-gray-900 flex-col">
@@ -31,15 +31,15 @@ function Sidebar() {
 
                 </div> */}
                         <div class="mt-6 flex flex-col justify-start items-center  pl-4 w-full border-gray-600 border-b space-y-3 pb-5 ">
-                            <Link onClick={()=>{
+                            <Link onClick={() => {
                                 setSelectedLink('Home')
                                 console.log(selectedLink);
-                                
+
                             }} href={'http://localhost:3000/'} class={`${selectedLink === 'Home' ? 'text-indigo-400' : ''} flex jusitfy-start items-center space-x-6 w-full  focus:outline-none  focus:text-indigo-400   text-white rounded `}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" /> <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" /> </svg>
                                 <p class="text-base leading-4 ">Home</p>
                             </Link>
-                            <Link href={'http://localhost:3000/dashboard'} onClick={()=>{
+                            <Link href={'http://localhost:3000/dashboard'} onClick={() => {
                                 setSelectedLink('Dashboard')
                                 console.log(selectedLink);
                             }}
