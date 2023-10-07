@@ -1,7 +1,11 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 
 const CreateSignalForm = () => {
+    const [currentUser, setCurrentUser] = useState({})
+
+
     const [signalData, setSignalData] = useState({
         pair: '',
         explanation: '',
@@ -14,24 +18,82 @@ const CreateSignalForm = () => {
         cryptoOrStock: 'Crypto',
         duration: '',
         longOrShort: 'Long',
+        signalProvider: currentUser._id
     });
+    useEffect(() => {
+        getUser()
+        console.log(currentUser._id);
+    }, [signalData])
+
+    const getUser = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "uid": localStorage.getItem('uid')
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:3000/api/get-user", requestOptions)
+            .then(response => response.text())
+            .then(result => setCurrentUser(JSON.parse(result)))
+            .catch(error => console.log('error', error));
+
+    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setSignalData({ ...signalData, [name]: value });
+        if (name === 'pair') {
+            setSignalData({ ...signalData, [name]: value.toUpperCase() });
+        }
+        else setSignalData({ ...signalData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Signal Data:', signalData);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        signalData.signalProvider = currentUser._id
+
+        console.log(signalData);
+        try {
+            // Send the form data to the server
+            const response = await fetch('http://localhost:3000/api/create-signal', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(signalData),
+            });
+
+            if (response.ok) {
+                // Handle successful response (e.g., show a success message)
+                console.log('Signal created successfully!');
+                window.location = 'http://localhost:3000'
+            } else {
+                // Handle error response (e.g., show an error message)
+                console.error('Error creating signal:', response.statusText);
+            }
+        } catch (error) {
+            // Handle network or other errors
+            console.error('Error creating signal:', error.message);
+        }
     };
 
     return (
         <section className="max-w-4xl p-6 mx-auto bg-white bg-opacity-80 rounded-md shadow-md dark:bg-black dark:bg-opacity-80 mt-20">
             <h1 className="text-xl font-bold text-black capitalize dark:text-white">Create a New Signal</h1>
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+
+
+                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
                     <div>
+
                         <label className="text-black dark:text-white" htmlFor="pair">
                             Pair (e.g., BTC/USDT)
                         </label>
@@ -62,6 +124,9 @@ const CreateSignalForm = () => {
                             required
                         ></textarea>
                     </div>
+                </div >
+                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-3">
+
 
                     <div>
                         <label className="text-black dark:text-white" htmlFor="entry1">
