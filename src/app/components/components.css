@@ -82,6 +82,11 @@
 
 .sdes {
   min-height: 58px;
+  min-width: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  
 }
 .group:hover .group-hover\:flex {
   display: flex !important;

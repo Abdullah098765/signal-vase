@@ -198,6 +198,10 @@ const signalSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  disLikesCount: {
+    type: Number,
+    default: 0,
+  },
 
   // Users who follow the signal provider
   followersCount: {
