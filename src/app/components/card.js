@@ -9,7 +9,7 @@ const Card = ({ signal }) => {
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(signal.likes.length);
-    const [dislikeCount, setDislikeCount] = useState(signal.thumbsDownCount || 6);
+    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount.length);
     const { user } = useMyContext();
 
     const handleLikeClick = () => {
@@ -35,7 +35,30 @@ const Card = ({ signal }) => {
                 .catch(error => console.log('error', error));
 
             setLikeCount(likeCount + 1);
-            setDislikeCount(disliked ? dislikeCount - 1 : dislikeCount);
+            if (disliked) {
+                var myHeaders = new Headers();
+                myHeaders.append("a", "dni");
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "signalId": signal._id,
+                    'likerId': user._id
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+
+                setDislikeCount(disliked ? dislikeCount - 1 : dislikeCount);
+
+            }
         }
         else {
             setLikeCount(likeCount - 1);
@@ -66,12 +89,71 @@ const Card = ({ signal }) => {
     const handleDislikeClick = () => {
         if (!disliked) {
 
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
 
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/disLikesCount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
             setDislikeCount(dislikeCount + 1);
-            setLikeCount(liked ? likeCount - 1 : likeCount);
+            if (liked) {
+                var myHeaders = new Headers();
+                myHeaders.append("a", "dni");
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "signalId": signal._id,
+                    'likerId': user._id
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+                setLikeCount(liked ? likeCount - 1 : likeCount);
+
+            }
         }
         else {
             setDislikeCount(dislikeCount - 1);
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
 
         }
         setDisliked(!disliked);
@@ -81,7 +163,11 @@ const Card = ({ signal }) => {
         if (signal.likes.indexOf(user._id) !== -1) {
             setLiked(true)
         }
-    })
+        if (signal.disLikesCount.indexOf(user._id) !== -1) {
+            setDisliked(true)
+        }
+
+    }, [])
     const likeIconColor = liked ? 'text-green-500  mr-1' : '  mr-1 border-gray-400 hover:text-green-700 cursor-pointer hover:text-green-500';
     const dislikeIconColor = disliked ? 'text-red-500 ml-2 mr-1' : 'border-gray-400 ml-2 mr-1 cursor-pointer hover:text-red-500 focus:text-red-500';
 
