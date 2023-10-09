@@ -1,40 +1,87 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useMyContext } from '../context/context';
 const Card = ({ signal }) => {
 
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
-    const [likeCount, setLikeCount] = useState(signal.thumbsUpCount || 49);
+    const [likeCount, setLikeCount] = useState(signal.likes.length);
     const [dislikeCount, setDislikeCount] = useState(signal.thumbsDownCount || 6);
+    const { user } = useMyContext();
 
     const handleLikeClick = () => {
         if (!liked) {
-          setLikeCount(likeCount + 1);
-          setDislikeCount(disliked ? dislikeCount - 1 : dislikeCount);
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/likescount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+            setLikeCount(likeCount + 1);
+            setDislikeCount(disliked ? dislikeCount - 1 : dislikeCount);
         }
-        else{
-          setLikeCount(likeCount - 1);
-            
+        else {
+            setLikeCount(likeCount - 1);
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
         }
         setLiked(!liked);
         setDisliked(false);
-      };
-    
-      const handleDislikeClick = () => {
+    };
+
+    const handleDislikeClick = () => {
         if (!disliked) {
-          setDislikeCount(dislikeCount + 1);
-          setLikeCount(liked ? likeCount - 1 : likeCount);
+
+
+            setDislikeCount(dislikeCount + 1);
+            setLikeCount(liked ? likeCount - 1 : likeCount);
         }
-        else{
+        else {
             setDislikeCount(dislikeCount - 1);
-              
-          }
+
+        }
         setDisliked(!disliked);
         setLiked(false);
-      };
+    };
+    useEffect(() => {
+        if (signal.likes.indexOf(user._id) !== -1) {
+            setLiked(true)
+        }
+    })
     const likeIconColor = liked ? 'text-green-500  mr-1' : '  mr-1 border-gray-400 hover:text-green-700 cursor-pointer hover:text-green-500';
     const dislikeIconColor = disliked ? 'text-red-500 ml-2 mr-1' : 'border-gray-400 ml-2 mr-1 cursor-pointer hover:text-red-500 focus:text-red-500';
 
@@ -120,7 +167,7 @@ const Card = ({ signal }) => {
                 </button>
 
                 {/* Details Button */}
-                <div className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 focus:bg-gray-950 text-sm">
+                <div className="bg-gray-700 text-white px-4 py-2 rounded-full  text-sm">
                     <div className="flex items-center">
                         {/* Thumbs Up Icon */}
                         <FontAwesomeIcon

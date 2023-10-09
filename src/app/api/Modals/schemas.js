@@ -194,15 +194,14 @@ const signalSchema = new mongoose.Schema({
   ],
 
   // Users who liked the signal
-  likesCount: {
-    type: Number,
-    default: 0,
-  },
-  disLikesCount: {
-    type: Number,
-    default: 0,
-  },
-
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
+  disLikesCount: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
   // Users who follow the signal provider
   followersCount: {
     type: Number,
