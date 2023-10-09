@@ -250,35 +250,40 @@ function SignalModal({ }) {
                         </div>
                     </div>
                 </div>
-               
-               <div className='grid grid-cols-1 gap-4'>
-               <div className="mt-4 border rounded p-2">
-                    <h3 className="text-lg font-semibold mb-2">Signal Provider Profile</h3>
-                    <div className="flex items-center">
-                        <img
-                            className="w-10 h-10 rounded-full mr-4"
-                            src={signal.signalProvider.profilePicture}
-                            alt={signal.signalProvider.displayName}
-                        />
-                        <div>
-                            <h4 className="text-md font-semibold">
-                                {signal.signalProvider.displayName}
-                            </h4>
-                            <div className="flex items-center">
-                                <p className="text-gray-600 mr-2">
-                                    Rating: {signal.signalProvider.rating}/5
-                                </p>
-                                <p className="text-gray-600 mr-2">
-                                    Win-Lose Ratio: {signal.signalProvider.winLoseRatio}
-                                </p>
-                                <p className="text-gray-600">
-                                    Followers: {signal.signalProvider.followers}
-                                </p>
+
+                <div className='grid grid-cols-1 gap-4'>
+                    <div className="mt-4 border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
+                        <div className="flex items-center  md:justify-center sm:justify-center ">
+                            <img
+                                className="w-12 h-12 rounded-full mr-4"
+                                src={signal.signalProvider.profilePicture}
+                                alt={signal.signalProvider.displayName}
+                            />
+                            <div>
+                                <h4 className="text-lg font-semibold">
+                                    {signal.signalProvider.displayName}
+                                </h4>
                             </div>
                         </div>
+                        <div className="xl:flex flex-col sm:block md:block justify-stretch  items-center mt-4  lg:mt-4 xl:mt-0 xl:flex-row">
+                            <div className="signal-info bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
+                                {signal.signalProvider.winLoseRatio || 324} SuccessfulSignals
+                            </div>
+                            <div className="signal-info bg-gray-200 text-xs text-black p-2 rounded-full  xl:mt-0 mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
+                                {signal.signalProvider.winLoseRatio || 103} UnsuccessfulSignals
+                            </div>
+                            <div className="signal-info bg-gray-200 text-xs text-black p-2 mb-2 lg:mb-0  xl:mt-0 lg:mt-4 rounded-full">
+                                {signal.signalProvider.followers || '3.4k'} 3.4k Subscribers
+                            </div>
+                        </div>
+                        <div className='flex items-center mt-4 lg:mt-0'>
+                            <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm">
+                                Subscribe
+                            </button>
+                        </div>
                     </div>
+
                 </div>
-               </div>
 
                 {/* User Profile */}
 
