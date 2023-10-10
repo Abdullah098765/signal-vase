@@ -12,6 +12,9 @@ export const useMyContext = () => {
 export const MyContextProvider = ({ children }) => {
   const [user, setUser] = useState({})
   const [signals, setSignals] = useState([])
+  const [selectedSignal, setSelectedSignal] = useState({})
+  const [isSignalModalOpen, setisSignalModalOpen] = useState(false)
+  
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -68,7 +71,7 @@ export const MyContextProvider = ({ children }) => {
 
 
   return (
-    <MyContext.Provider value={{ isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{ selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

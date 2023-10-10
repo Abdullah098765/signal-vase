@@ -6,77 +6,21 @@ import { formatDistanceToNow } from 'date-fns';
 import './components.css'
 import { useCountdown } from './countDown-timer';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { useMyContext } from '../context/context';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function SignalModal({ }) {
-    if (!true) return null;
+    const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen } = useMyContext();
 
-    var signal = {
-        "_id": "6522f2aa8c9f93a0efade078",
-        "signalProvider": {
-            "notificationPreferences": {
-                "email": true,
-                "inApp": true
-            },
-            "_id": "652141a91db996b419bd6afe",
-            "displayName": "Sabir Ali.",
-            "email": "ssmmhazz@gmail.com",
-            "fireBaseUid": "6ildueoonpvab1qbkkp4vog48vf2",
-            "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c",
-            "followers": [],
-            "following": [],
-            "signalsPosted": [],
-            "SuccessfulSignals": [],
-            "UnsuccessfulSignals": [],
-            "reviews": [],
-            "accountStatus": "active",
-            "registrationDate": "2023-10-07T11:31:53.764Z",
-            "__v": 0
-        },
-        "cryptoOrStock": "Crypto",
-        "duration": 99999999999,
-        "entry1": 4,
-        "entry2": 34,
-        "explanation": "Find the best freelance jobs Browse jobs posted on Upwork, or jump right in and create a free profile to find the work that you love to do.",
-        "longOrShort": "Long",
-        "pair": "TRB/USDT",
-        "stopLoss": 4,
-        "takeProfit1": 43,
-        "takeProfit2": 43,
-        "takeProfit3": 34,
-        "isSuccess": false,
-        "likes": [],
-        "disLikesCount": [
-            "652141a91db996b419bd6afe"
-        ],
-        "followersCount": 0,
-        "createdAt": "2023-10-08T18:19:22.080Z",
-        "comments": [
-            {
-                user: {
-                    "displayName": "Sabir Ali.",
-                    "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c"
-                },
-                text: 'I am following you form a long time',
-                "createdAt": "2023-10-08T18:19:22.080Z",
-
-
-            },
-          
-        ],
-
-        "__v": 0
-    }
-    var user = {
-        "displayName": "Sabir Ali.",
-        "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c"
-    }
+    if (!isSignalModalOpen && selectedSignal) return null;
+    const signal = selectedSignal
     // Handle like and dislike counts
     const [days, hours, minutes, seconds] = useCountdown(signal.duration);
     useEffect(() => {
         console.log(days, hours, minutes, seconds);
     }, [days, hours, minutes, seconds])
-    const likeCount = signal.likes.length;
-    const dislikeCount = signal.disLikesCount.length;
+
+
     const [showComments, setShowComments] = useState(false);
     // Function to toggle the comment section visibility
     const toggleComments = () => {
@@ -96,13 +40,8 @@ function SignalModal({ }) {
             }
         }
     }, [showComments]);
-    const handleLikeClick = () => {
-        // Implement your like logic here
-    };
 
-    const handleDislikeClick = () => {
-        // Implement your dislike logic here
-    };
+
 
     const [copyentry1, setcopyentry1] = useState('Copy');
     const [copyentry2, setCopyentry2] = useState('Copy');
@@ -157,15 +96,189 @@ function SignalModal({ }) {
                 console.error('Copy failed:', err);
             });
     }
-    // Define the initial icon colors
-    const likeIconColor = 'text-gray-400';
-    const dislikeIconColor = 'text-gray-400';
+
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
+    const [likeCount, setLikeCount] = useState(signal.likes.length);
+    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount.length);
+
+    const handleLikeClick = () => {
+        if (!liked) {
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/likescount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+            setLikeCount(likeCount + 1);
+            if (disliked) {
+                var myHeaders = new Headers();
+                myHeaders.append("a", "dni");
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "signalId": signal._id,
+                    'likerId': user._id
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+
+                setDislikeCount(disliked ? dislikeCount - 1 : dislikeCount);
+
+            }
+        }
+        else {
+            setLikeCount(likeCount - 1);
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+        }
+        setLiked(!liked);
+        setDisliked(false);
+    };
+
+    const handleDislikeClick = () => {
+        if (!disliked) {
+
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/disLikesCount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+            setDislikeCount(dislikeCount + 1);
+            if (liked) {
+                var myHeaders = new Headers();
+                myHeaders.append("a", "dni");
+                myHeaders.append("Content-Type", "application/json");
+
+                var raw = JSON.stringify({
+                    "signalId": signal._id,
+                    'likerId': user._id
+                });
+
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: 'follow'
+                };
+                fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+                    .then(response => response.text())
+                    .then(result => console.log(result))
+                    .catch(error => console.log('error', error));
+                setLikeCount(liked ? likeCount - 1 : likeCount);
+
+            }
+        }
+        else {
+            setDislikeCount(dislikeCount - 1);
+            var myHeaders = new Headers();
+            myHeaders.append("a", "dni");
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = JSON.stringify({
+                "signalId": signal._id,
+                'likerId': user._id
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+
+        }
+        setDisliked(!disliked);
+        setLiked(false);
+    };
+    useEffect(() => {
+        if (signal.likes.indexOf(user._id) !== -1) {
+            setLiked(true)
+        }
+        if (signal.disLikesCount.indexOf(user._id) !== -1) {
+            setDisliked(true)
+        }
+
+    }, [])
+    const likeIconColor = liked ? 'text-green-500  mr-1' : '  mr-1 border-gray-400 hover:text-green-700 cursor-pointer hover:text-green-500';
+    const dislikeIconColor = disliked ? 'text-red-500 ml-2 mr-1' : 'border-gray-400 ml-2 mr-1 cursor-pointer hover:text-red-500 focus:text-red-500';
+
+
+
     const expirationTime = new Date().getTime() + 600000; // 600,000 milliseconds = 10 minutes
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+            <button
+                onClick={() => {
+                    setisSignalModalOpen(!isSignalModalOpen)
+                }}
+                className='text-white absolute top-3 right-3 text-2xl'
+            >
+                <FontAwesomeIcon icon={faTimes} />
+
+            </button>
             <div className="bg-white p-4 w-full md:w-2/3 lg:w-1/2 xl:w-3/5 rounded-lg shadow-lg overflow-y-auto max-h-40rem">
                 {/* Modal content goes here */}
+
 
 
                 <div className='flex justify-between'>
@@ -191,7 +304,7 @@ function SignalModal({ }) {
                 </div>
 
                 {
-                    seconds > 0 ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
+                    (days === 0 || hours === 0 || minutes === 0 || seconds === 0) || (days > 0) ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
                         <div className="text-center mb-4">
                             <div className="text-xl font-semibold">Signal will expire in</div>
                         </div>

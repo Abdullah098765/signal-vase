@@ -122,3 +122,6 @@
   background-color: #ccc;
   margin: 0 10px;
 }
+.webkit-fill-available{
+  width: 100%;
+}
