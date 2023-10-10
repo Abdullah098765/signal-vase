@@ -13,7 +13,7 @@ const CreateSignalForm = () => {
         setSelectedDuration(e.target.value);
         const _durationTimestamp = calculateTimestamp(e.target.value);
         setDurationTimestamp(_durationTimestamp)
-        console.log('Selected Duration Timestamp: ', _durationTimestamp + Date.now());
+        console.log('Selected Duration Timestamp: ', _durationTimestamp - Date.now());
         // You can save this timestamp in your state or use it as needed in your application.
     };
 
@@ -107,7 +107,7 @@ const CreateSignalForm = () => {
             if (response.ok) {
                 // Handle successful response (e.g., show a success message)
                 console.log('Signal created successfully!');
-                // window.location = 'http://localhost:3000'
+                window.location = 'http://localhost:3000'
             } else {
                 // Handle error response (e.g., show an error message)
                 console.error('Error creating signal:', response.statusText);

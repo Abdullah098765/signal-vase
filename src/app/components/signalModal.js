@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { formatDistanceToNow } from 'date-fns';
-import CountdownTimer from './countDown'
 import './components.css'
+import { useCountdown } from './countDown-timer';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 function SignalModal({ }) {
-    if (!false) return null;
+    if (!true) return null;
 
     var signal = {
         "_id": "6522f2aa8c9f93a0efade078",
@@ -32,7 +33,7 @@ function SignalModal({ }) {
             "__v": 0
         },
         "cryptoOrStock": "Crypto",
-        "duration": "4",
+        "duration": 99999999999,
         "entry1": 4,
         "entry2": 34,
         "explanation": "Find the best freelance jobs Browse jobs posted on Upwork, or jump right in and create a free profile to find the work that you love to do.",
@@ -59,7 +60,8 @@ function SignalModal({ }) {
                 "createdAt": "2023-10-08T18:19:22.080Z",
 
 
-            }
+            },
+          
         ],
 
         "__v": 0
@@ -69,6 +71,10 @@ function SignalModal({ }) {
         "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c"
     }
     // Handle like and dislike counts
+    const [days, hours, minutes, seconds] = useCountdown(signal.duration);
+    useEffect(() => {
+        console.log(days, hours, minutes, seconds);
+    }, [days, hours, minutes, seconds])
     const likeCount = signal.likes.length;
     const dislikeCount = signal.disLikesCount.length;
     const [showComments, setShowComments] = useState(false);
@@ -166,7 +172,7 @@ function SignalModal({ }) {
                     <div className={`mb-2 ${signal.longOrShort === 'Long' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'} py-1 px-2 rounded-md text-xs font-semibold inline-block shadow-md`}>
                         {signal.longOrShort === 'Long' ? "Buy" : "Sell"}
                     </div>
-                    <CountdownTimer expirationTime={expirationTime} />
+
 
                     <div className="text-gray-600 text-xs">
                         {formatDistanceToNow(new Date(signal.createdAt), { addSuffix: true })}
@@ -174,15 +180,47 @@ function SignalModal({ }) {
                 </div>
 
                 <div className="mb-4 flex-col mt-3 bg-white  border-b">
+
                     <h2 className="text-3xl font-semibold mb-2  text-black border-b-2 border-black">
                         {signal.pair}
                     </h2>
+
 
                     <h3 className="text-lg font-semibold text-black mt-4 mb-2">Explanation</h3>
                     <p className="text-gray-500 text-lg">{signal.explanation}</p>
                 </div>
 
-
+                {
+                    seconds > 0 ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
+                        <div className="text-center mb-4">
+                            <div className="text-xl font-semibold">Signal will expire in</div>
+                        </div>
+                        <div className="grid grid-cols-4 gap-0">
+                            <div className="text-center">
+                                <div className="text-3xl font-semibold">{days}</div>
+                                <div className="text-sm">Days</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-semibold">{hours}</div>
+                                <div className="text-sm">Hours</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-semibold">{minutes}</div>
+                                <div className="text-sm">Minutes</div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-3xl font-semibold">{seconds}</div>
+                                <div className="text-sm">Seconds</div>
+                            </div>
+                        </div>
+                    </div> :
+                        <div className="bg-yellow-300 text-black p-8 mb-3 rounded-lg shadow-lg">
+                            <div className="text-center">
+                                <FontAwesomeIcon icon={faExclamationTriangle} size="2x" />
+                                <div className="text-xl font-semibold mt-2">Warning: Signal has expired</div>
+                            </div>
+                        </div>
+                }
 
 
 
@@ -370,6 +408,8 @@ function SignalModal({ }) {
                         className={`mt-4 border-t border-gray-300 pt-4  ${showComments ? 'max-h-screen transition-max-height ease-out duration-300' : 'max-h-0 overflow-hidden'
                             }`}
                     >
+                        {/* Comment input form */}
+
                         <h3 className="text-lg font-semibold mb-2 text-black">Comments</h3>
                         {/* Loop through and render comments */}
                         {signal.comments.map((comment, index) => (
@@ -393,26 +433,24 @@ function SignalModal({ }) {
                             </div>
 
                         ))}
-                        {/* Comment input form */}
                         <div className="mt-6">
-                            <h4 className="text-md font-semibold mb-2 text-black">Add a Comment</h4>
-                            <div className="flex items-center">
-                                <img
-                                    src={user.profilePicture}
-                                    alt={user.displayName}
-                                    className="w-6 h-6 rounded-full mr-2"
-                                />
-                                <input
+                            <div className="flex flex-col items-stretch justify-center">
+
+                                <textarea
                                     type="text"
-                                    className="w-full bg-gray-100 rounded-full p-2  focus:outline-none"
+                                    className="w-full bg-gray-100 rounded p-2  focus:outline-none"
                                     placeholder="Write your comment..."
                                 />
                                 <button
-                                    className={`bg-black text-white px-3 py-1 rounded-full hover:bg-gray-900 ml-2 ${showComments ? 'bg-gray-900' : ''
+                                    className={`bg-black text-white flex justify-center mt-3 mb-3  p-2  rounded hover:bg-gray-900 ml-2 ${showComments ? 'bg-gray-900' : ''
                                         }`}
                                     onClick={handleCommentSubmit}
                                 >
-                                    Submit
+                                    <img
+                                        src={user.profilePicture}
+                                        alt={user.displayName}
+                                        className="w-6 h-6 rounded-full mr-2"
+                                    />  Comment
                                 </button>
                             </div>
                         </div>

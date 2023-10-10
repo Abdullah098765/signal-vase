@@ -1,67 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-function CountdownTimer({ expirationTime }) {
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(expirationTime));
+const CountdownClock = ({ durationInSeconds }) => {
+  const [timeRemaining, setTimeRemaining] = useState(durationInSeconds);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(expirationTime));
+      if (timeRemaining <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      setTimeRemaining(timeRemaining - 1);
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [expirationTime]);
+  }, [timeRemaining]);
 
-  function calculateTimeLeft(expirationTime) {
-    const now = new Date().getTime();
-    const timeDifference = expirationTime - now;
+  const formatTime = (timeInSeconds) => {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
 
-    if (timeDifference <= 0) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      };
-    }
-
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-    return {
-      days,
-      hours,
-      minutes,
-      seconds,
-    };
-  }
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
 
   return (
-    <div className='flex'>
-      <h2>Time Left to Expiration:</h2>
-      <div className="countdown">
-        <div className="countdown-item">
-          <span className="countdown-number">{timeLeft.days}</span>
-          <span className="countdown-label">Days</span>
-        </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{timeLeft.hours}</span>
-          <span className="countdown-label">Hours</span>
-        </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{timeLeft.minutes}</span>
-          <span className="countdown-label">Minutes</span>
-        </div>
-        <div className="countdown-item">
-          <span className="countdown-number">{timeLeft.seconds}</span>
-          <span className="countdown-label">Seconds</span>
-        </div>
-      </div>
+    <div>
+      <p>Signal will expire in {formatTime(timeRemaining)}</p>
     </div>
   );
-}
+};
 
-export default CountdownTimer;
+export default CountdownClock;
