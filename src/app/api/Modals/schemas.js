@@ -115,7 +115,7 @@ const signalSchema = new mongoose.Schema({
 
   // Duration of the signal
   duration: {
-    type: String,
+    type: Number,
     required: true,
   },
 

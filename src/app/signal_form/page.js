@@ -5,6 +5,39 @@ import React, { useEffect, useState } from 'react';
 const CreateSignalForm = () => {
     const [currentUser, setCurrentUser] = useState({})
 
+    const [selectedDuration, setSelectedDuration] = useState('10m'); // Default duration
+    const [durationTimestamp, setDurationTimestamp] = useState(600000 + Date.now()); // Default duration
+
+
+    const handleDurationChange = (e) => {
+        setSelectedDuration(e.target.value);
+        const _durationTimestamp = calculateTimestamp(e.target.value);
+        setDurationTimestamp(_durationTimestamp)
+        console.log('Selected Duration Timestamp: ', _durationTimestamp + Date.now());
+        // You can save this timestamp in your state or use it as needed in your application.
+    };
+
+    const calculateTimestamp = (selectedValue) => {
+        // Convert the selected duration to milliseconds
+        let milliseconds = 0;
+
+        if (selectedValue.endsWith('m')) {
+            const minutes = parseInt(selectedValue, 10);
+            milliseconds = minutes * 60 * 1000;
+        } else if (selectedValue.endsWith('h')) {
+            const hours = parseInt(selectedValue, 10);
+            milliseconds = hours * 60 * 60 * 1000;
+        } else if (selectedValue.endsWith('d')) {
+            const days = parseInt(selectedValue, 10);
+            milliseconds = days * 24 * 60 * 60 * 1000;
+        }
+
+        // Calculate the current timestamp + selected duration
+        const currentTimestamp = Date.now();
+        const durationTimestamp = currentTimestamp + milliseconds;
+
+        return durationTimestamp;
+    };
 
     const [signalData, setSignalData] = useState({
         pair: '',
@@ -16,7 +49,7 @@ const CreateSignalForm = () => {
         takeProfit3: '',
         stopLoss: '',
         cryptoOrStock: 'Crypto',
-        duration: '',
+        duration: durationTimestamp,
         longOrShort: 'Long',
         signalProvider: currentUser._id
     });
@@ -59,7 +92,7 @@ const CreateSignalForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         signalData.signalProvider = currentUser._id
-
+        signalData.duration = durationTimestamp
         console.log(signalData);
         try {
             // Send the form data to the server
@@ -74,7 +107,7 @@ const CreateSignalForm = () => {
             if (response.ok) {
                 // Handle successful response (e.g., show a success message)
                 console.log('Signal created successfully!');
-                window.location = 'http://localhost:3000'
+                // window.location = 'http://localhost:3000'
             } else {
                 // Handle error response (e.g., show an error message)
                 console.error('Error creating signal:', response.statusText);
@@ -239,20 +272,29 @@ const CreateSignalForm = () => {
                             <option value="Stock">Stock</option>
                         </select>
                     </div>
-
                     <div>
                         <label className="text-black dark:text-white" htmlFor="duration">
                             Duration
                         </label>
-                        <input
-                            type="text"
+                        <select
                             name="duration"
                             id="duration"
                             className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                            placeholder="Duration"
-                            value={signalData.duration}
-                            onChange={handleInputChange}
-                        />
+                            value={selectedDuration}
+                            onChange={handleDurationChange}
+                        >
+                            <option value="10m">10 minutes</option>
+                            <option value="30m">30 minutes</option>
+                            <option value="1h">1 hour</option>
+                            <option value="2h">2 hours</option>
+                            <option value="4h">4 hours</option>
+                            <option value="6h">6 hours</option>
+                            <option value="12h">12 hours</option>
+                            <option value="1d">1 day</option>
+                            <option value="3d">3 days</option>
+                            <option value="7d">7 days</option>
+                            <option value="30d">30 days</option>
+                        </select>
                     </div>
 
                     <div>

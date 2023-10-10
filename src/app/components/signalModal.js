@@ -1,12 +1,13 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { formatDistanceToNow } from 'date-fns';
+import CountdownTimer from './countDown'
 import './components.css'
 
 function SignalModal({ }) {
-    if (!true) return null;
+    if (!false) return null;
 
     var signal = {
         "_id": "6522f2aa8c9f93a0efade078",
@@ -48,15 +49,47 @@ function SignalModal({ }) {
         ],
         "followersCount": 0,
         "createdAt": "2023-10-08T18:19:22.080Z",
-        "comments": [],
+        "comments": [
+            {
+                user: {
+                    "displayName": "Sabir Ali.",
+                    "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c"
+                },
+                text: 'I am following you form a long time',
+                "createdAt": "2023-10-08T18:19:22.080Z",
+
+
+            }
+        ],
+
         "__v": 0
     }
-
+    var user = {
+        "displayName": "Sabir Ali.",
+        "profilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ3WgwM8h0RdNmZZZFRgliLZOLzZAcr5AUCIftnR4UUwIU=s96-c"
+    }
     // Handle like and dislike counts
     const likeCount = signal.likes.length;
     const dislikeCount = signal.disLikesCount.length;
-
+    const [showComments, setShowComments] = useState(false);
+    // Function to toggle the comment section visibility
+    const toggleComments = () => {
+        setShowComments(!showComments);
+    };
     // Handle like and dislike button colors based on user interaction
+    const handleCommentSubmit = () => {
+        // Implement your like logic here
+    };
+    useEffect(() => {
+        if (showComments) {
+            const commentSection = document.getElementById('comment-section');
+            if (commentSection) {
+                commentSection.scrollIntoView({
+                    behavior: 'smooth',
+                });
+            }
+        }
+    }, [showComments]);
     const handleLikeClick = () => {
         // Implement your like logic here
     };
@@ -121,6 +154,7 @@ function SignalModal({ }) {
     // Define the initial icon colors
     const likeIconColor = 'text-gray-400';
     const dislikeIconColor = 'text-gray-400';
+    const expirationTime = new Date().getTime() + 600000; // 600,000 milliseconds = 10 minutes
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
@@ -132,6 +166,7 @@ function SignalModal({ }) {
                     <div className={`mb-2 ${signal.longOrShort === 'Long' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'} py-1 px-2 rounded-md text-xs font-semibold inline-block shadow-md`}>
                         {signal.longOrShort === 'Long' ? "Buy" : "Sell"}
                     </div>
+                    <CountdownTimer expirationTime={expirationTime} />
 
                     <div className="text-gray-600 text-xs">
                         {formatDistanceToNow(new Date(signal.createdAt), { addSuffix: true })}
@@ -289,23 +324,7 @@ function SignalModal({ }) {
 
 
                 {/* Comments Section */}
-                <div className="mt-4">
-                    <h3 className="text-lg font-semibold mb-2">Comments</h3>
-                    {/* Loop through and render comments */}
-                    {signal.comments.map((comment, index) => (
-                        <div key={index} className="mb-2">
-                            <div className="flex items-center text-sm">
-                                <img
-                                    src={comment.user.profilePicture}
-                                    alt={comment.user.displayName}
-                                    className="w-6 h-6 rounded-full"
-                                />
-                                <p className="ml-2">{comment.user.displayName}</p>
-                            </div>
-                            <p className="mt-2 text-sm">{comment.text}</p>
-                        </div>
-                    ))}
-                </div>
+
 
                 {/* Action Buttons */}
                 <div className="mt-4 flex justify-end space-x-2">
@@ -333,13 +352,74 @@ function SignalModal({ }) {
                     </div>
                 </div>
 
-                {/* Close button */}
-                <button
-                    className="mt-4 text-sm text-gray-600 hover:text-gray-800 ml-auto"
-                //   onClick={onClose}
-                >
-                    Close
-                </button>
+                {/* Above content (your existing code) */}
+                <div>
+                    {/* Content above the comment section */}
+                    {/* Add a button to toggle the comment section */}
+                    <button
+                        className={`bg-black text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm ${showComments ? 'bg-gray-900' : ''
+                            }`}
+                        onClick={toggleComments}
+                    >
+                        {showComments ? 'Hide Comments' : 'Show Comments'}
+                    </button>
+
+                    {/* Comment section with animation and auto-scroll */}
+                    <div
+                        id="comment-section"
+                        className={`mt-4 border-t border-gray-300 pt-4  ${showComments ? 'max-h-screen transition-max-height ease-out duration-300' : 'max-h-0 overflow-hidden'
+                            }`}
+                    >
+                        <h3 className="text-lg font-semibold mb-2 text-black">Comments</h3>
+                        {/* Loop through and render comments */}
+                        {signal.comments.map((comment, index) => (
+                            <div key={index} className="mb-4">
+                                <div className="flex items-center text-sm">
+                                    <img
+                                        src={comment.user.profilePicture}
+                                        alt={comment.user.displayName}
+                                        className="w-6 h-6 rounded-full"
+                                    />
+                                    <p className="ml-2 font-semibold text-black">{comment.user.displayName}</p>
+                                </div>
+                                <p className="mt-2 text-sm text-black">{comment.text}
+
+                                </p>
+
+                                {/* Display timestamp */}
+                                <p className="mt-1 text-xs text-gray-500">
+                                    {formatDistanceToNow(new Date(comment.createdAt), { addSuffix: true })}
+                                </p>
+                            </div>
+
+                        ))}
+                        {/* Comment input form */}
+                        <div className="mt-6">
+                            <h4 className="text-md font-semibold mb-2 text-black">Add a Comment</h4>
+                            <div className="flex items-center">
+                                <img
+                                    src={user.profilePicture}
+                                    alt={user.displayName}
+                                    className="w-6 h-6 rounded-full mr-2"
+                                />
+                                <input
+                                    type="text"
+                                    className="w-full bg-gray-100 rounded-full p-2  focus:outline-none"
+                                    placeholder="Write your comment..."
+                                />
+                                <button
+                                    className={`bg-black text-white px-3 py-1 rounded-full hover:bg-gray-900 ml-2 ${showComments ? 'bg-gray-900' : ''
+                                        }`}
+                                    onClick={handleCommentSubmit}
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     );
