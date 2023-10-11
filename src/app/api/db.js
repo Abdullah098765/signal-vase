@@ -1,6 +1,7 @@
 // db.js
 
 import mongoose from 'mongoose';
+import signal_Expirations from './signals-expiration/expiration.js'
 
 
 // mongodb+srv://sabir:LNnrcPrsOnfuTMEa@atlascluster.rimv5ng.mongodb.net/?retryWrites=true&w=majority
@@ -15,6 +16,8 @@ const connectDB = async () => {
   } catch (error) {
     console.error('MongoDB connection error:', error);
   }
+  signal_Expirations()
+
 };
 
 export default connectDB;

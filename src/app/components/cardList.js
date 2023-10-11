@@ -6,8 +6,9 @@ const SignalCardList = ({ }) => {
 
 
 
-    const { signals, setSignals } = useMyContext()
+    const { signals, setSignals,getSignals } = useMyContext()
     useEffect(() => {
+        getSignals()
         console.log(signals);
     },)
 

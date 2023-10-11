@@ -140,6 +140,11 @@ const signalSchema = new mongoose.Schema({
     required: true,
     enum: ['Long', 'Short'],
   },
+  status: {
+    type: String,
+    default: "Active",
+    enum: ['Active', 'Expired'],
+  },
 
   // Trading pair (e.g., BTC/USDT)
   pair: {
@@ -203,10 +208,11 @@ const signalSchema = new mongoose.Schema({
     ref: 'User', // Reference to the User model
   }],
   // Users who follow the signal provider
-  followersCount: {
-    type: Number,
-    default: 0,
-  },
+
+  followers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
 
   // Other properties specific to your project
 });

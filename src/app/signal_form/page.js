@@ -51,7 +51,8 @@ const CreateSignalForm = () => {
         cryptoOrStock: 'Crypto',
         duration: durationTimestamp,
         longOrShort: 'Long',
-        signalProvider: currentUser._id
+        signalProvider: currentUser._id,
+        status: 'Active' 
     });
     useEffect(() => {
         getUser()

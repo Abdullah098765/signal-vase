@@ -10,16 +10,14 @@ import { useMyContext } from '../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function SignalModal({ }) {
-    const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen } = useMyContext();
+    const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
     if (!isSignalModalOpen && selectedSignal) return null;
     const signal = selectedSignal
     // Handle like and dislike counts
     const [days, hours, minutes, seconds] = useCountdown(signal.duration);
-    useEffect(() => {
-        console.log(days, hours, minutes, seconds);
-    }, [days, hours, minutes, seconds])
 
+    const [isLoading, setIsLoading] = useState(false);
 
     const [showComments, setShowComments] = useState(false);
     // Function to toggle the comment section visibility
@@ -29,6 +27,58 @@ function SignalModal({ }) {
     // Handle like and dislike button colors based on user interaction
     const handleCommentSubmit = () => {
         // Implement your like logic here
+    };
+    const handleFollow = () => {
+        setIsLoading(true)
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "signalId": signal._id,
+            'followerId': user._id
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("http://localhost:3000/api/add-follower", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                setFollowing(true)
+
+                setIsLoading(false)
+            })
+            .catch(error => console.log('error', error));
+    };
+    const handleUnFollow = () => {
+        setIsLoading(true)
+
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "signalId": signal._id,
+            'followerId': user._id
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("http://localhost:3000/api/remove-follower", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                setFollowing(false)
+                setIsLoading(false)
+            })
+            .catch(error => console.log('error', error));
     };
     useEffect(() => {
         if (showComments) {
@@ -97,6 +147,7 @@ function SignalModal({ }) {
             });
     }
 
+    const [following, setFollowing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(signal.likes.length);
@@ -250,6 +301,10 @@ function SignalModal({ }) {
         setLiked(false);
     };
     useEffect(() => {
+        if (signal.followers.indexOf(user._id) !== -1) {
+            setFollowing(true)
+            console.log(signal.followers.indexOf(user._id));
+        }
         if (signal.likes.indexOf(user._id) !== -1) {
             setLiked(true)
         }
@@ -269,6 +324,7 @@ function SignalModal({ }) {
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <button
                 onClick={() => {
+                    getSignals()
                     setisSignalModalOpen(!isSignalModalOpen)
                 }}
                 className='text-white absolute top-3 right-3 text-2xl'
@@ -479,9 +535,23 @@ function SignalModal({ }) {
 
                 {/* Action Buttons */}
                 <div className="mt-4 flex justify-end space-x-2">
-                    <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
-                        Follow Signal
-                    </button>
+                    {!following ?
+                        < button onClick={handleFollow} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
+
+                            {isLoading ? (
+                                <div className="w-5 h-5 border-t-2 border-blue-500 border-solid rounded-full animate-spin"></div>
+                            ) : (
+                                'Follow Signal'
+                            )}
+                        </button> : <button onClick={handleUnFollow} className="bg-red-700 text-white px-4 py-2 rounded-full hover:bg-red-950 text-sm">
+                            {isLoading ? (
+                                <div className="w-5 h-5 border-t-2 border-yellow-500 border-solid rounded-full animate-spin"></div>
+                            ) : (
+                                'Unfollow Signal'
+                            )}
+                        </button>
+
+                    }
 
                     <div className="bg-gray-700 text-white px-4 py-2 rounded-full text-sm">
                         <div className="flex items-center">
@@ -572,7 +642,7 @@ function SignalModal({ }) {
 
 
             </div>
-        </div>
+        </div >
     );
 }
 
