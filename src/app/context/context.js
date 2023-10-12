@@ -17,13 +17,17 @@ export const MyContextProvider = ({ children }) => {
   
 
 
+  const [lineClicked, setLineClicked] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const closeSidenav = () => {
-    setIsSliderOpen(!isSliderOpen)
+  const closeSidenav = (is, lineClicked) => {
+    setIsSliderOpen(is)
     console.log(isSliderOpen);
+    if(lineClicked){
+      setLineClicked(true)
+    }
   };
 
   const getUser = () => {
@@ -71,7 +75,7 @@ export const MyContextProvider = ({ children }) => {
 
 
   return (
-    <MyContext.Provider value={{ selectedSignal, setSelectedSignal,getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{closeSidenav,lineClicked, selectedSignal, setSelectedSignal,getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

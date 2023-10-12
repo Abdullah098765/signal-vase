@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react';
+import { useCountdown } from './countDown-timer';
 
-const CountdownClock = ({ durationInSeconds }) => {
-  const [timeRemaining, setTimeRemaining] = useState(durationInSeconds);
+const CountdownClock = ({ duration }) => {
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (timeRemaining <= 0) {
-        clearInterval(interval);
-        return;
-      }
+    const [days, hours, minutes, seconds] = useCountdown(duration);
 
-      setTimeRemaining(timeRemaining - 1);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [timeRemaining]);
-
-  const formatTime = (timeInSeconds) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  return (
-    <div>
-      <p>Signal will expire in {formatTime(timeRemaining)}</p>
-    </div>
-  );
+    return (
+        <div className=''>
+            {
+                (days === 0 || hours === 0 || minutes === 0 || seconds === 0) || (days > 0) ?
+                    <div className="grid grid-cols-4 gap-0 max-w-3xl countdown-container bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
+                        <div className="text-sm font-semibold">{days}:</div>
+                        <div className="text-sm font-semibold">{hours}:</div>
+                        <div className="text-sm font-semibold">{minutes}:</div>
+                        <div className="text-sm font-semibold">{seconds}</div>
+                    </div> :
+                    <div className="">
+                        <button className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 text-sm">
+                            Good Signal
+                        </button>
+                        <button className="bg-red-500 text-white px-4 py-2 rounded-full hover-bg-red-600 text-sm">
+                            Bad Signal
+                        </button>
+                    </div>
+            }
+        </div>
+    );
 };
 
 export default CountdownClock;

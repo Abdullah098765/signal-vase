@@ -125,3 +125,17 @@
 .webkit-fill-available{
   width: 100%;
 }
+.countdown-container {
+  text-align: center;
+  width: 120px; /* Adjust the width as needed */
+  overflow: hidden;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+@media (min-width: 1024px) {
+  .w-66rem {
+    width: 100%;
+    
+  }
+}

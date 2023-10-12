@@ -10,7 +10,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useMyContext } from '../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-function SignalModal({ }) {
+function SignalModal() {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
     if (!isSignalModalOpen && selectedSignal) return null;

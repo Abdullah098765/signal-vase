@@ -38,7 +38,7 @@ const Navbar = () => {
                 {/* Branding or Logo */}
                 <div className="text-2xl font-semibold cursor-pointer flex">
                     <button onClick={
-                        closeSidenav
+                        () => closeSidenav(!isSliderOpen, true)
                     }
                         className="hamburger
                         -icon  focus:outline-none"
