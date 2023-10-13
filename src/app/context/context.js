@@ -14,7 +14,7 @@ export const MyContextProvider = ({ children }) => {
   const [signals, setSignals] = useState([])
   const [selectedSignal, setSelectedSignal] = useState({})
   const [isSignalModalOpen, setisSignalModalOpen] = useState(false)
-  
+
 
 
   const [lineClicked, setLineClicked] = useState(false);
@@ -25,7 +25,7 @@ export const MyContextProvider = ({ children }) => {
   const closeSidenav = (is, lineClicked) => {
     setIsSliderOpen(is)
     console.log(isSliderOpen);
-    if(lineClicked){
+    if (lineClicked) {
       setLineClicked(true)
     }
   };
@@ -52,6 +52,7 @@ export const MyContextProvider = ({ children }) => {
       .catch(error => console.log('error', error));
 
   };
+
   const getSignals = () => {
 
 
@@ -62,6 +63,16 @@ export const MyContextProvider = ({ children }) => {
       .catch(error => console.log('error', error));
 
   };
+  const _setIsModalOpen = (is, signal) => {
+
+    setIsModalOpen(is)
+    console.log(is, signal);
+
+
+  };
+
+
+
   useEffect(() => {
     getUser()
     getSignals()
@@ -75,7 +86,7 @@ export const MyContextProvider = ({ children }) => {
 
 
   return (
-    <MyContext.Provider value={{closeSidenav,lineClicked, selectedSignal, setSelectedSignal,getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{ _setIsModalOpen, closeSidenav, lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

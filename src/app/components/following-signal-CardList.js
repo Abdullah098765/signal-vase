@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 import FollowingSignalsCard from './FollowingSignalsCard'
 import CountdownClock from './countDown.js'
+import GoodBadButtons from './good-bad-buttons.js'
 import "./components.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 
 
 const SignalCardList = () => {
     const [followedSignals, setFollowedSignals] = useState([]);
-    const { user, closeSidenav, lineClicked } = useMyContext()
+    const { user, closeSidenav, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
 
 
     const windowWidth = window.innerWidth;
@@ -94,15 +97,23 @@ const SignalCardList = () => {
                     {/* Pair and Entry Price */}
 
                     {/* Duration */}
-                    <p className="text-sm text-gray-500 xl:mr-5">
-                        <CountdownClock duration={1697655161609} />
-                    </p>
+                    {signal.duration >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
+                        <CountdownClock duration={signal.duration} />
+                    </p> :
+                        <GoodBadButtons signal={signal}/>
+                      
+
+                    }
 
                     {/* Signal Type Badge (Buy or Sell) */}
 
                     {/* Action Buttons */}
                     <div className="mt-4 sm:mt-0">
-                        <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm">
+                        <button onClick={() => {
+                            // _setIsModalOpen(true, signal)
+                            setSelectedSignal(signal)
+                            setisSignalModalOpen(true)
+                        }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm">
                             See Details
                         </button>
 
