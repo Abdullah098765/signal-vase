@@ -579,7 +579,7 @@ function SignalModal() {
                     {/* Content above the comment section */}
                     {/* Add a button to toggle the comment section */}
                     <button
-                        className={`bg-black text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm ${showComments ? 'bg-gray-900' : ''
+                        className={`bg-black sm:mt-2 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm ${showComments ? 'bg-gray-900' : ''
                             }`}
                         onClick={toggleComments}
                     >

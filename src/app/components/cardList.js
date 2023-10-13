@@ -6,12 +6,27 @@ const SignalCardList = ({ }) => {
 
 
 
-    const { signals, setSignals,getSignals } = useMyContext()
+    const { signals, setSignals, getSignals, lineClicked, closeSidenav } = useMyContext()
     useEffect(() => {
         getSignals()
         console.log(signals);
-    },)
+    },[])
 
+    const windowWidth = window.innerWidth;
+
+    useEffect(() => {
+        console.log("Browser window width: " + windowWidth + " pixels");
+        if (!lineClicked) {
+            if (windowWidth <= 1100) {
+                closeSidenav(false)
+            }
+
+        }
+        if (windowWidth >= 1100) {
+            closeSidenav(true)
+        }
+
+    }, [windowWidth])
 
     return (
         <div className='webkit-fill-available'>

@@ -57,12 +57,12 @@ const SignalCardList = () => {
     var currentTimeStamp = 16970943
     return (
         <div className='flex flex-col justify-center items-center px-3 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12  webkit-fill-available'>
-            <h1 className="text-3xl font-bold mt-6 mb-4 text-gray-800 border-b">Following</h1>
+            <h1 class="text-3xl font-bold mt-6 mb-4 text-gray-800 border-b">{followedSignals.length} Signals Following</h1>
 
             {followedSignals.map((signal) => (
                 <div
                     key={signal._id}
-                    className="bg-white  dark:bg-black border border-black dark:border-white shadow-lg rounded-lg p-4 4  my-4 flex flex-col md:flex-row items-center justify-between  webkit-fill-available "
+                    className="bg-white  dark:bg-black border border-gray-900 dark:border-white shadow-lg rounded-lg p-4 4  my-4 flex flex-col md:flex-row items-center justify-between  webkit-fill-available "
                 >
                     <div
                         className={`${signal.longOrShort === 'Long' ? 'bg-green-500' : 'bg-red-500'
