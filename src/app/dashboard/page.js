@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../components/sidebar'
+import DashboardSidebar from '../components/DashboardSidebar.js'
 import MainDashboard from '../components/mainDashboard.js'
 import '../components/components.css'
 import Navbar from '../components/navbar';
@@ -15,11 +15,17 @@ const Dashboard = () => {
 	return (
 		<div className="text-gray-700 bg-gradient-to-tr from-blue-200 via-indigo-200 to-pink-200  w-full">
 			<div>
+
+
 				<MyContextProvider>
 					<Navbar />
-					<Sidebar />
-					<MainDashboard/>
-				</MyContextProvider >
+
+
+					<div className="flex">
+						<DashboardSidebar />
+						
+					</div>
+				</MyContextProvider>
 
 			</div>
 		</div>

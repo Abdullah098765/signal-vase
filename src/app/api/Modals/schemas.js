@@ -176,8 +176,8 @@ const signalSchema = new mongoose.Schema({
 
   // Success status of the signal (true if successful, false if failed)
   isSuccess: {
-    type: Boolean,
-    default: false,
+    type: String,
+    default: 'null',
   },
 
   // Comments on the signal

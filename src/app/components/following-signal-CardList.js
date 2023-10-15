@@ -57,7 +57,6 @@ const SignalCardList = () => {
 
 
     },);
-    var currentTimeStamp = 16970943
     return (
         <div className='flex flex-col justify-center items-center px-3 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12  webkit-fill-available'>
             <h1 class="text-3xl font-bold mt-6 mb-4 text-gray-800 border-b">{followedSignals.length} Signals Following</h1>
@@ -77,7 +76,7 @@ const SignalCardList = () => {
                         {signal.pair}
                     </h1>
                     <p className="text-sm text-gray-500 mr-2 ml-2 ">
-                        Entry Price: {signal.entry1} | Stop Loss: {signal.stopLoss} | Take Profit: {signal.takeProfit1}
+                        Entry: {signal.entry1} | SL: {signal.stopLoss} | TP: {signal.takeProfit1}
                     </p>
 
                     <div className='flex flex-col md:flex-row justify-between items-center xl:mr-3'>
@@ -113,7 +112,7 @@ const SignalCardList = () => {
                             // _setIsModalOpen(true, signal)
                             setSelectedSignal(signal)
                             setisSignalModalOpen(true)
-                        }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm">
+                        }} className="bg-gray-700 text-white px-4 py-2 sm:mt-2 lg:mt-0 lg:ml-1 rounded-full hover:bg-gray-900 text-sm">
                             See Details
                         </button>
 

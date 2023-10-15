@@ -159,10 +159,10 @@ const GoodBadButtons = ({ signal }) => {
     useEffect(() => {
 
 
-        if (signal.likes.indexOf(user._id) !== -1) {
+        if (signal.good.indexOf(user._id) !== -1) {
             setLiked(true)
         }
-        if (signal.disLikesCount.indexOf(user._id) !== -1) {
+        if (signal.bad.indexOf(user._id) !== -1) {
             setDisliked(true)
         }
 

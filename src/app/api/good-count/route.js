@@ -15,7 +15,7 @@ export async function POST(req, res) {
 
         // Use await to wait for the findOneAndUpdate to complete
         var signal = await Schemas.Signal.findByIdAndUpdate(signalId, {
-            $addToSet: { GeolocationCoordinates: likerId },
+            $addToSet: { good: likerId },
           });
 
         if (signal) {
