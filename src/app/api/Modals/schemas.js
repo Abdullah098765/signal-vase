@@ -41,13 +41,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     // Add the user's location if necessary.
   },
-  followers: [
+  Subscribers: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
   ],
-  following: [
+  Subscribed: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
@@ -59,13 +59,25 @@ const userSchema = new mongoose.Schema({
       ref: 'Signal', // If you have a Signal schema.
     },
   ],
-  SuccessfulSignals: [
+  goodSignals: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Signal', // Reference to the Signal schema.
     },
   ],
-  UnsuccessfulSignals: [
+  badSignals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Signal', // Reference to the Signal schema.
+    },
+  ],
+  neutralSignals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Signal', // Reference to the Signal schema.
+    },
+  ],
+  activeSignals: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Signal', // Reference to the Signal schema.

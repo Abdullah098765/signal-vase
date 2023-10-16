@@ -4,8 +4,42 @@ import { useMyContext } from '../context/context';
 import { faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart } from '@fortawesome/free-solid-svg-icons';
 import { faBarChart, faChartBar } from '@fortawesome/free-regular-svg-icons';
 import Career from './creer.js'
+import UserSignals from './userSignals.js'
+import { useEffect, useState } from 'react';
 function User() {
     const { user } = useMyContext();
+
+    
+    // useEffect(() => {
+
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("a", "dni");
+    //     myHeaders.append("Content-Type", "application/json");
+
+    //     var raw = JSON.stringify({
+    //         "uid": user._id
+    //     });
+
+    //     var requestOptions = {
+    //         method: 'POST',
+    //         headers: myHeaders,
+    //         body: raw,
+    //         redirect: 'follow'
+    //     };
+
+    //     fetch("http://localhost:3000/api/get-user-signals", requestOptions)
+    //         .then(response => response.text())
+    //         .then(result => {
+    //             setUserSignals(JSON.parse(result))
+    //             console.log(JSON.parse(result));
+
+    //         })
+    //         .catch(error => console.log('error', error));
+
+    // },)
+
+
+
     return (
         <div>
 
@@ -14,14 +48,14 @@ function User() {
                     <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                     </div>
                     <img
-                        src={'https://scontent.fkhi16-1.fna.fbcdn.net/v/t39.30808-6/387880006_872589680940413_2952632708859265931_n.jpg?stp=dst-jpg_p228x119&_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Z7XHRdtXEuQAX-DohDV&_nc_ht=scontent.fkhi16-1.fna&oh=00_AfBUyzBNk3-HVGwHte2hw5SyOR8I8ANv7CFwXa55mCk4iQ&oe=6531D989'}
+                        src={user.profilePicture}
                         className="w-40 h-40 rounded-full mx-4 border-2 border-gray-500  transition duration-300 object-cover"
                         alt={user.displayName}
                     />
 
                     <div>
                         <div class="flex items-center space-x-2 mt-2">
-                            <p class="text-2xl">Hamza Crypto</p>
+                            <p class="text-2xl">{user.displayName}</p>
                             <span class="bg-blue-500 rounded-full p-1" title="Verified">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
@@ -50,7 +84,7 @@ function User() {
                 </div>
 
 
-                <Career />
+                <Career user={user}  />
 
                 <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
                     <div class="w-full flex flex-col 2xl:w-1/3">
@@ -103,9 +137,10 @@ function User() {
                             </ul>
                         </div>
 
-                        
-                        
+
+
                     </div>
+
                     <div class="flex flex-col w-full 2xl:w-2/3">
                         <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
                             <h4 class="text-xl text-gray-900 font-bold">About</h4>
@@ -113,7 +148,12 @@ function User() {
                         </div>
 
                     </div>
+
+
+
                 </div>
+                <UserSignals />
+
             </div>
 
 
