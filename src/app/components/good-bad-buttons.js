@@ -26,7 +26,7 @@ const GoodBadButtons = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/good-count", requestOptions)
+            fetch("http://localhost:3000/api/neutral-count", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -74,7 +74,7 @@ const GoodBadButtons = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/good-discount", requestOptions)
+            fetch("http://localhost:3000/api/neutral-discount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -122,7 +122,7 @@ const GoodBadButtons = ({ signal }) => {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("http://localhost:3000/api/good-discount", requestOptions)
+                fetch("http://localhost:3000/api/neutral-discount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -167,7 +167,7 @@ const GoodBadButtons = ({ signal }) => {
         }
 
     }, [])
-    const likeIconColor = liked ? 'bg-green-800 border border-green-100 text-white px-1 py-1 rounded-full hover:bg-green-700 text-xs flex items-center' : 'border border-green-500 text-green-500 px-1 py-1 rounded-full hover:bg-green-100 text-xs flex items-center';
+    const likeIconColor = liked ? 'bg-blue-800 border border-blue-100 text-white px-1 py-1 rounded-full hover:bg-blue-700 text-xs flex items-center' : 'border border-blue-500 text-blue-500 px-1 py-1 rounded-full hover:bg-blue-100 text-xs flex items-center';
     const dislikeIconColor = disliked ? ' bg-red-800 border border-red-100  text-white px-1 py-1 rounded-full hover:bg-red-700 text-xs flex items-center' : 'border border-red-500  text-red-500 px-1 py-1 rounded-full hover:bg-red-100 text-xs flex items-center';
 
     return (
@@ -176,7 +176,7 @@ const GoodBadButtons = ({ signal }) => {
                 <button onClick={handleLikeClick} className={likeIconColor + ""}>
 
 
-                    Good Signal
+                    Neutral Signal
                 </button>
                 <button onClick={handleDislikeClick} className={dislikeIconColor + ""}>
 
