@@ -233,6 +233,10 @@ const signalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Reference to the User model
   }],
+  neutral: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
 
   // Other properties specific to your project
 });

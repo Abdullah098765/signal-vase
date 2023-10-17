@@ -9,7 +9,7 @@ const GoodBadButtons = ({ signal }) => {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
-    const handleLikeClick = () => {
+    const handleNeutralClick = () => {
         if (!liked) {
             var myHeaders = new Headers();
             myHeaders.append("a", "dni");
@@ -173,7 +173,7 @@ const GoodBadButtons = ({ signal }) => {
     return (
         <div>
             <div className="max-w-3xl mx-auto flex space-x-4">
-                <button onClick={handleLikeClick} className={likeIconColor + ""}>
+                <button onClick={handleNeutralClick} className={likeIconColor + ""}>
 
 
                     Neutral Signal

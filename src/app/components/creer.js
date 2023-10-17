@@ -25,7 +25,7 @@ const Creer = ({ user }) => {
                             </div>
                             <div class="flex flex-col">
                                 <div class="flex items-end">
-                                    <span class="text-2xl 2xl:text-3xl font-bold">1.8k</span>
+                                    <span class="text-2xl 2xl:text-3xl font-bold">{user.neutralSignals && user.neutralSignals.length + user.goodSignals.length + user.badSignals.length}</span>
 
 
                                 </div>
