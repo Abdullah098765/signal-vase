@@ -96,7 +96,7 @@ const SignalCardList = () => {
                     {/* Pair and Entry Price */}
 
                     {/* Duration */}
-                    {signal.duration >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
+                    {signal.duration-8686587 >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
                         <CountdownClock duration={signal.duration} />
                     </p> :
                         <GoodBadButtons signal={signal}/>

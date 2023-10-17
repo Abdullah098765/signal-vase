@@ -10,12 +10,12 @@ export async function POST(req, res) {
         // Parse the request body
         const _signalId = await req.json();
         var signalId = _signalId.signalId;
-        var likerId = _signalId.likerId;
+        var neutralId = _signalId.neutralId;
         console.log(signalId);
 
         // Use await to wait for the findOneAndUpdate to complete
         var signal = await Schemas.Signal.findByIdAndUpdate(signalId, {
-            $addToSet: { good: likerId },
+            $addToSet: { neutral: neutralId },
           });
 
         if (signal) {
