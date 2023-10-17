@@ -11,9 +11,12 @@ const updateSuccess = async () => {
         for (const signal of signals) {
             const goodLength = signal.good.length;
             const badLength = signal.bad.length;
+            const neutralLength = signal.neutral.length;
             let isSuccess = 'null';
 
-            if (badLength === 0 && goodLength === 0 || badLength < goodLength) {
+            console.log(goodLength, badLength, neutralLength,);
+
+            if ((badLength === 0 && goodLength === 0 && neutralLength === 0) || (badLength < goodLength && neutralLength < goodLength)) {
                 isSuccess = 'true';
 
                 // Update the user's object to add the signal to goodSignals and remove from others
@@ -21,7 +24,7 @@ const updateSuccess = async () => {
                     $addToSet: { goodSignals: signal._id },
                     $pull: { badSignals: signal._id, neutralSignals: signal._id },
                 });
-            } else if (badLength > goodLength) {
+            } else if (badLength > goodLength && badLength > neutralLength) {
                 isSuccess = 'false';
 
                 // Update the user's object to add the signal to badSignals and remove from others
@@ -29,7 +32,7 @@ const updateSuccess = async () => {
                     $addToSet: { badSignals: signal._id },
                     $pull: { goodSignals: signal._id, neutralSignals: signal._id },
                 });
-            } else if (badLength === goodLength && goodLength > 0) {
+            } else if (neutralLength > goodLength && neutralLength > badLength) {
                 // If it's neither good nor bad, it's neutral
                 // Update the user's object to add the signal to neutralSignals and remove from others
                 await User.findByIdAndUpdate(signal.signalProvider._id, {
