@@ -82,11 +82,8 @@ export const MyContextProvider = ({ children }) => {
 
 
 
-
-
-
   return (
-    <MyContext.Provider value={{ _setIsModalOpen, closeSidenav, lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{ _setIsModalOpen, closeSidenav,  lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

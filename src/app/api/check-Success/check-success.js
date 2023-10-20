@@ -49,9 +49,36 @@ const updateSuccess = async () => {
     }
 };
 
+const updateUsersSignalStatus = async () => {
+    try {
+        // Fetch all signals
+        const signals = await Signal.find().exec();
+
+        for (const signal of signals) {
+            // Determine whether the signal is expired or active
+            console.log(signal.status);
+            if (signal.status === 'Expired') {
+                // Update the user's "expiredSignals" array
+                await User.findByIdAndUpdate(signal.signalProvider._id, {
+                    $addToSet: { expiredSignals: signal._id },
+                });
+            } else if (signal.status === 'Active') {
+                // Update the user's "activeSignals" array
+                await User.findByIdAndUpdate(signal.signalProvider._id, {
+                    $addToSet: { activeSignals: signal._id },
+                });
+            }
+        }
+    } catch (error) {
+        console.error('Error updating users with signal status:', error);
+    }
+};
+
+
 // Schedule the updateSuccess function to run every minute
 export default function checkSuccess() {
     cron.schedule('* * * * *', () => {
         updateSuccess();
+        updateUsersSignalStatus()
     });
 }

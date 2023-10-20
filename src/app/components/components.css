@@ -139,3 +139,12 @@
     
   }
 }
+/* HorizontalScrollList.css */
+.scroll-item {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.scroll-item.active {
+  transform: translateX(-100%); /* Adjust this value as needed for your scroll distance */
+}

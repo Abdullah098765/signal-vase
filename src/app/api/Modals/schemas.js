@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
   },
   bio: {
     type: String,
+    default: 'Passionate about trading cryptocurrencies and stocks.'
     // Add any other user information fields you need.
   },
   location: {
@@ -53,6 +54,14 @@ const userSchema = new mongoose.Schema({
       ref: 'User',
     },
   ],
+  expiredSignals: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
+  activeSignals: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Reference to the User model
+  }],
   signalsPosted: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -237,6 +246,7 @@ const signalSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Reference to the User model
   }],
+
 
   // Other properties specific to your project
 });
