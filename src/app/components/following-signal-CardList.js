@@ -1,7 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
-import FollowingSignalsCard from './FollowingSignalsCard'
 import CountdownClock from './countDown.js'
 import GoodBadButtons from './good-bad-buttons.js'
 import "./components.css"
@@ -96,7 +95,7 @@ const SignalCardList = () => {
                     {/* Pair and Entry Price */}
 
                     {/* Duration */}
-                    {signal.duration-8686587 >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
+                    {signal.duration >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
                         <CountdownClock duration={signal.duration} />
                     </p> :
                         <GoodBadButtons signal={signal}/>

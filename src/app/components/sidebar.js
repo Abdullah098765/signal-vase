@@ -7,7 +7,7 @@ import { useMyContext } from '../context/context';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell,  faClock,  faGear,  } from '@fortawesome/free-regular-svg-icons';
+import { faBell, faClock, faGear, faUser, } from '@fortawesome/free-regular-svg-icons';
 
 function Sidebar() {
     const { isSliderOpen, setIsSliderOpen, isOpen, } = useMyContext();
@@ -41,19 +41,14 @@ function Sidebar() {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" /> <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" /> </svg>
                                 <p class="text-base leading-4 ">Home</p>
                             </Link>
-                            <Link href={'/dashboard'} onClick={() => {
+                            <Link href={'/profile'} onClick={() => {
                                 setSelectedLink('Dashboard')
                                 console.log(selectedLink);
                             }}
                                 className={`${selectedLink === 'Dashboard' ? 'text-indigo-400' : ''} flex jusitfy-start items-center space-x-6 w-full  focus:outline-none  focus:text-indigo-400   text-white rounded `}
                             >
-                                <svg class="fill-stroke " width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 4H5C4.44772 4 4 4.44772 4 5V9C4 9.55228 4.44772 10 5 10H9C9.55228 10 10 9.55228 10 9V5C10 4.44772 9.55228 4 9 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M19 4H15C14.4477 4 14 4.44772 14 5V9C14 9.55228 14.4477 10 15 10H19C19.5523 10 20 9.55228 20 9V5C20 4.44772 19.5523 4 19 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9 14H5C4.44772 14 4 14.4477 4 15V19C4 19.5523 4.44772 20 5 20H9C9.55228 20 10 19.5523 10 19V15C10 14.4477 9.55228 14 9 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M19 14H15C14.4477 14 14 14.4477 14 15V19C14 19.5523 14.4477 20 15 20H19C19.5523 20 20 19.5523 20 19V15C20 14.4477 19.5523 14 19 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                                <p class="text-base leading-4 ">Dashboard</p>
+                                <FontAwesomeIcon icon={faUser} width="24" height="24" />
+                                <p class="text-base leading-4 ">Profile</p>
                             </Link>
                         </div>
                         <div class="flex flex-col justify-start      border-b border-gray-600 w-full  ">
@@ -61,13 +56,13 @@ function Sidebar() {
                             <div id="menu1" class="flex justify-start  flex-col w-full md:w-auto items-start pb-1 ">
                                 <Link href="/following-signals" className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52">
 
-                                    <FontAwesomeIcon icon={faClock}  width="24" height="24"/>
+                                    <FontAwesomeIcon icon={faClock} width="24" height="24" />
 
                                     <p className="text-base leading-4">Following</p>
                                 </Link>
 
                                 <Link href={'http://localhost:3000/'} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
-                                    <FontAwesomeIcon icon={faBell} width="24" height="24"/>
+                                    <FontAwesomeIcon icon={faBell} width="24" height="24" />
 
                                     <p class="text-base leading-4  ">Subscriptions</p>
                                 </Link>
@@ -80,8 +75,8 @@ function Sidebar() {
                                     <p class="text-base leading-4  ">Notifications</p>
                                 </Link>
 
-                            
-                            
+
+
                                 <Link href={'http://localhost:3000/'} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8 21H12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />

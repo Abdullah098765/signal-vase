@@ -14,7 +14,7 @@ const updateSuccess = async () => {
             const neutralLength = signal.neutral.length;
             let isSuccess = 'null';
 
-            console.log(goodLength, badLength, neutralLength,);
+            // console.log(goodLength, badLength, neutralLength,);
 
             if ((badLength === 0 && goodLength === 0 && neutralLength === 0) || (badLength < goodLength && neutralLength < goodLength) || (goodLength === neutralLength && badLength < neutralLength) || (goodLength === badLength && badLength === neutralLength)) {
                 isSuccess = 'true';
@@ -56,18 +56,26 @@ const updateUsersSignalStatus = async () => {
 
         for (const signal of signals) {
             // Determine whether the signal is expired or active
-            console.log(signal.status);
+            // console.log(signal.status);
+
+            const updateData = {};
+
             if (signal.status === 'Expired') {
-                // Update the user's "expiredSignals" array
-                await User.findByIdAndUpdate(signal.signalProvider._id, {
-                    $addToSet: { expiredSignals: signal._id },
-                });
+                // Remove the signal from the user's "activeSignals" array
+                updateData.$pull = { activeSignals: signal._id };
+
+                // Add the signal to the user's "expiredSignals" array
+                updateData.$addToSet = { expiredSignals: signal._id };
             } else if (signal.status === 'Active') {
-                // Update the user's "activeSignals" array
-                await User.findByIdAndUpdate(signal.signalProvider._id, {
-                    $addToSet: { activeSignals: signal._id },
-                });
+                // Remove the signal from the user's "expiredSignals" array
+                updateData.$pull = { expiredSignals: signal._id };
+
+                // Add the signal to the user's "activeSignals" array
+                updateData.$addToSet = { activeSignals: signal._id };
             }
+
+            // Update the user's arrays based on the signal status
+            await User.findByIdAndUpdate(signal.signalProvider._id, updateData);
         }
     } catch (error) {
         console.error('Error updating users with signal status:', error);

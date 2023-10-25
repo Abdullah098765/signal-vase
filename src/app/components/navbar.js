@@ -37,7 +37,7 @@ const Navbar = () => {
 
                 {/* Branding or Logo */}
                 <div className="text-2xl font-semibold cursor-pointer flex">
-                    <button onClick={
+                    <button name='lines' onClick={
                         () => closeSidenav(!isSliderOpen, true)
                     }
                         className="hamburger
@@ -83,7 +83,7 @@ const Navbar = () => {
 
 
                     {localStorage.getItem('uid') && <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
-                        <Link href={'/signal_form'}>Create a Signal</Link>
+                        <Link href={'../signal_form'}>Create a Signal</Link>
                     </button>}
                     {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
 
@@ -93,17 +93,17 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
 
                     <div className="absolute right-5 group">
-                        {!localStorage.getItem('uid') ? <button onClick={() => {
+                        {!localStorage.getItem('uid') ? <button name='signin' onClick={() => {
                             setIsModalOpen(true)
                         }} className="bg-gray-700 text-white px-4 py-2 rounded hover:text-blue-400 text-sm ">
                             Sign In
-                        </button> : <button
+                        </button> : <button name='profile'
                             onClick={toggleMenu}
                             className="flex items-center space-x-2 focus:outline-none"
                         >
 
                             <div className="rounded-full overflow-hidden h-10 w-10">
-                                <img className='profile-pic-nav w-full h-full object-cover object-center' src={user.profilePicture}></img>
+                                <img className='profile-pic-nav w-full h-full object-cover object-center' alt='profile-pic' src={user.profilePicture} ></img>
                             </div>
                         </button>}
 

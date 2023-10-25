@@ -6,7 +6,6 @@ import SignalsPieChart from './career-chart'
 import React from 'react';
 
 const Creer = ({ user }) => {
-    console.log(user);
     var goodSignals = user.goodSignals && user.goodSignals.length || 0
     var badSignals = user.badSignals && user.badSignals.length || 0
     var neutralSignals = user.neutralSignals && user.neutralSignals.length || 0

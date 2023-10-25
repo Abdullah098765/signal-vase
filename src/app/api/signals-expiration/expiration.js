@@ -6,7 +6,7 @@ import Schemas from '../Modals/schemas.js'
 export default function signal_Expirations() {
 
     // Define a cron job to run every minute
-    cron.schedule('* * * * *', async () => {
+    cron.schedule('*/5 * * * * *', async () => {
         try {
             // Find all active signals
             const activeSignals = await Schemas.Signal.find({ status: 'Active' });

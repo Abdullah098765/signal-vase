@@ -9,6 +9,7 @@ import { useCountdown } from './countDown-timer';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useMyContext } from '../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Subscribe from './Subscribe';
 
 function SignalModal() {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
@@ -510,19 +511,17 @@ function SignalModal() {
                         </div>
                         <div className="xl:flex flex-col sm:block md:block justify-stretch  items-center mt-4  lg:mt-4 xl:mt-0 xl:flex-row">
                             <div className="signal-info bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                {signal.signalProvider.winLoseRatio || 324} SuccessfulSignals
+                                {signal.signalProvider.goodSignals.length } Good Signals
                             </div>
                             <div className="signal-info bg-gray-200 text-xs text-black p-2 rounded-full  xl:mt-0 mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                {signal.signalProvider.winLoseRatio || 103} UnsuccessfulSignals
+                                {signal.signalProvider.badSignals.length } Bad Signalse
                             </div>
                             <div className="signal-info bg-gray-200 text-xs text-black p-2 mb-2 lg:mb-0  xl:mt-0 lg:mt-4 rounded-full">
-                                {signal.signalProvider.followers || '3.4k'} 3.4k Subscribers
+                                {signal.signalProvider.Subscribers.length } Subscribers
                             </div>
                         </div>
                         <div className='flex items-center mt-4 lg:mt-0'>
-                            <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 text-sm">
-                                Subscribe
-                            </button>
+                            <Subscribe targetUser={signal.signalProvider} />
                         </div>
                     </div>
 

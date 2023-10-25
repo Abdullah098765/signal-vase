@@ -10,6 +10,7 @@ import BadSignals from './bad'
 import NeutralSignals from './neutral'
 import CryptoSignals from './crypto'
 import ForexSignals from './forex'
+import Subscribe from './Subscribe'
 import ActiveSignals from './active'
 import Reviews from './reviews'
 import About from './About'
@@ -19,6 +20,7 @@ import SignalsPieChart from './career-chart';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'; // Import the ScrollToPlugin
 
 import gsap from 'gsap';
+import SignalModal from './signalModal';
 
 function User() {
     const { user } = useMyContext();
@@ -31,7 +33,10 @@ function User() {
     function handleGetRoute(params) {
         setIsCurrentprofileRoute(params);
     }
-    const [allSignals, setAllSignals] = useState()
+    const [allSignals, setAllSignals] = useState([])
+    const [Signals, setSignals] = useState([])
+    const [cryptoSignals, setCryptoSignals] = useState([])
+    const [forexSignals, setForexSignals] = useState([])
     const getAllSignals = () => {
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -54,6 +59,8 @@ function User() {
                 let allSignals = JSON.parse(result).goodSignals.concat(JSON.parse(result).badSignals, JSON.parse(result).neutralSignals);
 
                 setAllSignals(allSignals)
+                setSignals(JSON.parse(result))
+
                 console.log(allSignals)
             })
             .catch(error => console.log('error', error));
@@ -62,7 +69,14 @@ function User() {
     useEffect(() => {
         getAllSignals()
 
-    },)
+
+    }, [])
+    useEffect(() => {
+        const cryptoSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Crypto');
+        const stockSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Stock');
+        setCryptoSignals(cryptoSignals)
+        setForexSignals(stockSignals)
+    }, [allSignals])
 
     const handleScroll = (direction) => {
         const scrollContainer = document.getElementById('scroll-container');
@@ -108,12 +122,10 @@ function User() {
                     <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
                         <div class="flex items-center space-x-4 lg:mt-24 xl:mt-24 mt-3">
-                            <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
-                                </svg>
-                                <span>Subscribe</span>
-                            </button>
+                            <MyContextProvider>
+                                {user ? <Subscribe targetUser={user} />:''
+                                }
+                            </MyContextProvider>
                             <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
@@ -161,17 +173,17 @@ function User() {
                                     <li onClick={() => handleGetRoute('Reviews')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'Reviews' ? 'bg-gray-100' : ''}`}>
                                         Reviews
                                     </li> </ul>
-                                    {isScrolled <= 2 && (
-                                        <div className="absolute right-0 cursor-pointer sm:hidden" onClick={() => handleScroll('left')}>
-                                            &#9654;
-                                        </div>
-                                    )}
-                                    {isScrolled >= 2 && (
-                                        <div className="absolute right-4 cursor-pointer sm:hidden" onClick={() => handleScroll('right')}>
-                                            &#9664;
-                                        </div>
-                                    )}
-                                    {/* Your content here */}
+                                {isScrolled <= 2 && (
+                                    <div className="absolute right-0 cursor-pointer sm:hidden" onClick={() => handleScroll('left')}>
+                                        &#9654;
+                                    </div>
+                                )}
+                                {isScrolled >= 2 && (
+                                    <div className="absolute right-4 cursor-pointer sm:hidden" onClick={() => handleScroll('right')}>
+                                        &#9664;
+                                    </div>
+                                )}
+                                {/* Your content here */}
 
 
 
@@ -184,16 +196,21 @@ function User() {
 
                     </div>
                 </div>
+                <MyContextProvider>
 
-                {currentprofileRoute === 'All' && <AllSignals allSignals={allSignals} />}
-                {currentprofileRoute === 'Good' && <GoodSignals />}
-                {currentprofileRoute === 'Active' && <ActiveSignals />}
-                {currentprofileRoute === 'Neutral' && <NeutralSignals />}
-                {currentprofileRoute === 'Bad' && <BadSignals />}
-                {currentprofileRoute === 'Crypto' && <CryptoSignals />}
-                {currentprofileRoute === 'Forex' && <ForexSignals />}
-                {currentprofileRoute === 'Reviews' && <Reviews />}
-                {currentprofileRoute === 'About' && <About />}
+
+                    {currentprofileRoute === 'All' && <AllSignals allSignals={allSignals} />}
+                    {currentprofileRoute === 'Good' && <GoodSignals goodSignals={Signals.goodSignals} />}
+                    {currentprofileRoute === 'Active' && <ActiveSignals activeSignals={Signals.activeSignals} />}
+                    {currentprofileRoute === 'Neutral' && <NeutralSignals neutralSignals={Signals.neutralSignals} />}
+                    {currentprofileRoute === 'Bad' && <BadSignals badSignals={Signals.badSignals} />}
+                    {currentprofileRoute === 'Crypto' && <CryptoSignals cryptoSignals={cryptoSignals} />}
+                    {currentprofileRoute === 'Forex' && <ForexSignals forexSignals={forexSignals} />}
+                    {currentprofileRoute === 'Reviews' && <Reviews />}
+                    {currentprofileRoute === 'About' && <About />}
+                    <SignalModal />
+
+                </MyContextProvider>
 
                 {currentprofileRoute === 'About' &&
                     <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
