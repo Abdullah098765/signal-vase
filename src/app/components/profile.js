@@ -1,8 +1,8 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyContextProvider, useMyContext } from '../context/context';
-import { faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart } from '@fortawesome/free-solid-svg-icons';
-import { faBarChart, faChartBar } from '@fortawesome/free-regular-svg-icons';
+import { faAdd, faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart } from '@fortawesome/free-solid-svg-icons';
+import { faBarChart, faChartBar, faEdit } from '@fortawesome/free-regular-svg-icons';
 import Career from './creer.js'
 import AllSignals from './all'
 import GoodSignals from './good'
@@ -122,15 +122,16 @@ function User() {
                     <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
                         <div class="flex items-center space-x-4 lg:mt-24 xl:mt-24 mt-3">
-                            <MyContextProvider>
-                                {user ? <Subscribe targetUser={user} />:''
-                                }
-                            </MyContextProvider>
+
+
                             <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
-                                </svg>
-                                <button class="whitespace-nowrap">Write a Review</button>
+
+                                <FontAwesomeIcon icon={faAdd} />
+                                <button class="whitespace-nowrap">Create a Signal</button>
+                            </button>
+                            <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                              <FontAwesomeIcon icon={faEdit}/>
+                                <button class="whitespace-nowrap">Edit Profile</button>
                             </button>
                         </div>
                     </div>
