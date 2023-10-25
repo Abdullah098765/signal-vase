@@ -2,7 +2,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faPerson } from '@fortawesome/free-solid-svg-icons';
 import { formatDistanceToNow } from 'date-fns';
 import './components.css'
 import { useCountdown } from './countDown-timer';
@@ -10,6 +10,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useMyContext } from '../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Subscribe from './Subscribe';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 function SignalModal() {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
@@ -511,17 +512,21 @@ function SignalModal() {
                         </div>
                         <div className="xl:flex flex-col sm:block md:block justify-stretch  items-center mt-4  lg:mt-4 xl:mt-0 xl:flex-row">
                             <div className="signal-info bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                {signal.signalProvider.goodSignals.length } Good Signals
+                                {signal.signalProvider.goodSignals.length} Good Signals
                             </div>
                             <div className="signal-info bg-gray-200 text-xs text-black p-2 rounded-full  xl:mt-0 mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                {signal.signalProvider.badSignals.length } Bad Signalse
+                                {signal.signalProvider.badSignals.length} Bad Signalse
                             </div>
                             <div className="signal-info bg-gray-200 text-xs text-black p-2 mb-2 lg:mb-0  xl:mt-0 lg:mt-4 rounded-full">
-                                {signal.signalProvider.Subscribers.length } Subscribers
+                                {signal.signalProvider.Subscribers.length} Subscribers
                             </div>
                         </div>
                         <div className='flex items-center mt-4 lg:mt-0'>
-                            <Subscribe targetUser={signal.signalProvider} />
+                            {signal.signalProvider._id !== user._id ? <Subscribe targetUser={signal.signalProvider} /> : <button onClick={() => window.location.href = 'profile'} class="flex items-center bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                <FontAwesomeIcon icon={faUser} />
+                                <span>    Go To Profile</span>
+                            </button>
+                            }
                         </div>
                     </div>
 

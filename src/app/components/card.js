@@ -246,7 +246,7 @@ const Card = ({ signal }) => {
                 {/* User Comments and Ratings */}
                 <div className="mt-2 text-sm text-gray-600">
                     <p>Comments: {signal.commentscount}5</p>
-                    <p>Followers: {6}</p>
+                    <p>Followers: {signal.followers.length}</p>
                 </div>
 
 
