@@ -14,6 +14,7 @@ import Subscribe from './Subscribe'
 import ActiveSignals from './active'
 import Reviews from './reviews'
 import About from './About'
+import EditButtons from './editButtons'
 import './components.css'
 import { useEffect, useState } from 'react';
 import SignalsPieChart from './career-chart';
@@ -21,6 +22,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'; // Import the ScrollToPlug
 
 import gsap from 'gsap';
 import SignalModal from './signalModal';
+import EditProfileModal from './edit-profile-modal';
 
 function User() {
     const { user } = useMyContext();
@@ -120,17 +122,12 @@ function User() {
                             <p class="text-sm text-gray-500">Joined at {user.registrationDate}</p>
                         </div>
                         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
+                            <MyContextProvider>
+                                <EditButtons />
+                                {user && <EditProfileModal />}
 
-                            <div class="flex items-center space-x-4 lg:mt-24 xl:mt-24 mt-3">
-                                <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                                    <FontAwesomeIcon icon={faAdd} />
-                                    <button class="whitespace-nowrap">Create a Signal</button>
-                                </button>
-                                <button class="flex items-center bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                                    <FontAwesomeIcon icon={faEdit} />
-                                    <button class="whitespace-nowrap">Edit Profile</button>
-                                </button>
-                            </div>
+                            </MyContextProvider>
+
                         </div>
                     </div>
 
@@ -281,7 +278,7 @@ function User() {
 
                 </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
                     <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-                    <p className="text-white mt-4">Loading...</p>
+                    <p className="text-white mt-4" >Loading...</p>
                 </div>
             }
 

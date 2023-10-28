@@ -1,3 +1,5 @@
+
+
 .search-icon {
   position: absolute;
   left: 800px;
@@ -148,3 +150,7 @@
 .scroll-item.active {
   transform: translateX(-100%); /* Adjust this value as needed for your scroll distance */
 }
+
+
+
+

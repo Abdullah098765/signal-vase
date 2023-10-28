@@ -2,6 +2,7 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react';
+import io from 'socket.io-client';
 
 const MyContext = createContext();
 
@@ -21,6 +22,7 @@ export const MyContextProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const closeSidenav = (is, lineClicked) => {
     setIsSliderOpen(is)
@@ -71,19 +73,21 @@ export const MyContextProvider = ({ children }) => {
 
   };
 
+  function _setIsEditModalOpen(params) {
+    setIsEditModalOpen(params)
+  }
 
 
   useEffect(() => {
     getUser()
     getSignals()
-
   }, [])
 
 
 
 
   return (
-    <MyContext.Provider value={{ _setIsModalOpen, closeSidenav,  lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{ _setIsModalOpen, _setIsEditModalOpen, closeSidenav, isEditModalOpen, setIsEditModalOpen, lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
     default: 'Passionate about trading cryptocurrencies and stocks.'
     // Add any other user information fields you need.
   },
+  about: {
+    type: String,
+    default: '...'
+    // Add any other user information fields you need.
+  },
   location: {
     type: String,
     // Add the user's location if necessary.
@@ -112,6 +117,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['active', 'disabled', 'suspended'],
     default: 'active',
+  },
+  market: {
+    type: String,
+    enum: ['Crypto', 'Forex', 'Crypto/Forex'],
+    default: 'Crypto/Forex',
   },
   registrationDate: {
     type: Date,
