@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="">
       <MyContextProvider>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="flex">
           <Sidebar />
           <SignalCardList />
