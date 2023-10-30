@@ -53,6 +53,12 @@ const userSchema = new mongoose.Schema({
       ref: 'User',
     },
   ],
+  SubscribersFCMTokens: [
+    {
+      type: String,
+      default:null
+    },
+  ],
   Subscribed: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -103,14 +109,15 @@ const userSchema = new mongoose.Schema({
       ref: 'Review', // If you have a Review schema.
     },
   ],
+
   notificationPreferences: {
-    email: {
-      type: Boolean,
-      default: true,
+    fcmToken: {
+      type: String, // Assuming FCM tokens are strings
+      default: null, // Set to null by default to indicate no FCM token initially
     },
     inApp: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   accountStatus: {

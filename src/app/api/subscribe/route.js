@@ -9,8 +9,8 @@ export async function POST(req, res) {
   try {
     // Parse the request body
     const requestData = await req.json();
-    const { userId, targetUserId, action } = requestData;
-    console.log(userId, targetUserId, action);
+    const { userId, targetUserId, action, userFcm } = requestData;
+    console.log(userId, targetUserId, action, userFcm);
 
     // Check if the target user exists
     const targetUser = await Schemas.User.findById(targetUserId);
@@ -24,9 +24,13 @@ export async function POST(req, res) {
       // Check if the user is not already subscribed
       if (!targetUser.Subscribers.includes(userId)) {
         targetUser.Subscribers.push(userId); // Add the user to the target's subscribers
+
+        if (userFcm) {
+          targetUser.SubscribersFCMTokens.push(userFcm);
+        }
         targetUser.save(); // Save changes in targetUser's Subscribers array
       }
-      
+
       // Also, add targetUserId to userId's Subscribed array
       const user = await Schemas.User.findById(userId);
       if (user) {
@@ -41,6 +45,15 @@ export async function POST(req, res) {
       if (index > -1) {
         targetUser.Subscribers.splice(index, 1);
         targetUser.save(); // Save changes in targetUser's Subscribers array
+      }
+
+      if (userFcm) {
+        const index1 = targetUser.SubscribersFCMTokens.indexOf(userFcm);
+
+        if (index1 > -1) {
+          targetUser.SubscribersFCMTokens.splice(index1, 1);
+          targetUser.save(); // Save changes in targetUser's Subscribers array
+        }
       }
 
       // Also, remove targetUserId from userId's Subscribed array

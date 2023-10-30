@@ -22,6 +22,7 @@ const Subscribe = ({ targetUser }) => {
                 },
                 body: JSON.stringify({
                     userId: user._id,
+                    userFcm: user.notificationPreferences.fcmToken,
                     targetUserId: targetUser._id,
                     action: action, // 'subscribe' or 'unsubscribe'
                 }),

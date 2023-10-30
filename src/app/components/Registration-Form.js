@@ -28,7 +28,8 @@ const RegistrationForm = () => {
               displayName: result.user.displayName,
               email: result.user.email, // User's email address
               profilePicture: result.user.photoURL,
-              phone: result.user.phoneNumber
+              phone: result.user.phoneNumber,
+              SubscribersFCMTokens:[]
             }
           ),
         });
@@ -37,7 +38,7 @@ const RegistrationForm = () => {
           // User registration on the server was successful
           console.log('User registered on the server.', response);
           window.localStorage.setItem('uid', result.user.uid)
-          window.location = 'http://localhost:3000/dashboard'
+          window.location = 'http://localhost:3000/'
         } else {
           // Handle server registration error
           console.error('Server registration failed.');
