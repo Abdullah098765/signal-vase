@@ -14,15 +14,38 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 function SignalModal() {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
-
-    if (!isSignalModalOpen && selectedSignal) return null;
     const signal = selectedSignal
-    // Handle like and dislike counts
-    const [days, hours, minutes, seconds] = useCountdown(signal.duration);
 
+    const [days, hours, minutes, seconds] = useCountdown(signal && signal.duration);
     const [isLoading, setIsLoading] = useState(false);
-
     const [showComments, setShowComments] = useState(false);
+    const [copyentry1, setcopyentry1] = useState('Copy');
+    const [copyentry2, setCopyentry2] = useState('Copy');
+    const [copytp1, setCopytp1] = useState('Copy');
+    const [copytp2, setCopytp2] = useState('Copy');
+    const [copytp3, setCopytp3] = useState('Copy');
+    const [copysl, setCopysl] = useState('Copy');
+    const [following, setFollowing] = useState(false);
+    const [liked, setLiked] = useState(false);
+    const [disliked, setDisliked] = useState(false);
+    const [likeCount, setLikeCount] = useState(signal.likes && signal.likes.length);
+    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount && signal.disLikesCount.length);
+
+    useEffect(() => {
+        if (showComments) {
+            const commentSection = document.getElementById('comment-section');
+            if (commentSection) {
+                commentSection.scrollIntoView({
+                    behavior: 'smooth',
+                });
+            }
+        }
+    }, [showComments]);
+
+
+    // Handle like and dislike counts
+
+
     // Function to toggle the comment section visibility
     const toggleComments = () => {
         setShowComments(!showComments);
@@ -83,25 +106,8 @@ function SignalModal() {
             })
             .catch(error => console.log('error', error));
     };
-    useEffect(() => {
-        if (showComments) {
-            const commentSection = document.getElementById('comment-section');
-            if (commentSection) {
-                commentSection.scrollIntoView({
-                    behavior: 'smooth',
-                });
-            }
-        }
-    }, [showComments]);
 
 
-
-    const [copyentry1, setcopyentry1] = useState('Copy');
-    const [copyentry2, setCopyentry2] = useState('Copy');
-    const [copytp1, setCopytp1] = useState('Copy');
-    const [copytp2, setCopytp2] = useState('Copy');
-    const [copytp3, setCopytp3] = useState('Copy');
-    const [copysl, setCopysl] = useState('Copy');
 
     const handleCopyClick = (value, name) => {
         navigator.clipboard.writeText(value)
@@ -150,11 +156,6 @@ function SignalModal() {
             });
     }
 
-    const [following, setFollowing] = useState(false);
-    const [liked, setLiked] = useState(false);
-    const [disliked, setDisliked] = useState(false);
-    const [likeCount, setLikeCount] = useState(signal.likes.length);
-    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount.length);
 
     const handleLikeClick = () => {
         if (!liked) {
@@ -304,24 +305,26 @@ function SignalModal() {
         setLiked(false);
     };
     useEffect(() => {
-        if (signal.followers.indexOf(user._id) !== -1) {
-            setFollowing(true)
-            console.log(signal.followers.indexOf(user._id));
-        }
-        if (signal.likes.indexOf(user._id) !== -1) {
-            setLiked(true)
-        }
-        if (signal.disLikesCount.indexOf(user._id) !== -1) {
-            setDisliked(true)
-        }
+        if (signal.followers) {
+            if (signal.followers.indexOf(user._id) !== -1) {
+                setFollowing(true)
+                console.log(signal.followers.indexOf(user._id));
+            }
+            if (signal.likes.indexOf(user._id) !== -1) {
+                setLiked(true)
+            }
+            if (signal.disLikesCount.indexOf(user._id) !== -1) {
+                setDisliked(true)
+            }
 
+        }
     }, [])
     const likeIconColor = liked ? 'text-green-500  mr-1' : '  mr-1 border-gray-400 hover:text-green-700 cursor-pointer hover:text-green-500';
     const dislikeIconColor = disliked ? 'text-red-500 ml-2 mr-1' : 'border-gray-400 ml-2 mr-1 cursor-pointer hover:text-red-500 focus:text-red-500';
 
 
+    if (!isSignalModalOpen && selectedSignal) return null;
 
-    const expirationTime = new Date().getTime() + 600000; // 600,000 milliseconds = 10 minutes
 
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">

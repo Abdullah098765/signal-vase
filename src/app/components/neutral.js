@@ -7,7 +7,7 @@ const NeutralSignals = ({ neutralSignals }) => {
         <div className='flex-1 bg-white  shadow-xl p-8'>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
                 {neutralSignals && neutralSignals.map((signal, index) => (
-                    <div key={signal._id}>
+                    <div key={index}>
 
                         <div className="bg-white p-3 card  " key={signal._id}>
                             <div className='flex justify-between'>
