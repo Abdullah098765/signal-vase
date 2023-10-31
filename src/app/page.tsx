@@ -9,15 +9,10 @@ import Modal from "./components/signUp-Model.js";
 import SignalModal from "./components/signalModal.js";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig, messaging } from "../../firebaseConfig.js";
+import { firebaseConfig } from "../../firebaseConfig.js";
 import { useEffect } from "react";
 import { io } from "socket.io-client";
-import { getToken } from "firebase/messaging";
 export default function Home() {
-
-
-  
-
   return (
     <div className="">
       <MyContextProvider>
