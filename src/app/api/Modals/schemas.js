@@ -270,6 +270,7 @@ const signalSchema = new mongoose.Schema({
 
 // Create the Signal model
 const Signal = models.Signal || mongoose.model('Signal', signalSchema);
-
 const User = models.User || mongoose.model('User', userSchema);
-export default { User, Signal }
+
+export default { User, Signal };
+
