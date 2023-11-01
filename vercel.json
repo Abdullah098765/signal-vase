@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "builds": [{ "src": "api/*.js", "use": "@vercel/node" }],
+    "routes": [
+      {
+        "src": "/api/get-user",
+        "methods": ["POST"],
+        "dest": "api/get-user.js",
+        "headers": {
+          "Access-Control-Allow-Origin": "https://signal-hub-git-main-abdullah098765.vercel.app",
+          "Access-Control-Allow-Methods": "POST",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      }
+    ]
+  }
+  
