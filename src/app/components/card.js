@@ -5,7 +5,9 @@ import { formatDistanceToNow } from 'date-fns';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMyContext } from '../context/context';
+import { useRouter } from 'next/navigation';
 const Card = ({ signal }) => {
+    const router = useRouter();
 
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
@@ -165,7 +167,7 @@ const Card = ({ signal }) => {
         if (signal.followers.indexOf(user._id) !== -1) {
             setFollowing(true)
         }
-        else  setFollowing(false)
+        else setFollowing(false)
         if (signal.likes.indexOf(user._id) !== -1) {
             setLiked(true)
         }
@@ -240,7 +242,7 @@ const Card = ({ signal }) => {
                 {/* User Profile */}
                 <div className="mt-2 flex items-center text-sm">
                     <img src={signal.signalProvider.profilePicture} alt={signal.signalProvider.displayName} className="w-6 h-6 rounded-full" />
-                    <p className="ml-2">{signal.signalProvider.displayName}</p>
+                    <p className="ml-2 cursor-pointer" onClick={() => router.push('/' + signal.signalProvider.fireBaseUid)}>{signal.signalProvider.displayName}</p>
                 </div>
 
                 {/* User Comments and Ratings */}

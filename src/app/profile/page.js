@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { MyContextProvider } from '@/app/context/context';
 import Navbar from '@/app/components/navbar';

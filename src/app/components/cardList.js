@@ -12,7 +12,14 @@ const SignalCardList = ({ }) => {
     console.log(signals);
   }, [])
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState();
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Access localStorage here
+      setWindowWidth(window.innerWidth)
+      // Do something with 'data'
+    }
+  }, [])
 
   useEffect(() => {
     // Function to handle window resize

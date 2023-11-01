@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { MyContextProvider } from '../context/context';
 import SignalCardList from '../components/following-signal-CardList.js';

@@ -16,8 +16,7 @@ import Reviews from '../components/reviews'
 import About from '../components/About'
 import '../components/components.css'
 import { useEffect, useState } from 'react';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin'; // Import the ScrollToPlugin
-
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import gsap from 'gsap';
 import SignalModal from '../components/signalModal';
 import Sidebar from '../components/sidebar';
@@ -25,8 +24,11 @@ import Navbar from '../components/navbar';
 import EditButtons from '../components/editButtons';
 
 function User() {
-
-    const pid = window.location.href.split('=')[1]
+    var pid;
+    useEffect(() => {
+        pid = window.location.href.split('=')[1]  
+              console.log(pid);
+    }, [pid]);
     console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
     const [user, setUser] = useState();

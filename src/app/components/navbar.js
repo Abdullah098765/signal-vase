@@ -8,10 +8,20 @@ import { firebaseConfig } from "../../../firebaseConfig";
 import { BellIcon } from '@heroicons/react/solid';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
     const auth = getAuth();
-    const uid = localStorage.getItem('uid')
+    var uid;
+    useEffect(() => {
+
+        if (typeof window !== 'undefined') {
+            // Access localStorage here
+            uid = localStorage.getItem('uid')
+            // Do something with 'data'
+        }
+    }, [])
+    const router = useRouter();
 
 
     // const [isOpen, setIsOpen] = useState(false);
@@ -82,8 +92,8 @@ const Navbar = () => {
                 <div className="space-x-4 flex ">
 
 
-                    {localStorage.getItem('uid') && <button className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
-                        <Link href={'../signal_form'}>Create a Signal</Link>
+                    {uid && <button onClick={() => router.push('/signal_form')} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
+                        Create a Signal
                     </button>}
                     {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
 
@@ -93,7 +103,7 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
 
                     <div className="absolute right-5 group">
-                        {!localStorage.getItem('uid') ? <button name='signin' onClick={() => {
+                        {!uid ? <button name='signin' onClick={() => {
                             setIsModalOpen(true)
                         }} className="bg-gray-700 text-white px-4 py-2 rounded hover:text-blue-400 text-sm ">
                             Sign In
@@ -138,8 +148,8 @@ const Navbar = () => {
                                             .then(response => response.text())
                                             .then(result =>
                                                 console.log("User signed out"))
-                                        window.location = 'http://localhost:3000/'
-                                        localStorage.removeItem('uid')
+                                        // window.location = 'http://localhost:3000/'
+                                        // localStorage.removeItem('uid')
                                             .catch(error => console.log('error', error));
                                     }).catch((error) => {
                                         // An error happened.

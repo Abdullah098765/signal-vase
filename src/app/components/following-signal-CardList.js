@@ -12,10 +12,13 @@ const SignalCardList = () => {
     const [followedSignals, setFollowedSignals] = useState([]);
     const { user, closeSidenav, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
 
-
-    const windowWidth = window.innerWidth;
+    var windowWidth;
 
     useEffect(() => {
+        windowWidth = window.innerWidth;
+    })
+    useEffect(() => {
+
         console.log("Browser window width: " + windowWidth + " pixels");
         if (!lineClicked) {
             if (windowWidth <= 1100) {
@@ -98,8 +101,8 @@ const SignalCardList = () => {
                     {signal.duration >= new Date().getTime() ? <p className="text-sm text-gray-500 xl:mr-5">
                         <CountdownClock duration={signal.duration} />
                     </p> :
-                        <GoodBadButtons signal={signal}/>
-                      
+                        <GoodBadButtons signal={signal} />
+
 
                     }
 
