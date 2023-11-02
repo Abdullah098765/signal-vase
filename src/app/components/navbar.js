@@ -37,7 +37,7 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-
+if(!user) return null
 
     return (
         <nav className="bg-gray-900 text-white p-1">

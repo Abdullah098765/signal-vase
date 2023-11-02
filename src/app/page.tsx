@@ -16,6 +16,7 @@ export default function Home() {
   return (
     <div className="">
       <MyContextProvider>
+        
         <Navbar />
         <div className="flex">
           <Sidebar />
