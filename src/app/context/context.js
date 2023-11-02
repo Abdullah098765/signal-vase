@@ -50,7 +50,7 @@ export const MyContextProvider = ({ children }) => {
       redirect: 'follow'
     };
 
-    fetch("https://signal-ksqafyiay-abdullah098765.vercel.app/api/get-user", requestOptions)
+    fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
       .then(response => response.text())
       .then(result => setUser(JSON.parse(result)))
       .catch(error => console.log('error', error));
@@ -61,7 +61,7 @@ export const MyContextProvider = ({ children }) => {
 
 
 
-    fetch("https://signal-ksqafyiay-abdullah098765.vercel.app/api/get-signals")
+    fetch("https://signal-hub.vercel.app/api/get-signals")
       .then(response => response.text())
       .then(result => setSignals(JSON.parse(result)))
       .catch(error => console.log('error', error));
