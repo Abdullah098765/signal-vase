@@ -20,7 +20,6 @@ export async function POST(req, res) {
       .populate('goodSignals')
       .populate('badSignals')
       .populate('neutralSignals')
-      .populate('reviews')
       .maxTime(30002);
 
     if (user) {
