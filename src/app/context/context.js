@@ -120,7 +120,9 @@ export const MyContextProvider = ({ children }) => {
   // }
 
   useEffect(() => {
-    getUser()
+    if (localStorage.getItem('uid')) {
+      getUser()
+    }
     getSignals()
   }, [])
   useEffect(() => {
