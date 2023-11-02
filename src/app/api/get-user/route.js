@@ -10,6 +10,13 @@ export async function POST(req, res) {
     const uid = await req.json();
     console.log(uid.uid);
 
+if (!uid) {
+  return NextResponse.json({ error: 'Invalid request data' });
+}
+
+// Continue with data parsing and processing.
+
+
     // Find the user by uid and populate the associated arrays
     const user = await Schemas.User.findOne({ fireBaseUid: uid.uid })
       .populate('Subscribers')
