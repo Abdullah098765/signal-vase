@@ -50,7 +50,7 @@ export const MyContextProvider = ({ children }) => {
       redirect: 'follow'
     };
 
-    fetch("http://localhost:3000/api/get-user", requestOptions)
+    fetch("https://signal-ksqafyiay-abdullah098765.vercel.app/api/get-user", requestOptions)
       .then(response => response.text())
       .then(result => setUser(JSON.parse(result)))
       .catch(error => console.log('error', error));
@@ -123,10 +123,10 @@ export const MyContextProvider = ({ children }) => {
     getUser()
     getSignals()
   }, [])
-  useEffect(()=>{
+  useEffect(() => {
     // user && requestPermission()
 
-  },[user])
+  }, [user])
 
 
 

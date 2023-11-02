@@ -4,8 +4,10 @@ import { NextResponse, NextRequest } from 'next/server'
 
 
 export async function GET(req, res) {
-  console.log(res);
-  return new Response('Server is running')
+  // const response = NextResponse.next(res
+console.log(NextResponse);
+ 
+  return NextResponse.json('server');
 }
 
 
