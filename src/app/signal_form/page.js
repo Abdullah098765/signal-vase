@@ -1,11 +1,14 @@
 'use client'
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 
 const CreateSignalForm = () => {
-    
+
+    const router = useRouter()
     const [currentUser, setCurrentUser] = useState({})
 
+    const [isButtonLoading, setIsButtonLoading] = useState(false); // Default duration
     const [selectedDuration, setSelectedDuration] = useState('10m'); // Default duration
     const [durationTimestamp, setDurationTimestamp] = useState(600000 + Date.now()); // Default duration
 
@@ -53,7 +56,7 @@ const CreateSignalForm = () => {
         duration: durationTimestamp,
         longOrShort: 'Long',
         signalProvider: currentUser._id,
-        status: 'Active' 
+        status: 'Active'
     });
     useEffect(() => {
         getUser()
@@ -78,7 +81,10 @@ const CreateSignalForm = () => {
 
         fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
             .then(response => response.text())
-            .then(result => setCurrentUser(JSON.parse(result)))
+            .then(result => {
+                setCurrentUser(JSON.parse(result))
+
+            })
             .catch(error => console.log('error', error));
 
     };
@@ -93,6 +99,7 @@ const CreateSignalForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsButtonLoading(true)
         signalData.signalProvider = currentUser._id
         signalData.duration = durationTimestamp
         console.log(signalData);
@@ -109,7 +116,7 @@ const CreateSignalForm = () => {
             if (response.ok) {
                 // Handle successful response (e.g., show a success message)
                 console.log('Signal created successfully!');
-                window.location = 'https://signal-hub.vercel.app'
+                router.push('/')
             } else {
                 // Handle error response (e.g., show an error message)
                 console.error('Error creating signal:', response.statusText);
@@ -317,9 +324,10 @@ const CreateSignalForm = () => {
                 </div>
 
                 <div className="flex justify-end mt-6">
-                    <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-black bg-opacity-80 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-600">
-                        Create Signal
-                    </button>
+                    {isButtonLoading ? <div className="w-5 h-5 border-t-2 border-gray-500 border-solid rounded-full animate-spin"></div>
+                        : <button className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-black bg-opacity-80 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-600">
+                            Create Signal
+                        </button>}
                 </div>
             </form>
         </section>
