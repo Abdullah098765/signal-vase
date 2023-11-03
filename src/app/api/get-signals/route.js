@@ -82,7 +82,7 @@ export async function GET(req, res) {
 
     // Perform the aggregation
     const signals = await Schemas.Signal.aggregate(pipeline, { maxTimeMS: 60000 })
-    const cacheControlHeader = 'no-cache, no-store, max-age=0, must-revalidate'; // You can adjust max-age as needed
+    const cacheControlHeader = 'no-cache, no-store,  must-revalidate'; // You can adjust max-age as needed
 
 
     if (signals) {
@@ -92,6 +92,7 @@ export async function GET(req, res) {
           'Cache-Control': cacheControlHeader,
           'Content-Type': 'application/json',
         },
+
       });
     } else {
       // User not found, return an appropriate response
