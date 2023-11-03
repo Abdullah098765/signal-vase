@@ -338,7 +338,7 @@ function SignalModal() {
             <button
                 onClick={() => {
                     getSignals()
-                    setSelectedSignal({})
+                    setSelectedSignal(null)
 
                     setisSignalModalOpen(!isSignalModalOpen)
                 }}
