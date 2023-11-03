@@ -331,6 +331,7 @@ function SignalModal() {
             <button
                 onClick={() => {
                     getSignals()
+                    setSelectedSignal(null)
                     setisSignalModalOpen(!isSignalModalOpen)
                 }}
                 className='text-white absolute top-3 right-3 text-2xl'
