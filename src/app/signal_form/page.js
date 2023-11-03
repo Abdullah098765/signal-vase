@@ -323,9 +323,9 @@ const CreateSignalForm = () => {
                                 <option value="3d">3 days</option>
                                 <option value="7d">7 days</option>
                                 <option value="30d">30 days</option>
-                                <option value="2m">2 months</option>
-                                <option value="3m">3 months</option>
-                                <option value="6m">6 months</option>
+                                <option value="2M">2 months</option>
+                                <option value="3M">3 months</option>
+                                <option value="6M">6 months</option>
                                 <option value="1y">1 year</option>
                             </select>
                         </div>
