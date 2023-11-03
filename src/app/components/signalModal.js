@@ -30,7 +30,7 @@ function SignalModal() {
     const [disliked, setDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(signal.likes && signal.likes.length);
     const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount && signal.disLikesCount.length);
-    const [showTimer, setShowTimer] = useState(false);
+    const [showTimer, setShowTimer] = useState(true);
 
     useEffect(() => {
         if (showComments) {
@@ -308,7 +308,7 @@ function SignalModal() {
     };
     useEffect(() => {
         setTimeout(() => {
-            setShowTimer(true)
+            setShowTimer(false)
 
         }, 3000);
         if (signal.followers) {
@@ -374,7 +374,7 @@ function SignalModal() {
                     <p className="text-gray-500 text-lg">{signal.explanation}</p>
                 </div>
 
-                {showTimer ? (
+                {seconds || seconds == 0 ? (
                     signal.duration > Date.now() ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
                         <div className="text-center mb-4">
                             <div className="text-xl font-semibold">Signal will expire in</div>
