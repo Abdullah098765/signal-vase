@@ -82,19 +82,35 @@ export async function GET(req, res) {
 
     // Perform the aggregation
     const signals = await Schemas.Signal.aggregate(pipeline, { maxTimeMS: 60000 })
+    const cacheControlHeader = 'public, max-age=3600'; // You can adjust max-age as needed
 
 
     if (signals) {
 
-      return NextResponse.json(signals);
+      return new Response(JSON.stringify(signals), {
+        headers: {
+          'Cache-Control': cacheControlHeader,
+          'Content-Type': 'application/json',
+        },
+      });
     } else {
       // User not found, return an appropriate response
-      return NextResponse.json({ error: 'signals not found' });
+      return new Response(JSON.stringify({ error: 'signals not found' }), {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        status: 404, // Use the appropriate status code
+      });
     }
   } catch (error) {
     console.error('Error finding signalsr:', error);
 
     // Send a JSON response with a 500 status code (Internal Server Error)
-    return NextResponse.json({ error: 'Internal Server Error' });
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      status: 500, // Use the appropriate status code
+    });
   }
 }
