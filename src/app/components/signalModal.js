@@ -309,7 +309,7 @@ function SignalModal() {
         setTimeout(() => {
             setShowTimer(false)
 
-        }, 1000);
+        }, 3000);
         if (signal.followers) {
             if (signal.followers.indexOf(user._id) !== -1) {
                 setFollowing(true)
