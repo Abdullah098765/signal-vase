@@ -30,7 +30,7 @@ function SignalModal() {
     const [disliked, setDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(signal.likes && signal.likes.length);
     const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount && signal.disLikesCount.length);
-    const [showTimer, setShowTimer] = useState(true);
+    const [showTimer, setShowTimer] = useState(false);
 
     useEffect(() => {
         if (showComments) {
@@ -45,7 +45,7 @@ function SignalModal() {
 
 
 
-    
+
 
     // Function to toggle the comment section visibility
     const toggleComments = () => {
@@ -108,7 +108,7 @@ function SignalModal() {
             .catch(error => console.log('error', error));
     };
 
-    
+
 
 
     const handleCopyClick = (value, name) => {
@@ -308,7 +308,7 @@ function SignalModal() {
     };
     useEffect(() => {
         setTimeout(() => {
-            setShowTimer(false)
+            setShowTimer(true)
 
         }, 3000);
         if (signal.followers) {
@@ -374,7 +374,7 @@ function SignalModal() {
                     <p className="text-gray-500 text-lg">{signal.explanation}</p>
                 </div>
 
-                { (days === 0 || hours === 0 || minutes === 0 || seconds === 0) || (days > 0) ? (
+                {showTimer ? (
                     signal.duration > Date.now() ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
                         <div className="text-center mb-4">
                             <div className="text-xl font-semibold">Signal will expire in</div>
@@ -406,11 +406,11 @@ function SignalModal() {
                         </div>
                 ) :
                     (
-                    <div className="flex justify-center items-center">
-                    <div className="w-11 h-11 border-t-2 border-gray-500 border-solid rounded-full animate-spin">
+                        <div className="flex justify-center items-center">
+                            <div className="w-11 h-11 border-t-2 border-gray-500 border-solid rounded-full animate-spin">
 
-                    </div>
-                    </div>
+                            </div>
+                        </div>
                     )
                 }
 
