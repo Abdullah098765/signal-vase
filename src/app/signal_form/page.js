@@ -290,6 +290,9 @@ const CreateSignalForm = () => {
                                 <option value="Stock">Stock</option>
                             </select>
                         </div>
+                        <label className="text-black dark:text-white" htmlFor="duration">
+                            Duration
+                        </label>
                         <select
                             name="duration"
                             id="duration"
