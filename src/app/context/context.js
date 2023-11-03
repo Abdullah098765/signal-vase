@@ -4,7 +4,7 @@
 import { getToken } from 'firebase/messaging';
 import { createContext, useContext, useEffect, useState } from 'react';
 import io from 'socket.io-client';
-// import { messaging } from '../../../firebaseConfig';
+import { messaging } from '../../../firebaseConfig';
 
 const MyContext = createContext();
 
