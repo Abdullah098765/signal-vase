@@ -44,8 +44,8 @@ function SignalModal() {
     }, [showComments]);
 
 
-    // Handle like and dislike counts
 
+    
 
     // Function to toggle the comment section visibility
     const toggleComments = () => {
@@ -108,8 +108,9 @@ function SignalModal() {
             .catch(error => console.log('error', error));
     };
 
+    
 
-
+    
     const handleCopyClick = (value, name) => {
         navigator.clipboard.writeText(value)
             .then(() => {
@@ -332,6 +333,7 @@ function SignalModal() {
 
 
     return (
+
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <button
                 onClick={() => {

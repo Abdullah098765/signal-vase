@@ -79,45 +79,45 @@ export const MyContextProvider = ({ children }) => {
     setIsEditModalOpen(params)
   }
 
-  // const requestPermission = () => {
-  //   console.log('Requesting permission...')
-  //   Notification.requestPermission().then(permission => {
-  //     if (permission === 'granted') {
-  //       console.log('Notification permission granted.')
+  const requestPermission = () => {
+    console.log('Requesting permission...')
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        console.log('Notification permission granted.')
 
-  //       getToken(messaging, {
-  //         vapidKey: "BDNMwTMS6c_6GqVeqkvkhTuTK71hb8auGJIdA5zJJjYJd7_or_TGDrQhmmLDmMiqlmZAnJzE82Ylv9LW1Omeptk",
-  //       })
-  //         .then(currentToken => {
-  //           if (currentToken) {
-  //             fetch('http://localhost:3000/api/store-fcm-token', {
-  //               method: 'POST',
-  //               body: JSON.stringify({
-  //                 userId: user._id,
-  //                 fcmToken: currentToken,
-  //               }),
-  //               headers: {
-  //                 'Content-Type': 'application/json',
-  //               },
-  //             });
-  //             console.log(
-  //               'Send the token to your server and update the UI if necssary',
-  //               currentToken
-  //             )
-  //           } else {
-  //             // Show permission request UI
-  //             console.log(
-  //               'No registration token available. Request permission to generate one.'
-  //             )
-  //           }
-  //         })
-  //         .catch(err => {
-  //           console.log('An error occurred while retrieving token. ', err)
-  //           // ...
-  //         })
-  //     }
-  //   })
-  // }
+        getToken(messaging, {
+          vapidKey: "BDNMwTMS6c_6GqVeqkvkhTuTK71hb8auGJIdA5zJJjYJd7_or_TGDrQhmmLDmMiqlmZAnJzE82Ylv9LW1Omeptk",
+        })
+          .then(currentToken => {
+            if (currentToken) {
+              fetch('http://localhost:3000/api/store-fcm-token', {
+                method: 'POST',
+                body: JSON.stringify({
+                  userId: user._id,
+                  fcmToken: currentToken,
+                }),
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              });
+              console.log(
+                'Send the token to your server and update the UI if necssary',
+                currentToken
+              )
+            } else {
+              // Show permission request UI
+              console.log(
+                'No registration token available. Request permission to generate one.'
+              )
+            }
+          })
+          .catch(err => {
+            console.log('An error occurred while retrieving token. ', err)
+            // ...
+          })
+      }
+    })
+  }
 
   useEffect(() => {
     if (localStorage.getItem('uid')) {
@@ -126,7 +126,7 @@ export const MyContextProvider = ({ children }) => {
     getSignals()
   }, [])
   useEffect(() => {
-    // user && requestPermission()
+    user && requestPermission()
 
   }, [user])
 
