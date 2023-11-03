@@ -368,7 +368,7 @@ function SignalModal() {
                 </div>
 
                 {
-                    (days === 0 || hours === 0 || minutes === 0 || seconds === 0) || (days > 0) ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
+                    signal.duration > Date.now() ? <div className="bg-black text-white p-8 mb-3 rounded-lg shadow-lg">
                         <div className="text-center mb-4">
                             <div className="text-xl font-semibold">Signal will expire in</div>
                         </div>
