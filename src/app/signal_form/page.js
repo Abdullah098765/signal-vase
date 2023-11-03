@@ -23,10 +23,11 @@ const CreateSignalForm = () => {
         // You can save this timestamp in your state or use it as needed in your application.
     };
 
+  
     const calculateTimestamp = (selectedValue) => {
         // Convert the selected duration to milliseconds
         let milliseconds = 0;
-
+    
         if (selectedValue.endsWith('m')) {
             const minutes = parseInt(selectedValue, 10);
             milliseconds = minutes * 60 * 1000;
@@ -36,14 +37,24 @@ const CreateSignalForm = () => {
         } else if (selectedValue.endsWith('d')) {
             const days = parseInt(selectedValue, 10);
             milliseconds = days * 24 * 60 * 60 * 1000;
+        } else if (selectedValue.endsWith('M')) {
+            const months = parseInt(selectedValue, 10);
+            milliseconds = months * 30 * 24 * 60 * 60 * 1000; // Assuming an average month has 30 days
+        } else if (selectedValue.endsWith('y')) {
+            const years = parseInt(selectedValue, 10);
+            milliseconds = years * 365 * 24 * 60 * 60 * 1000; // Assuming a year has 365 days
+        } else {
+            // Handle other cases or throw an error for unsupported values
         }
-
+    
         // Calculate the current timestamp + selected duration
         const currentTimestamp = Date.now();
         const durationTimestamp = currentTimestamp + milliseconds;
-
+    
         return durationTimestamp;
     };
+    
+    
 
     const [signalData, setSignalData] = useState({
         pair: '',
