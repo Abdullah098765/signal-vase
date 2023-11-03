@@ -28,8 +28,8 @@ function SignalModal() {
     const [following, setFollowing] = useState(false);
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
-    const [likeCount, setLikeCount] = useState(signal.likes && signal.likes.length);
-    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount && signal.disLikesCount.length);
+    const [likeCount, setLikeCount] = useState(signal && signal.likes.length);
+    const [dislikeCount, setDislikeCount] = useState(signal && signal.disLikesCount.length);
     const [showTimer, setShowTimer] = useState(true);
 
     useEffect(() => {
