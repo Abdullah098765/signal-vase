@@ -131,13 +131,13 @@ const CreateSignalForm = () => {
 
     return (
         <div>
-          
+
             <section className="max-w-4xl p-6 mx-auto bg-white bg-opacity-80 rounded-md shadow-md dark:bg-black dark:bg-opacity-80 mt-20">
-            <button onClick={() => {
-                router.push('/')
-            }} className="back-button">
-                <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
+                <button onClick={() => {
+                    router.push('/')
+                }} className="back-button">
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
                 <h1 className="text-xl font-bold text-black capitalize dark:text-white">Create a New Signal</h1>
                 <form onSubmit={handleSubmit}>
 
@@ -290,30 +290,30 @@ const CreateSignalForm = () => {
                                 <option value="Stock">Stock</option>
                             </select>
                         </div>
-                        <div>
-                            <label className="text-black dark:text-white" htmlFor="duration">
-                                Duration
-                            </label>
-                            <select
-                                name="duration"
-                                id="duration"
-                                className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
-                                value={selectedDuration}
-                                onChange={handleDurationChange}
-                            >
-                                <option value="10m">10 minutes</option>
-                                <option value="30m">30 minutes</option>
-                                <option value="1h">1 hour</option>
-                                <option value="2h">2 hours</option>
-                                <option value="4h">4 hours</option>
-                                <option value="6h">6 hours</option>
-                                <option value="12h">12 hours</option>
-                                <option value="1d">1 day</option>
-                                <option value="3d">3 days</option>
-                                <option value="7d">7 days</option>
-                                <option value="30d">30 days</option>
-                            </select>
-                        </div>
+                        <select
+                            name="duration"
+                            id="duration"
+                            className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                            value={selectedDuration}
+                            onChange={handleDurationChange}
+                        >
+                            <option value="10m">10 minutes</option>
+                            <option value="30m">30 minutes</option>
+                            <option value="1h">1 hour</option>
+                            <option value="2h">2 hours</option>
+                            <option value="4h">4 hours</option>
+                            <option value="6h">6 hours</option>
+                            <option value="12h">12 hours</option>
+                            <option value="1d">1 day</option>
+                            <option value="3d">3 days</option>
+                            <option value="7d">7 days</option>
+                            <option value="30d">30 days</option>
+                            <option value="2m">2 months</option>
+                            <option value="3m">3 months</option>
+                            <option value="6m">6 months</option>
+                            <option value="1y">1 year</option>
+                        </select>
+
 
                         <div>
                             <label className="text-black dark:text-white" htmlFor="longOrShort">
