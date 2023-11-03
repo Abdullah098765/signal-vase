@@ -403,7 +403,13 @@ function SignalModal() {
                             </div>
                         </div>
                 ) :
-                    (<div className="w-11 h-11 border-t-2 border-gray-500 border-solid rounded-full animate-spin"></div>)
+                    (
+                    <div className="flex justify-center items-center">
+                    <div className="w-11 h-11 border-t-2 border-gray-500 border-solid rounded-full animate-spin">
+
+                    </div>
+                    </div>
+                    )
                 }
 
 
