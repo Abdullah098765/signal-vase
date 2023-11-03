@@ -131,12 +131,13 @@ const CreateSignalForm = () => {
 
     return (
         <div>
+          
+            <section className="max-w-4xl p-6 mx-auto bg-white bg-opacity-80 rounded-md shadow-md dark:bg-black dark:bg-opacity-80 mt-20">
             <button onClick={() => {
                 router.push('/')
             }} className="back-button">
                 <FontAwesomeIcon icon={faArrowLeft} />
             </button>
-            <section className="max-w-4xl p-6 mx-auto bg-white bg-opacity-80 rounded-md shadow-md dark:bg-black dark:bg-opacity-80 mt-20">
                 <h1 className="text-xl font-bold text-black capitalize dark:text-white">Create a New Signal</h1>
                 <form onSubmit={handleSubmit}>
 
