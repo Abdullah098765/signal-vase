@@ -51,8 +51,8 @@ const SignalCardList = ({ }) => {
 
   return (
     <div className='webkit-fill-available'>
-      {signals[0] || user ? 
-        <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-0 md:p-5">
+      {signals[0]._id || user ? 
+        <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 p-0 md:p-5">
           {signals.map((signal) => (
             <Card signal={signal} key={signal._id} />
           ))}                </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
