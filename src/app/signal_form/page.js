@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 
 const CreateSignalForm = () => {
+    
     const [currentUser, setCurrentUser] = useState({})
 
     const [selectedDuration, setSelectedDuration] = useState('10m'); // Default duration
@@ -75,7 +76,7 @@ const CreateSignalForm = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/api/get-user", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
             .then(response => response.text())
             .then(result => setCurrentUser(JSON.parse(result)))
             .catch(error => console.log('error', error));
@@ -97,7 +98,7 @@ const CreateSignalForm = () => {
         console.log(signalData);
         try {
             // Send the form data to the server
-            const response = await fetch('http://localhost:3000/api/create-signal', {
+            const response = await fetch('https://signal-hub.vercel.app/api/create-signal', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ const CreateSignalForm = () => {
             if (response.ok) {
                 // Handle successful response (e.g., show a success message)
                 console.log('Signal created successfully!');
-                window.location = 'http://localhost:3000'
+                window.location = 'https://signal-hub.vercel.app'
             } else {
                 // Handle error response (e.g., show an error message)
                 console.error('Error creating signal:', response.statusText);
