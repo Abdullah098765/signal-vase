@@ -38,7 +38,7 @@ const RegistrationForm = () => {
           // User registration on the server was successful
           console.log('User registered on the server.', response);
           window.localStorage.setItem('uid', result.user.uid)
-          window.location = 'http://localhost:3000/'
+          window.location = 'https://signal-hub.vercel.app'
         } else {
           // Handle server registration error
           console.error('Server registration failed.');
