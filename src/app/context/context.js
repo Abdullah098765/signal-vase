@@ -61,7 +61,7 @@ export const MyContextProvider = ({ children }) => {
 
 
 
-    fetch("https://signal-hub.vercel.app/api/get-signals")
+    fetch("https://signal-hub.vercel.app/api/get-signals",{method:'POST'})
       .then(response => response.text())
       .then(result => setSignals(JSON.parse(result)))
       .catch(error => console.log('error', error));
