@@ -131,7 +131,9 @@ const CreateSignalForm = () => {
 
     return (
         <div>
-            <button onClick={handleGoBack} className="back-button">
+            <button onClick={() => {
+                router.push('/')
+            }} className="back-button">
                 <FontAwesomeIcon icon={faArrowLeft} />
             </button>
             <section className="max-w-4xl p-6 mx-auto bg-white bg-opacity-80 rounded-md shadow-md dark:bg-black dark:bg-opacity-80 mt-20">
