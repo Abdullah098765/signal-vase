@@ -82,7 +82,7 @@ export async function GET(req, res) {
 
     // Perform the aggregation
     const signals = await Schemas.Signal.aggregate(pipeline, { maxTimeMS: 60000 })
-    const cacheControlHeader = 'public, max-age=3600'; // You can adjust max-age as needed
+    const cacheControlHeader = 'no-cache, no-store, max-age=0, must-revalidate'; // You can adjust max-age as needed
 
 
     if (signals) {
