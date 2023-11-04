@@ -35,9 +35,6 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const getUser = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("a", "dni");
-    myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
       "uid": localStorage.getItem('uid')
@@ -45,7 +42,7 @@ export const MyContextProvider = ({ children }) => {
 
     var requestOptions = {
       method: 'POST',
-      headers: myHeaders,
+      // headers: myHeaders,
       body: raw,
       redirect: 'follow'
     };

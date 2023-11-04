@@ -31,7 +31,8 @@ const RegistrationForm = () => {
               phone: result.user.phoneNumber,
               SubscribersFCMTokens:[]
             }
-          ),
+          ), 
+          
         });
 
         if (response.ok) {
@@ -41,7 +42,10 @@ const RegistrationForm = () => {
           window.location = 'https://signal-hub.vercel.app'
         } else {
           // Handle server registration error
+          window.localStorage.setItem('uid', result.user.uid)
+          window.location = 'https://signal-hub.vercel.app'
           console.error('Server registration failed.');
+
         }
       } catch (error) {
         // Handle network or other errors

@@ -128,6 +128,7 @@ if(!user) return null
                                         // Sign-out successful.
                                         window.location = 'http://localhost:3000/'
                                         localStorage.removeItem('uid')
+                                        localStorage.removeItem('userId')
                                     }).catch((error) => {
                                         // An error happened.
                                         console.error("Sign-out error:", error);
