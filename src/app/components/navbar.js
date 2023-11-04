@@ -126,7 +126,7 @@ if(!user) return null
                                 <li onClick={() => {
                                     signOut(auth).then(() => {
                                         // Sign-out successful.
-                                        window.location = 'http://localhost:3000/'
+                                        window.location = 'https://signal-hub.vercel.app/'
                                         localStorage.removeItem('uid')
                                         localStorage.removeItem('userId')
                                     }).catch((error) => {

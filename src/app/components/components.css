@@ -150,7 +150,35 @@
 .scroll-item.active {
   transform: translateX(-100%); /* Adjust this value as needed for your scroll distance */
 }
+/* Style the tooltip container */
+.tooltip {
+  position: relative;
+  /* display: inline-block; */
+  text-align: center;
+  opacity: 0.5;
 
+}
 
+/* Style the tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Position above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
 
-
+/* Style the tooltip container on hover */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
