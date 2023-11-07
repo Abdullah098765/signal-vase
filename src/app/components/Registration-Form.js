@@ -20,7 +20,6 @@ const RegistrationForm = () => {
     console.log(result);
     if (result) {
       // console.log(result.user.displayName + " is Signed in.");
-      setIsGoogleClicked(false)
       try {
         // Send userData to your server to register the user
         const response = await fetch('https://signal-hub.vercel.app/api/signUp', {
@@ -43,6 +42,8 @@ const RegistrationForm = () => {
           // User registration on the server was successful
           console.log('User registered on the server.', response);
           window.localStorage.setItem('uid', result.user.uid)
+          setIsGoogleClicked(false)
+
           window.location = 'https://signal-hub.vercel.app'
         } else {
           // Handle server registration error
@@ -90,7 +91,7 @@ const RegistrationForm = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold mb-4">Join</h2>
+      <h2 className="text-xl font-semibold flex justify-center mb-4">Join</h2>
 
       <div className="mb-4">
         {/* Google Sign-Up Button */}
@@ -132,7 +133,7 @@ const RegistrationForm = () => {
           </div>
           <span className="mr-2">Metamask</span>
 
-          <span class="tooltiptext">Unavailable for now</span>
+          <span class="tooltiptext">Feature Under Development</span>
 
         </button>
       </div>
@@ -150,7 +151,7 @@ const RegistrationForm = () => {
             <path d="M516.3 361.83c60.28 0 108.1 37.18 126.26 92.47H764C742 336.09 644.47 256 517.27 256 372.82 256 260 365.65 260 512.49S370 768 517.27 768c124.35 0 223.82-80.09 245.84-199.28H642.55c-17.22 55.3-65 93.45-125.32 93.45-83.23 0-141.56-63.89-141.56-149.68.04-86.77 57.43-150.66 140.63-150.66z" fill='#fff' />
           </svg>
           <span className="mr-2">Coinbase</span>
-          <span class="tooltiptext">Unavailable for now</span>
+          <span class="tooltiptext">Feature Under Development</span>
 
         </button>
       </div>
@@ -165,7 +166,7 @@ const RegistrationForm = () => {
         >
           <svg height={24} width={24} className='mr-2' viewBox="0 0 126.61 126.61" xmlns="http://www.w3.org/2000/svg"><g fill="#f3ba2f"><path d="m38.73 53.2 24.59-24.58 24.6 24.6 14.3-14.31-38.9-38.91-38.9 38.9z" /><path d="m0 63.31 14.3-14.31 14.31 14.31-14.31 14.3z" /><path d="m38.73 73.41 24.59 24.59 24.6-24.6 14.31 14.29-38.9 38.91-38.91-38.88z" /><path d="m98 63.31 14.3-14.31 14.31 14.3-14.31 14.32z" /><path d="m77.83 63.3-14.51-14.52-10.73 10.73-1.24 1.23-2.54 2.54 14.51 14.5 14.51-14.47z" /></g></svg>
           <span className="mr-2">Binance Wallet</span>
-          <span class="tooltiptext">Unavailable for now</span>
+          <span class="tooltiptext">Feature Under Development</span>
 
         </button>
       </div>
