@@ -149,12 +149,10 @@
 }
 /* Style the tooltip container */
 .tooltip {
-  position: relative;
-  /* display: inline-block; */
+  position: relative; /* display: inline-block; */
   text-align: center;
   opacity: 0.5;
 }
-
 /* Style the tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -172,13 +170,11 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-
 /* Style the tooltip container on hover */
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
-
 .navbar {
   position: fixed;
   top: 0;
@@ -186,15 +182,12 @@
   transition: top 0.3s; /* Add smooth transition effect */
   z-index: 1;
 }
-
 .navbar-visible {
   top: 0;
 }
-
 .navbar-hidden {
   top: -70px; /* Adjust this value to the navbar's height */
 }
-
 /* Define the initial styles for the search input and container */
 .search-container {
   opacity: 0;
@@ -202,23 +195,19 @@
   overflow: hidden;
   transition: max-height 0.3s, opacity 0.3s;
 }
-
 .search-input {
   width: 0;
   opacity: 0;
   transition: width 0.3s, opacity 0.3s;
 }
-
 /* Styles for the active (visible) state */
 .search-container.active {
   opacity: 1;
   max-height: 100px; /* Adjust the height as needed */
 }
-
 .search-container.active .search-input {
   width: 100%; /* Adjust the width as needed */
   opacity: 1;
-  
 }
 .bottomBar {
   position: fixed;
@@ -227,11 +216,17 @@
   transition: bottom 0.3s; /* Add smooth transition effect */
   z-index: 1;
 }
-
 .bottom-navbar-visible {
   bottom: 0;
 }
-
 .bottom-navbar-hidden {
   bottom: -70px; /* Adjust this value to the navbar's height */
+}
+.bottam_icon {
+  color: #fff;
+  font-size: x-large;
+}
+.signal-Icon {
+  margin-top: 5.5px;
+  margin-bottom: 4.5px;
 }
