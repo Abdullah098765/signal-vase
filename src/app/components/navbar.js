@@ -193,6 +193,7 @@ const Navbar = () => {
             </nav >
 
             <nav className={`unvisible-navbar bg-gray-900 text-white pr-2 flex items-center justify-between md:hidden  mb-14`} />
+            
             <nav className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${searchVisible ? 'justify-end' : 'justify-between'} ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
 
 

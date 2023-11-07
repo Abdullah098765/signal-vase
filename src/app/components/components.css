@@ -220,3 +220,18 @@
   opacity: 1;
   
 }
+.bottomBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transition: bottom 0.3s; /* Add smooth transition effect */
+  z-index: 1;
+}
+
+.bottom-navbar-visible {
+  bottom: 0;
+}
+
+.bottom-navbar-hidden {
+  bottom: -70px; /* Adjust this value to the navbar's height */
+}
