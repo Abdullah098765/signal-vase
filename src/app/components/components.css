@@ -212,6 +212,7 @@
 .bottomBar {
   position: fixed;
   bottom: 0;
+  min-height: 46px;
   width: 100%;
   transition: bottom 0.3s; /* Add smooth transition effect */
   z-index: 1;
@@ -226,7 +227,9 @@
   color: #fff;
   font-size: x-large;
 }
-.signal-Icon {
+
+/* .signal-Icon {
   margin-top: 5.5px;
   margin-bottom: 4.5px;
-}
+} */
+
