@@ -63,7 +63,7 @@ const EditProfileModal = ({ }) => {
             if (response.ok) {
                 const updatedUser = await response.json();
                 console.log('User updated:', updatedUser);
-                window.location = 'http://localhost:3000/profile'
+                window.location = 'https://signal-hub.vercel.app/profile'
                 // Handle success here
             } else {
                 console.error('User update failed');

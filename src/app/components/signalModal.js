@@ -72,7 +72,7 @@ function SignalModal() {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/add-follower", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/add-follower", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setFollowing(true)
@@ -99,7 +99,7 @@ function SignalModal() {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/remove-follower", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/remove-follower", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setFollowing(false)
@@ -176,7 +176,7 @@ function SignalModal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/likescount", requestOptions)
+            fetch("https://signal-hub.vercel.app/api/likescount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -198,7 +198,7 @@ function SignalModal() {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+                fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -224,7 +224,7 @@ function SignalModal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+            fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -251,7 +251,7 @@ function SignalModal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/disLikesCount", requestOptions)
+            fetch("https://signal-hub.vercel.app/api/disLikesCount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -272,7 +272,7 @@ function SignalModal() {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("http://localhost:3000/api/likesdiscount", requestOptions)
+                fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -297,7 +297,7 @@ function SignalModal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("http://localhost:3000/api/dislikesdiscount", requestOptions)
+            fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));

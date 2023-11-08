@@ -12,7 +12,7 @@ const Subscribe = ({ targetUser }) => {
     async function handleSubscription(action) {
         setIsLoading(true)
         try {
-            const apiUrl = 'http://localhost:3000/api/subscribe'; // Adjust the URL to match your API route
+            const apiUrl = 'https://signal-hub.vercel.app/api/subscribe'; // Adjust the URL to match your API route
 
             // Create a request object with the appropriate method, headers, and body
             const request = {

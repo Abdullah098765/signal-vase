@@ -26,7 +26,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/neutral-count", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -49,7 +49,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/good-count", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -72,7 +72,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/good-discount", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/good-discount", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -95,7 +95,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/bad-discount", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/bad-discount", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -119,7 +119,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/neutral-discount", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/neutral-discount", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -142,7 +142,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("http://localhost:3000/api/bad-count", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
