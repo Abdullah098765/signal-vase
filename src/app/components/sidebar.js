@@ -16,7 +16,7 @@ function Sidebar() {
     const [selectedLink, setSelectedLink] = useState('');
 
     return (
-        <div >
+        <div className='hidden md:block' >
             {
                 <div className={` bg-gray-900   sidebar-visible h-full   transition-transform ${isSliderOpen ? 'translate-x-0 open' : '-translate-x-full close'}`}>
                 </div>

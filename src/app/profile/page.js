@@ -17,6 +17,8 @@ const Profile = () => {
 
                     <User />
                 </div>
+        {/* <BottomNavbar /> */}
+
             </MyContextProvider>
         </div>
     );

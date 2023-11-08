@@ -1,14 +1,18 @@
 'use client'
-import { faBell, faHistory, faHome, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faBell, faHistory, faHome, faPlus, faPlusCircle, faPlusSquare, faUser, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import './components.css'
+import { usePathname, useRouter } from 'next/navigation';
+import path from 'path';
 
 function BottomNavbar() {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
     const [visible, setVisible] = useState(true);
-
+    const router = useRouter()
+    const pathName = usePathname()
     useEffect(() => {
+        console.log(pathName);
         const handleScroll = () => {
             const currentScrollPos = window.pageYOffset;
 
@@ -28,43 +32,56 @@ function BottomNavbar() {
         };
     }, [prevScrollPos]);
 
-    const [activeIcon, setActiveIcon] = useState('home'); // Set an initial active icon
+    const [activeIcon, setActiveIcon] = useState(pathName); // Set an initial active icon
 
     const handleIconClick = (iconName) => {
-        setActiveIcon(iconName);
+        // setActiveIcon(iconName);
     };
     return (
         <nav className={`bottomBar bg-gray-900 text-white p-2 flex items-center justify-around fixed bottom-0 left-0 right-0 md:hidden ${visible ? 'bottom-navbar-visible' : 'bottom-navbar-hidden'}`}>
             {/* Home Icon */}
             <button
-                className={`text-gray-400  ${activeIcon === 'home' ? 'bottam_icon' : ''}`}
-                onClick={() => handleIconClick('home')}
+                className={`text-gray-400  ${activeIcon === '/' ? 'bottam_icon' : ''}`}
+                onClick={() => {
+                    router.push('/')
+                    handleIconClick('/')
+                }}
             >
                 <FontAwesomeIcon icon={faHome} />
             </button>
 
             {/* Explore Icon */}
             <button
-                className={`text-gray-400  ${activeIcon === 'following' ? 'bottam_icon' : ''}`}
-                onClick={() => handleIconClick('following')}
+                className={`text-gray-400  ${activeIcon === '/following-signals' ? 'bottam_icon' : ''}`}
+                onClick={() => {
+                    handleIconClick('/following-signals')
+                    router.push('/following-signals')
+                }}
             >
                 <FontAwesomeIcon icon={faHistory} />
             </button>
 
             {/* Notifications Icon */}
             <button
-                className={`text-gray-400  ${activeIcon === 'notifications' ? 'bottam_icon' : ''}`}
-                onClick={() => handleIconClick('notifications')}
+                className={`text-gray-400  ${activeIcon === '/signal_form' ? 'bottam_icon' : ''}`}
+                onClick={() => {
+                    handleIconClick('/signal_form')
+                    router.push('/signal_form')
+                }}
             >
-                <FontAwesomeIcon icon={faBell} />
+                <svg width="30" height="30" viewBox="0 0 270 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="135" cy="135" r="128.5" stroke="white" stroke-width="13" />
+                    <circle cx="135" cy="135" r="86.5" fill="white" stroke="black" stroke-width="7" />
+                    <path d="M127.5 127V110C127.5 104.5 139.5 100 142.5 110V127H161C164.5 128.5 171 135.5 161 142.5H142.5V160C140 168 131 168 127.5 160V142.5H110C104.5 142.5 98.5 132.5 110 127H127.5Z" fill="#111827" stroke="black" />
+                </svg>
             </button>
 
             {/* Profile Icon */}
             <button
                 className={`text-gray-400  ${activeIcon === 'profile' ? 'bottam_icon' : ''}`}
-                onClick={() => handleIconClick('profile')}
+                onClick={() => handleIconClick('Subscription')}
             >
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUsers} />
             </button>
             <button
                 className={`text-gray-400 signal-Icon ${activeIcon === 'signalHub' ? 'bottam_icon' : ''}`}

@@ -5,6 +5,7 @@ import SignalCardList from '../components/following-signal-CardList.js';
 import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
 import SignalModal from '../components/signalModal';
+import BottomNavbar from '../components/mobile-bottem-bar';
 
 function FollowingSignals() {
 
@@ -21,6 +22,8 @@ function FollowingSignals() {
                         <Sidebar />
                         <SignalCardList />
                     </div>
+                    <BottomNavbar />
+
                 </MyContextProvider>
             </div>
         </div>
