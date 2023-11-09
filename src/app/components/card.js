@@ -259,17 +259,20 @@ const Card = ({ signal }) => {
 
 
                     {!following ? <button onClick={() => {
-                        getSignals()
-                        setSelectedSignal(signal)
-                        setisSignalModalOpen(true)
+                        // getSignals()
+                        // setSelectedSignal(signal)
+                        // setisSignalModalOpen(true)
+                        router.push('/signal/' + signal._id)
+
                     }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
                         Follow Signal
                     </button>
                         :
                         <button onClick={() => {
-                            getSignals()
-                            setSelectedSignal(signal)
-                            setisSignalModalOpen(true)
+                            // getSignals()
+                            // setSelectedSignal(signal)
+                            // setisSignalModalOpen(true)
+                            router.push('/signal/' + signal._id)
                         }} className="bg-gray-100 text-black px-4 py-2 rounded-full hover:bg-gray-200 text-sm">
                             See Details
                         </button>

@@ -111,6 +111,7 @@
   /* background-color: #f2f2f2; */
   padding: 4px;
   border-radius: 5px;
+  width: 100%;
 }
 
 /* Style for the separator */
@@ -228,9 +229,30 @@
   color: #fff;
   font-size: x-large;
 }
-
 /* .signal-Icon {
   margin-top: 5.5px;
   margin-bottom: 4.5px;
 } */
-
+.col-buttons {
+  display: flex;
+  flex-direction: column;
+}
+.col_button {
+  margin-left: 0;
+  margin-top: 0px;
+  margin-top: 5px;
+}
+@media screen and (min-width: 390px) {
+  .col-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-left: 0;
+  }
+  .col_button {
+    /* --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); */
+    margin-top: 0px;
+    margin-left: 10px;
+  }
+}
