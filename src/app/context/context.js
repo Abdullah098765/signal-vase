@@ -13,10 +13,12 @@ export const useMyContext = () => {
 };
 
 export const MyContextProvider = ({ children }) => {
+  
   const [user, setUser] = useState({})
   const [signals, setSignals] = useState([])
   const [selectedSignal, setSelectedSignal] = useState({})
   const [isSignalModalOpen, setisSignalModalOpen] = useState(false)
+  const [routerLoading, setRouterLoading] = useState(false)
 
 
 
@@ -58,7 +60,7 @@ export const MyContextProvider = ({ children }) => {
 
 
 
-    fetch("https://signal-hub.vercel.app/api/get-signals",{method:'POST'})
+    fetch("https://signal-hub.vercel.app/api/get-signals", { method: 'POST' })
       .then(response => response.text())
       .then(result => setSignals(JSON.parse(result)))
       .catch(error => console.log('error', error));
@@ -128,10 +130,14 @@ export const MyContextProvider = ({ children }) => {
   }, [user])
 
 
-
+if(routerLoading){
+  setTimeout(() => {
+    setRouterLoading(false)
+  }, 5000);
+}
 
   return (
-    <MyContext.Provider value={{ _setIsModalOpen, _setIsEditModalOpen, closeSidenav, isEditModalOpen, setIsEditModalOpen, lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
+    <MyContext.Provider value={{ _setIsModalOpen, routerLoading, setRouterLoading, _setIsEditModalOpen, closeSidenav, isEditModalOpen, setIsEditModalOpen, lineClicked, selectedSignal, setSelectedSignal, getSignals, isSignalModalOpen, setisSignalModalOpen, isOpen, setIsOpen, isSliderOpen, closeSidenav, isModalOpen, signals, setSignals, getUser, setIsModalOpen, user, setUser }}>
       {children}
     </MyContext.Provider>
   );

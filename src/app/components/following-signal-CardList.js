@@ -10,7 +10,7 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 
 const SignalCardList = () => {
     const [followedSignals, setFollowedSignals] = useState([]);
-    const { user, closeSidenav, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
+    const { user, closeSidenav,setRouterLoading, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
 
     var windowWidth;
 
@@ -18,7 +18,7 @@ const SignalCardList = () => {
         windowWidth = window.innerWidth;
     })
     useEffect(() => {
-
+        setRouterLoading(false)
         console.log("Browser window width: " + windowWidth + " pixels");
         if (!lineClicked) {
             if (windowWidth <= 1100) {
@@ -85,7 +85,7 @@ const SignalCardList = () => {
                         <img
                             src={signal.signalProvider.profilePicture}
                             alt={signal.signalProvider.displayName}
-                            className="w-6 h-6 rounded-full mb-2 md:mb-0 mr-3 "
+                            className="w-6 h-6 rounded-full object-cover mb-2 md:mb-0 mr-3 "
                         />
 
                         {/* Signal Information */}

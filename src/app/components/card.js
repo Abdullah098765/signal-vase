@@ -13,7 +13,7 @@ const Card = ({ signal }) => {
     const [disliked, setDisliked] = useState(false);
     const [likeCount, setLikeCount] = useState(signal.likes.length);
     const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount.length);
-    const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
+    const { user, setRouterLoading,selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
     const handleLikeClick = () => {
@@ -262,6 +262,7 @@ const Card = ({ signal }) => {
                         // getSignals()
                         // setSelectedSignal(signal)
                         // setisSignalModalOpen(true)
+                        setRouterLoading(true)
                         router.push('/signal/' + signal._id)
 
                     }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
@@ -272,6 +273,8 @@ const Card = ({ signal }) => {
                             // getSignals()
                             // setSelectedSignal(signal)
                             // setisSignalModalOpen(true)
+                        setRouterLoading(true)
+
                             router.push('/signal/' + signal._id)
                         }} className="bg-gray-100 text-black px-4 py-2 rounded-full hover:bg-gray-200 text-sm">
                             See Details

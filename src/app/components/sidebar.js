@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 
 function Sidebar() {
     const router = useRouter()
-    const { isSliderOpen, setIsSliderOpen, isOpen, } = useMyContext();
+    const { isSliderOpen, setRouterLoading, setIsSliderOpen, isOpen, } = useMyContext();
     const [selectedLink, setSelectedLink] = useState('');
 
     return (
@@ -36,6 +36,7 @@ function Sidebar() {
                 </div> */}
                         <div class="mt-6 flex flex-col justify-start items-center  pl-4 w-full border-gray-600 border-b space-y-3 pb-5 ">
                             <div onClick={() => {
+                                setRouterLoading(true)
                                 router.push('/')
                                 setSelectedLink('Home')
                                 console.log(selectedLink);
@@ -45,6 +46,7 @@ function Sidebar() {
                                 <p class="text-base leading-4 ">Home</p>
                             </div>
                             <div onClick={() => {
+                                setRouterLoading(true)
                                 router.push('/profile')
                                 setSelectedLink('Dashboard')
                                 console.log(selectedLink);
@@ -58,8 +60,11 @@ function Sidebar() {
                         <div class="flex flex-col justify-start      border-b border-gray-600 w-full  ">
 
                             <div id="menu1" class="flex justify-start  flex-col w-full md:w-auto items-start pb-1 ">
-                                <div onClick={()=>{
-                                router.push('/following-signals')
+                                <div onClick={() => {
+                                    
+                                    setRouterLoading(true)
+
+                                    router.push('/following-signals')
                                 }} className="flex justify-start cursor-pointer items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52">
 
                                     <FontAwesomeIcon icon={faClock} width="24" height="24" />

@@ -27,7 +27,7 @@ const Navbar = () => {
 
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user } = useMyContext();
+    const { isOpen, setIsOpen, routerLoading, setRouterLoading, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user } = useMyContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -82,6 +82,8 @@ const Navbar = () => {
     return (
 
         <>
+            {routerLoading && <div class="loader-line"></div>}
+
             <nav className="bg-gray-900 text-white p-1 hidden md:block">
                 <div className="container ml-4 mx-auto flex justify-between items-center">
 
@@ -139,7 +141,10 @@ const Navbar = () => {
                     <div className="space-x-4 flex ">
 
 
-                        {uid != null && <button onClick={() => router.push('/signal_form')} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
+                        {uid != null && <button onClick={() => {
+                            router.push('/signal_form')
+                            setRouterLoading(true)
+                        }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm ">
                             Create a Signal
                         </button>}
                         {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
@@ -193,7 +198,7 @@ const Navbar = () => {
             </nav >
 
             <nav className={`unvisible-navbar bg-gray-900 text-white pr-2 flex items-center justify-between md:hidden  mb-14`} />
-            
+
             <nav className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${searchVisible ? 'justify-end' : 'justify-between'} ${visible ? 'navbar-visible' : 'navbar-hidden'}`}>
 
 

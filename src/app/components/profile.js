@@ -25,7 +25,10 @@ import SignalModal from './signalModal';
 import EditProfileModal from './edit-profile-modal';
 
 function User() {
-    const { user } = useMyContext();
+
+    
+
+    const { user, setRouterLoading } = useMyContext();
     const [isScrolled, setIsScrolled] = useState(1);
 
 
@@ -70,7 +73,7 @@ function User() {
     };
     useEffect(() => {
         getAllSignals()
-
+        setRouterLoading(false)
 
     }, [user])
     useEffect(() => {

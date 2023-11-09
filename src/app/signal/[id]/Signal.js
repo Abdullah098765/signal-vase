@@ -14,7 +14,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { usePathname } from 'next/navigation';
 
 function Signal() {
-    const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
+    const { user,setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
 
 
@@ -28,6 +28,7 @@ function Signal() {
 
     const [signalId, setSignalId] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
+        setRouterLoading(false)
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
         myHeaders.append("Content-Type", "application/json");
