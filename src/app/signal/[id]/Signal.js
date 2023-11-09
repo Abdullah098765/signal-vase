@@ -14,7 +14,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { usePathname } from 'next/navigation';
 
 function Signal() {
-    const { user,setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
+    const { user, setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
 
 
@@ -85,14 +85,14 @@ function Signal() {
     }, [showComments]);
 
 
-useEffect(() => {
-    if (signal._id) {
-        setLikeCount(signal.likes.length)
-        setDislikeCount(signal.disLikesCount.length)
-    }
+    useEffect(() => {
+        if (signal._id) {
+            setLikeCount(signal.likes.length)
+            setDislikeCount(signal.disLikesCount.length)
+        }
 
-    
-}, [signal])
+
+    }, [signal])
 
 
     // Function to toggle the comment section visibility
@@ -588,7 +588,7 @@ useEffect(() => {
                                     <div className=" border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
                                         <div className="flex items-center  md:justify-center sm:justify-center ">
                                             <img
-                                                className="w-12 h-12 rounded-full mr-4"
+                                                className="w-12 h-12 object-cover rounded-full mr-4"
                                                 src={signal.signalProvider.profilePicture}
                                                 alt={signal.signalProvider.displayName}
                                             />
@@ -690,7 +690,7 @@ useEffect(() => {
                                                 <img
                                                     src={comment.user.profilePicture}
                                                     alt={comment.user.displayName}
-                                                    className="w-6 h-6 rounded-full"
+                                                    className="w-6 h-6 object-cover rounded-full"
                                                 />
                                                 <p className="ml-2 font-semibold text-black">{comment.user.displayName}</p>
                                             </div>
