@@ -157,21 +157,21 @@ const CreateSignalForm = () => {
                         }} className="back-button">
                             <FontAwesomeIcon icon={faArrowLeft} />
                         </button>
-                        <h1 className="text-xl font-bold text-black capitalize dark:text-white">Create a New Signal</h1>
+                        <h1 className="text-xl font-bold text-black capitalize ">Create a New Signal</h1>
                         <form onSubmit={handleSubmit}>
 
 
                             <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-1">
                                 <div>
 
-                                    <label className="text-black dark:text-white" htmlFor="pair">
+                                    <label className="text-black " htmlFor="pair">
                                         Pair (e.g., BTC/USDT)
                                     </label>
                                     <input
                                         type="text"
                                         name="pair"
                                         id="pair"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark:text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                         placeholder="e.g., BTC/USDT"
                                         value={signalData.pair}
                                         onChange={handleInputChange}
@@ -180,14 +180,14 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="explanation">
+                                    <label className="text-black " htmlFor="explanation">
                                         Signal Explanation
                                     </label>
                                     <textarea
                                         name="explanation"
                                         id="explanation"
                                         rows="4"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark:text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                         placeholder="Enter signal explanation"
                                         value={signalData.explanation}
                                         onChange={handleInputChange}
@@ -199,14 +199,14 @@ const CreateSignalForm = () => {
 
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="entry1">
+                                    <label className="text-black " htmlFor="entry1">
                                         Entry 1
                                     </label>
                                     <input
                                         type="number"
                                         name="entry1"
                                         id="entry1"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark:text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                         placeholder="Entry 1"
                                         value={signalData.entry1}
                                         onChange={handleInputChange}
@@ -215,14 +215,14 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="entry2">
+                                    <label className="text-black " htmlFor="entry2">
                                         Entry 2
                                     </label>
                                     <input
                                         type="number"
                                         name="entry2"
                                         id="entry2"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark:text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                         placeholder="Entry 2"
                                         value={signalData.entry2}
                                         onChange={handleInputChange}
@@ -231,14 +231,14 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="takeProfit1">
+                                    <label className="text-black " htmlFor="takeProfit1">
                                         Take Profit 1
                                     </label>
                                     <input
                                         type="number"
                                         name="takeProfit1"
                                         id="takeProfit1"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark:text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
                                         placeholder="Take Profit 1"
                                         value={signalData.takeProfit1}
                                         onChange={handleInputChange}
@@ -247,7 +247,7 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="takeProfit2">
+                                    <label className="text-black " htmlFor="takeProfit2">
                                         Take Profit 2
                                     </label>
                                     <input
@@ -263,7 +263,7 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="takeProfit3">
+                                    <label className="text-black " htmlFor="takeProfit3">
                                         Take Profit 3
                                     </label>
                                     <input
@@ -279,7 +279,7 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="stopLoss">
+                                    <label className="text-black " htmlFor="stopLoss">
                                         Stop Loss
                                     </label>
                                     <input
@@ -295,7 +295,7 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="cryptoOrStock">
+                                    <label className="text-black " htmlFor="cryptoOrStock">
                                         Crypto or Stock
                                     </label>
                                     <select
@@ -310,7 +310,7 @@ const CreateSignalForm = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="duration">
+                                    <label className="text-black " htmlFor="duration">
                                         Duration
                                     </label>
                                     <select
@@ -339,7 +339,7 @@ const CreateSignalForm = () => {
                                 </div>
 
                                 <div>
-                                    <label className="text-black dark:text-white" htmlFor="longOrShort">
+                                    <label className="text-black " htmlFor="longOrShort">
                                         Long or Short
                                     </label>
                                     <select
