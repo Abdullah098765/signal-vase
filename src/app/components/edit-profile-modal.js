@@ -19,6 +19,7 @@ const EditProfileModal = ({ }) => {
     });
     const [isLoading, setIsLoading] = useState(false);
 
+    const [imageUploading, setImageUploading] = useState(false);
     const [selectedImage, setSelectedImage] = useState();
 
     const handleChange = (e) => {
@@ -26,8 +27,10 @@ const EditProfileModal = ({ }) => {
         setFormData({ ...formData, [name]: value });
     };
     const handleFileChange = async (e) => {
+
         const file = e.target.files[0];
         if (file) {
+            setImageUploading(true)
             try {
                 // Create a reference to the storage location for the user's profile picture
                 const profilePictureRef = ref(storage, `profile-pictures/${user._id}/${file.name}`);
@@ -41,6 +44,7 @@ const EditProfileModal = ({ }) => {
                 // Update the user's profile picture URL in the local state or database
                 setSelectedImage(file);
                 setFormData({ ...formData, profilePicture: imageUrl });
+                setImageUploading(false)
             } catch (error) {
                 console.error('Errrror uploading the image to Firebase Storage:', error);
                 // Handle error here
@@ -122,7 +126,9 @@ const EditProfileModal = ({ }) => {
                         <div className="flex items-center flex-col w-full border-gray-400">
                             <div>
                                 <label htmlFor="file-input" className="avatar-input">
-                                    <img
+                                    {imageUploading ? <>
+                                        <div className="animate-spin rounded-full w-20 h-20  mx-4 border-t-2 border-b-2 border-blue-500"></div>
+                                    </> : <img
                                         src={selectedImage ? URL.createObjectURL(selectedImage) : formData.profilePicture}
                                         className="w-20 h-20 rounded-full mx-4 border-2 border-gray-500 transition duration-300 object-cover cursor-pointer"
                                         alt={user.displayName}
@@ -137,7 +143,7 @@ const EditProfileModal = ({ }) => {
                                         onMouseOut={(e) => {
                                             e.target.style.transform = 'scale(1)';
                                         }}
-                                    />
+                                    />}
                                     <label className="text-gray-600 dark:text-gray-400">Profile Picture</label>
 
                                     <input

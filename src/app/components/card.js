@@ -240,8 +240,8 @@ const Card = ({ signal }) => {
                 </div>
 
                 {/* User Profile */}
-                <div className="mt-2 flex items-center text-sm">
-                    <img src={signal.signalProvider.profilePicture} alt={signal.signalProvider.displayName} className="w-6 h-6 rounded-full" />
+                <div className="mt-2 flex items-center  text-sm">
+                    <img src={signal.signalProvider.profilePicture} alt={signal.signalProvider.displayName} className="w-6 h-6 rounded-full object-cover" />
                     <p className="ml-2 cursor-pointer" onClick={() => router.push('/' + signal.signalProvider.fireBaseUid)}>{signal.signalProvider.displayName}</p>
                 </div>
 

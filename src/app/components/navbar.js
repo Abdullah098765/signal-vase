@@ -160,7 +160,7 @@ const Navbar = () => {
                             >
 
                                 <div className="rounded-full overflow-hidden h-10 w-10">
-                                    <img className='profile-pic-nav w-full h-full object-cover object-center' alt='profile-pic' src={user.profilePicture} ></img>
+                                    <img className='profile-pic-nav w-full h-full object-cover  object-center' alt='profile-pic' src={user.profilePicture} ></img>
                                 </div>
                             </button>}
 
@@ -288,7 +288,7 @@ const Navbar = () => {
                             Sign In
                         </div> :
                             <img
-                                className="h-8 w-8 mr-3 ml-3 rounded-full"
+                                className="h-8 w-8 mr-3 ml-3 object-cover rounded-full"
                                 src={user.profilePicture}
                                 alt="Profile"
                             />}
