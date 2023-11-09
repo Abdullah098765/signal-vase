@@ -12,6 +12,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Subscribe from '../../components/Subscribe';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { usePathname } from 'next/navigation';
+                
+import BottomNavbar from '../../components/mobile-bottem-bar'
+
 
 function Signal() {
     const { user, setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
@@ -721,7 +724,7 @@ function Signal() {
                                                 <img
                                                     src={user.profilePicture}
                                                     alt={user.displayName}
-                                                    className="w-6 h-6 rounded-full mr-2"
+                                                    className="w-6 h-6 object-cover rounded-full mr-2"
                                                 />  Comment
                                             </button>
                                         </div>
@@ -738,6 +741,7 @@ function Signal() {
                     </div>
                 }
 
+                <BottomNavbar />
 
             </div>
         </>
