@@ -171,7 +171,7 @@ const CreateSignalForm = () => {
                                         type="text"
                                         name="pair"
                                         id="pair"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="e.g., BTC/USDT"
                                         value={signalData.pair}
                                         onChange={handleInputChange}
@@ -187,7 +187,7 @@ const CreateSignalForm = () => {
                                         name="explanation"
                                         id="explanation"
                                         rows="4"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Enter signal explanation"
                                         value={signalData.explanation}
                                         onChange={handleInputChange}
@@ -206,7 +206,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="entry1"
                                         id="entry1"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Entry 1"
                                         value={signalData.entry1}
                                         onChange={handleInputChange}
@@ -222,7 +222,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="entry2"
                                         id="entry2"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Entry 2"
                                         value={signalData.entry2}
                                         onChange={handleInputChange}
@@ -238,7 +238,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="takeProfit1"
                                         id="takeProfit1"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70  dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Take Profit 1"
                                         value={signalData.takeProfit1}
                                         onChange={handleInputChange}
@@ -254,7 +254,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="takeProfit2"
                                         id="takeProfit2"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Take Profit 2"
                                         value={signalData.takeProfit2}
                                         onChange={handleInputChange}
@@ -270,7 +270,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="takeProfit3"
                                         id="takeProfit3"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Take Profit 3"
                                         value={signalData.takeProfit3}
                                         onChange={handleInputChange}
@@ -286,7 +286,7 @@ const CreateSignalForm = () => {
                                         type="number"
                                         name="stopLoss"
                                         id="stopLoss"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
                                         placeholder="Stop Loss"
                                         value={signalData.stopLoss}
                                         onChange={handleInputChange}
@@ -301,7 +301,7 @@ const CreateSignalForm = () => {
                                     <select
                                         name="cryptoOrStock"
                                         id="cryptoOrStock"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark-bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         value={signalData.cryptoOrStock}
                                         onChange={handleInputChange}
                                     >
@@ -316,7 +316,7 @@ const CreateSignalForm = () => {
                                     <select
                                         name="duration"
                                         id="duration"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark:bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
                                         value={selectedDuration}
                                         onChange={handleDurationChange}
                                     >
@@ -345,7 +345,7 @@ const CreateSignalForm = () => {
                                     <select
                                         name="longOrShort"
                                         id="longOrShort"
-                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md dark-bg-opacity-70 dark-text-white dark:border-white focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"
+                                        className="block w-full px-4 py-2 mt-2 text-black bg-white bg-opacity-50 border border-black rounded-md   focus:border-blue-500  focus:outline-none focus:ring"
                                         value={signalData.longOrShort}
                                         onChange={handleInputChange}
                                     >
