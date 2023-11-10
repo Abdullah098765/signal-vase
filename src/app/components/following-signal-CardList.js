@@ -68,7 +68,7 @@ const SignalCardList = () => {
             {followedSignals.map((signal) => (
                 <div
                     key={signal._id}
-                    className="bg-white   border border-gray-900 dark:border-white shadow-lg rounded-lg p-4 4  my-4 flex flex-col md:flex-row items-center justify-between  webkit-fill-available "
+                    className="bg-white   border border-gray-900  shadow-lg rounded-lg p-4 4  my-4 flex flex-col md:flex-row items-center justify-between  webkit-fill-available "
                 >
                     <div
                         className={`${signal.longOrShort === 'Long' ? 'bg-green-500' : 'bg-red-500'

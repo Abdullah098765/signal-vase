@@ -520,7 +520,7 @@ function SignalModal() {
                     <div className="mt-4 border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
                         <div className="flex items-center  md:justify-center sm:justify-center ">
                             <img
-                                className="w-12 h-12 rounded-full mr-4"
+                                className="w-12 h-12 object-cover rounded-full mr-4"
                                 src={signal.signalProvider.profilePicture}
                                 alt={signal.signalProvider.displayName}
                             />
@@ -558,45 +558,7 @@ function SignalModal() {
                 {/* Comments Section */}
 
 
-                {/* Action Buttons */}
-                <div className="mt-4 flex justify-end space-x-2">
-                    {!following ?
-                        < button onClick={handleFollow} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
 
-                            {isLoading ? (
-                                <div className="w-5 h-5 border-t-2 border-blue-500 border-solid rounded-full animate-spin"></div>
-                            ) : (
-                                'Follow Signal'
-                            )}
-                        </button> : <button onClick={handleUnFollow} className="bg-red-700 text-white px-4 py-2 rounded-full hover:bg-red-950 text-sm">
-                            {isLoading ? (
-                                <div className="w-5 h-5 border-t-2 border-yellow-500 border-solid rounded-full animate-spin"></div>
-                            ) : (
-                                'Unfollow Signal'
-                            )}
-                        </button>
-
-                    }
-
-                    <div className="bg-gray-700 text-white px-4 py-2 rounded-full text-sm">
-                        <div className="flex items-center">
-                            <FontAwesomeIcon
-                                icon={faThumbsUp}
-                                className={likeIconColor}
-                                onClick={handleLikeClick}
-                            />
-                            <p>{likeCount}</p>
-                            <div className="separator-line mx-2 border-r border-gray-400 h-5"></div>
-                            <p>{dislikeCount}</p>
-                            <FontAwesomeIcon
-                                icon={faThumbsDown}
-                                flip="horizontal"
-                                className={dislikeIconColor}
-                                onClick={handleDislikeClick}
-                            />
-                        </div>
-                    </div>
-                </div>
 
                 {/* Above content (your existing code) */}
                 <div>
