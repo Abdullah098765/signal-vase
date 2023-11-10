@@ -7,6 +7,7 @@ import Navbar from "../components/navbar"
 import { MyContextProvider } from '../context/context';
 import Sidebar from '../components/sidebar';
 import BottomNavbar from '../components/mobile-bottem-bar';
+import Modal from '../components/signUp-Model';
 
 const CreateSignalForm = () => {
 
@@ -142,12 +143,21 @@ const CreateSignalForm = () => {
             console.error('Error creating signal:', error.message);
         }
     };
+    const [isSignInButtinShown, setIsSignInButtinShown] = useState(false)
+
+
+    useEffect(() => {
+        if (!window.localStorage.getItem("uid")) {
+            setIsSignInButtinShown(true)
+        }
+
+    }, [])
 
     return (
         <div>
             <MyContextProvider>
                 <Navbar />
-                <div className='flex'>
+                {!isSignInButtinShown && <div className='flex'>
                     <Sidebar />
                     <section className=" p-6 w-full  bg-white rounded-md shadow-md  ">
                         <button onClick={() => {
@@ -363,7 +373,14 @@ const CreateSignalForm = () => {
                             </div>
                         </form>
                     </section>
-                </div>
+                </div>}
+
+                {isSignInButtinShown && <div className=' w-full flex items-center justify-center h-screen'>
+                    <button className=''>
+                        Sign In To Create Signal
+                    </button>
+                </div>}
+                <Modal/>
                 <BottomNavbar />
             </MyContextProvider>
 

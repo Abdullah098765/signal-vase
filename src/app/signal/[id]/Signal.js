@@ -17,7 +17,7 @@ import BottomNavbar from '../../components/mobile-bottem-bar'
 
 
 function Signal() {
-    const { user, setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
+    const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
 
 
@@ -647,19 +647,36 @@ function Signal() {
 
                                 <div className="bg-gray-700 text-white px-4 py-2 rounded-full text-sm">
                                     <div className="flex items-center">
+                                        {/* Thumbs Up Icon */}
                                         <FontAwesomeIcon
                                             icon={faThumbsUp}
                                             className={likeIconColor}
-                                            onClick={handleLikeClick}
+                                            onClick={() => {
+                                                if (window.localStorage.getItem('uid')) {
+                                                    handleLikeClick()
+                                                }
+                                                else setIsModalOpen(true)
+                                            }}
                                         />
                                         <p>{likeCount}</p>
+
+                                        {/* Separator Line */}
                                         <div className="separator-line mx-2 border-r border-gray-400 h-5"></div>
                                         <p>{dislikeCount}</p>
+
+                                        {/* Thumbs Down Icon */}
                                         <FontAwesomeIcon
                                             icon={faThumbsDown}
                                             flip="horizontal"
                                             className={dislikeIconColor}
-                                            onClick={handleDislikeClick}
+                                            onClick={() => {
+                                                if (window.localStorage.getItem('uid')) {
+                                                    handleDislikeClick()
+
+                                                }
+                                                else setIsModalOpen(true)
+
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -746,6 +763,12 @@ function Signal() {
                 </MyContextProvider>
 
             </div>
+            
+            {isSignInButtinShown && <div className=' w-full flex items-center justify-center h-screen'>
+                <button onClick={() => setIsModalOpen(true)} className=' bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded'>
+                    Sign In
+                </button>
+            </div>}
         </>
 
 

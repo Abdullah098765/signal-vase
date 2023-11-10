@@ -5,7 +5,8 @@ const Subscribe = ({ targetUser }) => {
 
     const [subscribed, setSubscribed] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const { user } = useMyContext()
+
+    const { user, isModalOpen, setIsModalOpen } = useMyContext()
 
 
 
@@ -78,7 +79,13 @@ const Subscribe = ({ targetUser }) => {
         <div>
 
             <div class="flex items-center  col-buttons  lg:mt-24 xl:mt-24 mt-3">
-                {!subscribed ? <button onClick={() => handleSubscription('subscribe')} class="flex items-center bg-gray-600 w-full hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                {!subscribed ? <button onClick={() => {
+                    if (window.localStorage.getItem('uid')) {
+                        handleSubscription('subscribe')
+
+                    }
+                    else setIsModalOpen(true)
+                }} class="flex items-center bg-gray-600 w-full hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path>
                     </svg>
