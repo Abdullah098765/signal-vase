@@ -627,7 +627,15 @@ function Signal() {
                         <div class="flex-1 w-full bg-white rounded-lg shadow-xl mt-4 md:p-8 p-4">
                             <div className="mt-4 flex justify-end space-x-2">
                                 {!following ?
-                                    < button onClick={handleFollow} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
+                                    < button onClick={
+                                        () => {
+                                            if (window.localStorage.getItem('uid')) {
+                                                handleFollow()
+                                            }
+                                            else setIsModalOpen(true)
+                                        }
+
+                                    } className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
 
                                         {isLoading ? (
                                             <div className="w-5 h-5 border-t-2 border-blue-500 border-solid rounded-full animate-spin"></div>
@@ -762,9 +770,9 @@ function Signal() {
                 </MyContextProvider>
 
             </div>
-            
-        
-        
+
+
+
         </>
 
 
