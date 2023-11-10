@@ -6,6 +6,7 @@ import User from '@/app/components/profile'
 import Sidebar from '../components/sidebar';
 import EditProfileModal from '../components/edit-profile-modal';
 import BottomNavbar from '../components/mobile-bottem-bar';
+import Modal from '../components/signUp-Model';
 
 const Profile = () => {
     return (
@@ -18,7 +19,8 @@ const Profile = () => {
 
                     <User />
                 </div>
-        <BottomNavbar />
+                <BottomNavbar />
+                <Modal />
 
             </MyContextProvider>
         </div>

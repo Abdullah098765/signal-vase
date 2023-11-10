@@ -76,6 +76,17 @@ const Navbar = () => {
             searchInputRef.current.focus();
         }
     }, [searchVisible]);
+    const _signOut = () => {
+        signOut(auth).then(() => {
+            // Sign-out successful.
+            window.location = 'https://signal-hub.vercel.app/'
+            localStorage.removeItem('uid')
+            localStorage.removeItem('userId')
+        }).catch((error) => {
+            // An error happened.
+            console.error("Sign-out error:", error);
+        });
+    }
 
     if (!user) return null
 
@@ -175,18 +186,9 @@ const Navbar = () => {
                                     onClick={closeMenu}
                                 >
                                     {/* Add dropdown menu items */}
-                                    <li className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Item 1</li>
-                                    <li className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Item 2</li>
+
                                     <li onClick={() => {
-                                        signOut(auth).then(() => {
-                                            // Sign-out successful.
-                                            window.location = 'https://signal-hub.vercel.app/'
-                                            localStorage.removeItem('uid')
-                                            localStorage.removeItem('userId')
-                                        }).catch((error) => {
-                                            // An error happened.
-                                            console.error("Sign-out error:", error);
-                                        });
+                                        _signOut()
                                     }} className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Sign Out</li>
                                 </ul>
                             )}
@@ -289,14 +291,38 @@ const Navbar = () => {
                     {!searchVisible && <div className="relative">
                         {uid === null ? <div name='signin' onClick={() => {
                             setIsModalOpen(true)
-                        }} className=" hover:text-blue-400 text-sm mr-2">
+                        }} className=" hover:text-blue-400 cursor-pointer text-sm mr-2">
                             Sign In
                         </div> :
-                            <img
-                                className="h-8 w-8 mr-3 ml-3 object-cover rounded-full"
-                                src={user.profilePicture}
-                                alt="Profile"
-                            />}
+                            <>
+
+                                <img
+                                    onClick={toggleMenu}
+                                    className="h-8 w-8 mr-3 ml-3 object-cover cursor-pointer rounded-full"
+                                    src={user.profilePicture}
+                                    alt="Profile"
+                                />
+
+
+
+
+                                {isOpen && (
+                                    <ul
+                                        className="absolute right-0 mt-2 w-40 bg-gray-900 text-gray-100 border border-gray-700 rounded-md shadow-lg z-10"
+                                        onClick={closeMenu}
+                                    >
+                                        {/* Add dropdown menu items */}
+
+                                        <li onClick={() => {
+                                            setRouterLoading(true)
+                                            router.push('/profile')
+                                        }} className="py-2 px-4 hover:bg-gray-800 cursor-pointer">My Profile</li>
+                                        <li onClick={() => {
+                                            _signOut()
+                                        }} className="py-2 px-4 hover:bg-gray-800 cursor-pointer">Sign Out</li>
+                                    </ul>
+                                )}
+                            </>}
                     </div>}
                 </div>
             </nav>

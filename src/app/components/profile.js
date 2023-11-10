@@ -26,9 +26,9 @@ import EditProfileModal from './edit-profile-modal';
 
 function User() {
 
-    
 
-    const { user, setRouterLoading } = useMyContext();
+
+    const { user, setRouterLoading, isModalOpen, setIsModalOpen } = useMyContext();
     const [isScrolled, setIsScrolled] = useState(1);
 
 
@@ -39,6 +39,7 @@ function User() {
         setIsCurrentprofileRoute(params);
     }
     const [allSignals, setAllSignals] = useState([])
+    const [isSignInButtinShown, setIsSignInButtinShown] = useState(false)
     const [Signals, setSignals] = useState([])
     const [cryptoSignals, setCryptoSignals] = useState([])
     const [forexSignals, setForexSignals] = useState([])
@@ -71,11 +72,24 @@ function User() {
             .catch(error => console.log('error', error));
 
     };
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         getAllSignals()
         setRouterLoading(false)
+        if (user) {
+            setIsLoading(false)
+
+        }
+        if (!window.localStorage.getItem('uid')) {
+            setIsModalOpen(true)
+            setIsSignInButtinShown(true)
+
+        }
+
 
     }, [user])
+
+
     useEffect(() => {
         const cryptoSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Crypto');
         const stockSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Stock');
@@ -99,10 +113,11 @@ function User() {
         }
     };
 
-    return (
+    return (<>
         <div className='w-full'>
-            {user.displayName ?
-                <div class="h-full bg-gray-200 p-8">
+
+            {user.displayName &&
+                <div class="h-full bg-gray-200 md:p-8 p-4">
                     <div class="bg-white rounded-lg shadow-xl p-6 flex flex-col lg:flex-row  xl:flex-row items-center">
                         <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                         </div>
@@ -112,8 +127,8 @@ function User() {
                             alt={user.displayName}
                         />
 
-                        <div>
-                            <div class="flex items-center space-x-2 mt-2">
+                        <div className=''>
+                            <div class="flex items-center space-x-2 lg:justify-start justify-center mt-2">
                                 <p class="text-2xl">{user.displayName}</p>
                                 <span class="bg-blue-500 rounded-full p-1" title="Verified">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -279,14 +294,24 @@ function User() {
                         </div>
                     }
 
-                </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-                    <p className="text-white mt-4" >Loading...</p>
                 </div>
             }
 
+            {isLoading && <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+                <p className="text-white mt-4" >Loading...</p>
+            </div>}
+
+            {isSignInButtinShown && <div className=' w-full flex items-center justify-center h-screen'>
+                <button onClick={() => setIsModalOpen(true)} className=' bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded'>
+                    Sign In
+                </button>
+            </div>}
 
         </div>
+    </>
+
+
     );
 }
 

@@ -740,10 +740,10 @@ function Signal() {
                         <p className="text-white ml-2 mt-4" >Loading...</p>
                     </div>
                 }
-<MyContextProvider>
+                <MyContextProvider>
 
-                <BottomNavbar />
-</MyContextProvider>
+                    <BottomNavbar />
+                </MyContextProvider>
 
             </div>
         </>

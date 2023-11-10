@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import './components.css'
 import { usePathname, useRouter } from 'next/navigation';
 import path from 'path';
+import { useMyContext } from '../context/context';
 
 function BottomNavbar() {
     const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -12,7 +13,7 @@ function BottomNavbar() {
     const router = useRouter()
     const pathName = usePathname()
 
-    const { routerLoading } = useContext()
+    const { routerLoading } = useMyContext()
     useEffect(() => {
         console.log(pathName);
         const handleScroll = () => {
@@ -41,7 +42,6 @@ function BottomNavbar() {
     };
     return (
         <>
-            {routerLoading && <div class="loader-line"></div>}
             <nav className={`bottomBar bg-gray-900 text-white p-2 flex items-center justify-around fixed bottom-0 left-0 right-0 md:hidden ${visible ? 'bottom-navbar-visible' : 'bottom-navbar-hidden'}`}>
                 {/* Home Icon */}
                 <button
@@ -99,6 +99,8 @@ function BottomNavbar() {
 
                 </button>
             </nav>
+            {routerLoading && <div class="loader-line"></div>}
+
         </>
 
     );
