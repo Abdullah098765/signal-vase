@@ -75,7 +75,6 @@ function Signal() {
     const [likeCount, setLikeCount] = useState(signal.likes && signal.likes.length);
     const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount && signal.disLikesCount.length);
     const [showTimer, setShowTimer] = useState(true);
-
     useEffect(() => {
         if (showComments) {
             const commentSection = document.getElementById('comment-section');
@@ -764,11 +763,8 @@ function Signal() {
 
             </div>
             
-            {isSignInButtinShown && <div className=' w-full flex items-center justify-center h-screen'>
-                <button onClick={() => setIsModalOpen(true)} className=' bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded'>
-                    Sign In
-                </button>
-            </div>}
+        
+        
         </>
 
 
