@@ -7,7 +7,7 @@ import { formatDistanceToNow } from 'date-fns';
 //  import '../../components/c'
 import { useCountdown } from '../..//components/countDown-timer';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { useMyContext } from '../../context/context';
+import { MyContextProvider, useMyContext } from '../../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Subscribe from '../../components/Subscribe';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
@@ -740,8 +740,10 @@ function Signal() {
                         <p className="text-white ml-2 mt-4" >Loading...</p>
                     </div>
                 }
+<MyContextProvider>
 
                 <BottomNavbar />
+</MyContextProvider>
 
             </div>
         </>
