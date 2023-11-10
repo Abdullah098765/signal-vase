@@ -133,7 +133,7 @@ export const MyContextProvider = ({ children }) => {
 if(routerLoading){
   setTimeout(() => {
     setRouterLoading(false)
-  }, 5000);
+  }, 10000);
 }
 
   return (
