@@ -8,7 +8,7 @@ import { firebaseConfig } from "../../../firebaseConfig";
 import { BellIcon } from '@heroicons/react/solid';
 import { getAuth, signOut } from 'firebase/auth';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBackspace, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
@@ -76,10 +76,11 @@ const Navbar = () => {
             searchInputRef.current.focus();
         }
     }, [searchVisible]);
+    const pathname = usePathname()
     const _signOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            window.location = 'https://signal-hub.vercel.app/'
+            window.location = 'https://signal-hub.vercel.app/' + pathname
             localStorage.removeItem('uid')
             localStorage.removeItem('userId')
         }).catch((error) => {

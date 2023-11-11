@@ -5,14 +5,19 @@ import { firebaseConfig } from "../../../firebaseConfig";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthernet } from '@fortawesome/free-solid-svg-icons';
 import './components.css'
+import { usePathname } from 'next/navigation';
 
 
 const RegistrationForm = () => {
   const auth = getAuth();
   const [isGoogleClicked, setIsGoogleClicked] = useState(false);
-
+  const pathName = usePathname()
 
   const signInWithGoogle = async () => {
+    setTimeout(() => {
+      setIsGoogleClicked(false)
+    }, 20000);
+    
     const provider = new GoogleAuthProvider();
     setIsGoogleClicked(true)
 
@@ -44,12 +49,13 @@ const RegistrationForm = () => {
           window.localStorage.setItem('uid', result.user.uid)
           setIsGoogleClicked(false)
 
-          window.location = 'https://signal-hub.vercel.app'
+          window.location = 'https://signal-hub.vercel.app/' + pathName
+          console.log(pathName);
         } else {
           // Handle server registration error
           window.localStorage.setItem('uid', result.user.uid)
-          window.location = 'https://signal-hub.vercel.app'
-          console.log('User Exist in Database');
+          window.location = 'https://signal-hub.vercel.app/' + pathName
+          console.log('User Exist in Database',pathName);
 
         }
       } catch (error) {
@@ -65,6 +71,8 @@ const RegistrationForm = () => {
       setIsGoogleClicked(false)
       alert('Unable To sign In')
     }
+
+    
   };
 
   const [formData, setFormData] = useState({
