@@ -9,6 +9,7 @@ import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 
 
 const SignalCardList = () => {
+    const [isSignInButtinShown, setIsSignInButtinShown] = useState(false);
     const [followedSignals, setFollowedSignals] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
     const { user, closeSidenav, setRouterLoading, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
@@ -17,6 +18,9 @@ const SignalCardList = () => {
 
     useEffect(() => {
         windowWidth = window.innerWidth;
+        if(!localStorage.getItem('uid')){
+            setIsSignInButtinShown(true)
+        }
     })
     useEffect(() => {
         setRouterLoading(false)
@@ -123,6 +127,7 @@ const SignalCardList = () => {
                     </div>
                 </div>
             ))}
+            
             {(dataLoading && user) && <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
                 <p className="text-white ml-2 mt-4" >Loading...</p>
