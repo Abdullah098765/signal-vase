@@ -1,33 +1,38 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MyContextProvider, useMyContext } from '../context/context';
+import { MyContextProvider, useMyContext } from '../../context/context';
 import { faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart } from '@fortawesome/free-solid-svg-icons';
 import { faBarChart, faChartBar } from '@fortawesome/free-regular-svg-icons';
-import Career from '../components/creer'
-import AllSignals from '../components/all'
-import GoodSignals from '../components/good'
-import BadSignals from '../components/bad'
-import NeutralSignals from '../components/neutral'
-import CryptoSignals from '../components/crypto'
-import ForexSignals from '../components/forex'
-import Subscribe from '../components/Subscribe'
-import ActiveSignals from '../components/active'
-import Reviews from '../components/reviews'
-import About from '../components/About'
+import Career from '../../components/creer'
+import AllSignals from '../../components/all'
+import GoodSignals from '../../components/good'
+import BadSignals from '../../components/bad'
+import NeutralSignals from '../../components/neutral'
+import CryptoSignals from '../../components/crypto'
+import ForexSignals from '../../components/forex'
+import Subscribe from '../../components/Subscribe'
+import ActiveSignals from '../../components/active'
+import Reviews from '../../components/reviews'
+import About from '../../components/About'
 import '../components/components.css'
 import { useEffect, useState } from 'react';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import gsap from 'gsap';
-import SignalModal from '../components/signalModal';
-import Sidebar from '../components/sidebar';
-import Navbar from '../components/navbar';
-import EditButtons from '../components/editButtons';
+import SignalModal from '../../components/signalModal';
+import Sidebar from '../../components/sidebar';
+import Navbar from '../../components/navbar';
+import EditButtons from '../../components/editButtons';
 
 function User() {
-    var pid;
+    const searchParams = usePathname()
+    const urlParts = searchParams.split('/');
+
+
+
+    const [pid, setSignalId] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
-        pid = window.location.href.split('=')[1]  
-              console.log(pid);
+        pid = window.location.href.split('=')[1]
+        console.log(pid);
     }, [pid]);
     console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
