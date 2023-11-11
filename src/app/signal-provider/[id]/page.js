@@ -14,7 +14,7 @@ import Subscribe from '../../components/Subscribe'
 import ActiveSignals from '../../components/active'
 import Reviews from '../../components/reviews'
 import About from '../../components/About'
-import '../components/components.css'
+import '../../components/components.css'
 import { useEffect, useState } from 'react';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import gsap from 'gsap';
@@ -22,6 +22,7 @@ import SignalModal from '../../components/signalModal';
 import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
 import EditButtons from '../../components/editButtons';
+import { usePathname } from 'next/navigation';
 
 function User() {
     const searchParams = usePathname()
@@ -29,9 +30,8 @@ function User() {
 
 
 
-    const [pid, setSignalId] = useState(urlParts[urlParts.length - 1]);
+    const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
-        pid = window.location.href.split('=')[1]
         console.log(pid);
     }, [pid]);
     console.log(pid);
