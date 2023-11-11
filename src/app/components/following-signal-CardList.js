@@ -18,7 +18,7 @@ const SignalCardList = () => {
 
     useEffect(() => {
         windowWidth = window.innerWidth;
-        if(!localStorage.getItem('uid')){
+        if (!localStorage.getItem('uid')) {
             setIsSignInButtinShown(true)
         }
     })
@@ -65,8 +65,8 @@ const SignalCardList = () => {
 
 
     },);
-    return (
-        !isSignInButtinShown && <>   <div className='flex flex-col justify-center items-center px-3 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12  webkit-fill-available'>
+    return (<>
+        {!isSignInButtinShown ? <div className='flex flex-col justify-center items-center px-3 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12  webkit-fill-available'>
             <h1 class="text-3xl font-bold mt-6 mb-4 text-gray-800 border-b">{followedSignals.length} Signals Following</h1>
 
             {followedSignals.map((signal) => (
@@ -127,7 +127,7 @@ const SignalCardList = () => {
                     </div>
                 </div>
             ))}
-            
+
             {(dataLoading) && <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
                 <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
                 <p className="text-white ml-2 mt-4" >Loading...</p>
@@ -138,8 +138,8 @@ const SignalCardList = () => {
                 <button className=''>
                     Sign In
                 </button>
-            </div>
-        </>
+            </div>}
+    </>
 
     );
 }
