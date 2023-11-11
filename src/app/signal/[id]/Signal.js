@@ -23,6 +23,7 @@ function Signal() {
 
 
 
+    const [loggedIn, setLoggedIn] = useState(true);
     const [signal, setSignal] = useState({});
     const searchParams = usePathname()
     const urlParts = searchParams.split('/');
@@ -31,6 +32,9 @@ function Signal() {
 
     const [signalId, setSignalId] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
+        if (!localStorage.getItem('uid')) {
+            setLoggedIn(false)
+        }
         setRouterLoading(false)
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -745,11 +749,13 @@ function Signal() {
                                                     }`}
                                                 onClick={handleCommentSubmit}
                                             >
-                                                <img
+                                                {loggedIn && <img
                                                     src={user.profilePicture}
                                                     alt={user.displayName}
                                                     className="w-6 h-6 object-cover rounded-full mr-2"
-                                                />  Comment
+                                                />}
+
+                                                Comment
                                             </button>
                                         </div>
                                     </div>

@@ -6,6 +6,7 @@ import Navbar from '../components/navbar';
 import Sidebar from '../components/sidebar';
 import SignalModal from '../components/signalModal';
 import BottomNavbar from '../components/mobile-bottem-bar';
+import Modal from '../components/signUp-Model.js';
 
 function FollowingSignals() {
 
@@ -22,8 +23,9 @@ function FollowingSignals() {
                         <Sidebar />
                         <SignalCardList />
                     </div>
+                    
                     <BottomNavbar />
-
+                    <Modal />
                 </MyContextProvider>
             </div>
         </div>
