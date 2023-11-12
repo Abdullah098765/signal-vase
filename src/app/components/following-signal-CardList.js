@@ -6,6 +6,7 @@ import GoodBadButtons from './good-bad-buttons.js'
 import "./components.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { useRouter } from 'next/navigation.js';
 
 
 const SignalCardList = () => {
@@ -36,7 +37,7 @@ const SignalCardList = () => {
         }
 
     }, [windowWidth])
-
+    const router = useRouter()
     useEffect(() => {
 
         var myHeaders = new Headers();
@@ -87,7 +88,7 @@ const SignalCardList = () => {
                         Entry: {signal.entry1} | SL: {signal.stopLoss} | TP: {signal.takeProfit1}
                     </p>
 
-                    <div className='flex flex-col md:flex-row justify-between items-center xl:mr-3'>
+                    <div className='flex flex-col md:flex-row  justify-between items-center xl:mr-3 hover:underline cursor-pointer  text-sm' onClick={() => router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)}>
                         <img
                             src={signal.signalProvider.profilePicture}
                             alt={signal.signalProvider.displayName}
