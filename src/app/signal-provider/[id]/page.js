@@ -33,7 +33,10 @@ function User() {
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
         console.log(pid);
-    }, [pid]);
+       if (pid === user._id){
+            window.location
+        }
+    }, [pid, user]);
     console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
     const [user, setUser] = useState();

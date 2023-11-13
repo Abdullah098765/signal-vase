@@ -8,6 +8,7 @@ import SignalCardList from "./components/cardList.js";
 import Modal from "./components/signUp-Model.js";
 import SignalModal from "./components/signalModal.js";
 import BottomNavbar from "./components/mobile-bottem-bar.js";
+import RouterLoading from "./components/routerLoading.js";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { firebaseConfig } from "../../firebaseConfig.js";
@@ -38,6 +39,7 @@ export default function Home() {
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <MyContextProvider>
+        <RouterLoading/>
         <Navbar />
         <div className="flex">
           <Sidebar />

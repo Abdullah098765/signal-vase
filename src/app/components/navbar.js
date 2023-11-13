@@ -94,7 +94,6 @@ const Navbar = () => {
     return (
 
         <>
-            {routerLoading && <div class="loader-line"></div>}
 
             <nav className="bg-gray-900 text-white p-1 hidden md:block">
                 <div className="container ml-4 mx-auto flex justify-between items-center">
@@ -128,7 +127,7 @@ const Navbar = () => {
                             placeholder="Search signals"
                             className="w-120 px-3 py-2 rounded-full pl-10 bg-gray-800 text-gray-100 focus:outline-none focus:bg-gray-700"
                         />
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <div className="absolute inset-y-0 left-0  pl-3 flex items-center pointer-events-none">
                             {/* Search Icon */}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +266,7 @@ const Navbar = () => {
 
                     {
                         !searchVisible && <button
-                            className="text-gray-400 hover:text-gray-100"
+                            className="text-gray-400 hover:text-gray-100 mr-2"
                         >
                             <svg
                                 onClick={toggleSearch}
