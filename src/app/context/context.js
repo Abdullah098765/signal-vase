@@ -91,7 +91,7 @@ export const MyContextProvider = ({ children }) => {
         })
           .then(currentToken => {
             if (currentToken) {
-              fetch('http://localhost:3000/api/store-fcm-token', {
+              fetch('https://signal-hub.vercel.app/api/store-fcm-token', {
                 method: 'POST',
                 body: JSON.stringify({
                   userId: user._id,
