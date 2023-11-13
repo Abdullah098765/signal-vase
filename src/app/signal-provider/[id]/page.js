@@ -34,10 +34,13 @@ function User() {
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
         console.log(pid);
-       if (pid === user._id){
-            window.location
-        }
+
+    if(user._id)  { if (pid === user._id){
+            window.location = "https://signal-hub.vercel.app/profile"
+        }}
+
     }, [pid, user]);
+
     console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
 
