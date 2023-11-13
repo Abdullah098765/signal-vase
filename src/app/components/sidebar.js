@@ -70,7 +70,7 @@ function Sidebar() {
                                     setRouterLoading(true)
 
                                     router.push('/following-signals')
-                                }} className={` ${pathName === '/following-signals' ? 'bg-gray-700 text-indigo-400 ' : 'text-white'} flex justify-start cursor-pointer items-center space-x-6 hover:text-white   hover:bg-gray-700  rounded px-3 py-2 w-full md:w-52`}>
+                                }} className={` ${pathName === '/following-signals' ? 'bg-gray-700 text-indigo-400 ' : 'text-gray-400'} flex justify-start cursor-pointer items-center space-x-6 hover:text-white   hover:bg-gray-700  rounded px-3 py-2 w-full md:w-52`}>
 
                                     <FontAwesomeIcon icon={faClock} width="24" height="24" />
 
