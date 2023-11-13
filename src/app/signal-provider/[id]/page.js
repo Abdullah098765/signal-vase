@@ -28,6 +28,7 @@ function User() {
     const searchParams = usePathname()
     const urlParts = searchParams.split('/');
 
+    const [user, setUser] = useState();
 
 
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
@@ -39,7 +40,6 @@ function User() {
     }, [pid, user]);
     console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
-    const [user, setUser] = useState();
 
 
     const getUser = () => {
