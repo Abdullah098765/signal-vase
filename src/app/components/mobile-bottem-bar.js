@@ -13,7 +13,7 @@ function BottomNavbar() {
     const router = useRouter()
     const pathName = usePathname()
 
-    const { routerLoading } = useMyContext()
+    const { routerLoading, setRouterLoading } = useMyContext()
     useEffect(() => {
         console.log(pathName);
         const handleScroll = () => {
@@ -42,11 +42,13 @@ function BottomNavbar() {
     };
     return (
         <>
+        
             <nav className={`bottomBar bg-gray-900 text-white p-2 flex items-center justify-around fixed bottom-0 left-0 right-0 md:hidden ${visible ? 'bottom-navbar-visible' : 'bottom-navbar-hidden'}`}>
                 {/* Home Icon */}
                 <button
                     className={`text-gray-400  ${activeIcon === '/' ? 'bottam_icon' : ''}`}
                     onClick={() => {
+                        setRouterLoading(true)
                         router.push('/')
                         handleIconClick('/')
                     }}
@@ -59,6 +61,7 @@ function BottomNavbar() {
                     className={`text-gray-400  ${activeIcon === '/following-signals' ? 'bottam_icon' : ''}`}
                     onClick={() => {
                         handleIconClick('/following-signals')
+                        setRouterLoading(true)
                         router.push('/following-signals')
                     }}
                 >
@@ -69,6 +72,7 @@ function BottomNavbar() {
                 <button
                     className={`text-gray-400  ${activeIcon === '/signal_form' ? 'bottam_icon' : ''}`}
                     onClick={() => {
+                        setRouterLoading(true)
                         handleIconClick('/signal_form')
                         router.push('/signal_form')
                     }}
@@ -99,7 +103,6 @@ function BottomNavbar() {
 
                 </button>
             </nav>
-            {routerLoading && <div class="loader-line"></div>}
 
         </>
 

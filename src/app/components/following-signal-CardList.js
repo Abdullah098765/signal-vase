@@ -41,9 +41,8 @@ const SignalCardList = () => {
     useEffect(() => {
 
         var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
-
+   
+        
         var raw = JSON.stringify({
             'userId': user._id
         });
