@@ -32,6 +32,7 @@ self.addEventListener('push', (event) => {
 });
 
 
+
 self.addEventListener('notificationclick', (event) => {
   // console.log('Notification clicked:', event);
 
@@ -45,6 +46,6 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('clickAction')
+    clients.openWindow('/profile')
   );
 });
