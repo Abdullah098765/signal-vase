@@ -38,7 +38,7 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-
+console.log(event);
   // Open the specified URL
   event.waitUntil(
     clients.openWindow('clickAction')  // Use the clickAction from custom data
