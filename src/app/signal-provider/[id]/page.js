@@ -35,11 +35,11 @@ function User() {
     useEffect(() => {
         console.log(pid);
 
-        if (user._id) {
-            if (pid === user._id) {
-                window.location = "https://signal-hub.vercel.app/profile"
-            }
-        }
+        // if (user._id) {
+        //     if (pid === user._id) {
+        //         window.location = "https://signal-hub.vercel.app/profile"
+        //     }
+        // }
 
     }, [pid, user]);
 
