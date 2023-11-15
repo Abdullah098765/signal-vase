@@ -41,6 +41,6 @@ self.addEventListener('notificationclick', (event) => {
   console.log(event);
   // Open the specified URL
   event.waitUntil(
-    clients.openWindow('clickAction')  // Use the clickAction from custom data
+    clients.openWindow(event.notification.data)  // Use the clickAction from custom data
   );
 });
