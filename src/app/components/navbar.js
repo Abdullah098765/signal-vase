@@ -82,7 +82,7 @@ const Navbar = () => {
             // Sign-out successful.
       
 
-            fetch('https://signal-hub.vercel.app/signout', {
+            fetch('https://signal-hub.vercel.app/api/signout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
