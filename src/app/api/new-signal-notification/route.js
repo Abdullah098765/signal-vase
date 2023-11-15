@@ -39,9 +39,8 @@ export async function POST(req, res) {
             const subscribersFCMTokens = []
             signalProvider.Subscribers
                 .map(subscriber => {
-                    if(subscriber.notificationPreferences.inApp){
+                    if (subscriber.notificationPreferences.inApp) {
                         subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
-
                     }
                 })
             console.log(signalProvider.Subscribers);

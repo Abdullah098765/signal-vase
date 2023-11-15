@@ -80,9 +80,22 @@ const Navbar = () => {
     const _signOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-            window.location = 'https://signal-hub.vercel.app/' + pathname
-            localStorage.removeItem('uid')
-            localStorage.removeItem('userId')
+      
+
+            fetch('https://signal-hub.vercel.app/signout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ uid }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location = 'https://signal-hub.vercel.app/' + pathname
+                    localStorage.removeItem('uid')
+                    localStorage.removeItem('userId')
+                })
+                .catch(error => console.error('Error:', error));
         }).catch((error) => {
             // An error happened.
             console.error("Sign-out error:", error);
