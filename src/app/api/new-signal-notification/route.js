@@ -29,19 +29,22 @@ export async function POST(req, res) {
         const signalProvider = await models.User.findById(signal.signalProvider._id).populate('Subscribers', 'notificationPreferences')
         if (signalProvider.Subscribers && signalProvider.Subscribers.length > 0) {
 
-            const subscribersFCMTokens = signalProvider.Subscribers
-                .map(subscriber => subscriber.notificationPreferences?.fcmToken)
-                .filter(fcmToken => typeof fcmToken === 'string' && fcmToken.trim() !== '');
+            // const subscribersFCMTokens = signalProvider.Subscribers
+            //     .map(subscriber => subscriber.notificationPreferences?.fcmToken)
+            //     .filter(fcmToken => typeof fcmToken === 'string' && fcmToken.trim() !== '');
 
-            console.log(subscribersFCMTokens);
+            // console.log(subscribersFCMTokens);
 
             //later
-            // const subscribersFCMTokens = []
-            // signalProvider.Subscribers
-            //     .map(subscriber => {
-            //         subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
-            //     })
-            // console.log(signalProvider.Subscribers);
+            const subscribersFCMTokens = []
+            signalProvider.Subscribers
+                .map(subscriber => {
+                    if(subscriber.notificationPreferences.inApp){
+                        subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
+
+                    }
+                })
+            console.log(signalProvider.Subscribers);
 
 
             // Send notifications to subscribers
