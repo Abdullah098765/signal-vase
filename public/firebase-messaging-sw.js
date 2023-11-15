@@ -15,37 +15,32 @@ if ('serviceWorker' in navigator) {
 // });
 
 
-
 self.addEventListener('push', (event) => {
   const payload = event.data.json();
-  const title = payload.notification.title + "L"
+  const title = payload.notification.title;
   const body = payload.notification.body;
-  // console.log(payload);
+
+  // Retrieve custom data
+  const imageUrl = payload.data.imageUrl;
+  const iconUrl = payload.data.iconUrl;
+  const clickAction = payload.data.clickAction;
+
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
-      image: payload.notification.image
+      icon: iconUrl,  // Set the icon using the custom data
+      image: imageUrl,  // Set the image using the custom data
       // Add more options as needed
     })
-    
   );
 });
 
 
-
 self.addEventListener('notificationclick', (event) => {
-  // console.log('Notification clicked:', event);
-
-  // Log the entire notification object
-  console.log('Notification object:', event.notification);
-
-  // Try accessing click_action directly
-  // const clickAction = event.notification.data.click_action;
-  // console.log('Click Action:', clickAction);
-
   event.notification.close();
 
+  // Open the specified URL
   event.waitUntil(
-    clients.openWindow('/profile')
+    clients.openWindow('clickAction')  // Use the clickAction from custom data
   );
 });
