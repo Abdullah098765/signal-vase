@@ -23,7 +23,7 @@ export async function POST(req, res) {
     // Save the signal to the database
     var _signal = await newsignal.save();
     console.log('signal saved to the database', _signal);
-    await notifySubscribersAboutNewSignal(signalData);
+    await notifySubscribersAboutNewSignal(_signal);
 
     // Send a JSON response with a 200 status code (OK)
     return NextResponse.json(_signal);
@@ -40,8 +40,8 @@ const notifySubscribersAboutNewSignal = async (signalData) => {
     // Make an HTTP request to your notification API
     const notificationApiUrl = 'https://signal-hub.vercel.app/api/new-signal-notification';
     const payload = {
-      signalId: signalData.signalId,
-      signalProviderId: signalData.signalProviderId,
+      signalId: signalData._id,
+      signalProviderId: signalData.signalProvider._id,
     };
 
     await fetch(notificationApiUrl, {
