@@ -33,13 +33,9 @@ function User() {
 
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
-        console.log(pid);
 
-        if (user?._id) {
-            if (pid === user.fireBaseUid) {
-                window.location = "https://signal-hub.vercel.app/profile"
-                console.log(user.fireBaseUid, "user Id");
-            }
+        if (pid === localStorage.getItem(uid)) {
+            window.location = "https://signal-hub.vercel.app/profile"
         }
 
     }, [pid, user]);
