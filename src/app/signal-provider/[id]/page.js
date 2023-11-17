@@ -35,11 +35,11 @@ function User() {
     useEffect(() => {
         console.log(pid);
 
-        // if (user._id) {
-        //     if (pid === user._id) {
-        //         window.location = "https://signal-hub.vercel.app/profile"
-        //     }
-        // }
+        if (user?._id) {
+            if (pid === user._id) {
+                window.location = "https://signal-hub.vercel.app/profile"
+            }
+        }
 
     }, [pid, user]);
 
@@ -169,13 +169,12 @@ function User() {
                                             </svg>
                                         </span>
                                     </div>
-                                    <p class="text-gray-700">{localStorage.getItem('uid')} || {user.fireBaseUid}</p>
+                                    <p class="text-gray-700">{user.fireBaseUid}</p>
                                     <p class="text-sm text-gray-500">Joined at 3/2/2024</p>
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
-                                    {user && (user.fireBaseUid !== localStorage.getItem('uid') && <Subscribe targetUser={user} />)}
-                                    {user && (user.fireBaseUid === localStorage.getItem('uid') && <EditButtons />)}
+                                    {user && (user.fireBaseUid !== localStorage.getItem('uid') ? <Subscribe targetUser={user} /> : <EditButtons />)}
 
                                 </div>
                             </div>
