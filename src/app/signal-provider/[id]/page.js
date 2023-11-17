@@ -38,6 +38,7 @@ function User() {
         if (user?._id) {
             if (pid === user._id) {
                 window.location = "https://signal-hub.vercel.app/profile"
+                console.log(user._id, "user Id");
             }
         }
 
