@@ -150,7 +150,7 @@ function User() {
                 <div className='flex'>
                     <Sidebar />
                     {user ?
-                        <div class="h-full bg-gray-200 p-8">
+                        <div class="h-full bg-gray-200 p-8 w-full">
                             <div class="bg-white rounded-lg shadow-xl p-6 flex flex-col lg:flex-row  xl:flex-row items-center">
                                 <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                                 </div>
@@ -169,12 +169,12 @@ function User() {
                                             </svg>
                                         </span>
                                     </div>
-                                    <p class="text-gray-700">{user.fireBaseUid}</p>
+                                    <p class="text-gray-700">{localStorage.getItem('uid')}</p>
                                     <p class="text-sm text-gray-500">Joined at 3/2/2024</p>
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
-                                    {user && (user.fireBaseUid === localStorage.getItem('uid') ? <Subscribe targetUser={user} /> : <EditButtons />)}
+                                    {user && (user.fireBaseUid !== localStorage.getItem('uid') ? <Subscribe targetUser={user} /> : <EditButtons />)}
 
                                 </div>
                             </div>
