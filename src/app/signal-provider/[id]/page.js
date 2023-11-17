@@ -169,7 +169,7 @@ function User() {
                                             </svg>
                                         </span>
                                     </div>
-                                    <p class="text-gray-700">{localStorage.getItem('uid')}</p>
+                                    <p class="text-gray-700">{localStorage.getItem('uid')} || {user.fireBaseUid}</p>
                                     <p class="text-sm text-gray-500">Joined at 3/2/2024</p>
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
