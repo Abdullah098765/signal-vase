@@ -22,9 +22,10 @@ import SignalModal from '../../components/signalModal';
 import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
 import EditButtons from '../../components/editButtons';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 function User() {
+    const router = useRouter()
     const searchParams = usePathname()
     const urlParts = searchParams.split('/');
 
@@ -34,9 +35,10 @@ function User() {
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
 
-        // if (pid.toLowerCase() === localStorage.getItem('uid').toLowerCase()) {
-        //     window.location = "https://signal-hub.vercel.app/profile"
-        // }
+        if (pid.toLowerCase() === localStorage.getItem('uid').toLowerCase()) {
+            // window.location = "https://signal-hub.vercel.app/profile"
+            router.push('/profile')
+        }
       
         
     }, []);
@@ -166,8 +168,8 @@ function User() {
                                             </svg>
                                         </span>
                                     </div>
-                                    <p class="text-gray-700">{user.fireBaseUid}</p>
-                                    <p class="text-sm text-gray-500">Joined at 3/2/2024</p>
+                                    <p class="text-gray-700">{user.bio}</p>
+                                    <p class="text-sm text-gray-500">Joined at {user.createAt}</p>
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
