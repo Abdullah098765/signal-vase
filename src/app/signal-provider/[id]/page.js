@@ -49,7 +49,6 @@ function User() {
     const getUser = () => {
         var myHeaders = new Headers();
        
-        
 
         var raw = JSON.stringify({
             "uid": pid

@@ -20,52 +20,49 @@ export async function POST(req, res) {
     }
 
     // Handle subscription/unsubscription based on the action
-    if (action === 'subscribe') {
-      // Check if the user is not already subscribed
-      if (!targetUser.Subscribers.includes(userId)) {
-        targetUser.Subscribers.push(userId); // Add the user to the target's subscribers
+ // ... (other code)
 
-        if (userFcm) {
-          targetUser.SubscribersFCMTokens.push(userFcm);
-        }
-        targetUser.save(); // Save changes in targetUser's Subscribers array
-      }
-
-      // Also, add targetUserId to userId's Subscribed array
-      const user = await Schemas.User.findById(userId);
-      if (user) {
-        if (!user.Subscribed.includes(targetUserId)) {
-          user.Subscribed.push(targetUserId); // Add the target user to the user's subscribed list
-          user.save(); // Save changes in user's Subscribed array
-        }
-      }
-    } else if (action === 'unsubscribe') {
-      // Remove the user from the target's subscribers
-      const index = targetUser.Subscribers.indexOf(userId);
-      if (index > -1) {
-        targetUser.Subscribers.splice(index, 1);
-        targetUser.save(); // Save changes in targetUser's Subscribers array
-      }
+if (action === 'subscribe') {
+  if (!targetUser.Subscribers.includes(userId)) {
+      targetUser.Subscribers.push(userId);
 
       if (userFcm) {
-        const index1 = targetUser.SubscribersFCMTokens.indexOf(userFcm);
+          targetUser.SubscribersFCMTokens.push(userFcm);
+      }
+      await targetUser.save(); // Use await to ensure the save operation completes before proceeding
+  }
 
-        if (index1 > -1) {
+  const user = await Schemas.User.findById(userId);
+  if (user && !user.Subscribed.includes(targetUserId)) {
+      user.Subscribed.push(targetUserId);
+      await user.save(); // Use await to ensure the save operation completes before proceeding
+  }
+} else if (action === 'unsubscribe') {
+  const index = targetUser.Subscribers.indexOf(userId);
+  if (index > -1) {
+      targetUser.Subscribers.splice(index, 1);
+      await targetUser.save(); // Use await to ensure the save operation completes before proceeding
+  }
+
+  if (userFcm) {
+      const index1 = targetUser.SubscribersFCMTokens.indexOf(userFcm);
+      if (index1 > -1) {
           targetUser.SubscribersFCMTokens.splice(index1, 1);
-          targetUser.save(); // Save changes in targetUser's Subscribers array
-        }
+          await targetUser.save(); // Use await to ensure the save operation completes before proceeding
       }
+  }
 
-      // Also, remove targetUserId from userId's Subscribed array
-      const user = await Schemas.User.findById(userId);
-      if (user) {
-        const userIndex = user.Subscribed.indexOf(targetUserId);
-        if (userIndex > -1) {
-          user.Subscribed.splice(userIndex, 1); // Remove the target user from the user's subscribed list
-          user.save(); // Save changes in user's Subscribed array
-        }
+  const user = await Schemas.User.findById(userId);
+  if (user) {
+      const userIndex = user.Subscribed.indexOf(targetUserId);
+      if (userIndex > -1) {
+          user.Subscribed.splice(userIndex, 1);
+          await user.save(); // Use await to ensure the save operation completes before proceeding
       }
-    } else {
+  }
+}
+    
+    else {
       return NextResponse.json({ error: 'Invalid action' });
     }
 
