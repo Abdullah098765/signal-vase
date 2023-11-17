@@ -11,7 +11,7 @@ import { MyContextProvider, useMyContext } from '../../context/context';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Subscribe from '../../components/Subscribe';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import BottomNavbar from '../../components/mobile-bottem-bar'
 
@@ -19,7 +19,7 @@ import BottomNavbar from '../../components/mobile-bottem-bar'
 function Signal() {
     const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
-
+const router = useRouter()
 
 
 
@@ -592,7 +592,7 @@ function Signal() {
 
                                 <div className='grid grid-cols-1 gap-4'>
                                     <div className=" border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
-                                        <div className="flex items-center  md:justify-center sm:justify-center ">
+                                        <div className="flex items-center  md:justify-center sm:justify-center hover:underline cursor-pointer "  onClick={() => router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)}>
                                             <img
                                                 className="w-12 h-12 object-cover rounded-full mr-4"
                                                 src={signal.signalProvider.profilePicture}
