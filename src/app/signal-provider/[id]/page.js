@@ -174,7 +174,7 @@ function User() {
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
-                                    {user && (user._id !== localStorage.getItem('userId') ? <Subscribe targetUser={user} /> : <EditButtons />)}
+                                    {user && (user.fireBaseUid !== localStorage.getItem('uid') ? <Subscribe targetUser={user} /> : <EditButtons />)}
 
                                 </div>
                             </div>
