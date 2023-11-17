@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Navbar from "../components/navbar"
-import { MyContextProvider } from '../context/context';
+import { MyContextProvider, useMyContext } from '../context/context';
 import Sidebar from '../components/sidebar';
 import BottomNavbar from '../components/mobile-bottem-bar';
 import Modal from '../components/signUp-Model';
@@ -154,6 +154,18 @@ const CreateSignalForm = () => {
 
     }, [])
 
+    function BackButton(params) {
+        const { setRouterLoading } = useMyContext()
+
+        return <button onClick={() => {
+            setRouterLoading(true)
+
+            router.push('/')
+        }} className="back-button">
+            <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+
+    }
     return (
         <div>
             <MyContextProvider>
@@ -163,13 +175,10 @@ const CreateSignalForm = () => {
                 {!isSignInButtinShown && <div className='flex'>
                     <Sidebar />
                     <section className=" p-6 w-full  bg-white rounded-md shadow-md  ">
-                        <button onClick={() => {
-                            setRouterLoading(true)
+                        <MyContextProvider>
+                            <BackButton />
+                        </MyContextProvider>
 
-                            router.push('/')
-                        }} className="back-button">
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </button>
                         <h1 className="text-xl font-bold text-black capitalize ">Create a New Signal</h1>
                         <form onSubmit={handleSubmit}>
 
