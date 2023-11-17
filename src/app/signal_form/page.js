@@ -8,6 +8,7 @@ import { MyContextProvider } from '../context/context';
 import Sidebar from '../components/sidebar';
 import BottomNavbar from '../components/mobile-bottem-bar';
 import Modal from '../components/signUp-Model';
+import RouterLoading from '@/app/components/routerLoading';
 
 const CreateSignalForm = () => {
 
@@ -157,6 +158,8 @@ const CreateSignalForm = () => {
         <div>
             <MyContextProvider>
                 <Navbar />
+                <RouterLoading />
+
                 {!isSignInButtinShown && <div className='flex'>
                     <Sidebar />
                     <section className=" p-6 w-full  bg-white rounded-md shadow-md  ">
@@ -380,7 +383,7 @@ const CreateSignalForm = () => {
                         Sign In To Create Signal
                     </button>
                 </div>}
-                <Modal/>
+                <Modal />
                 <BottomNavbar />
             </MyContextProvider>
 

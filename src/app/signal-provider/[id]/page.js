@@ -23,6 +23,7 @@ import Sidebar from '../../components/sidebar';
 import Navbar from '../../components/navbar';
 import EditButtons from '../../components/editButtons';
 import { usePathname, useRouter } from 'next/navigation';
+import RouterLoading from '@/app/components/routerLoading';
 
 function User() {
     const router = useRouter()
@@ -48,7 +49,7 @@ function User() {
 
     const getUser = () => {
         var myHeaders = new Headers();
-       
+
 
         var raw = JSON.stringify({
             "uid": pid
@@ -143,6 +144,8 @@ function User() {
     return (
         <div className='w-full'>
             <MyContextProvider>
+                <RouterLoading />
+
                 <Navbar />
 
                 <div className='flex'>

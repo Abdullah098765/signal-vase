@@ -7,6 +7,7 @@ import Sidebar from '../components/sidebar';
 import SignalModal from '../components/signalModal';
 import BottomNavbar from '../components/mobile-bottem-bar';
 import Modal from '../components/signUp-Model.js';
+import RouterLoading from '@/app/components/routerLoading';
 
 function FollowingSignals() {
 
@@ -15,6 +16,8 @@ function FollowingSignals() {
         <div>
             <div>
                 <MyContextProvider>
+            <RouterLoading />
+
                     <Navbar />
 
                     <SignalModal />

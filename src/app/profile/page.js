@@ -7,11 +7,14 @@ import Sidebar from '../components/sidebar';
 import EditProfileModal from '../components/edit-profile-modal';
 import BottomNavbar from '../components/mobile-bottem-bar';
 import Modal from '../components/signUp-Model';
+import RouterLoading from '@/app/components/routerLoading';
 
 const Profile = () => {
     return (
         <div>
             <MyContextProvider>
+            <RouterLoading />
+
                 <Navbar />
 
                 <div className="flex">
