@@ -48,8 +48,8 @@ function User() {
 
     const getUser = () => {
         var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
+       
+        
 
         var raw = JSON.stringify({
             "uid": pid

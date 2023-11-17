@@ -50,7 +50,7 @@ const Subscribe = ({ targetUser }) => {
                 // Handle the error in your application, e.g., show a notification to the user
             }
         } catch (error) {
-            console.error('Error subscribing:', error);
+            console.error('Errorz subscribing:', error);
             // Handle any unexpected errors, e.g., network issues
         }
     }

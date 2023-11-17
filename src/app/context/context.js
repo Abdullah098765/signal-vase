@@ -97,9 +97,8 @@ export const MyContextProvider = ({ children }) => {
                   userId: user._id,
                   fcmToken: currentToken,
                 }),
-                headers: {
-                  'Content-Type': 'application/json',
-                },
+               
+                
               });
               console.log(
                 'Send the token to your server and update the UI if necssary',
