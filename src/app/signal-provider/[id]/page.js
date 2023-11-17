@@ -34,13 +34,13 @@ function User() {
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
 
-        if (pid === localStorage.getItem('uid')) {
-            window.location = "https://signal-hub.vercel.app/profile"
-        }
+        // if (pid.toLowerCase() === localStorage.getItem('uid').toLowerCase()) {
+        //     window.location = "https://signal-hub.vercel.app/profile"
+        // }
+      
+        
+    }, []);
 
-    }, [pid, user]);
-
-    console.log(pid);
     const [isScrolled, setIsScrolled] = useState(1);
 
 
@@ -64,7 +64,7 @@ function User() {
             .then(response => response.text())
             .then(result => {
                 setUser(JSON.parse(result))
-                console.log(user);
+
             })
             .catch(error => console.log('error', error));
 
@@ -108,7 +108,7 @@ function User() {
                 setAllSignals(allSignals)
                 setSignals(JSON.parse(result))
 
-                console.log(allSignals)
+
             })
             .catch(error => console.log('error', error));
 
@@ -171,7 +171,7 @@ function User() {
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
-                                    {user && (user.fireBaseUid !== localStorage.getItem('uid') ? <Subscribe targetUser={user} /> : <EditButtons />)}
+                                    {user && (pid.toLowerCase() !== localStorage.getItem('uid').toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons />)}
 
                                 </div>
                             </div>
