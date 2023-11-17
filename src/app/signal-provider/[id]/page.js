@@ -36,9 +36,9 @@ function User() {
         console.log(pid);
 
         if (user?._id) {
-            if (pid === user._id) {
+            if (pid === user.fireBaseUid) {
                 window.location = "https://signal-hub.vercel.app/profile"
-                console.log(user._id, "user Id");
+                console.log(user.fireBaseUid, "user Id");
             }
         }
 
