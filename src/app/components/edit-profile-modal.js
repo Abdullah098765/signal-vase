@@ -161,7 +161,7 @@ const EditProfileModal = ({ }) => {
                                 <label className="text-gray-600 dark:text-gray-400">Display Name</label>
                                 <input
                                     type="text"
-                                    maxLength={10}
+                                    maxLength={15}
                                     name="displayName"
                                     value={formData.displayName}
                                     onChange={handleChange}

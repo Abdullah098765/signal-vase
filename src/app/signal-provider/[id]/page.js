@@ -39,8 +39,8 @@ function User() {
             // window.location = "https://signal-hub.vercel.app/profile"
             router.push('/profile')
         }
-      
-        
+
+
     }, []);
 
     const [isScrolled, setIsScrolled] = useState(1);
@@ -169,7 +169,8 @@ function User() {
                                         </span>
                                     </div>
                                     <p class="text-gray-700">{user.bio}</p>
-                                    <p class="text-sm text-gray-500">Joined at {user.createAt}</p>
+                                    <p class="text-sm text-gray-500">Joined at {user.registrationDate}</p>
+                                    <p class="text-sm text-gray-500 mt-3">Subscribers {user.Subscribers.length}</p>
                                 </div>
                                 <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
 
