@@ -13,7 +13,7 @@ import Subscribe from '../../components/Subscribe';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { usePathname, useRouter } from 'next/navigation';
 import BottomNavbar from '../../components/mobile-bottem-bar'
-import ShareModal from '@/app/components/ShareModal';
+import ShareModal from '@/app/components/ShareModal.js';
 
 
 function Signal() {
