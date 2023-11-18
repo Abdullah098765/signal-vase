@@ -592,7 +592,10 @@ const router = useRouter()
 
                                 <div className='grid grid-cols-1 gap-4'>
                                     <div className=" border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
-                                        <div className="flex items-center  md:justify-center sm:justify-center hover:underline cursor-pointer "  onClick={() => router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)}>
+                                        <div className="flex items-center  md:justify-center sm:justify-center hover:underline cursor-pointer "  onClick={() => {
+                                            setRouterLoading(true)
+                                            router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)
+                                        }}>
                                             <img
                                                 className="w-12 h-12 object-cover rounded-full mr-4"
                                                 src={signal.signalProvider.profilePicture}
