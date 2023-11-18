@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import './components.css'
 import { useMyContext } from '../context/context';
