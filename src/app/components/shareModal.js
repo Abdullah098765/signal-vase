@@ -5,7 +5,7 @@ import ShareButton from './shareButton.js';
 function ShareModal({ isOpen, onRequestClose, id, title }) {
 
     const [copySuccess, setCopySuccess] = useState(false);
-    const url = {`https://signal-hub.vercel.app/signal/${id}`}
+    const url = `https://signal-hub.vercel.app/signal/${id}`
 
 const copyToClipboard = () => {
     navigator.clipboard.writeText(url);
