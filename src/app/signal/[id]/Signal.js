@@ -655,13 +655,13 @@ function Signal() {
                                     className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
                                     onClick={openModal}
                                 >
-                                     Share <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
+                                     Share 
                                 </button>
 
                                 <ShareModal
                                     isOpen={isShareModalOpen}
                                     onRequestClose={closeModal}
-                                    idd={signal._id}
+                                    id={signal._id}
                                     title={signal.pair}
                                 />
                                 {!following ?
