@@ -2,7 +2,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsUp, faThumbsDown, faPerson } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsUp, faThumbsDown, faPerson, faShare } from '@fortawesome/free-solid-svg-icons';
 import { formatDistanceToNow } from 'date-fns';
 //  import '../../components/c'
 import { useCountdown } from '../..//components/countDown-timer';
@@ -12,14 +12,14 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import Subscribe from '../../components/Subscribe';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { usePathname, useRouter } from 'next/navigation';
-
 import BottomNavbar from '../../components/mobile-bottem-bar'
+import ShareModal from '@/app/components/ShareModal';
 
 
 function Signal() {
     const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
-const router = useRouter()
+    const router = useRouter()
 
 
 
@@ -37,8 +37,8 @@ const router = useRouter()
         }
         setRouterLoading(false)
         var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
+        // myHeaders.append("a", "dni");
+        // myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
             "signalId": signalId
@@ -394,6 +394,15 @@ const router = useRouter()
 
     //     </div>)
 
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsShareModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsShareModalOpen(false);
+    };
 
     return (
 
@@ -592,7 +601,7 @@ const router = useRouter()
 
                                 <div className='grid grid-cols-1 gap-4'>
                                     <div className=" border rounded p-4 flex flex-col lg:flex-row lg:justify-between xl:justify-between items-center">
-                                        <div className="flex items-center  md:justify-center sm:justify-center hover:underline cursor-pointer "  onClick={() => {
+                                        <div className="flex items-center  md:justify-center sm:justify-center hover:underline cursor-pointer " onClick={() => {
                                             setRouterLoading(true)
                                             router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)
                                         }}>
@@ -619,7 +628,11 @@ const router = useRouter()
                                             </div>
                                         </div>
                                         <div className='flex items-center lg:mt-0'>
-                                            {signal.signalProvider._id !== user._id ? <Subscribe targetUser={signal.signalProvider} /> : <button onClick={() => window.location.href = 'profile'} class="flex items-center bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                                            {signal.signalProvider._id !== user._id ? <Subscribe targetUser={signal.signalProvider} /> : <button onClick={() => {
+                                                setRouterLoading(true)
+                                                router.push('/profile')
+
+                                            }} class="flex items-center bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                                                 <FontAwesomeIcon icon={faUser} />
                                                 <span>    Go To Profile</span>
                                             </button>
@@ -632,7 +645,25 @@ const router = useRouter()
                         </div>
                         {/* Action button */}
                         <div class="flex-1 w-full bg-white rounded-lg shadow-xl mt-4 md:p-8 p-4">
+
                             <div className="mt-4 flex justify-end space-x-2">
+                                {/* <ShareButton
+                                    url={`https://signal-hub.vercel.app/signal/${signal._id}`}
+                                    description={`Check out this trading signal: ${signal.pair}`}
+                                /> */}
+                                <button
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                                    onClick={openModal}
+                                >
+                                     Share <FontAwesomeIcon icon={faShare}></FontAwesomeIcon>
+                                </button>
+
+                                <ShareModal
+                                    isOpen={isShareModalOpen}
+                                    onRequestClose={closeModal}
+                                    idd={signal._id}
+                                    title={signal.pair}
+                                />
                                 {!following ?
                                     < button onClick={
                                         () => {
