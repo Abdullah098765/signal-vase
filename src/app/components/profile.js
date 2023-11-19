@@ -124,7 +124,7 @@ function User() {
     };
     const pathName = usePathname()
 
-      function ShareIcon(params) {
+    function ShareIcon(params) {
         return ( <div
             className=" text-gray-600 cursor-pointer ml-2 mtinsm  block md:hidden rounded-md hover:text-gray-800 focus:outline-none"
             onClick={openModal}
