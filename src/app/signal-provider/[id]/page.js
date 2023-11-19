@@ -37,9 +37,11 @@ function User() {
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
 
-        if (pid.toLowerCase() === localStorage.getItem('uid').toLowerCase()) {
-            // window.location = "https://signal-hub.vercel.app/profile"
-            router.push('/profile')
+        if (localStorage.getItem('uid')) {
+            if (pid.toLowerCase() === localStorage.getItem('uid').toLowerCase()) {
+                // window.location = "https://signal-hub.vercel.app/profile"
+                router.push('/profile')
+            }
         }
 
 
