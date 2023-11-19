@@ -157,6 +157,7 @@ function User() {
                                 onRequestClose={closeModal}
                                 id={user.fireBaseUid}
                                 title={user.displayName}
+                                isSignal={false} 
                                 url = {window.location.host + '/signal-provider/' + user.fireBaseUid}
 
                             />

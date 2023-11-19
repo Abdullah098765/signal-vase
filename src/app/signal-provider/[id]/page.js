@@ -1,7 +1,7 @@
 'use client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MyContextProvider, useMyContext } from '../../context/context';
-import { faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart } from '@fortawesome/free-solid-svg-icons';
+import { faChartArea, faChartLine, faCheck, faClose, faCross, faLineChart, faShareAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBarChart, faChartBar } from '@fortawesome/free-regular-svg-icons';
 import Career from '../../components/creer'
 import AllSignals from '../../components/all'
@@ -194,15 +194,16 @@ function User() {
                                         onRequestClose={closeModal}
                                         id={user.fireBaseUid}
                                         title={user.displayName}
+                                        isSignal={false} 
                                         url={window.location.host + '/signal-provider/' + user.fireBaseUid}
 
                                     />
-                                    <button
-                                        className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                                    <div
+                                        className=" text-gray-600 cursor-pointer rounded-md hover:text-gray-800 focus:outline-none"
                                         onClick={openModal}
                                     >
-                                        Share
-                                    </button>
+                                        <FontAwesomeIcon icon={faShareAlt}/>
+                                    </div>
 
                                     {user && (pid.toLowerCase() !== localStorage.getItem('uid')?.toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons />)}
 

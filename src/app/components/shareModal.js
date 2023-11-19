@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import ShareButton from './shareButton.js';
 import "./components.css"
-function ShareModal({ isOpen, onRequestClose, id, title, url }) {
+function ShareModal({ isOpen, onRequestClose, id, title, url, isSignal }) {
 
     const [copySuccess, setCopySuccess] = useState(false);
 
@@ -17,7 +17,7 @@ function ShareModal({ isOpen, onRequestClose, id, title, url }) {
             <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
 
             <div className="bg-white w-96 relative z-10  mx-auto  mt-20 p-6 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold mb-4">Share this Signal</h2>
+            <h2 className="text-2xl font-bold mb-4">Share this {isSignal ? 'Signal' : 'Provider'}</h2>
 
                 {/* Share Buttons */}
                 <ShareButton
