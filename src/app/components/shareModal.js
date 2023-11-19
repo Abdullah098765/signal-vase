@@ -1,7 +1,7 @@
 // ShareModal.js
 import React, { useState } from 'react';
 import ShareButton from './shareButton.js';
-import "./comp"
+import "./components.css"
 function ShareModal({ isOpen, onRequestClose, id, title }) {
 
     const [copySuccess, setCopySuccess] = useState(false);
