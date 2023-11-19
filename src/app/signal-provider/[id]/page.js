@@ -317,7 +317,7 @@ function User() {
                                                     <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
-                                                    <span class="font-bold w-24">Mobile:</span>
+                                                    <span class="font-bold w-24">JAGJ:</span>
                                                     <span class="text-gray-700">(123) 123-1234</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
