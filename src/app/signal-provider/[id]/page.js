@@ -24,6 +24,7 @@ import Navbar from '../../components/navbar';
 import EditButtons from '../../components/editButtons';
 import { usePathname, useRouter } from 'next/navigation';
 import RouterLoading from '@/app/components/routerLoading';
+import ShareModal from '@/app/components/shareModal';
 
 function User() {
     const router = useRouter()

@@ -19,7 +19,7 @@ import './components.css'
 import { useEffect, useState } from 'react';
 import SignalsPieChart from './career-chart';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'; // Import the ScrollToPlugin
-
+import ShareModal from "./shareModal.js"
 import gsap from 'gsap';
 import SignalModal from './signalModal';
 import EditProfileModal from './edit-profile-modal';
