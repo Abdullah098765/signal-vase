@@ -306,11 +306,11 @@ function User() {
                                             <ul class="mt-2 text-gray-700">
                                                 <li class="flex border-y py-2">
                                                     <span class="font-bold w-24">Full name:</span>
-                                                    <span class="text-gray-700">KHS S. Ross</span>
+                                                    <span class="text-gray-700">KHS S. KHA</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
                                                     <span class="font-bold w-24">Birthday:</span>
-                                                    <span class="text-gray-700">24 Jul, 1991</span>
+                                                    <span class="text-gray-700">5 Jul, 1991</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
                                                     <span class="font-bold w-24">Joined:</span>
