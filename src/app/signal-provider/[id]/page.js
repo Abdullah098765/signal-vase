@@ -157,7 +157,7 @@ function User() {
         <div className='w-full'>
             <MyContextProvider>
                 <RouterLoading />
-                <Modal/>
+                <Modal />
 
                 <Navbar />
 
@@ -194,7 +194,7 @@ function User() {
                                         onRequestClose={closeModal}
                                         id={user.fireBaseUid}
                                         title={user.displayName}
-                                        isSignal={false} 
+                                        isSignal={false}
                                         url={window.location.host + '/signal-provider/' + user.fireBaseUid}
 
                                     />
@@ -202,7 +202,9 @@ function User() {
                                         className=" text-gray-600 cursor-pointer rounded-md hover:text-gray-800 focus:outline-none"
                                         onClick={openModal}
                                     >
-                                        <FontAwesomeIcon icon={faShareAlt}/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24">
+                                            <path d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z"></path>
+                                        </svg>
                                     </div>
 
                                     {user && (pid.toLowerCase() !== localStorage.getItem('uid')?.toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons />)}
