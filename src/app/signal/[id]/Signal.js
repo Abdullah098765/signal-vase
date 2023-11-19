@@ -647,16 +647,9 @@ function Signal() {
                         <div class="flex-1 w-full bg-white rounded-lg shadow-xl mt-4 md:p-8 p-4">
 
                             <div className="mt-4 flex justify-end space-x-2">
-                                {/* <ShareButton
-                                    url={`https://signal-hub.vercel.app/signal/${signal._id}`}
-                                    description={`Check out this trading signal: ${signal.pair}`}
-                                /> */}
-                                <button
-                                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
-                                    onClick={openModal}
-                                >
-                                     Share 
-                                </button>
+
+
+
 
                                 <ShareModal
                                     isOpen={isShareModalOpen}
@@ -689,7 +682,12 @@ function Signal() {
                                     </button>
 
                                 }
-
+                                <button
+                                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                                    onClick={openModal}
+                                >
+                                    Share
+                                </button>
                                 <div className="bg-gray-700 text-white px-4 py-2 rounded-full text-sm">
                                     <div className="flex items-center">
                                         {/* Thumbs Up Icon */}

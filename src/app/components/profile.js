@@ -112,12 +112,21 @@ function User() {
             }
         }
     };
+    const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsShareModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsShareModalOpen(false);
+    };
 
     return (<>
         <div className='w-full'>
 
             {user.displayName &&
-                <div class="h-full bg-gray-200 md:p-8 p-4">
+                <div class="h-full bg-gray-200 md:p-8 p-4 w-full">
                     <div class="bg-white rounded-lg shadow-xl p-6 flex flex-col lg:flex-row  xl:flex-row items-center">
                         <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                         </div>
@@ -147,6 +156,19 @@ function User() {
                                 {user && <EditProfileModal />}
 
                             </MyContextProvider>
+
+                            <ShareModal
+                                isOpen={isShareModalOpen}
+                                onRequestClose={closeModal}
+                                id={user.fireBaseUid}
+                                title={user.displayName}
+                            />
+                            <button
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+                                onClick={openModal}
+                            >
+                                Share
+                            </button>
 
                         </div>
                     </div>
