@@ -306,7 +306,7 @@ function User() {
                                             <ul class="mt-2 text-gray-700">
                                                 <li class="flex border-y py-2">
                                                     <span class="font-bold w-24">Full name:</span>
-                                                    <span class="text-gray-700">Amanda S. Ross</span>
+                                                    <span class="text-gray-700">KHS S. Ross</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
                                                     <span class="font-bold w-24">Birthday:</span>
@@ -314,7 +314,7 @@ function User() {
                                                 </li>
                                                 <li class="flex border-b py-2">
                                                     <span class="font-bold w-24">Joined:</span>
-                                                    <span class="text-gray-700">10 Jan 2022 (25 days ago)</span>
+                                                    <span class="text-gray-700"> Jan 2022 (25 days ago)</span>
                                                 </li>
                                                 <li class="flex border-b py-2">
                                                     <span class="font-bold w-24">Mobile:</span>
@@ -370,7 +370,7 @@ function User() {
                         </div> : 
                         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
                             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-                            <p className="text-white mt-4">Loading....</p>
+                            <p className="text-white mt-4">Loading...</p>
                         </div>
                     }</div>
 
