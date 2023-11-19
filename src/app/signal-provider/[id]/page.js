@@ -202,7 +202,7 @@ function User() {
                                         Share
                                     </button>
 
-                                    {user && (pid.toLowerCase() !== localStorage.getItem('uid').toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons />)}
+                                    {(user && localStorage.getItem('uid')) && (pid.toLowerCase() !== localStorage.getItem('uid').toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons />)}
 
                                 </div>
                             </div>
