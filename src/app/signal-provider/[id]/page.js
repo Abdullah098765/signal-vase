@@ -156,6 +156,7 @@ function User() {
         <div className='w-full'>
             <MyContextProvider>
                 <RouterLoading />
+                <Modal />
 
                 <Navbar />
 
