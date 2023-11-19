@@ -656,6 +656,8 @@ function Signal() {
                                     onRequestClose={closeModal}
                                     id={signal._id}
                                     title={signal.pair}
+                                    url={window.location.host + '/signal/' + signal._id}
+
                                 />
                                 {!following ?
                                     < button onClick={

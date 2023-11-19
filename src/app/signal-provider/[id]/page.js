@@ -160,8 +160,8 @@ function User() {
                 <div className='flex'>
                     <Sidebar />
                     {user ?
-                <div class="h-full bg-gray-200 md:p-8 p-4 w-full">
-                            
+                        <div class="h-full bg-gray-200 md:p-8 p-4 w-full">
+
                             <div class="bg-white rounded-lg shadow-xl p-6 flex flex-col lg:flex-row  xl:flex-row items-center">
                                 <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                                 </div>
@@ -190,6 +190,8 @@ function User() {
                                         onRequestClose={closeModal}
                                         id={user.fireBaseUid}
                                         title={user.displayName}
+                                        url={window.location.host + '/signal-provider/' + user.fireBaseUid}
+
                                     />
                                     <button
                                         className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"

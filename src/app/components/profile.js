@@ -23,6 +23,7 @@ import ShareModal from "./shareModal.js"
 import gsap from 'gsap';
 import SignalModal from './signalModal';
 import EditProfileModal from './edit-profile-modal';
+import { usePathname } from 'next/navigation';
 
 function User() {
 
@@ -121,7 +122,7 @@ function User() {
     const closeModal = () => {
         setIsShareModalOpen(false);
     };
-
+    const pathName = usePathname()
     return (<>
         <div className='w-full'>
 
@@ -151,17 +152,13 @@ function User() {
 
                         </div>
                         <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8">
-                            <MyContextProvider>
-                                <EditButtons />
-                                {user && <EditProfileModal />}
-
-                            </MyContextProvider>
-
                             <ShareModal
                                 isOpen={isShareModalOpen}
                                 onRequestClose={closeModal}
                                 id={user.fireBaseUid}
                                 title={user.displayName}
+                                url = {window.location.host + '/signal-provider/' + user.fireBaseUid}
+
                             />
                             <button
                                 className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
@@ -169,6 +166,13 @@ function User() {
                             >
                                 Share
                             </button>
+                            <MyContextProvider>
+                                <EditButtons />
+                                {user && <EditProfileModal />}
+
+                            </MyContextProvider>
+
+
 
                         </div>
                     </div>

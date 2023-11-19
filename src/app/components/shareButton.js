@@ -19,8 +19,7 @@ import {
   TelegramIcon,  // Add TelegramIcon
 } from 'react-share';
 
-function ShareButton({ description }) {
-  const url = window.location.href;
+function ShareButton({ description, url }) {
 
   return (
     <>
