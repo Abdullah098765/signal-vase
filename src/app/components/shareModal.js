@@ -14,8 +14,8 @@ const copyToClipboard = () => {
 
 
 return (
-    <div className={`fixed m-0 inset-0 z-50 ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="absolute inset-0 bg-gray-900 m-0 opacity-50"></div>
+    <div className={`${isOpen ? 'block' : 'hidden'} fixed inset-0 flex items-baseline justify-center z-50`}>
+            <div className="modal-overlay fixed inset-0 bg-black opacity-50"></div>
 
         <div className="bg-white w-96 relative z-10  mx-auto  mt-20 p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold mb-4">Share this Signal</h2>
