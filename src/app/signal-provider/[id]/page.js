@@ -25,6 +25,7 @@ import EditButtons from '../../components/editButtons';
 import { usePathname, useRouter } from 'next/navigation';
 import RouterLoading from '@/app/components/routerLoading';
 import ShareModal from '@/app/components/shareModal';
+import Modal from '@/app/components/signUp-Model';
 
 function User() {
     const router = useRouter()
@@ -156,7 +157,7 @@ function User() {
         <div className='w-full'>
             <MyContextProvider>
                 <RouterLoading />
-                <Modal />
+                <Modal/>
 
                 <Navbar />
 
