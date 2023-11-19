@@ -242,6 +242,9 @@
   margin-top: 0px;
   margin-top: 5px;
 }
+.mtinsm{
+  margin-top: 6px;
+}
 @media screen and (min-width: 390px) {
   .col-buttons {
     display: flex;
@@ -254,6 +257,10 @@
     margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); */
     margin-top: 0px;
     margin-left: 10px;
+  }
+  .mtinsm{
+  margin-top: 0px;
+
   }
 }
 .loader-line {
