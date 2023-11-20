@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 
-const Subscribe = ({ targetUser, openModal,ShareIcon }) => {
+const Subscribe = ({ targetUser, openModal }) => {
 
     const [subscribed, setSubscribed] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -115,7 +115,6 @@ const Subscribe = ({ targetUser, openModal,ShareIcon }) => {
                     </svg>
                     <button class="whitespace-nowrap">Write a Review</button>
                 </button>
-                <ShareIcon/>
 
             </div>
 

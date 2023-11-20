@@ -244,6 +244,8 @@
 }
 .mtinsm{
   margin-top: 6px;
+  
+
 }
 @media screen and (min-width: 390px) {
   .col-buttons {
@@ -259,7 +261,8 @@
     margin-left: 10px;
   }
   .mtinsm{
-  margin-top: 0px;
+  margin-top: 6px;
+  margin-left: -30px;
 
   }
 }

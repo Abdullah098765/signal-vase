@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useMyContext } from '../context/context';
 import { useRouter } from 'next/navigation';
 
-const EditButtons = ({ShareIcon}) => {
+const EditButtons = ({}) => {
     const { isEditModalOpen, setRouterLoading, setIsEditModalOpen, user } = useMyContext()
 
     const router = useRouter()
@@ -27,7 +27,6 @@ const EditButtons = ({ShareIcon}) => {
                 <FontAwesomeIcon icon={faEdit} />
                 <button class="whitespace-nowrap">Edit Profile</button>
             </button>
-           <ShareIcon/>
         </div>
 
     );
