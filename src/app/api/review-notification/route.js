@@ -29,7 +29,7 @@ export async function POST(req, res) {
 
         // Retrieve the signal provider information
 
-        if (provider.notificationPreferences.inApp && (provider.profilePicture !== reviewData.rProfilePicture)) {
+        if (provider.notificationPreferences.inApp) {
             // Send notification to the specific signal provider
             const notificationPayload = {
                 title: reviewData.rDisplayName,
