@@ -45,7 +45,7 @@ const Reviews = ({ providerId, loggedIn }) => {
         };
 
         // Assume you have an API endpoint to handle reviews similar to the comment section
-        const apiUrl = 'http://localhost:3000/api/review';
+        const apiUrl = 'https://signal-hub.vercel.app/api/review';
         const requestBody = { reviewData, providerId };
 
         try {
