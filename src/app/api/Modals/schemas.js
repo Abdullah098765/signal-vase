@@ -105,8 +105,29 @@ const userSchema = new mongoose.Schema({
   ],
   reviews: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Review', // If you have a Review schema.
+      rFireBaseUid: {
+        type: String,
+        // required: true,
+      },
+      rProfilePicture: {
+        type: String,
+        // required: true,
+      },
+      rDisplayName: {
+        type: String,
+        // required: true,
+      },
+      text: {
+        type: String,
+        // required: true,
+      },
+      image: {
+        type: String, // Assuming you want to store the URL of the image
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
 
