@@ -11,7 +11,6 @@ export default function CommentSection({ signal, user, loggedIn }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-
         console.log(signal.comments);
     }, [])
 
@@ -58,7 +57,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
         const requestBody = { commentData, signalId };
 
         try {
-            const response = await fetch('http://localhost:3000/api/comment', {
+            const response = await fetch('https://signal-hub.vercel.app/api/comment', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

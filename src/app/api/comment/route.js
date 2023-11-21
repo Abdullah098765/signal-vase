@@ -4,6 +4,27 @@ import connectDB from '../db.js';
 
 connectDB();
 
+async function sendNotification(signalId, commentData) {
+    try {
+        const response = await fetch('https://signal-hub.vercel.app/comment-notification', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ commentData, signalId }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
 export async function PUT(req, res) {
     try {
         const Data = await req.json();
@@ -17,7 +38,7 @@ export async function PUT(req, res) {
             { $push: { comments: commentData } },
             { new: true }
         );
-
+        sendNotification(signalId, commentData)
         return NextResponse.json({ message: 'Comment added successfully', updatedSignal });
     } catch (error) {
         console.error('Error saving Comment:', error);

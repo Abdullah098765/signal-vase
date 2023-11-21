@@ -223,15 +223,15 @@ const signalSchema = new mongoose.Schema({
     {
       cProfilePicture: {
         type: String,
-        required: true,
+        // required: true,
       },
       cDisplayName: {
         type: String,
-        required: true,
+        // required: true,
       },
       text: {
         type: String,
-        required: true,
+        // required: true,
       },
       image: {
         type: String, // Assuming you want to store the URL of the image
