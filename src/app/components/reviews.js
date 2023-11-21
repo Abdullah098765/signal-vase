@@ -21,6 +21,27 @@ const Reviews = ({ provider, loggedIn }) => {
             setIlligible(false)
         }
     }, [user, provider])
+
+    async function sendNotification(providerId, reviewData) {
+        try {
+            const response = await fetch('https://signal-hub.vercel.app/api/review-notification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ reviewData, providerId }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     const handleSelectImage = async (e) => {
         setImageLoading(true);
         const selectedFile = e.target.files[0];
@@ -67,6 +88,7 @@ const Reviews = ({ provider, loggedIn }) => {
                 setReviews([...reviews, reviewData]); // Update reviews state
                 setLoading(false);
                 console.log('submitted');
+                sendNotification(provider._id, reviewData)
                 // Add any additional logic you need here, e.g., sending notifications
             } else {
                 console.error('Error submitting review:', response.statusText);
@@ -163,7 +185,7 @@ const Reviews = ({ provider, loggedIn }) => {
                                 if (localStorage.getItem('uid')) {
 
                                     // if (illigible) {
-                                        handleReviewSubmit();
+                                    handleReviewSubmit();
                                     // }
                                     // else alert ("Only Subscribers Can review")
 
