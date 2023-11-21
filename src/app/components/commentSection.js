@@ -116,9 +116,12 @@ export default function CommentSection({ signal, user, loggedIn }) {
                         {comment.image && (
                             <div className="mt-2">
                                 <img
+                                    onClick={() => {
+                                        window.open(comment.image)
+                                    }}
                                     src={comment.image}
                                     alt={`Comment Image by ${comment.image}`}
-                                    className="w-24 h-24 object-cover rounded"
+                                    className="w-24 h-24 cursor-pointer hover:opacity-5 object-cover rounded"
                                 />
                             </div>
                         )}
