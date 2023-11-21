@@ -20,7 +20,12 @@ export async function POST(req, res) {
         const { signalId, commentData } = await req.json();
 
         // Retrieve the signal information from the database
-        const signal = await models.Signal.findById(signalId).populate('signalProvider', 'notificationPreferences');
+        const signal = await models.Signal.findById(signalId)
+            .populate({
+                path: 'signalProvider',
+                select: 'notificationPreferences profilePicture',
+            })
+            .exec();
 
         if (!signal) {
             return NextResponse.json({ error: 'Signal not found' });
@@ -29,7 +34,7 @@ export async function POST(req, res) {
         // Retrieve the signal provider information
         const signalProvider = signal.signalProvider;
 
-        if (signalProvider.notificationPreferences.inApp) {
+        if (signalProvider.notificationPreferences.inApp && (signalProvider.profilePicture !== commentData.cProfilePicture)) {
             // Send notification to the specific signal provider
             const notificationPayload = {
                 title: commentData.cDisplayName,
