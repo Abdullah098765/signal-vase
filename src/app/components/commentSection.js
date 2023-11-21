@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { formatDistanceToNow } from 'date-fns';
+import { useRouter } from 'next/navigation';
+import { useMyContext } from '../context/context';
 
 export default function CommentSection({ signal, user, loggedIn }) {
     const [comments, setComments] = useState(signal.comments)
@@ -40,11 +42,34 @@ export default function CommentSection({ signal, user, loggedIn }) {
             // You can use this URL to display the image in your comments or store it in your database.
         }
     };
+    const { setRouterLoading} = useMyContext();
+
+    async function sendNotification(signalId, commentData) {
+        try {
+            const response = await fetch('http://localhost:3000/api/comment-notification', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ commentData, signalId }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log(result);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     const handleCommentSubmit = async () => {
         setLoading(true)
         // Implement your comment submission logic here
 
         const commentData = {
+            cFireBaseUid: user.fireBaseUid,
             text: newComment,
             image: imageUrl, // You can send the image data or URL here
             cDisplayName: user.displayName,
@@ -57,7 +82,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
         const requestBody = { commentData, signalId };
 
         try {
-            const response = await fetch('https://signal-hub.vercel.app/api/comment', {
+            const response = await fetch('http://localhost:3000/api/comment', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,6 +93,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
             if (response.ok) {
                 console.log('Comment submitted successfully');
                 setLoading(false)
+                sendNotification(signalId, commentData)
                 comments.push(commentData)
             } else {
                 console.error('Error submitting comment:', response.statusText);
@@ -81,7 +107,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
         setImageUrl(undefined);
         console.log(commentData);
     };
-
+    const router = useRouter()
     return (
         <div>
             <div
@@ -93,7 +119,11 @@ export default function CommentSection({ signal, user, loggedIn }) {
                 <h3 className="text-lg font-semibold mb-2 text-black">{comments.length} Comments</h3>
                 {comments.map((comment, index) => (
                     <div key={index} className="mb-4">
-                        <div className="flex items-center text-sm">
+                        <div onClick={() => {
+                            setRouterLoading(true)
+
+                            comment.cFireBaseUid &&    router.push('/signal-provider/' + comment.cFireBaseUid)
+                        }} className="flex items-center cursor-pointer hover:underline text-sm">
                             {comment.cProfilePicture && (
                                 <img
                                     src={comment.cProfilePicture}

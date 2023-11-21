@@ -221,6 +221,10 @@ const signalSchema = new mongoose.Schema({
   // Comments on the signal
   comments: [
     {
+      cFireBaseUid: {
+        type: String,
+        // required: true,
+      },
       cProfilePicture: {
         type: String,
         // required: true,
