@@ -291,7 +291,7 @@ function User() {
                             {currentprofileRoute === 'Bad' && <BadSignals badSignals={Signals.badSignals} />}
                             {currentprofileRoute === 'Crypto' && <CryptoSignals cryptoSignals={cryptoSignals} />}
                             {currentprofileRoute === 'Forex' && <ForexSignals forexSignals={forexSignals} />}
-                            {currentprofileRoute === 'Reviews' && <Reviews />}
+                            {currentprofileRoute === 'Reviews' && <Reviews providerId={user}  />}
                             {currentprofileRoute === 'About' && <About />}
                             <SignalModal />
 

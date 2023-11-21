@@ -42,7 +42,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
             // You can use this URL to display the image in your comments or store it in your database.
         }
     };
-    const { setRouterLoading} = useMyContext();
+    const { setRouterLoading } = useMyContext();
 
     async function sendNotification(signalId, commentData) {
         try {
@@ -94,7 +94,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
                 console.log('Comment submitted successfully');
                 setLoading(false)
                 sendNotification(signalId, commentData)
-                comments.push(commentData)
+                setComments([...comments, commentData])
             } else {
                 console.error('Error submitting comment:', response.statusText);
             }
@@ -122,7 +122,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
                         <div onClick={() => {
                             setRouterLoading(true)
 
-                            comment.cFireBaseUid &&    router.push('/signal-provider/' + comment.cFireBaseUid)
+                            comment.cFireBaseUid && router.push('/signal-provider/' + comment.cFireBaseUid)
                         }} className="flex items-center cursor-pointer hover:underline text-sm">
                             {comment.cProfilePicture && (
                                 <img
