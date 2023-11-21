@@ -6,7 +6,7 @@ connectDB();
 
 async function sendNotification(signalId, commentData) {
     try {
-        const response = await fetch('https://signal-hub.vercel.app/comment-notification', {
+        const response = await fetch('https://signal-hub.vercel.app/api/comment-notification', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
