@@ -45,7 +45,7 @@ const Reviews = ({ providerId, loggedIn }) => {
         };
 
         // Assume you have an API endpoint to handle reviews similar to the comment section
-        const apiUrl = 'https://signal-hub.vercel.app/api/review';
+        const apiUrl = 'http://localhost:3000/api/review';
         const requestBody = { reviewData, providerId };
 
         try {
@@ -60,6 +60,7 @@ const Reviews = ({ providerId, loggedIn }) => {
             if (response.ok) {
                 setReviews([...reviews, reviewData]); // Update reviews state
                 setLoading(false);
+                console.log('submitted');
                 // Add any additional logic you need here, e.g., sending notifications
             } else {
                 console.error('Error submitting review:', response.statusText);
