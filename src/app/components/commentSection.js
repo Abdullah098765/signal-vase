@@ -46,7 +46,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
 
     async function sendNotification(signalId, commentData) {
         try {
-            const response = await fetch('http://localhost:3000/api/comment-notification', {
+            const response = await fetch('https://signal-hub.vercel.app/api/comment-notification', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
         const requestBody = { commentData, signalId };
 
         try {
-            const response = await fetch('http://localhost:3000/api/comment', {
+            const response = await fetch('https://signal-hub.vercel.app/api/comment', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
