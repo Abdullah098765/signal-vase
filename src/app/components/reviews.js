@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { faCheck, faImage } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -14,7 +14,13 @@ const Reviews = ({ provider, loggedIn }) => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { user, setIsModalOpen } = useMyContext();
+    const [illigible, setIlligible] = useState(true);
+    useEffect(() => {
 
+        if (!provider.Subscribers.includes(user._id)) {
+            setIlligible(false)
+        }
+    }, [user, provider])
     const handleSelectImage = async (e) => {
         setImageLoading(true);
         const selectedFile = e.target.files[0];
@@ -155,13 +161,17 @@ const Reviews = ({ provider, loggedIn }) => {
                         onClick={() => {
                             if (!loading && newReview !== '') {
                                 if (localStorage.getItem('uid')) {
-                                    handleReviewSubmit();
+
+                                    // if (illigible) {
+                                        handleReviewSubmit();
+                                    // }
+                                    // else alert ("Only Subscribers Can review")
 
                                 }
                                 else setIsModalOpen(true)
                             }
                         }}
-                        disabled={loading || newReview === ''}
+                        disabled={(loading || newReview === '') && provider._id === user._id}
                     >
                         {loading ? (
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
