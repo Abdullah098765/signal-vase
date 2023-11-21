@@ -210,7 +210,7 @@ function User() {
                                         </svg>
                                     </div>
 
-                                    {user && (pid.toLowerCase() !== localStorage.getItem('uid')?.toLowerCase() ? <Subscribe  targetUser={user} /> : <EditButtons openModal={openModal} />)}
+                                    {user && (pid.toLowerCase() !== localStorage.getItem('uid')?.toLowerCase() ? <Subscribe targetUser={user} /> : <EditButtons openModal={openModal} />)}
                                     <div
                                         className=" text-gray-600 cursor-pointer mt-3 mtinsm  block md:hidden rounded-md hover:text-gray-800 focus:outline-none"
                                         onClick={openModal}
@@ -291,10 +291,10 @@ function User() {
                             {currentprofileRoute === 'Bad' && <BadSignals badSignals={Signals.badSignals} />}
                             {currentprofileRoute === 'Crypto' && <CryptoSignals cryptoSignals={cryptoSignals} />}
                             {currentprofileRoute === 'Forex' && <ForexSignals forexSignals={forexSignals} />}
-                            {currentprofileRoute === 'Reviews' && <Reviews providerId={user}  />}
+                            {currentprofileRoute === 'Reviews' && <Reviews provider={user} />}
                             {currentprofileRoute === 'About' && <About />}
                             <SignalModal />
-
+                            <Modal />
 
                             {currentprofileRoute === 'About' &&
                                 <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">

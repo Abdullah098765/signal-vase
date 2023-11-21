@@ -6,14 +6,14 @@ import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/context';
 
-const Reviews = ({ providerId, loggedIn }) => {
-    const [reviews, setReviews] = useState([]);
+const Reviews = ({ provider, loggedIn }) => {
+    const [reviews, setReviews] = useState(provider.reviews);
     const [newReview, setNewReview] = useState('');
     const [imageUrl, setImageUrl] = useState();
     const [imageLoading, setImageLoading] = useState(false);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const { user } = useMyContext();
+    const { user, setIsModalOpen } = useMyContext();
 
     const handleSelectImage = async (e) => {
         setImageLoading(true);
@@ -45,8 +45,8 @@ const Reviews = ({ providerId, loggedIn }) => {
         };
 
         // Assume you have an API endpoint to handle reviews similar to the comment section
-        const apiUrl = 'https://signal-hub.vercel.app/api/review';
-        const requestBody = { reviewData, providerId };
+        const apiUrl = 'http://localhost:3000/api/review';
+        const requestBody = { reviewData, providerId: provider._id };
 
         try {
             const response = await fetch(apiUrl, {
@@ -154,7 +154,11 @@ const Reviews = ({ providerId, loggedIn }) => {
                             }`}
                         onClick={() => {
                             if (!loading && newReview !== '') {
-                                handleReviewSubmit();
+                                if (localStorage.getItem('uid')) {
+                                    handleReviewSubmit();
+
+                                }
+                                else setIsModalOpen(true)
                             }
                         }}
                         disabled={loading || newReview === ''}
@@ -163,7 +167,7 @@ const Reviews = ({ providerId, loggedIn }) => {
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
                         ) : (
                             <>
-                                {loggedIn && (
+                                {localStorage.getItem('uid') && (
                                     <img
                                         src={user.profilePicture}
                                         alt={user.displayName}

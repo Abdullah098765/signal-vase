@@ -17,6 +17,9 @@ export async function PUT(req, res) {
             { $push: { reviews: reviewData } },
             { new: true }
         );
+        if(updatedSignal){
+            console.log("submitterd");
+        }
 
         return NextResponse.json({ message: 'Review added successfully', updatedSignal });
     } catch (error) {
