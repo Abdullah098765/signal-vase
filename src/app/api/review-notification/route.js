@@ -21,8 +21,8 @@ export async function POST(req, res) {
 
         // Retrieve the signal information from the database
         const provider = await models.User.findById(providerId)
-          
-        
+
+
         if (!provider) {
             return NextResponse.json({ error: 'provider not found' });
         }
@@ -33,7 +33,7 @@ export async function POST(req, res) {
             // Send notification to the specific signal provider
             const notificationPayload = {
                 title: reviewData.rDisplayName,
-                body: `Review on your profile `,
+                body: `Review on your profile ` + reviewData.text,
             };
 
             const response = await admin.messaging().send({
@@ -44,7 +44,7 @@ export async function POST(req, res) {
                 },
                 data: {
                     clickAction: '/profile',
-                    iconUrl: commentData.rProfilePicture
+                    iconUrl: reviewData.rProfilePicture
 
                 },
 
