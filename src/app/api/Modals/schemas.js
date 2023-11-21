@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
   SubscribersFCMTokens: [
     {
       type: String,
-      default:null
+      default: null
     },
   ],
   Subscribed: [
@@ -221,13 +221,20 @@ const signalSchema = new mongoose.Schema({
   // Comments on the signal
   comments: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User model
+      cProfilePicture: {
+        type: String,
+        required: true,
+      },
+      cDisplayName: {
+        type: String,
+        required: true,
       },
       text: {
         type: String,
         required: true,
+      },
+      image: {
+        type: String, // Assuming you want to store the URL of the image
       },
       createdAt: {
         type: Date,
