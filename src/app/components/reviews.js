@@ -191,8 +191,8 @@ const Reviews = ({ provider, loggedIn }) => {
                                     // else alert ("Only Subscribers Can review")
 
                                 }
-                                else setIsModalOpen(true)
-                            }
+                                
+                            }else setIsModalOpen(true)
                         }}
                         disabled={(loading || newReview === '')}
                     >
