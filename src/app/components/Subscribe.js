@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 import { usePathname, useRouter } from 'next/navigation';
 
-const Subscribe = ({ targetUser, openModal }) => {
+const Subscribe = ({ setIsCurrentprofileRoute, targetUser, openModal }) => {
 
     const [subscribed, setSubscribed] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
@@ -111,14 +111,18 @@ const Subscribe = ({ targetUser, openModal }) => {
 
                 <button onClick={() => {
                     if (pathname.split('/')[1] === "signal-provider") {
-                        
-                            window.scrollTo({
-                                top: document.body.scrollHeight,
-                                behavior: 'smooth', // You can use 'auto' for instant scroll
-                            });
+                        setIsCurrentprofileRoute("Reviews")
+
+
+                        window.scrollTo({
+                            top: document.body.scrollHeight,
+                            behavior: 'smooth', // You can use 'auto' for instant scroll
+                        });
                     }
-                  else  {router.push("/signal-provider/" + targetUser.fireBaseUid + "?review=true")
-                    setRouterLoading(true)}
+                    else {
+                        router.push("/signal-provider/" + targetUser.fireBaseUid + "?review=true")
+                        setRouterLoading(true)
+                    }
 
                 }} class="flex items-center col_button bg-gray-600 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
