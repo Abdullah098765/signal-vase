@@ -181,8 +181,9 @@ const Reviews = ({ provider, loggedIn }) => {
                         className={`bg-black text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
                             }`}
                         onClick={() => {
-                            if (!loading && newReview !== '') {
-                                if (localStorage.getItem('uid')) {
+                            if (localStorage.getItem('uid')) {
+                                if (!loading && newReview !== '') {
+
 
                                     // if (illigible) {
                                     handleReviewSubmit();
