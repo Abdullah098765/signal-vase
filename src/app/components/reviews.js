@@ -182,7 +182,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             }`}
                         onClick={() => {
                             if (localStorage.getItem('uid')) {
-                                
+
                                 if (!loading && newReview !== '') {
 
 
@@ -192,8 +192,9 @@ const Reviews = ({ provider, loggedIn }) => {
                                     // else alert ("Only Subscribers Can review")
 
                                 }
-                                
-                            } else {
+
+                            }
+                            else if (!localStorage.getItem('uid')) {
                                 setIsModalOpen(true)
                                 console.log('signedout');
                             }
