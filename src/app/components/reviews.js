@@ -102,8 +102,8 @@ const Reviews = ({ provider, loggedIn }) => {
     };
 
     return (
-        <div className='flex-1 bg-white shadow-xl p-8'>
-            <h2 className='text-2xl font-semibold mb-4'>Reviews</h2>
+        <div className='flex-1 bg-white shadow-xl p-4 lg:p-8'>
+            <h2 className='text-2xl font-semibold mb-4'> {reviews.length} Reviews</h2>
             {reviews.map((review, index) => (
                 <div key={index} className='mb-4'>
                     <div

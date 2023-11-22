@@ -168,7 +168,7 @@ const Creer = ({ user }) => {
 
                 </div>
 
-                {goodSignals + badSignals + neutralSignals > 0 &&
+                {(goodSignals.length && goodSignals.length + badSignals.length + neutralSignals.length > 0) &&
                     <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 mt-4">
 
 

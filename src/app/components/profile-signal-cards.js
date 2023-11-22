@@ -1,13 +1,12 @@
-import { formatDistanceToNow } from 'date-fns';
-import React, { useEffect, useState } from 'react';
+import { formatDistanceToNow } from 'date-fns'
+import React from 'react'
 
-
-
-const AllSignals = ({ signals }) => {
-
+export default function ProfileSignalCards({ signals }) {
     return (
-        <div className='flex-1 bg-white  shadow-xl p-8'>
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className='flex-1 bg-white shadow-md lg:shadow-xl lg:p-8 p-0 '>
+            {signals.length === 0 ? (
+                <p className="text-center pt-20 pb-32 text-gray-500">No signals available.</p>
+            ) : <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 ">
                 {signals && signals.map((signal, index) => (
                     <div key={index}>
 
@@ -107,9 +106,7 @@ const AllSignals = ({ signals }) => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
-    );
+    )
 }
-
-export default AllSignals;

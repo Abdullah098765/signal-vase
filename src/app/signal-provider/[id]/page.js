@@ -27,6 +27,7 @@ import RouterLoading from '@/app/components/routerLoading';
 import ShareModal from '@/app/components/shareModal';
 import Modal from '@/app/components/signUp-Model';
 import BottomNavbar from '@/app/components/mobile-bottem-bar';
+import ProfileSignalCards from '../../components/profile-signal-cards';
 
 function User() {
     const router = useRouter()
@@ -107,7 +108,7 @@ function User() {
             redirect: 'follow'
         };
 
-        fetch("https://signal-hub.vercel.app/api/all-user-signals", requestOptions)
+        fetch("http://localhost:3000/api/all-user-signals", requestOptions)
             .then(response => response.text())
             .then(result => {
                 let allSignals = JSON.parse(result).goodSignals.concat(JSON.parse(result).badSignals, JSON.parse(result).neutralSignals);
@@ -284,13 +285,13 @@ function User() {
                             </div>
 
 
-                            {currentprofileRoute === 'All' && <AllSignals allSignals={allSignals} />}
-                            {currentprofileRoute === 'Good' && <GoodSignals goodSignals={Signals.goodSignals} />}
-                            {currentprofileRoute === 'Active' && <ActiveSignals activeSignals={Signals.activeSignals} />}
-                            {currentprofileRoute === 'Neutral' && <NeutralSignals neutralSignals={Signals.neutralSignals} />}
-                            {currentprofileRoute === 'Bad' && <BadSignals badSignals={Signals.badSignals} />}
-                            {currentprofileRoute === 'Crypto' && <CryptoSignals cryptoSignals={cryptoSignals} />}
-                            {currentprofileRoute === 'Forex' && <ForexSignals forexSignals={forexSignals} />}
+                            {currentprofileRoute === 'All' && <ProfileSignalCards signals={allSignals} />}
+                            {currentprofileRoute === 'Good' && <ProfileSignalCards signals={Signals.goodSignals} />}
+                            {currentprofileRoute === 'Active' && <ProfileSignalCards signals={Signals.activeSignals} />}
+                            {currentprofileRoute === 'Neutral' && <ProfileSignalCards signals={Signals.neutralSignals} />}
+                            {currentprofileRoute === 'Bad' && <ProfileSignalCards signals={Signals.badSignals} />}
+                            {currentprofileRoute === 'Crypto' && <ProfileSignalCards signals={cryptoSignals} />}
+                            {currentprofileRoute === 'Forex' && <ProfileSignalCards signals={forexSignals} />}
                             {currentprofileRoute === 'Reviews' && <Reviews provider={user} />}
                             {currentprofileRoute === 'About' && <About />}
                             <SignalModal />

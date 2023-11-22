@@ -24,6 +24,7 @@ import gsap from 'gsap';
 import SignalModal from './signalModal';
 import EditProfileModal from './edit-profile-modal';
 import { usePathname } from 'next/navigation';
+import ProfileSignalCards from './profile-signal-cards.js';
 
 function User() {
 
@@ -179,13 +180,13 @@ function User() {
 
                             </MyContextProvider>
                             <div
-                                        className=" text-gray-600 cursor-pointer mt-3 mtinsm  block md:hidden rounded-md hover:text-gray-800 focus:outline-none"
-                                        onClick={openModal}
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24">
-                                            <path d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z"></path>
-                                        </svg>
-                                    </div>
+                                className=" text-gray-600 cursor-pointer mt-3 mtinsm  block md:hidden rounded-md hover:text-gray-800 focus:outline-none"
+                                onClick={openModal}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24">
+                                    <path d="M 18 2 A 3 3 0 0 0 15 5 A 3 3 0 0 0 15.054688 5.5605469 L 7.9394531 9.7109375 A 3 3 0 0 0 6 9 A 3 3 0 0 0 3 12 A 3 3 0 0 0 6 15 A 3 3 0 0 0 7.9355469 14.287109 L 15.054688 18.439453 A 3 3 0 0 0 15 19 A 3 3 0 0 0 18 22 A 3 3 0 0 0 21 19 A 3 3 0 0 0 18 16 A 3 3 0 0 0 16.0625 16.712891 L 8.9453125 12.560547 A 3 3 0 0 0 9 12 A 3 3 0 0 0 8.9453125 11.439453 L 16.060547 7.2890625 A 3 3 0 0 0 18 8 A 3 3 0 0 0 21 5 A 3 3 0 0 0 18 2 z"></path>
+                                </svg>
+                            </div>
 
 
                         </div>
@@ -254,14 +255,14 @@ function User() {
                     <MyContextProvider>
 
 
-                        {currentprofileRoute === 'All' && <AllSignals allSignals={allSignals} />}
-                        {currentprofileRoute === 'Good' && <GoodSignals goodSignals={Signals.goodSignals} />}
-                        {currentprofileRoute === 'Active' && <ActiveSignals activeSignals={Signals.activeSignals} />}
-                        {currentprofileRoute === 'Neutral' && <NeutralSignals neutralSignals={Signals.neutralSignals} />}
-                        {currentprofileRoute === 'Bad' && <BadSignals badSignals={Signals.badSignals} />}
-                        {currentprofileRoute === 'Crypto' && <CryptoSignals cryptoSignals={cryptoSignals} />}
-                        {currentprofileRoute === 'Forex' && <ForexSignals forexSignals={forexSignals} />}
-                        {currentprofileRoute === 'Reviews' && <Reviews />}
+                        {currentprofileRoute === 'All' && <ProfileSignalCards signals={allSignals} />}
+                        {currentprofileRoute === 'Good' && <ProfileSignalCards signals={Signals.goodSignals} />}
+                        {currentprofileRoute === 'Active' && <ProfileSignalCards signals={Signals.activeSignals} />}
+                        {currentprofileRoute === 'Neutral' && <ProfileSignalCards signals={Signals.neutralSignals} />}
+                        {currentprofileRoute === 'Bad' && <ProfileSignalCards signals={Signals.badSignals} />}
+                        {currentprofileRoute === 'Crypto' && <ProfileSignalCards signals={cryptoSignals} />}
+                        {currentprofileRoute === 'Forex' && <ProfileSignalCards signals={forexSignals} />}
+                        {currentprofileRoute === 'Reviews' && <Reviews provider={user} />}
                         {currentprofileRoute === 'About' && <About />}
                         <SignalModal />
 
