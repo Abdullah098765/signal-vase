@@ -178,7 +178,7 @@ const Reviews = ({ provider, loggedIn }) => {
                         </div>
                     </div>
                     <button
-                        className={`bg-black text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
+                        className={`bg-black cursor-pointer text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
                             }`}
                         onClick={() => {
                             if (localStorage.getItem('uid')) {
