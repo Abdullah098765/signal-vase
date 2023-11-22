@@ -51,7 +51,7 @@ function User() {
                 top: document.body.scrollHeight,
                 behavior: 'smooth', // You can use 'auto' for instant scroll
             });
-          }, 3000);
+          }, 1000);
         }
     }, [currentprofileRoute])
     
