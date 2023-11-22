@@ -182,6 +182,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             }`}
                         onClick={() => {
                             if (localStorage.getItem('uid')) {
+                                
                                 if (!loading && newReview !== '') {
 
 
