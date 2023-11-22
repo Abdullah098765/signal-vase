@@ -192,7 +192,10 @@ const Reviews = ({ provider, loggedIn }) => {
 
                                 }
                                 
-                            }else setIsModalOpen(true)
+                            } else {
+                                setIsModalOpen(true)
+                                console.log('signedout');
+                            }
                         }}
                         disabled={(loading || newReview === '')}
                     >
