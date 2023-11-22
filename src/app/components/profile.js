@@ -46,15 +46,15 @@ function User() {
     useEffect(() => {
         // Scroll to the bottom of the page when isCurrentprofileRoute changes
         if (currentprofileRoute === "Reviews") {
-          setTimeout(() => {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth', // You can use 'auto' for instant scroll
-            });
-          }, 1000);
+            setTimeout(() => {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth', // You can use 'auto' for instant scroll
+                });
+            }, 1000);
         }
     }, [currentprofileRoute])
-    
+
     function handleGetRoute(params) {
         setIsCurrentprofileRoute(params);
     }
@@ -218,7 +218,7 @@ function User() {
                             <div class="bg-white ">
                                 <div className="relative overflow-hidden flex flex-row items-center sm:flex-col sm:items-stretch ">
 
-                                    <ul className="flex scroll-controller lg:flex-row lg:justify-around xl:flex xl:justify-around  justify-start" id="scroll-container">
+                                    <ul className="flex scroll-controller cursor-pointer lg:flex-row lg:justify-around xl:flex xl:justify-around  justify-start" id="scroll-container">
 
                                         <li onClick={() => handleGetRoute('All')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'All' ? 'bg-gray-100' : ''}`}>
                                             All

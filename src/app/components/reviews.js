@@ -138,7 +138,7 @@ const Reviews = ({ provider, loggedIn }) => {
                                 }}
                                 src={review.image}
                                 alt={`Review Image by ${review.image}`}
-                                className='w-24 h-24 cursor-pointer hover:opacity-5 object-cover rounded'
+                                className='w-24 h-24 cursor-pointer hover:opacity-75 object-cover rounded'
                             />
                         </div>
                     )}
@@ -146,7 +146,7 @@ const Reviews = ({ provider, loggedIn }) => {
             ))}
 
             <div className='mt-6'>
-                <div className='flex flex-col items-stretch justify-center'>
+                {provider._id !== user._id && <div className='flex flex-col items-stretch justify-center'>
                     <div className='relative'>
                         <textarea
                             type='text'
@@ -193,7 +193,7 @@ const Reviews = ({ provider, loggedIn }) => {
                                 else setIsModalOpen(true)
                             }
                         }}
-                        disabled={(loading || newReview === '') && provider._id === user._id}
+                        disabled={(loading || newReview === '')}
                     >
                         {loading ? (
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
@@ -210,7 +210,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             </>
                         )}
                     </button>
-                </div>
+                </div>}
             </div>
         </div>
     );
