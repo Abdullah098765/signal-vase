@@ -12,12 +12,12 @@ const Creer = ({ user }) => {
     return (
         <div>
 
-            {user && <div class="flex-1 w-full bg-white rounded-lg shadow-xl mt-4 p-8">
+            {user && <div class="flex-1 w-full bg-white rounded-lg lg:shadow-xl shadow-md mt-4 lg:p-8 p-4">
                 <h4 class="text-xl text-gray-900 font-bold">Careere</h4>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8  mt-4">
 
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-indigo-600">Total Signals</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -42,7 +42,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-green-600">Good Signals</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -62,7 +62,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-slate-600">Neutral Signals</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -86,7 +86,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-red-600">Bad Signals</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -104,7 +104,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-green-600">Active Signals</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -124,7 +124,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    {/* <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    {/* <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-slate-600">Subscriber</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -142,7 +142,7 @@ const Creer = ({ user }) => {
                             </div>
                         </div>
                     </div> */}
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
+                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
                         <div class="flex items-center justify-between">
                             <span class="font-bold text-sm text-slate-600">Reviews</span>
                             <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
@@ -167,18 +167,20 @@ const Creer = ({ user }) => {
 
 
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 mt-4">
+
+                {goodSignals + badSignals + neutralSignals > 0 &&
+                    <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 mt-4">
 
 
-                    <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl flex justify-center">
-                        <div>
+                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md flex justify-center">
+                            <div>
 
-                            {/* Signals pie chart */}
-                            <SignalsPieChart goodCount={goodSignals} badCount={badSignals} neutralCount={neutralSignals} />
+                                {/* Signals pie chart */}
+                                <SignalsPieChart goodCount={goodSignals} badCount={badSignals} neutralCount={neutralSignals} />
 
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </div>}
 
 
                 {/* <div class="mt-4">

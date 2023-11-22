@@ -109,7 +109,7 @@ const Reviews = ({ provider, loggedIn }) => {
                     <div
                         onClick={() => {
                             // Handle click on user profile, e.g., navigate to user's profile page
-                            router.push('/user/' + review.rFireBaseUid);
+                            router.push('/signal-provider/' + review.rFireBaseUid);
                         }}
                         className='flex items-center cursor-pointer hover:underline text-sm'
                     >

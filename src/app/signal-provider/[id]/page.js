@@ -179,7 +179,7 @@ function User() {
                                 />
 
                                 <div>
-                                    <div class="flex items-center space-x-2 mt-2">
+                                    <div class="flex items-center space-x-2 lg:justify-start justify-center mt-2">
                                         <p class="text-2xl">{user.displayName}</p>
                                         <span class="bg-blue-500 rounded-full p-1" title="Verified">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
