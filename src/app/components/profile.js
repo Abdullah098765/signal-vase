@@ -37,6 +37,24 @@ function User() {
     const [currentprofileRoute, setIsCurrentprofileRoute] = useState('All');
     gsap.registerPlugin(ScrollToPlugin); // Register the plugin
 
+    useEffect(() => {
+        if (window.location.search === "?review=true") {
+            setIsCurrentprofileRoute("Reviews");
+        }
+    }, [])
+
+    useEffect(() => {
+        // Scroll to the bottom of the page when isCurrentprofileRoute changes
+        if (currentprofileRoute === "Reviews") {
+          setTimeout(() => {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth', // You can use 'auto' for instant scroll
+            });
+          }, 3000);
+        }
+    }, [currentprofileRoute])
+    
     function handleGetRoute(params) {
         setIsCurrentprofileRoute(params);
     }

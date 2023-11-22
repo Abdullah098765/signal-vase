@@ -32,12 +32,33 @@ import ProfileSignalCards from '../../components/profile-signal-cards';
 function User() {
     const router = useRouter()
     const searchParams = usePathname()
+
     const urlParts = searchParams.split('/');
 
     const [user, setUser] = useState();
 
+    const [currentprofileRoute, setIsCurrentprofileRoute] = useState('All');
 
     const [pid, setPid] = useState(urlParts[urlParts.length - 1]);
+
+    useEffect(() => {
+        if (window.location.search === "?review=true") {
+            setIsCurrentprofileRoute("Reviews");
+        }
+    }, [])
+
+    useEffect(() => {
+        // Scroll to the bottom of the page when isCurrentprofileRoute changes
+        if (currentprofileRoute === "Reviews") {
+          setTimeout(() => {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth', // You can use 'auto' for instant scroll
+            });
+          }, 3000);
+        }
+    }, [currentprofileRoute])
+
     useEffect(() => {
 
         if (localStorage.getItem('uid')) {
@@ -82,7 +103,6 @@ function User() {
         getUser()
     }, [])
 
-    const [currentprofileRoute, setIsCurrentprofileRoute] = useState('All');
     gsap.registerPlugin(ScrollToPlugin); // Register the plugin
 
     function handleGetRoute(params) {
@@ -108,7 +128,7 @@ function User() {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:3000/api/all-user-signals", requestOptions)
+        fetch("https://signal-hub.vercel.app/api/all-user-signals", requestOptions)
             .then(response => response.text())
             .then(result => {
                 let allSignals = JSON.parse(result).goodSignals.concat(JSON.parse(result).badSignals, JSON.parse(result).neutralSignals);

@@ -43,7 +43,7 @@ export async function POST(req, res) {
                     body: notificationPayload.body,
                 },
                 data: {
-                    clickAction: '/profile',
+                    clickAction: '/profile' + '?review=true',
                     iconUrl: reviewData.rProfilePicture
 
                 },
