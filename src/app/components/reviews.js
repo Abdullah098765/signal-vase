@@ -180,25 +180,19 @@ const Reviews = ({ provider, loggedIn }) => {
                     <button
                         className={`bg-black cursor-pointer text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
                             }`}
-                        onClick={() => {
-                            if (localStorage.getItem('uid')) {
-
-                                if (!loading && newReview !== '') {
-
-
-                                    // if (illigible) {
-                                    handleReviewSubmit();
-                                    // }
-                                    // else alert ("Only Subscribers Can review")
-
+                            onClick={() => {
+                                if (localStorage.getItem('uid')) {
+                                    if (!loading && newReview !== '') {
+                                        // if (illigible) {
+                                        handleReviewSubmit();
+                                        // }
+                                        // else alert ("Only Subscribers Can review")
+                                    }
+                                } else {
+                                    setIsModalOpen(true);
+                                    console.log('signed out');
                                 }
-
-                            }
-                            else if (!localStorage.getItem('uid')) {
-                                setIsModalOpen(true)
-                                console.log('signedout');
-                            }
-                        }}
+                            }}
                         disabled={(loading || newReview === '')}
                     >
                         {loading ? (

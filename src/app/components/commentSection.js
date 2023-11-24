@@ -193,7 +193,8 @@ export default function CommentSection({ signal, user, loggedIn }) {
                             className={`bg-black text-white flex justify-center mt-3 mb-3  p-2  rounded hover:bg-gray-900 ml-2 ${true ? 'bg-gray-900' : ''
                                 }`}
                             onClick={() => {
-                                if (!loading && newComment !== '') {
+                                if (!loading && newComment !== '' && loggedIn) {
+
                                     handleCommentSubmit()
                                 }
                             }}
