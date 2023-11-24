@@ -21,8 +21,7 @@ self.addEventListener('push', (event) => {
   const clickAction = payload.data.clickAction;
 
   const buttonsData = JSON.parse(payload.data.buttons || '[]');
-
-  const actions = buttonsData.map(button => ({
+  const actions = buttonsData.slice(0, 2).map(button => ({
     action: button.action,
     title: button.title,
   }));
