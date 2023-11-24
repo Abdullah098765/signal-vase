@@ -10,11 +10,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// onMessage(messaging, (payload) => {
-//   console.log('Message received. ', payload);
-// });
-
-
 self.addEventListener('push', (event) => {
   const payload = event.data.json();
   const title = payload.notification.title;
@@ -25,22 +20,33 @@ self.addEventListener('push', (event) => {
   const iconUrl = payload.data.iconUrl;
   const clickAction = payload.data.clickAction;
 
+  const buttonsData = JSON.parse(payload.data.buttons || '[]');
+
+  const actions = buttonsData.map(button => ({
+    action: button.action,
+    title: button.title,
+  }));
+
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
       icon: iconUrl,  // Set the icon using the custom data
       image: imageUrl,  // Set the image using the custom data
-      data: clickAction
+      data: {
+        clickAction: clickAction,
+      },
+      actions: actions,
     })
   );
 });
 
-
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
-  console.log(event);
-  // Open the specified URL
-  event.waitUntil(
-    clients.openWindow(event.notification.data)  // Use the clickAction from custom data
-  );
+  const clickAction = event.notification.data.clickAction;
+
+  if (clickAction) {
+    event.waitUntil(
+      clients.openWindow(clickAction)
+    );
+  }
 });

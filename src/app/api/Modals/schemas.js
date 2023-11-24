@@ -207,6 +207,10 @@ const signalSchema = new mongoose.Schema({
     default: "Active",
     enum: ['Active', 'Expired'],
   },
+  expirationNotificationSent: {
+    type: Boolean,
+    default: false,
+},
 
   // Trading pair (e.g., BTC/USDT)
   pair: {
