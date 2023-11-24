@@ -12,6 +12,7 @@ export async function POST(req, res) {
     console.log(user);
     // Save the user to the database
    var _user = await newUser.save();
+   
     console.log('User saved to the database',_user);
     // Send a JSON response with a 200 status code (OK)
     return NextResponse.json(_user);

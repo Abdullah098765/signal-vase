@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthernet } from '@fortawesome/free-solid-svg-icons';
 import './components.css'
 import { usePathname } from 'next/navigation';
+import CryptoJS from 'crypto-js';
 
 
 const RegistrationForm = () => {
@@ -25,7 +26,10 @@ const RegistrationForm = () => {
     console.log(result);
     if (result) {
       // console.log(result.user.displayName + " is Signed in.");
+      const hashedUid = CryptoJS.SHA256(result.user.uid).toString(CryptoJS.enc.Hex);
+
       try {
+
         // Send userData to your server to register the user
         const response = await fetch('https://signal-hub.vercel.app/api/signUp', {
           method: 'POST',
@@ -37,7 +41,8 @@ const RegistrationForm = () => {
               email: result.user.email, // User's email address
               profilePicture: result.user.photoURL,
               phone: result.user.phoneNumber,
-              SubscribersFCMTokens: []
+              SubscribersFCMTokens: [],
+              fireBaseUidHash:hashedUid
             }
           ),
 
