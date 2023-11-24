@@ -192,17 +192,19 @@ const Navbar = () => {
 
                                 <div className="rounded-full overflow-hidden h-10 w-10">
                                     <img
+                                       priority
+                                       className='profile-pic-nav w-full h-full object-cover  object-center'
+                                       height={100}
+                                       width={100}
+                                       src={user.profilePicture}
+                                       alt='profile-pic'
                                     ></img>
-                                    {user.profilePicture && <Image
-                                        priority
-                                        className='profile-pic-nav w-full h-full object-cover  object-center'
-                                        height={100}
-                                        width={100}
-                                        src={user.profilePicture}
-                                        alt='profile-pic'
+
+                                    {/* {user.profilePicture && <Image
+                                     
 
 
-                                    />}
+                                    />} */}
 
                                 </div>
                             </button>
