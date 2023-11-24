@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthernet } from '@fortawesome/free-solid-svg-icons';
 import './components.css'
 import { usePathname } from 'next/navigation';
-import CryptoJS from 'crypto-js';
+const crypto = require('crypto');
 
 
 const RegistrationForm = () => {
@@ -18,7 +18,7 @@ const RegistrationForm = () => {
     setTimeout(() => {
       setIsGoogleClicked(false)
     }, 20000);
-    
+
     const provider = new GoogleAuthProvider();
     setIsGoogleClicked(true)
 
@@ -26,7 +26,7 @@ const RegistrationForm = () => {
     console.log(result);
     if (result) {
       // console.log(result.user.displayName + " is Signed in.");
-      const hashedUid = CryptoJS.SHA256(result.user.uid).toString(CryptoJS.enc.Hex);
+      const hashedUid = crypto.createHash('sha256').update(result.user.uid).digest('hex');
 
       try {
 
@@ -42,7 +42,7 @@ const RegistrationForm = () => {
               profilePicture: result.user.photoURL,
               phone: result.user.phoneNumber,
               SubscribersFCMTokens: [],
-              fireBaseUidHash:hashedUid
+              fireBaseUidHash: hashedUid
             }
           ),
 
@@ -60,7 +60,7 @@ const RegistrationForm = () => {
           // Handle server registration error
           window.localStorage.setItem('uid', result.user.uid)
           window.location = 'https://signal-hub.vercel.app/' + pathName
-          console.log('User Exist in Database',pathName);
+          console.log('User Exist in Database', pathName);
 
         }
       } catch (error) {
@@ -77,7 +77,7 @@ const RegistrationForm = () => {
       alert('Unable To sign In')
     }
 
-    
+
   };
 
   const [formData, setFormData] = useState({
