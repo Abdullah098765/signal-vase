@@ -41,11 +41,11 @@ export async function POST(req, res) {
             const buttons = [
                 {
                     title: 'Good Signal',
-                    action: '/signal/' + signalId + '/feedback/good',
+                    action: 'goodSignal',
                 },
                 {
                     title: 'Neutral Signal',
-                    action: '/signal/' + signalId + '/feedback/neutral',
+                    action: 'neutralSignal',
                 },
                 {
                     title: 'Bad Signal',
