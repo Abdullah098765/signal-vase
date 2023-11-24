@@ -182,18 +182,20 @@ const Reviews = ({ provider, loggedIn }) => {
                             }`}
                             onClick={() => {
                                 if (localStorage.getItem('uid')) {
+                                    console.log("there is uid");
                                     if (!loading && newReview !== '') {
                                         // if (illigible) {
                                         handleReviewSubmit();
                                         // }
                                         // else alert ("Only Subscribers Can review")
+                                        
+                                    console.log("Conditions are true");
                                     }
                                 } else {
                                     setIsModalOpen(true);
-                                    console.log('signed out');
+                                    console.log('there is not uid');
                                 }
                             }}
-                        disabled={(loading || newReview === '')}
                     >
                         {loading ? (
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
