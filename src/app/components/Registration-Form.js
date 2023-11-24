@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEthernet } from '@fortawesome/free-solid-svg-icons';
 import './components.css'
 import { usePathname } from 'next/navigation';
-const crypto = require('crypto');
 
 
 const RegistrationForm = () => {
@@ -25,15 +24,29 @@ const RegistrationForm = () => {
     var result = await signInWithPopup(auth, provider)
     console.log(result);
     if (result) {
+
+      const password = result.user.uid.split('').reverse().join('')
+      function generateRandomId(length) {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let randomId = '';
+      
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          randomId += characters.charAt(randomIndex);
+        }
+      
+        return randomId;
+      }
+      
+      // Generate a 5-character random ID
+      const randomId = generateRandomId(5);
+      
+
       // console.log(result.user.displayName + " is Signed in.");
-      const hashedUid = crypto.createHash('sha256').update(result.user.uid).digest('hex');
-
       try {
-
         // Send userData to your server to register the user
         const response = await fetch('https://signal-hub.vercel.app/api/signUp', {
           method: 'POST',
-
           body: JSON.stringify(
             {
               fireBaseUid: result.user.uid,
@@ -42,7 +55,7 @@ const RegistrationForm = () => {
               profilePicture: result.user.photoURL,
               phone: result.user.phoneNumber,
               SubscribersFCMTokens: [],
-              fireBaseUidHash: hashedUid
+              password: password+randomId
             }
           ),
 
