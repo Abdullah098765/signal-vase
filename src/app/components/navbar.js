@@ -194,7 +194,7 @@ const Navbar = () => {
                                     <img
                                     ></img>
                                     {user.profilePicture && <Image
-                                        
+                                        priority
                                         className='profile-pic-nav w-full h-full object-cover  object-center'
                                         height={100}
                                         width={100}
