@@ -12,6 +12,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
     const [imageUrl, setImageUrl] = useState();
     const [imageLoading, setImageLoading] = useState(false);
     const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         console.log(signal.comments);
     }, [])
@@ -42,7 +43,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
             // You can use this URL to display the image in your comments or store it in your database.
         }
     };
-    const { setRouterLoading } = useMyContext();
+    const { setRouterLoading, setIsModalOpen } = useMyContext();
 
     async function sendNotification(signalId, commentData) {
         try {
@@ -193,10 +194,11 @@ export default function CommentSection({ signal, user, loggedIn }) {
                             className={`bg-black text-white flex justify-center mt-3 mb-3  p-2  rounded hover:bg-gray-900 ml-2 ${true ? 'bg-gray-900' : ''
                                 }`}
                             onClick={() => {
-                                if (!loading && newComment !== '' && loggedIn) {
+                                if (!loading && newComment !== '') {
 
-                                    handleCommentSubmit()
+                                    loggedIn ? handleCommentSubmit() : setIsModalOpen(true)
                                 }
+
                             }}
                         >
                             {loading ? < div className="animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400"></div> : <>{loggedIn && (
