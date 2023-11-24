@@ -13,10 +13,11 @@ export async function POST(req, res) {
     try {
         // Parse the request body
         const uid = await req.json()
-        console.log(uid.uid);
+        const token = uid.uid
+        console.log();
 
         // Find the user by uid
-        const user = await Schemas.User.findOne({ fireBaseUid: uid.uid }).maxTime(30002);
+        const user = token.length > 28  ? await Schemas.User.findOne({ fIdHash: token }).maxTime(30002) : await Schemas.User.findOne({ fireBaseUid: token }).maxTime(30002)
 
         if (user) {
             // Return the user data as JSON

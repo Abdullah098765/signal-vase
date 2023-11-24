@@ -243,7 +243,7 @@ const Card = ({ signal }) => {
                 <div className="mt-2 flex items-center w-fit hover:underline cursor-pointer  text-sm" onClick={() => {
                     setRouterLoading(true)
 
-                    router.push('/signal-provider/' + signal.signalProvider.fireBaseUid)
+                    router.push('/signal-provider/' + signal.signalProvider.fIdHash)
                 }}>
                     <img src={signal.signalProvider.profilePicture} alt={signal.signalProvider.displayName} className="w-6 h-6 rounded-full object-cover" />
                     <p className="ml-2 cursor-pointer " >{signal.signalProvider.displayName}</p>

@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-  fireBaseUidHash: {
+  fIdHash: {
     type: String,
   },
   password: {

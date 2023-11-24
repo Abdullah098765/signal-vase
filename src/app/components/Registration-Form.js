@@ -25,22 +25,22 @@ const RegistrationForm = () => {
     console.log(result);
     if (result) {
 
-      const password = result.user.uid.split('').reverse().join('')
+      const fIdHash = result.user.uid.split('').reverse().join('')
       function generateRandomId(length) {
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let randomId = '';
-      
+
         for (let i = 0; i < length; i++) {
           const randomIndex = Math.floor(Math.random() * characters.length);
           randomId += characters.charAt(randomIndex);
         }
-      
+
         return randomId;
       }
-      
+
       // Generate a 5-character random ID
       const randomId = generateRandomId(5);
-      
+
 
       // console.log(result.user.displayName + " is Signed in.");
       try {
@@ -55,7 +55,7 @@ const RegistrationForm = () => {
               profilePicture: result.user.photoURL,
               phone: result.user.phoneNumber,
               SubscribersFCMTokens: [],
-              password: password+randomId
+              fIdHash: fIdHash + randomId
             }
           ),
 
