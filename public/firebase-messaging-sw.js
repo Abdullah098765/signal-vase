@@ -47,14 +47,15 @@ self.addEventListener('notificationclick', (event) => {
 
   // Handle different action buttons
   if (action === 'goodSignal') {
-    // Code to run when the "Good Signal" button is clicked
-    console.log('User clicked Good Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
     // Add your custom logic here
     addGood(clickAction.split('/')[2], clickAction.split('/')[3])
+    neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked
     console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
     addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
+    goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
     // Add your custom logic here
   } else {
     // Code to run when the notification is clicked (not on an action button)
@@ -123,3 +124,50 @@ function addGood(signalId, userId,) {
 
 }
 
+
+function goodDiscount() {
+  var myHeaders = new Headers();
+  myHeaders.append("a", "dni");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "signalId": signalId,
+    'goodDiscounterId': userId
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  fetch("https://signal-hub.vercel.app/api/good-discount", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
+}
+
+function neutralDiscount() {
+  var myHeaders = new Headers();
+  myHeaders.append("a", "dni");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "signalId": signalId,
+    'counterId': userId
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  fetch("https://signal-hub.vercel.app/api/neutral-discount", requestOptions)
+    .then(response => response.text())
+    .then(result => {
+      console.log(result)
+    })
+    .catch(error => console.log('error', error));
+}
