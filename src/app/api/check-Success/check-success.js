@@ -4,7 +4,7 @@ const Signal = mongoose.model('Signal'); // Replace 'Signal' with your actual mo
 const User = mongoose.model('User'); // Replace 'Signal' with your actual model name
 
 
-const updateSuccess = async () => {
+export const updateSuccess = async () => {
     try {
         const signals = await Signal.find().exec();
 
@@ -49,7 +49,7 @@ const updateSuccess = async () => {
     }
 };
 
-const updateUsersSignalStatus = async () => {
+export const updateUsersSignalStatus = async () => {
     try {
         // Fetch all signals
         const signals = await Signal.find().exec();

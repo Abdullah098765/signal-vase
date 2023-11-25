@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import Schemas from '../Modals/schemas.js'
 import connectDB from '../db.js';
-
+import { updateSuccess, updateUsersSignalStatus } from '../check-Success/check-success.js';
 
 
 connectDB()
@@ -11,7 +11,8 @@ connectDB()
 
 export async function POST(req, res) {
   try {
-
+    updateSuccess()
+    updateUsersSignalStatus()
 
     // Find the user by uid
     // const signals = await Schemas.Signal.find().populate({ path: 'signalProvider', model: Schemas.User })
