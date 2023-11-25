@@ -20,7 +20,10 @@ export async function POST(req, res) {
         const { signalId } = await req.json();
 
         // Retrieve the signal information from the database
-        const signal = await models.Signal.findById(signalId).populate('followers', 'notificationPreferences');
+        const signal = await models.Signal.findById(signalId).populate({
+            path: 'followers',
+            select: 'notificationPreferences _id',
+        });
 
         if (!signal) {
             return NextResponse.json({ error: 'Signal not found' });
@@ -30,6 +33,12 @@ export async function POST(req, res) {
             .filter(follower => follower.notificationPreferences?.inApp)
             .map(follower => follower.notificationPreferences.fcmToken)
             .filter(fcmToken => typeof fcmToken === 'string' && fcmToken.trim() !== '');
+
+
+        const followersIds = signal.followers
+            .filter(follower => follower.notificationPreferences?.inApp)
+            .map(follower => follower._id.toString());
+
 
         if (followersFCMTokens.length > 0) {
             // Send notifications to followers
@@ -58,25 +67,48 @@ export async function POST(req, res) {
                 action: button.action,
             }));
 
-            const responses = await admin.messaging().sendMulticast({
-                tokens: followersFCMTokens,
-                notification: {
-                    title: notificationPayload.title,
-                    body: notificationPayload.body,
-                },
-                data: {
-                    clickAction: '/signal/' + signalId,
-                    buttons: JSON.stringify(buttonsData),
-                },
-            });
 
-            responses.responses.forEach((response, index) => {
-                if (!response.success) {
-                    console.error(`Error sending notification to token ${followersFCMTokens[index]}:`, response.error);
+            // ... (previous code)
+
+            // Filter followers with in-app notification preferences and extract their IDs
+            const followersWithInApp = signal.followers
+                .filter(follower => follower.notificationPreferences?.inApp)
+                .map(follower => ({
+                    followerId: follower._id.toString(),
+                    fcmToken: follower.notificationPreferences.fcmToken,
+                }));
+
+            let successCount = 0;
+            let failureCount = 0;
+
+            for (const follower of followersWithInApp) {
+                const response = await admin.messaging().send({
+                    token: follower.fcmToken,
+                    notification: {
+                        title: notificationPayload.title,
+                        body: notificationPayload.body,
+                    },
+                    data: {
+                        clickAction: `/signal/${signalId}/${follower.followerId}`,
+                        buttons: JSON.stringify(buttonsData),
+                    },
+                });
+
+                if (response.success) {
+                    successCount++;
+                } else {
+                    failureCount++;
+                    console.error(`Error sending notification to token ${follower.fcmToken}:`, response.error);
                 }
+            }
+
+            return NextResponse.json({
+                success: true,
+                successCount,
+                failureCount,
             });
 
-            return NextResponse.json({ success: true, responses });
+
         } else {
             return NextResponse.json({ success: false, message: 'No followers with in-app notification preferences to notify' });
         }
