@@ -32,7 +32,6 @@ const GoodBadButtons = ({ signal }) => {
         fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
             .then(response => response.text())
             .then(result => {
-                setCurrentVote('neutral')
                 console.log(result)})
             .catch(error => console.log('error', error));
 
@@ -57,7 +56,6 @@ const GoodBadButtons = ({ signal }) => {
         fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
             .then(response => response.text())
             .then(result => {
-                setCurrentVote('good')
 
                 console.log(result)
             })
@@ -66,6 +64,31 @@ const GoodBadButtons = ({ signal }) => {
         return "Good counted"
 
     }
+    function badCount() {
+
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "signalId": signal._id,
+            'badCounterId': user._id
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => console.log('error', error));
+    }
+
     function goodDiscount() {
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -136,31 +159,7 @@ const GoodBadButtons = ({ signal }) => {
             .catch(error => console.log('error', error));
     }
 
-    function badCount() {
-
-        var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            "signalId": signal._id,
-            'badCounterId': user._id
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                setCurrentVote('bad')
-                console.log(result)
-            })
-            .catch(error => console.log('error', error));
-    }
+ 
 
 
     const handleGoodClick = () => {
