@@ -1,6 +1,6 @@
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js');
-
+import { addNeutral, addGood } from "../src/app/components/good-bad-buttons";
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../firebase-messaging-sw.js')
     .then(function (registration) {
@@ -48,6 +48,7 @@ self.addEventListener('notificationclick', (event) => {
   if (action === 'goodSignal') {
     // Code to run when the "Good Signal" button is clicked
     console.log('User clicked Good Signal', clickAction.split('/')[2], localStorage.getItem('uid'));
+    // addGood()
     // Add your custom logic here
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked

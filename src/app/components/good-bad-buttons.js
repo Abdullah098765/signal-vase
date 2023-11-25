@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
-export function addNeutral(signal, user, setNeutraledCount, neutraledCount) {
+
+export function addNeutral(signalId, userId, setNeutraledCount, neutraledCount) {
     var myHeaders = new Headers();
     myHeaders.append("a", "dni");
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-        "signalId": signal._id,
-        'neutralId': user._id
+        "signalId": signalId,
+        'neutralId': userId
     });
 
     var requestOptions = {
@@ -21,9 +22,34 @@ export function addNeutral(signal, user, setNeutraledCount, neutraledCount) {
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
 
-    setNeutraledCount(neutraledCount + 1);
+    setNeutraledCount && setNeutraledCount(neutraledCount + 1);
+    return "Neutral counted"
 }
+export function addGood(signalId, userId, setNeutraledCount, neutraledCount) {
+    var myHeaders = new Headers();
+    myHeaders.append("a", "dni");
+    myHeaders.append("Content-Type", "application/json");
 
+    var raw = JSON.stringify({
+        "signalId": signalId,
+        'goodcounterId': userId
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+    setNeutraledCount && setNeutraledCount(neutraledCount + 1);
+    return "Good counted"
+
+}
 const GoodBadButtons = ({ signal }) => {
     const [neutraled, setNeutraled] = useState(false);
     const [beenBad, setBeenBad] = useState(false);
@@ -33,30 +59,7 @@ const GoodBadButtons = ({ signal }) => {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
-   
-    function addGood() {
-        var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            "signalId": signal._id,
-            'goodcounterId': user._id
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-
-        setNeutraledCount(neutraledCount + 1);
-    }
     function goodDiscount() {
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -154,7 +157,7 @@ const GoodBadButtons = ({ signal }) => {
     const handleGoodClick = () => {
 
         if (!beenGood) {
-            addGood()
+            addGood(signal._id, user._id, setNeutraledCount, neutraledCount)
             if (beenBad) {
 
                 badDiscount()
@@ -175,7 +178,7 @@ const GoodBadButtons = ({ signal }) => {
     }
     const handleNeutralClick = () => {
         if (!neutraled) {
-            addNeutral(signal, user, setNeutraledCount, neutraledCount)
+            addNeutral(signal._id, user._id, setNeutraledCount, neutraledCount)
             if (beenBad) {
 
                 badDiscount()

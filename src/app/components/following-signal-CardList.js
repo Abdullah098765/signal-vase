@@ -41,8 +41,8 @@ const SignalCardList = () => {
     useEffect(() => {
 
         var myHeaders = new Headers();
-   
-        
+
+
         var raw = JSON.stringify({
             'userId': user._id
         });
@@ -64,7 +64,8 @@ const SignalCardList = () => {
             .catch(error => console.log('error', error));
 
 
-    },[user]);
+    }, [user]);
+    
     return (<>
         {!isSignInButtinShown ? <div className='flex flex-col justify-center items-center px-3 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12  webkit-fill-available'>
             <h1 class="text-3xl font-bold mt-6 mb-4 text-gray-800 border-b">{followedSignals.length} Signals Following</h1>
