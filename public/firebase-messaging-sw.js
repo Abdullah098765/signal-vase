@@ -42,29 +42,30 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
 
   const action = event.action;
+  const clickAction = event.notification.data.clickAction;
 
   // Handle different action buttons
   if (action === 'goodSignal') {
     // Code to run when the "Good Signal" button is clicked
-    console.log('User clicked Good Signal');
+    console.log('User clicked Good Signal', clickAction.split('/'));
     // Add your custom logic here
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked
-    console.log('User clicked Neutral Signal');
+    console.log('User clicked Neutral Signal', clickAction.split('/'));
     // Add your custom logic here
   } else {
     // Code to run when the notification is clicked (not on an action button)
-    console.log('User clicked the notification');
+    console.log('User clicked the notification', clickAction.split('/'));
+    if (clickAction) {
+      event.waitUntil(
+        clients.openWindow(clickAction)
+      );
+    }
     // Add your custom logic here
   }
-  
-  event.notification.close();
-  const clickAction = event.notification.data.clickAction;
 
-  if (clickAction) {
-    event.waitUntil(
-      clients.openWindow(clickAction)
-    );
-  }
+  event.notification.close();
+
+
 });
 

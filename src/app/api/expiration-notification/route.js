@@ -49,7 +49,7 @@ export async function POST(req, res) {
                 },
                 {
                     title: 'Bad Signal',
-                    action: '/signal/' + signalId + '/feedback/bad',
+                    action: 'badSignal',
                 },
             ];
 
@@ -66,8 +66,6 @@ export async function POST(req, res) {
                 },
                 data: {
                     clickAction: '/signal/' + signalId,
-                    imageUrl: 'https://example.com/signal-expiration-image.jpg',
-                    iconUrl: 'https://example.com/signal-expiration-icon.jpg',
                     buttons: JSON.stringify(buttonsData),
                 },
             });

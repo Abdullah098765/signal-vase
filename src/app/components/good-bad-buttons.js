@@ -260,3 +260,4 @@ const GoodBadButtons = ({ signal }) => {
 }
 
 export default GoodBadButtons;
+
