@@ -1,6 +1,7 @@
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js');
-import { addNeutral, addGood } from "../src/app/components/good-bad-buttons";
+importScripts('../src/app/components/good-bad-buttons'); // Import other scripts if needed
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../firebase-messaging-sw.js')
     .then(function (registration) {
