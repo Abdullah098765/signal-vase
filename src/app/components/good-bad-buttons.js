@@ -34,7 +34,6 @@ const GoodBadButtons = ({ signal }) => {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
-        setNeutraledCount && setNeutraledCount(neutraledCount + 1);
         return "Neutral counted"
     }
     function addGood(signalId, userId, setNeutraledCount, neutraledCount) {
@@ -56,13 +55,10 @@ const GoodBadButtons = ({ signal }) => {
         fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
             .then(response => response.text())
             .then(result => {
-                setCurrentVote('good')
-
                 console.log(result)
             })
             .catch(error => console.log('error', error));
 
-        setNeutraledCount && setNeutraledCount(neutraledCount + 1);
         return "Good counted"
 
     }
@@ -110,7 +106,6 @@ const GoodBadButtons = ({ signal }) => {
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
 
-        setBeenBadCount(beenBad ? beenBadCount - 1 : beenBadCount);
     }
     function neutralDiscount() {
         setNeutraledCount(neutraledCount - 1);
@@ -157,9 +152,7 @@ const GoodBadButtons = ({ signal }) => {
         };
         fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
             .then(response => response.text())
-            .then(result => {
-                setCurrentVote('bad')
-                console.log(result)
+            .then(result => {                console.log(result)
             })
             .catch(error => console.log('error', error));
     }
