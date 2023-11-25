@@ -1,5 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
+export function addNeutral(signal, user, setNeutraledCount, neutraledCount) {
+    var myHeaders = new Headers();
+    myHeaders.append("a", "dni");
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+        "signalId": signal._id,
+        'neutralId': user._id
+    });
+
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+    setNeutraledCount(neutraledCount + 1);
+}
 
 const GoodBadButtons = ({ signal }) => {
     const [neutraled, setNeutraled] = useState(false);
@@ -10,29 +33,7 @@ const GoodBadButtons = ({ signal }) => {
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
-    function addNeutral() {
-        var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
-
-        var raw = JSON.stringify({
-            "signalId": signal._id,
-            'neutralId': user._id
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-        fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-
-        setNeutraledCount(neutraledCount + 1);
-    }
+   
     function addGood() {
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -174,7 +175,7 @@ const GoodBadButtons = ({ signal }) => {
     }
     const handleNeutralClick = () => {
         if (!neutraled) {
-            addNeutral()
+            addNeutral(signal, user, setNeutraledCount, neutraledCount)
             if (beenBad) {
 
                 badDiscount()
@@ -260,4 +261,3 @@ const GoodBadButtons = ({ signal }) => {
 }
 
 export default GoodBadButtons;
-
