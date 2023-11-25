@@ -122,3 +122,4 @@ function addGood(signalId, userId,) {
   return "Good counted"
 
 }
+

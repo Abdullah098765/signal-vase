@@ -1,65 +1,71 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 
-export function addNeutral(signalId, userId, setNeutraledCount, neutraledCount) {
-    var myHeaders = new Headers();
-    myHeaders.append("a", "dni");
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-        "signalId": signalId,
-        'neutralId': userId
-    });
-
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-    setNeutraledCount && setNeutraledCount(neutraledCount + 1);
-    return "Neutral counted"
-}
-export function addGood(signalId, userId, setNeutraledCount, neutraledCount) {
-    var myHeaders = new Headers();
-    myHeaders.append("a", "dni");
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-        "signalId": signalId,
-        'goodcounterId': userId
-    });
-
-    var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-
-    setNeutraledCount && setNeutraledCount(neutraledCount + 1);
-    return "Good counted"
-
-}
 const GoodBadButtons = ({ signal }) => {
-    const [neutraled, setNeutraled] = useState(false);
-    const [beenBad, setBeenBad] = useState(false);
-    const [beenGood, setBeenGood] = useState(false);
+    const [currentVote, setCurrentVote] = useState('none');
+
+    // const [neutraled, setNeutraled] = useState(false);
+    // const [beenBad, setBeenBad] = useState(false);
+    // const [beenGood, setBeenGood] = useState(false);
     const [neutraledCount, setNeutraledCount] = useState(signal.likes.length);
-    const [beenBadCount, setBeenBadCount] = useState(signal.disLikesCount.length);
+    // const [beenBadCount, setBeenBadCount] = useState(signal.disLikesCount.length);
     const { user, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
 
+    function addNeutral(signalId, userId, setNeutraledCount, neutraledCount) {
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "signalId": signalId,
+            'neutralId': userId
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        setNeutraledCount && setNeutraledCount(neutraledCount + 1);
+        return "Neutral counted"
+    }
+    function addGood(signalId, userId, setNeutraledCount, neutraledCount) {
+        var myHeaders = new Headers();
+        myHeaders.append("a", "dni");
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "signalId": signalId,
+            'goodcounterId': userId
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+        fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                setCurrentVote('good')
+
+                console.log(result)
+            })
+            .catch(error => console.log('error', error));
+
+        setNeutraledCount && setNeutraledCount(neutraledCount + 1);
+        return "Good counted"
+
+    }
     function goodDiscount() {
         var myHeaders = new Headers();
         myHeaders.append("a", "dni");
@@ -125,7 +131,10 @@ const GoodBadButtons = ({ signal }) => {
         };
         fetch("https://signal-hub.vercel.app/api/neutral-discount", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                setCurrentVote('neutral')
+                console.log(result)
+            })
             .catch(error => console.log('error', error));
     }
 
@@ -148,43 +157,48 @@ const GoodBadButtons = ({ signal }) => {
         };
         fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
             .then(response => response.text())
-            .then(result => console.log(result))
+            .then(result => {
+                setCurrentVote('bad')
+                console.log(result)
+            })
             .catch(error => console.log('error', error));
-        setBeenBadCount(beenBadCount + 1);
     }
 
 
     const handleGoodClick = () => {
 
-        if (!beenGood) {
+        if (currentVote !== 'good') {
             addGood(signal._id, user._id, setNeutraledCount, neutraledCount)
-            if (beenBad) {
+            setCurrentVote('good')
+            if (currentVote === 'bad') {
 
                 badDiscount()
 
             }
-            if (neutraled) {
+            if (currentVote === 'neutral') {
 
                 neutralDiscount()
 
             }
+
         }
         else {
             goodDiscount()
+            setCurrentVote('none')
+
         }
-        setBeenGood(!beenGood);
-        setBeenBad(false);
-        setNeutraled(false);
     }
     const handleNeutralClick = () => {
-        if (!neutraled) {
+        if (currentVote !== 'neutral') {
             addNeutral(signal._id, user._id, setNeutraledCount, neutraledCount)
-            if (beenBad) {
+            setCurrentVote('neutral')
+
+            if (currentVote === 'bad') {
 
                 badDiscount()
 
             }
-            if (beenGood) {
+            if (currentVote === 'good') {
 
                 goodDiscount()
 
@@ -192,21 +206,25 @@ const GoodBadButtons = ({ signal }) => {
         }
         else {
             neutralDiscount()
+            setCurrentVote('none')
+
         }
-        setNeutraled(!neutraled);
-        setBeenBad(false);
-        setBeenGood(false);
+
+
     };
 
     const handleBadClick = () => {
-        if (!beenBad) {
+        if (currentVote !== 'bad') {
+
             badCount()
-            if (neutraled) {
+            setCurrentVote('bad')
+
+            if (currentVote === 'neutral') {
 
                 neutralDiscount()
 
             }
-            if (beenGood) {
+            if (currentVote === 'good') {
 
                 goodDiscount()
 
@@ -214,11 +232,10 @@ const GoodBadButtons = ({ signal }) => {
         }
         else {
             badDiscount()
-
+            setCurrentVote('none')
         }
-        setBeenBad(!beenBad);
-        setNeutraled(false);
-        setBeenGood(false);
+
+
     };
 
 
@@ -226,19 +243,20 @@ const GoodBadButtons = ({ signal }) => {
 
 
         if (signal.good.indexOf(user._id) !== -1) {
-            setBeenGood(true)
+            setCurrentVote('good')
         }
         if (signal.neutral.indexOf(user._id) !== -1) {
-            setNeutraled(true)
+            setCurrentVote('neutral')
         }
         if (signal.bad.indexOf(user._id) !== -1) {
-            setBeenBad(true)
+            setCurrentVote('bad')
         }
 
     }, [])
-    const neutraledIconColor = neutraled ? 'bg-blue-800 border border-blue-100 text-white px-1 py-1 rounded-full hover:bg-blue-700 text-xs flex items-center' : 'border border-blue-500 text-blue-500 px-1 py-1 rounded-full hover:bg-blue-100 text-xs flex items-center';
-    const dislikeIconColor = beenBad ? ' bg-red-800 border border-red-100  text-white px-1 py-1 rounded-full hover:bg-red-700 text-xs flex items-center' : 'border border-red-500  text-red-500 px-1 py-1 rounded-full hover:bg-red-100 text-xs flex items-center';
-    const beenGoodClasses = beenGood ? ' bg-green-800 border border-green-100  text-white px-1 py-1 rounded-full hover:bg-green-700 text-xs flex items-center' : 'border border-green-500  text-green-500 px-1 py-1 rounded-full hover:bg-green-100 text-xs flex items-center';
+
+    const neutraledIconColor = currentVote === "neutral" ? 'bg-blue-800 border border-blue-100 text-white px-1 py-1 rounded-full hover:bg-blue-700 text-xs flex items-center' : 'border border-blue-500 text-blue-500 px-1 py-1 rounded-full hover:bg-blue-100 text-xs flex items-center';
+    const dislikeIconColor = currentVote === 'bad' ? ' bg-red-800 border border-red-100  text-white px-1 py-1 rounded-full hover:bg-red-700 text-xs flex items-center' : 'border border-red-500  text-red-500 px-1 py-1 rounded-full hover:bg-red-100 text-xs flex items-center';
+    const beenGoodClasses = currentVote === 'good' ? ' bg-green-800 border border-green-100  text-white px-1 py-1 rounded-full hover:bg-green-700 text-xs flex items-center' : 'border border-green-500  text-green-500 px-1 py-1 rounded-full hover:bg-green-100 text-xs flex items-center';
 
     return (
         <div>
