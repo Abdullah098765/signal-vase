@@ -1,6 +1,5 @@
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js');
-importScripts('../src/app/components/good-bad-buttons'); // Import other scripts if needed
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('../firebase-messaging-sw.js')
@@ -43,22 +42,20 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
 
   const action = event.action;
-  const clickAction = event.notification.data.clickAction;
 
   // Handle different action buttons
   if (action === 'goodSignal') {
     // Code to run when the "Good Signal" button is clicked
-    console.log('User clicked Good Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
-    addGood(clickAction.split('/')[2], clickAction.split('/')[3])
+    console.log('User clicked Good Signal' , clickAction.split('/')[2], clickAction.split('/')[3]);
     // Add your custom logic here
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked
-    console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
-    addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
+    console.log('User clicked Neutral Signal',  clickAction.split('/')[2], clickAction.split('/')[3]);
     // Add your custom logic here
   } else {
+    const clickAction = event.notification.data.clickAction;
     // Code to run when the notification is clicked (not on an action button)
-    console.log('User clicked the notification', clickAction.split('/')[2], clickAction.split('/')[3]);
+    console.log('User clicked the notification',  clickAction.split('/')[2], clickAction.split('/')[3]);
     if (clickAction) {
       event.waitUntil(
         clients.openWindow(clickAction)
