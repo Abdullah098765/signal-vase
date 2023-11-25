@@ -125,7 +125,7 @@ function addGood(signalId, userId,) {
 }
 
 
-function goodDiscount() {
+function goodDiscount(signalId, userId) {
   var myHeaders = new Headers();
   myHeaders.append("a", "dni");
   myHeaders.append("Content-Type", "application/json");
@@ -148,7 +148,7 @@ function goodDiscount() {
 
 }
 
-function neutralDiscount() {
+function neutralDiscount(signalId, userId) {
   var myHeaders = new Headers();
   myHeaders.append("a", "dni");
   myHeaders.append("Content-Type", "application/json");
