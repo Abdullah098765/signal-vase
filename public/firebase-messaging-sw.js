@@ -50,12 +50,14 @@ self.addEventListener('notificationclick', (event) => {
     // Add your custom logic here
     addGood(clickAction.split('/')[2], clickAction.split('/')[3])
     neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
 
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked
     console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
     addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
     goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
     // Add your custom logic here
   } else {
     // Code to run when the notification is clicked (not on an action button)
@@ -170,4 +172,27 @@ function neutralDiscount(signalId, userId) {
       console.log(result)
     })
     .catch(error => console.log('error', error));
+}
+
+function badDiscount(signalId, userId) {
+  var myHeaders = new Headers();
+  myHeaders.append("a", "dni");
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({
+    "signalId": signalId,
+    'badCounterId': userId
+  });
+
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  fetch("https://signal-hub.vercel.app/api/bad-discount", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
+
 }
