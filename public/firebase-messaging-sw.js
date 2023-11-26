@@ -48,6 +48,7 @@ self.addEventListener('push', (event) => {
 self.addEventListener('notificationclick', (event) => {
   const action = event.action;
   const clickAction = event.notification.data.clickAction;
+  console.log(event);
 
   // Check if event.notification is defined before accessing its properties
   if (event.notification) {
@@ -56,7 +57,6 @@ self.addEventListener('notificationclick', (event) => {
     if (payload && payload.data && payload.data.receiverId) {
       const receiverId = payload.data.receiverId;
       console.log(receiverId);
-      console.log(event);
 
       // Handle different action buttons
       if (action === 'goodSignal') {
