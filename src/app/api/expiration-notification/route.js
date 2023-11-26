@@ -91,6 +91,7 @@ export async function POST(req, res) {
                     data: {
                         clickAction: `/signal/${signalId}/${follower.followerId}`,
                         buttons: JSON.stringify(buttonsData),
+                        receiverId: follower.followerId
                     },
                 });
 

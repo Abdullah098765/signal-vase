@@ -211,10 +211,10 @@ function User() {
                     </div>
 
 
-                    <Career user={user}  />
+                    <Career user={user} />
 
                     <div>
-                        <div class="w-full flex flex-col  mt-3">
+                        <div class="w-full flex flex-col cursor-pointer mt-3">
                             <div class="bg-white ">
                                 <div className="relative overflow-hidden flex flex-row items-center sm:flex-col sm:items-stretch ">
 

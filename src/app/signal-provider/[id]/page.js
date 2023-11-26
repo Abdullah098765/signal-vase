@@ -247,7 +247,7 @@ function User() {
                             <Career user={user} />
 
                             <div>
-                                <div class="w-full flex flex-col 2xl:w-1/3 mt-3 cursor-pointer">
+                                <div class="w-full flex flex-col  mt-3 cursor-pointer">
                                     <div class="bg-white ">
                                         <div className="relative overflow-hidden flex flex-row items-center sm:flex-col sm:items-stretch ">
 

@@ -49,8 +49,8 @@ export async function POST(req, res) {
                 },
                 data: {
                     clickAction: '/signal/' + signalId,
-                    iconUrl: commentData.cProfilePicture
-
+                    iconUrl: commentData.cProfilePicture,
+                    receiverId:''
                 },
 
 

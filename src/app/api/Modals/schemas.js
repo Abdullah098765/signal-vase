@@ -210,7 +210,7 @@ const signalSchema = new mongoose.Schema({
   expirationNotificationSent: {
     type: Boolean,
     default: false,
-},
+  },
 
   // Trading pair (e.g., BTC/USDT)
   pair: {
@@ -306,10 +306,42 @@ const signalSchema = new mongoose.Schema({
 
   // Other properties specific to your project
 });
-
+const notificationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  body: {
+    type: String,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+  },
+  iconUrl: {
+    type: String,
+  },
+  clickAction: {
+    type: String,
+    required: true,
+  },
+  actions: [
+    {
+      action: {
+        type: String,
+        required: true,
+      },
+      title: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+});
 // Create the Signal model
 const Signal = models.Signal || mongoose.model('Signal', signalSchema);
 const User = models.User || mongoose.model('User', userSchema);
+const Notification = models.Notification || mongoose.model('Notification', notificationSchema);
 
-export default { User, Signal };
+export default { User, Signal, Notification };
 

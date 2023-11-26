@@ -19,13 +19,19 @@ self.addEventListener('push', (event) => {
   const imageUrl = payload.data.imageUrl;
   const iconUrl = payload.data.iconUrl;
   const clickAction = payload.data.clickAction;
-
+  const receiverId = payload.data.receiverId;
+  console.log(receiverId);
   const buttonsData = JSON.parse(payload.data.buttons || '[]');
   const actions = buttonsData.slice(0, 2).map(button => ({
     action: button.action,
     title: button.title,
   }));
-
+  sendNotificationData(title,
+    body,
+    imageUrl,
+    iconUrl,
+    clickAction,
+    actions)
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
@@ -43,8 +49,9 @@ self.addEventListener('notificationclick', (event) => {
 
   const action = event.action;
   const clickAction = event.notification.data.clickAction;
+  const receiverId = event.notification.data.receiverId;
 
-
+  console.log(receiverId);
   // Handle different action buttons
   if (action === 'goodSignal') {
     // Add your custom logic here
@@ -195,4 +202,35 @@ function badDiscount(signalId, userId) {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
+}
+
+const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions) => {
+
+
+  const notificationData = {
+    title,
+    body,
+    imageUrl,
+    iconUrl,
+    clickAction,
+    actions,
+  };
+
+  try {
+    const response = await fetch('http://localhost:3000/api/save-notifications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(notificationData),
+    });
+
+    if (response.ok) {
+      console.log('Notification data sent successfully');
+    } else {
+      console.error('Failed to send notification data:', response.status, response.statusText);
+    }
+  } catch (error) {
+    console.error('Error sending notification data:', error);
+  }
 }
