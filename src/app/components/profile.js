@@ -180,7 +180,7 @@ function User() {
                                 id={user.fireBaseUid}
                                 title={user.displayName}
                                 isSignal={false}
-                                url={window.location.host + '/signal-provider/' + user.fireBaseUid}
+                                url={window.location.host + '/signal-provider/' + user.fIdHash}
 
                             />
                             <div
