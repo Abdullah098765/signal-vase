@@ -50,7 +50,7 @@ export async function POST(req, res) {
                 data: {
                     clickAction: '/signal/' + signalId,
                     iconUrl: commentData.cProfilePicture,
-                    receiverId:''
+                    receiverId:signalProvider._id
                 },
 
 

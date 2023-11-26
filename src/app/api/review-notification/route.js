@@ -44,7 +44,8 @@ export async function POST(req, res) {
                 },
                 data: {
                     clickAction: '/profile' + '?review=true',
-                    iconUrl: reviewData.rProfilePicture
+                    iconUrl: reviewData.rProfilePicture,
+                    receiverId:providerId
 
                 },
 

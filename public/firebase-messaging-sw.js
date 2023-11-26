@@ -55,20 +55,20 @@ self.addEventListener('notificationclick', (event) => {
   // Handle different action buttons
   if (action === 'goodSignal') {
     // Add your custom logic here
-    addGood(clickAction.split('/')[2], clickAction.split('/')[3])
-    neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
-    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    addGood(clickAction.split('/')[2], receiverId)
+    neutralDiscount(clickAction.split('/')[2], receiverId)
+    badDiscount(clickAction.split('/')[2], receiverId)
 
   } else if (action === 'neutralSignal') {
     // Code to run when the "Neutral Signal" button is clicked
-    console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
-    addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
-    goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
-    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    console.log('User clicked Neutral Signal', clickAction.split('/')[2], receiverId);
+    addNeutral(clickAction.split('/')[2], receiverId)
+    goodDiscount(clickAction.split('/')[2], receiverId)
+    badDiscount(clickAction.split('/')[2], receiverId)
     // Add your custom logic here
   } else {
     // Code to run when the notification is clicked (not on an action button)
-    console.log('User clicked the notification', clickAction.split('/')[2], clickAction.split('/')[3]);
+    console.log('User clicked the notification', clickAction.split('/')[2], receiverId);
     if (clickAction) {
       event.waitUntil(
         clients.openWindow(clickAction)

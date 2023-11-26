@@ -89,7 +89,7 @@ export async function POST(req, res) {
                         body: notificationPayload.body,
                     },
                     data: {
-                        clickAction: `/signal/${signalId}/${follower.followerId}`,
+                        clickAction: `/signal/${signalId}`,
                         buttons: JSON.stringify(buttonsData),
                         receiverId: follower.followerId
                     },
