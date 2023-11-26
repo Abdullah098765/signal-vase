@@ -20,7 +20,7 @@ self.addEventListener('push', (event) => {
   const iconUrl = payload.data.iconUrl;
   const clickAction = payload.data.clickAction;
   const receiverId = payload.data.receiverId;
-  console.log(receiverId);
+  console.log(payload.data);
   const buttonsData = JSON.parse(payload.data.buttons || '[]');
   const actions = buttonsData.slice(0, 2).map(button => ({
     action: button.action,
