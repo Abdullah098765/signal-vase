@@ -20,18 +20,13 @@ self.addEventListener('push', (event) => {
   const iconUrl = payload.data.iconUrl;
   const clickAction = payload.data.clickAction;
   const receiverId = payload.data.receiverId;
-  console.log(payload.data);
+
   const buttonsData = JSON.parse(payload.data.buttons || '[]');
   const actions = buttonsData.slice(0, 2).map(button => ({
     action: button.action,
     title: button.title,
   }));
-  sendNotificationData(title,
-    body,
-    imageUrl,
-    iconUrl,
-    clickAction,
-    actions,receiverId)
+  sendNotificationData(title, body, imageUrl, iconUrl, clickAction, actions, receiverId)
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
@@ -46,38 +41,52 @@ self.addEventListener('push', (event) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
+
   const action = event.action;
   const clickAction = event.notification.data.clickAction;
-  console.log(event);
 
-  // Check if event.notification is defined before accessing its properties
-  if (event.notification) {
-    // Retrieve custom data from the original payload
-    const payload = event.notification.data.payload;
-    if (payload && payload.data && payload.data.receiverId) {
-      const receiverId = payload.data.receiverId;
-      console.log(receiverId);
 
-      // Handle different action buttons
-      if (action === 'goodSignal') {
-        addGood(clickAction.split('/')[2], receiverId);
-        neutralDiscount(clickAction.split('/')[2], receiverId);
-        badDiscount(clickAction.split('/')[2], receiverId);
-      } else if (action === 'neutralSignal') {
-        addNeutral(clickAction.split('/')[2], receiverId);
-        goodDiscount(clickAction.split('/')[2], receiverId);
-        badDiscount(clickAction.split('/')[2], receiverId);
-      } else {
-        if (clickAction) {
-          event.waitUntil(clients.openWindow(clickAction));
-        }
+  // Handle different action buttons
+  if (action === 'goodSignal') {
+    // Add your custom logic here
+    addGood(clickAction.split('/')[2], clickAction.split('/')[3])
+    neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+
+  } else if (action === 'neutralSignal') {
+    // Code to run when the "Neutral Signal" button is clicked
+    console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
+    addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
+    goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+    // Add your custom logic here
+  } else {
+    // Code to run when the notification is clicked (not on an action button)
+    console.log('User clicked the notification', clickAction.split('/')[2], clickAction.split('/')[3]);
+    if (clickAction) {
+
+
+      if (event.notification.title === "Signal Expiration") {
+        const originalString = clickAction
+        const lastSlashIndex = originalString.lastIndexOf("/");
+        const stringWithoutLastPart = originalString.substring(0, lastSlashIndex + 1);
+        event.waitUntil(
+          clients.openWindow(stringWithoutLastPart)
+        );
+      }
+      else {
+        event.waitUntil(
+          clients.openWindow(clickAction)
+        )
       }
     }
+    // Add your custom logic here
   }
 
   event.notification.close();
-});
 
+
+});
 
 
 
@@ -211,7 +220,7 @@ const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction,
     iconUrl,
     clickAction,
     actions,
-    receiverIds:[receiverId]
+    receiverIds: [receiverId]
   };
 
   try {
