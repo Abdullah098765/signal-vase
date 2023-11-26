@@ -48,9 +48,9 @@ export async function POST(req, res) {
                     body: notificationPayload.body,
                 },
                 data: {
-                    clickAction: '/signal/' + signalId,
+                    clickAction: '/signal/' + + String(signalId),
                     iconUrl: commentData.cProfilePicture,
-                    receiverId:signalProvider._id
+                    receiverId:String(signalProvider._id)
                 },
 
 
