@@ -321,10 +321,11 @@ const notificationSchema = new mongoose.Schema({
   iconUrl: {
     type: String,
   },
-  clickAction: {
-    type: String,
-    required: true,
-  },
+  receiverIds: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User', // Assuming you have a User model
+  }],
+
   actions: [
     {
       action: {

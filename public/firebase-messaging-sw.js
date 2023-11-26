@@ -31,7 +31,7 @@ self.addEventListener('push', (event) => {
     imageUrl,
     iconUrl,
     clickAction,
-    actions)
+    actions,receiverId)
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
@@ -204,7 +204,7 @@ function badDiscount(signalId, userId) {
 
 }
 
-const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions) => {
+const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverId) => {
 
 
   const notificationData = {
@@ -214,10 +214,11 @@ const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction,
     iconUrl,
     clickAction,
     actions,
+    receiverIds:[receiverId]
   };
 
   try {
-    const response = await fetch('http://localhost:3000/api/save-notifications', {
+    const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

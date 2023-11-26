@@ -26,7 +26,10 @@ export async function POST(req, res) {
             return NextResponse.json({ error: 'Signal not found' });
         }
 
-        const signalProvider = await models.User.findById(signal.signalProvider._id).populate('Subscribers', 'notificationPreferences')
+        const signalProvider = await models.User.findById(signal.signalProvider._id).populate({
+            path: 'Subscribers',
+            select: 'notificationPreferences _id',
+        })
         if (signalProvider.Subscribers && signalProvider.Subscribers.length > 0) {
 
             // const subscribersFCMTokens = signalProvider.Subscribers
@@ -37,8 +40,10 @@ export async function POST(req, res) {
 
             //later
             const subscribersFCMTokens = []
+            const subscribersIds = []
             signalProvider.Subscribers
                 .map(subscriber => {
+                    subscribersIds.push(subscriber._id)
                     if (subscriber.notificationPreferences.inApp) {
                         subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
                     }
