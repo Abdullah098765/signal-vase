@@ -645,7 +645,7 @@ function Signal() {
                         {/* Action button */}
                         <div class="flex-1 w-full bg-white rounded-lg shadow-xl mt-4 md:p-8 p-4">
 
-                            <div className="mt-4 flex justify-end space-x-2">
+                            <div className="mt-4 flex justify-end items-center  space-x-2">
 
 
 
