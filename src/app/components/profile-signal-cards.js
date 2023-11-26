@@ -1,7 +1,11 @@
 import { formatDistanceToNow } from 'date-fns'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 export default function ProfileSignalCards({ signals }) {
+    const { setRouterLoading } = useMyContext();
+
+    const router = useRouter()
     return (
         <div className='flex-1 bg-white shadow-md lg:shadow-xl lg:p-8 p-0 '>
             {signals?.length === 0 ? (
@@ -71,8 +75,8 @@ export default function ProfileSignalCards({ signals }) {
 
                             {/* User Comments and Ratings */}
                             <div className="mt-2 text-sm text-gray-600">
-                                <p>Comments: {signal.commentscount}5</p>
-                                <p>Followers: {6}</p>
+                                <p>Comments: {signal.comments.length}</p>
+                                <p>Followers: {signal.followers.length}</p>
                             </div>
 
 
@@ -83,17 +87,19 @@ export default function ProfileSignalCards({ signals }) {
 
 
                                 {!true ? <button onClick={() => {
-                                    // getSignals()
-                                    // setSelectedSignal(signal)
-                                    // setisSignalModalOpen(true)
+
+                                    setRouterLoading(true)
+                                    router.push('/signal/' + signal._id)
+
                                 }} className="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-950 text-sm">
                                     Follow Signal
                                 </button>
                                     :
                                     <button onClick={() => {
-                                        // getSignals()
-                                        // setSelectedSignal(signal)
-                                        // setisSignalModalOpen(true)
+                                        setRouterLoading(true)
+                                        router.push('/signal/' + signal._id)
+
+                                        // router,
                                     }} className="bg-gray-100 text-black px-4 py-2 rounded-full hover:bg-gray-200 text-sm">
                                         See Details
                                     </button>
