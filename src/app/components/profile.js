@@ -211,7 +211,7 @@ function User() {
                     </div>
 
 
-                    <Career user={user} />
+                    <Career user={user}  />
 
                     <div>
                         <div class="w-full flex flex-col 2xl:w-1/3 mt-3">

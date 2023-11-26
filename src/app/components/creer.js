@@ -9,6 +9,7 @@ const Creer = ({ user }) => {
     var goodSignals = user.goodSignals && user.goodSignals.length || 0
     var badSignals = user.badSignals && user.badSignals.length || 0
     var neutralSignals = user.neutralSignals && user.neutralSignals.length || 0
+    var reviewsCount = user.reviews && user.reviews.length || 0
     return (
         <div>
 
@@ -157,7 +158,7 @@ const Creer = ({ user }) => {
                             </div>
                             <div class="flex flex-col">
                                 <div class="flex items-end">
-                                    <span class="text-2xl 2xl:text-3xl font-bold">98</span>
+                                    <span class="text-2xl 2xl:text-3xl font-bold">{reviewsCount}</span>
                                 </div>
                             </div>
                         </div>
