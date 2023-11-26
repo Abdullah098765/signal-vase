@@ -52,6 +52,7 @@ self.addEventListener('notificationclick', (event) => {
   const payload = event.notification.data.payload;
   const receiverId = payload.data.receiverId;
   console.log(receiverId);
+  console.log(event);
   // Handle different action buttons
   if (action === 'goodSignal') {
     // Add your custom logic here
