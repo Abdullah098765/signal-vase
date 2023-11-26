@@ -46,42 +46,38 @@ self.addEventListener('push', (event) => {
 });
 
 self.addEventListener('notificationclick', (event) => {
-
   const action = event.action;
   const clickAction = event.notification.data.clickAction;
-  const payload = event.notification.data.payload;
-  const receiverId = payload.data.receiverId;
-  console.log(receiverId);
-  console.log(event);
-  // Handle different action buttons
-  if (action === 'goodSignal') {
-    // Add your custom logic here
-    addGood(clickAction.split('/')[2], receiverId)
-    neutralDiscount(clickAction.split('/')[2], receiverId)
-    badDiscount(clickAction.split('/')[2], receiverId)
 
-  } else if (action === 'neutralSignal') {
-    // Code to run when the "Neutral Signal" button is clicked
-    console.log('User clicked Neutral Signal', clickAction.split('/')[2], receiverId);
-    addNeutral(clickAction.split('/')[2], receiverId)
-    goodDiscount(clickAction.split('/')[2], receiverId)
-    badDiscount(clickAction.split('/')[2], receiverId)
-    // Add your custom logic here
-  } else {
-    // Code to run when the notification is clicked (not on an action button)
-    console.log('User clicked the notification', clickAction.split('/')[2], receiverId);
-    if (clickAction) {
-      event.waitUntil(
-        clients.openWindow(clickAction)
-      );
+  // Check if event.notification is defined before accessing its properties
+  if (event.notification) {
+    // Retrieve custom data from the original payload
+    const payload = event.notification.data.payload;
+    if (payload && payload.data && payload.data.receiverId) {
+      const receiverId = payload.data.receiverId;
+      console.log(receiverId);
+      console.log(event);
+
+      // Handle different action buttons
+      if (action === 'goodSignal') {
+        addGood(clickAction.split('/')[2], receiverId);
+        neutralDiscount(clickAction.split('/')[2], receiverId);
+        badDiscount(clickAction.split('/')[2], receiverId);
+      } else if (action === 'neutralSignal') {
+        addNeutral(clickAction.split('/')[2], receiverId);
+        goodDiscount(clickAction.split('/')[2], receiverId);
+        badDiscount(clickAction.split('/')[2], receiverId);
+      } else {
+        if (clickAction) {
+          event.waitUntil(clients.openWindow(clickAction));
+        }
+      }
     }
-    // Add your custom logic here
   }
 
   event.notification.close();
-
-
 });
+
 
 
 
