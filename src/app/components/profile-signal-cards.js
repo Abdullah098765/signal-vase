@@ -1,6 +1,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useMyContext } from '../context/context';
 
 export default function ProfileSignalCards({ signals }) {
     const { setRouterLoading } = useMyContext();
