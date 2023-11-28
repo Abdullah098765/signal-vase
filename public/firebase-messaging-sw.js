@@ -26,7 +26,7 @@ self.addEventListener('push', (event) => {
     action: button.action,
     title: button.title,
   }));
-
+console.log("notification recieved");
   
   if(body.split(" ")[0] !== "Posted" ){
   saveNotificationData(title, body, imageUrl, iconUrl, clickAction, actions, receiverId)
