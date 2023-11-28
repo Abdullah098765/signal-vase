@@ -26,7 +26,13 @@ self.addEventListener('push', (event) => {
     action: button.action,
     title: button.title,
   }));
+
+  
+  if(body.split(" ")[0] !== "Posted" ){
   saveNotificationData(title, body, imageUrl, iconUrl, clickAction, actions, receiverId)
+    
+  }
+
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
