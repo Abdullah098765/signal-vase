@@ -26,7 +26,7 @@ self.addEventListener('push', (event) => {
     action: button.action,
     title: button.title,
   }));
-  sendNotificationData(title, body, imageUrl, iconUrl, clickAction, actions, receiverId)
+  saveNotificationData(title, body, imageUrl, iconUrl, clickAction, actions, receiverId)
   event.waitUntil(
     self.registration.showNotification(title, {
       body: body,
@@ -210,7 +210,7 @@ function badDiscount(signalId, userId) {
 
 }
 
-const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverId) => {
+const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverId) => {
 
 
   const notificationData = {
