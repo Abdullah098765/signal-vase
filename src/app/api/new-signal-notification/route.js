@@ -46,7 +46,7 @@ export async function POST(req, res) {
                     subscribersIds.push(subscriber._id)
                     if (subscriber.notificationPreferences.inApp) {
                         subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
-                     }
+                    }
                 })
             console.log(signalProvider.Subscribers);
             console.log(subscribersIds);
@@ -58,11 +58,11 @@ export async function POST(req, res) {
                 body: `Posted new signal for : ${signal.cryptoOrStock} ${signal.pair}`,
             };
 
-            saveNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId,  subscribersIds)
+            saveNotificationData(notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId, subscribersIds)
 
             if (subscribersFCMTokens.length > 0) {
                 const responses = await admin.messaging().sendMulticast({
-                   tokens: subscribersFCMTokens,
+                    tokens: subscribersFCMTokens,
                     notification: {
                         title: notificationPayload.title,
                         body: notificationPayload.body,
@@ -94,7 +94,7 @@ export async function POST(req, res) {
     }
 }
 
-const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction,  receiverIds) => {
+const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction, receiverIds) => {
 
 
     const notificationData = {
@@ -105,7 +105,7 @@ const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction,
         clickAction,
         receiverIds: receiverIds
     };
-console.log(receiverIds);
+    console.log(receiverIds);
     try {
         const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
             method: 'POST',
