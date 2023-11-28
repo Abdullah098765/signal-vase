@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faBackspace, faChartLine } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import logo from "../../../assets/logo.svg";
+import Notification_Icon from '@/app/components/notification-icon'
 
 const Navbar = () => {
     const auth = getAuth();
@@ -177,6 +178,9 @@ const Navbar = () => {
 
                     </div>
 
+<div >
+    <Notification_Icon/>
+</div>
                     {/* User Profile */}
                     <div className="flex items-center space-x-4">
 
