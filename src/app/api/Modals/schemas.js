@@ -306,6 +306,7 @@ const signalSchema = new mongoose.Schema({
 
   // Other properties specific to your project
 });
+
 const notificationSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -325,7 +326,10 @@ const notificationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User', // Assuming you have a User model
   }],
-
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   actions: [
     {
       action: {
