@@ -57,7 +57,7 @@ export async function POST(req, res) {
                 body: `Posted new signal for : ${signal.cryptoOrStock} ${signal.pair}`,
             };
 
-
+            sendNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId, 'actions', subscribersIds)
 
             if (subscribersFCMTokens.length > 0) {
                 const responses = await admin.messaging().sendMulticast({
@@ -81,6 +81,7 @@ export async function POST(req, res) {
                 });
                 // console.log('Successfully sent notifications:', responses);
                 return NextResponse.json({ success: true, responses });
+
             }
             else {
                 return NextResponse.json({ success: false, message: 'No subscribers to notify' });
@@ -89,5 +90,37 @@ export async function POST(req, res) {
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' });
+    }
+}
+
+const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverIds) => {
+
+
+    const notificationData = {
+        title,
+        body,
+        imageUrl,
+        iconUrl,
+        clickAction,
+        actions,
+        receiverIds: [receiverIds]
+    };
+
+    try {
+        const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(notificationData),
+        });
+
+        if (response.ok) {
+            console.log('Notification data sent successfully');
+        } else {
+            console.error('Failed to send notification data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending notification data:', error);
     }
 }
