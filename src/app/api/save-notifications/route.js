@@ -7,7 +7,6 @@ connectDB();
 export async function POST(req, res) {
   try {
     const notificationData = await req.json();
-
     // Save the notification to the database
     const newNotification = new Schemas.Notification(notificationData);
     const savedNotification = await newNotification.save();

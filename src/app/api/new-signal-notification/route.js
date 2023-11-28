@@ -49,6 +49,7 @@ export async function POST(req, res) {
                      }
                 })
             console.log(signalProvider.Subscribers);
+            console.log(subscribersIds);
 
 
             // Send notifications to subscribers
@@ -57,7 +58,7 @@ export async function POST(req, res) {
                 body: `Posted new signal for : ${signal.cryptoOrStock} ${signal.pair}`,
             };
 
-            sendNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId, 'actions', subscribersIds)
+            saveNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId, 'actions', subscribersIds)
 
             if (subscribersFCMTokens.length > 0) {
                 const responses = await admin.messaging().sendMulticast({
@@ -93,7 +94,7 @@ export async function POST(req, res) {
     }
 }
 
-const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverIds) => {
+const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverIds) => {
 
 
     const notificationData = {
@@ -103,9 +104,9 @@ const sendNotificationData = async (title, body, imageUrl, iconUrl, clickAction,
         iconUrl,
         clickAction,
         actions,
-        receiverIds: [receiverIds]
+        receiverIds: receiverIds
     };
-
+console.log(receiverIds);
     try {
         const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
             method: 'POST',
