@@ -46,7 +46,7 @@ export async function POST(req, res) {
                     subscribersIds.push(subscriber._id)
                     if (subscriber.notificationPreferences.inApp) {
                         subscribersFCMTokens.push(subscriber.notificationPreferences.fcmToken)
-                    }
+                     }
                 })
             console.log(signalProvider.Subscribers);
 
@@ -61,7 +61,7 @@ export async function POST(req, res) {
 
             if (subscribersFCMTokens.length > 0) {
                 const responses = await admin.messaging().sendMulticast({
-                    tokens: subscribersFCMTokens,
+                   tokens: subscribersFCMTokens,
                     notification: {
                         title: notificationPayload.title,
                         body: notificationPayload.body,
