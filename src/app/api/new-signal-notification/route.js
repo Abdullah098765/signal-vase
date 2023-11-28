@@ -58,7 +58,7 @@ export async function POST(req, res) {
                 body: `Posted new signal for : ${signal.cryptoOrStock} ${signal.pair}`,
             };
 
-            saveNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId, 'actions', subscribersIds)
+            saveNotificationData( notificationPayload.title, notificationPayload.body, 'imageUrl', signalProvider.profilePicture, '/signal/' + signalId,  subscribersIds)
 
             if (subscribersFCMTokens.length > 0) {
                 const responses = await admin.messaging().sendMulticast({
@@ -94,7 +94,7 @@ export async function POST(req, res) {
     }
 }
 
-const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverIds) => {
+const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction,  receiverIds) => {
 
 
     const notificationData = {
@@ -103,7 +103,6 @@ const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction,
         imageUrl,
         iconUrl,
         clickAction,
-        actions,
         receiverIds: receiverIds
     };
 console.log(receiverIds);
