@@ -215,34 +215,3 @@ function badDiscount(signalId, userId) {
 
 }
 
-const saveNotificationData = async (title, body, imageUrl, iconUrl, clickAction, actions, receiverId) => {
-
-
-  const notificationData = {
-    title,
-    body,
-    imageUrl,
-    iconUrl,
-    clickAction,
-    actions,
-    receiverIds: [receiverId]
-  };
-
-  try {
-    const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(notificationData),
-    });
-
-    if (response.ok) {
-      console.log('Notification data sent successfully');
-    } else {
-      console.error('Failed to send notification data:', response.status, response.statusText);
-    }
-  } catch (error) {
-    console.error('Error sending notification data:', error);
-  }
-}
