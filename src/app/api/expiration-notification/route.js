@@ -29,6 +29,20 @@ export async function POST(req, res) {
             return NextResponse.json({ error: 'Signal not found' });
         }
 
+        const buttons = [
+            {
+                title: 'Good Signal',
+                action: 'goodSignal',
+            },
+            {
+                title: 'Neutral Signal',
+                action: 'neutralSignal',
+            },
+            {
+                title: 'Bad Signal',
+                action: 'badSignal',
+            },
+        ];
         const followersFCMTokens = signal.followers
             .filter(follower => follower.notificationPreferences?.inApp)
             .map(follower => follower.notificationPreferences.fcmToken)
@@ -38,7 +52,8 @@ export async function POST(req, res) {
         const followersIds = signal.followers
             .filter(follower => follower.notificationPreferences?.inApp)
             .map(follower => follower._id.toString());
-
+        console.log(followersIds);
+        saveNotificationData('Signal Expiration', `The signal for ${signal.cryptoOrStock} ${signal.pair} has expired.`, `/signal/${signalId}`, buttons, followersIds)
 
         if (followersFCMTokens.length > 0) {
             // Send notifications to followers
@@ -47,20 +62,7 @@ export async function POST(req, res) {
                 body: `The signal for ${signal.cryptoOrStock} ${signal.pair} has expired.`,
             };
 
-            const buttons = [
-                {
-                    title: 'Good Signal',
-                    action: 'goodSignal',
-                },
-                {
-                    title: 'Neutral Signal',
-                    action: 'neutralSignal',
-                },
-                {
-                    title: 'Bad Signal',
-                    action: 'badSignal',
-                },
-            ];
+
 
             const buttonsData = buttons.map(button => ({
                 title: button.title,
@@ -116,5 +118,34 @@ export async function POST(req, res) {
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' });
+    }
+}
+const saveNotificationData = async (title, body, clickAction, actions, receiverId) => {
+
+
+    const notificationData = {
+        title,
+        body,
+        clickAction,
+        actions,
+        receiverIds: receiverId
+    };
+
+    try {
+        const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(notificationData),
+        });
+
+        if (response.ok) {
+            console.log('Notification data sent successfully');
+        } else {
+            console.error('Failed to send notification data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending notification data:', error);
     }
 }

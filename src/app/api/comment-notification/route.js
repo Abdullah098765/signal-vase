@@ -33,6 +33,8 @@ export async function POST(req, res) {
 
         // Retrieve the signal provider information
         const signalProvider = signal.signalProvider;
+        saveNotificationData(commentData.cDisplayName, `Commented on your signal for: ${signal.cryptoOrStock} ${signal.pair}`, commentData.cProfilePicture, '/signal/' + String(signalId), String(signalProvider._id))
+
 
         if (signalProvider.notificationPreferences.inApp && (signalProvider.profilePicture !== commentData.cProfilePicture)) {
             // Send notification to the specific signal provider
@@ -48,9 +50,9 @@ export async function POST(req, res) {
                     body: notificationPayload.body,
                 },
                 data: {
-                    clickAction: '/signal/' +  String(signalId),
+                    clickAction: '/signal/' + String(signalId),
                     iconUrl: commentData.cProfilePicture,
-                    receiverId:String(signalProvider._id)
+                    receiverId: String(signalProvider._id)
                 },
 
 
@@ -69,5 +71,36 @@ export async function POST(req, res) {
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' });
+    }
+}
+
+
+const saveNotificationData = async (title, body, iconUrl, clickAction, receiverId) => {
+
+
+    const notificationData = {
+        title,
+        body,
+        iconUrl,
+        clickAction,
+        receiverIds: [receiverId]
+    };
+
+    try {
+        const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(notificationData),
+        });
+
+        if (response.ok) {
+            console.log('Notification data sent successfully');
+        } else {
+            console.error('Failed to send notification data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending notification data:', error);
     }
 }

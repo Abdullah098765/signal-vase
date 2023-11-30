@@ -26,6 +26,8 @@ export async function POST(req, res) {
         if (!provider) {
             return NextResponse.json({ error: 'provider not found' });
         }
+        saveNotificationData(reviewData.rDisplayName, `Review on your profile ` + reviewData.text, reviewData.rProfilePicture, '/profile?review=true', String(providerId))
+
 
         // Retrieve the signal provider information
 
@@ -43,9 +45,9 @@ export async function POST(req, res) {
                     body: notificationPayload.body,
                 },
                 data: {
-                    clickAction: '/profile' + '?review=true',
+                    clickAction: '/profile?review=true',
                     iconUrl: reviewData.rProfilePicture,
-                    receiverId:providerId
+                    receiverId: providerId
 
                 },
 
@@ -65,5 +67,36 @@ export async function POST(req, res) {
     } catch (error) {
         console.error('Error:', error);
         return NextResponse.json({ error: 'Internal Server Error' });
+    }
+}
+
+
+const saveNotificationData = async (title, body, iconUrl, clickAction, receiverId) => {
+
+
+    const notificationData = {
+        title,
+        body,
+        iconUrl,
+        clickAction,
+        receiverIds: [receiverId]
+    };
+
+    try {
+        const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(notificationData),
+        });
+
+        if (response.ok) {
+            console.log('Notification data sent successfully');
+        } else {
+            console.error('Failed to send notification data:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Error sending notification data:', error);
     }
 }
