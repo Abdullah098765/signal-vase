@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const cron = require('node-cron');
 const Signal = mongoose.model('Signal'); // Replace 'Signal' with your actual model name
 const User = mongoose.model('User'); // Replace 'Signal' with your actual model name
 
@@ -52,7 +53,6 @@ export const updateSuccess = async () => {
     }
 };
 
-
 export const updateUsersSignalStatus = async () => {
     try {
         // Fetch all signals
@@ -88,8 +88,13 @@ export const updateUsersSignalStatus = async () => {
     } catch (error) {
         console.error('Error updating users with signal status:', error);
     }
-    // console.log('user updated');
-
 };
 
 
+// Schedule the updateSuccess function to run every minute
+export default function checkSuccess() {
+    // cron.schedule('* * * * *', () => {
+    //     updateSuccess();
+    //     updateUsersSignalStatus()
+    // });
+}
