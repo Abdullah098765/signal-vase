@@ -24,11 +24,11 @@ export async function POST(req, res) {
             path: 'followers',
             select: 'notificationPreferences _id',
         });
-
+   
         if (!signal) {
             return NextResponse.json({ error: 'Signal not found' });
         }
-
+        console.log(signalId);
         const buttons = [
             {
                 title: 'Good Signal',
