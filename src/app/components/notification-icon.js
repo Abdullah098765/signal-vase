@@ -14,7 +14,7 @@ const Notification_Icon = () => {
         ></script> */}
             </Head>
 
-            <div className="">
+            <div className="overflow-scroll">
                 <div className="">
                     <button
                         onClick={() => setDropdownOpen(!dropdownOpen)}
