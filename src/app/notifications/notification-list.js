@@ -40,7 +40,7 @@ const NotificationCardList = () => {
   // Example usage
 
   return (
-    <div class="p-2   border border-b-0 pb-0  w-full">
+    <div class="p-2 overflow-auto  border border-b-0 pb-0  w-full">
 
       {!isNotificationsLoading ? <>{notifications && notifications.map((notification, index) =>
         <a key={index} href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
