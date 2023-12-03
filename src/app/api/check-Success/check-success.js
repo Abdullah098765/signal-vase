@@ -1,7 +1,10 @@
+import schemas from "../Modals/schemas";
+
 const mongoose = require('mongoose');
 const cron = require('node-cron');
-const Signal = mongoose.model('Signal'); // Replace 'Signal' with your actual model name
-const User = mongoose.model('User'); // Replace 'Signal' with your actual model name
+
+const Signal = schemas.Signal; // Replace 'Signal' with your actual model name
+const User = schemas.User // Replace 'Signal' with your actual model name
 
 
 
@@ -68,7 +71,7 @@ export const updateUsersSignalStatus = async () => {
 
             if (signal.status === 'Expired') {
 
-         
+
                 // Remove the signal from the user's "activeSignals" array
                 updateData.$pull = { activeSignals: signal._id };
 
