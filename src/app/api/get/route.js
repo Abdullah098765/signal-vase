@@ -10,6 +10,7 @@ export async function GET(req, res) {
      connectDB();  // Assuming connectDB returns a promise or is an asynchronous function
 
     // Your existing code
+    
    await updateSuccess();
    await  updateUsersSignalStatus();
    await signal_Expirations();
