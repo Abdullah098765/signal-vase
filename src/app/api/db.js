@@ -1,8 +1,7 @@
 // db.js
 
 import mongoose from 'mongoose';
-import signal_Expirations from './signals-expiration/expiration.js'
-import checkSuccess from './check-Success/check-success.js'
+
 
 
 // mongodb+srv://sabir:LNnrcPrsOnfuTMEa@atlascluster.rimv5ng.mongodb.net/?retryWrites=true&w=majority
@@ -17,8 +16,7 @@ const connectDB = async () => {
   } catch (error) {
     console.error('MongoDB connection error:', error);
   }
-  signal_Expirations()
-  checkSuccess()
+
 };
 
 export default connectDB;

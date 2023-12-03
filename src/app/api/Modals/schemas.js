@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 // const models = require('mongoose/models');
 import { models } from "mongoose";
 
+const numSchema = new mongoose.Schema({
+  num:
+  {
+    type: Number,
+  },
+
+})
+
 const userSchema = new mongoose.Schema({
 
   displayName: {
@@ -347,6 +355,7 @@ const notificationSchema = new mongoose.Schema({
 const Signal = models.Signal || mongoose.model('Signal', signalSchema);
 const User = models.User || mongoose.model('User', userSchema);
 const Notification = models.Notification || mongoose.model('Notification', notificationSchema);
+const Num = models.Num || mongoose.model('Num', numSchema);
 
-export default { User, Signal, Notification };
+export default { User, Signal, Notification, Num };
 

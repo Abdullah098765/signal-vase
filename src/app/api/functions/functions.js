@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 const cron = require('node-cron');
 import Schemas from '../Modals/schemas.js'
 import { updateSuccess, updateUsersSignalStatus } from "../check-Success/check-success.js";
-
+import signal_Expirations from '../signals-expiration/expiration.js'
+import schemas from "../Modals/schemas.js";
 export function setupChangeStream() {
     console.log("stream is on!");
     const changeStream = Schemas.Signal.watch();
@@ -65,11 +66,29 @@ async function handleExpiredSignal(signal) {
     }
 
 }
+// Function to push a random number
+const pushRandomNumber = async () => {
+    // Generate a random number
+    const randomNumber = Math.floor(Math.random() * 100); // You can adjust the range as needed
 
+    try {
+        // Create a new document with the random number
+        const newDocument = new schemas.Num({ num: randomNumber });
+
+        // Save the new document
+        await newDocument.save();
+
+        console.log(`Random number ${randomNumber} added successfully.`);
+    } catch (error) {
+        console.error('Error adding random number:', error.message);
+    }
+};
 export const cornInterval = () => {
-    cron.schedule('* * * * *', () => {
-        updateSuccess()
-        updateUsersSignalStatus()
-        console.log("cornInterval on a minute!");
+    cron.schedule('*/15 * * * * *', () => {
+        updateSuccess();
+        updateUsersSignalStatus();
+        signal_Expirations();
+        pushRandomNumber()
+        console.log("cronInterval every 15 seconds!");
     });
 }
