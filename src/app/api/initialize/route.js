@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { setupChangeStream, cornInterval } from '../functions/functions'
 import connectDB from '../db';
 
-export async function GET(req, res) {
+export async function POST(req, res) {
 connectDB()
 
     // Your initialization code here
