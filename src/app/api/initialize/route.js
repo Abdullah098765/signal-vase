@@ -8,7 +8,7 @@ export async function POST(req, res) {
 
         // Your initialization code here
         await setupChangeStream();
-        await cornInterval();
+        // await cornInterval();
         console.log('Initialization code executed');
 
         return   await NextResponse.json({ message: "Initialization code executed" });

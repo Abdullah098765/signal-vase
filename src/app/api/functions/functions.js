@@ -67,7 +67,7 @@ async function handleExpiredSignal(signal) {
 
 }
 // Function to push a random number
-const pushRandomNumber = async () => {
+export const pushRandomNumber = async () => {
     // Generate a random number
     const randomNumber = Math.floor(Math.random() * 100); // You can adjust the range as needed
 
