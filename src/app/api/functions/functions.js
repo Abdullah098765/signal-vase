@@ -8,12 +8,17 @@ export function setupChangeStream() {
     console.log("stream is on!");
     const changeStream = Schemas.Signal.watch();
     changeStream.on('change', async (change) => {
+        console.log("Some thing changing in Signal collection!", change);
         if (change.operationType === 'update') {
             const updatedSignal = await Schemas.Signal.findById(change.documentKey._id);
-
+            await updateSuccess();
+            await updateUsersSignalStatus();
+            await signal_Expirations();
+            await pushRandomNumber();
             if (updatedSignal.status === 'Expired') {
                 console.log(updatedSignal);
                 await handleExpiredSignal(updatedSignal);
+
             }
         }
     });
