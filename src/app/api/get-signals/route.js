@@ -11,8 +11,7 @@ connectDB()
 
 export async function POST(req, res) {
   try {
-    updateSuccess()
-    updateUsersSignalStatus()
+
 
     // Find the user by uid
     // const signals = await Schemas.Signal.find().populate({ path: 'signalProvider', model: Schemas.User })

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const cron = require('node-cron');
 import Schemas from '../Modals/schemas.js'
-// import { updateSuccess, updateUsersSignalStatus } from "../check-Success/check-success.js";
+import { updateSuccess, updateUsersSignalStatus } from "../check-Success/check-success.js";
 
 export function setupChangeStream() {
     console.log("stream is on!");
@@ -68,7 +68,8 @@ async function handleExpiredSignal(signal) {
 
 export const cornInterval = () => {
     cron.schedule('* * * * *', () => {
-      
+        updateSuccess()
+        updateUsersSignalStatus()
         console.log("cornInterval on a minute!");
     });
 }
