@@ -5,6 +5,7 @@ import Navbar from '../components/navbar'
 import Modal from '../components/signUp-Model'
 import { MyContextProvider } from '../context/context'
 import Sidebar from '../components/sidebar'
+import NotificationCardList from './notification-list'
 
 export default function page() {
     return (
@@ -15,7 +16,10 @@ export default function page() {
                 <Navbar />
                 <div className='flex'>
                     <Sidebar />
-                    <Notifications />
+                        <NotificationCardList />
+                    {/* <div className='w-full  bg-gray-200 md:p-8 p-4'>
+
+                    </div> */}
                 </div>
                 <Modal />
             </MyContextProvider>

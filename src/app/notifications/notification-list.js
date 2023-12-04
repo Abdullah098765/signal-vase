@@ -11,7 +11,7 @@ const NotificationCardList = () => {
   // Assuming you are calling this function in a React component or another client-side context
   async function getNotifications() {
     try {
-      const response = await fetch('https://signal-hub.vercel.app/api/get-notifications', {
+      const response = await fetch('/api/get-notifications', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,9 +24,11 @@ const NotificationCardList = () => {
       }
 
       const data = await response.json();
-      setNotifications(data)
+      setNotifications(data.reverse())
       console.log(data);
       setIsNotificationsLoading(false)
+
+
       // Process the retrieved data as needed
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -40,21 +42,30 @@ const NotificationCardList = () => {
   // Example usage
 
   return (
-    <div class="p-2 overflow-auto  border border-b-0 pb-0  w-full">
-
-      {!isNotificationsLoading ? <>{notifications && notifications.map((notification, index) =>
-        <a key={index} href="#" class="flex items-center px-4 py-3 border-b hover:bg-gray-100 -mx-2">
-     {  notification.iconUrl &&   <img class="h-8 w-8 rounded-full object-cover mx-1" src={notification.iconUrl} alt="avatar" />}
-          <p class="text-gray-600 text-sm mx-2">
-            <span class="font-bold" href="#">{notification.title}</span> {notification.body}
-            {' ' + formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}
-          </p>
-        </a>)}
-
-      </> : <div className=" inset-0 flex items-center justify-center bg-white opacity-75">
-        <div className="animate-spin rounded-full border-t-4 mt-40 border-gray-500 border-solid h-12 w-12"></div>
-      </div>}
+    <div className={`p-2 overflow-auto border border-b-0 pb-0 rounded bg-white w-full`}>
+      {!isNotificationsLoading ? (
+        <>
+          {notifications && notifications.map((notification, index) => (
+            <div key={index} onClick={() => { }} className="flex items-center px-4 py-3  border-b justify-between hover:bg-gray-100 -mx-2">
+              <div className='flex items-center overflow-ellipsis ' style={{ maxWidth: "80%"/* set your desired width */ }}>
+                {notification.iconUrl && <img style={{ minWidth: "2rem" }} className="h-8 w-8 rounded-full object-cover mx-1" src={notification.iconUrl} alt="avatar" />}
+                <p className="text-gray-600 text-sm mx-2  truncate " >
+                  <span className="font-bold"  >{notification.title}</span>
+                  <p className='truncate '> {notification.body}</p>
+                </p>
+              </div>
+              <span className='text-gray-600 text-sm mx-2 '> {' ' + formatDistanceToNow(new Date(notification.createdAt), { addSuffix: true })}</span>
+            </div>
+          ))}
+        </>
+      ) : (
+        <div className="flex items-center justify-center pb-80 pt-56 bg-white opacity-75">
+          <div className="animate-spin rounded-full border-t-4 border-gray-500 border-solid h-12 w-12"></div>
+        </div>
+      )}
     </div>
+
+
   );
 };
 

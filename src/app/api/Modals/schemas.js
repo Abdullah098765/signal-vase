@@ -338,6 +338,9 @@ const notificationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  clickAction : {
+    type: String,
+  },
   actions: [
     {
       action: {
