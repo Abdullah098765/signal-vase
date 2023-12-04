@@ -11,7 +11,7 @@ export async function POST(req, res) {
     const newNotification = new Schemas.Notification(notificationData);
     const savedNotification = await newNotification.save();
 
-    console.log('Notification saved to the database', savedNotification);
+    console.log('Notification savedd to the database', savedNotification);
 
     // Send a JSON response with a 200 status code (OK)
     return NextResponse.json(savedNotification);
