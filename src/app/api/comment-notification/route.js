@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import connectDB from '../db.js';
 import { models } from 'mongoose';
+import schemas from '../Modals/schemas.js';
+schemas
 const admin = require('firebase-admin');
 
 // Check if the Firebase app is already initialized
@@ -20,7 +22,7 @@ export async function POST(req, res) {
         const { signalId, commentData } = await req.json();
 
         // Retrieve the signal information from the database
-        const signal = await models.Signal.findById(signalId)
+        const signal = await schemas.Signal.findById(signalId)
             .populate({
                 path: 'signalProvider',
                 select: 'notificationPreferences profilePicture',
@@ -85,7 +87,7 @@ const saveNotificationData = async (title, body, iconUrl, clickAction, receiverI
         clickAction,
         receiverIds: [receiverId]
     };
-
+console.log(notificationData);
     try {
         const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
             method: 'POST',

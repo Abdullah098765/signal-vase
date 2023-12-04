@@ -81,6 +81,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
         // Add the new comment to your signal.comments array or send it to the backend
         const signalId = signal._id; // Replace with the actual signalId
         const requestBody = { commentData, signalId };
+        
 
         try {
             const response = await fetch('https://signal-hub.vercel.app/api/comment', {
