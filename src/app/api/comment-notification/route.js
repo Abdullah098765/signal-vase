@@ -87,6 +87,7 @@ const saveNotificationData = async (title, body, iconUrl, clickAction, receiverI
         clickAction,
         receiverIds: [receiverId]
     };
+    console.log(notificationData);
     try {
         const response = await fetch('https://signal-hub.vercel.app/api/save-notifications', {
             method: 'POST',
