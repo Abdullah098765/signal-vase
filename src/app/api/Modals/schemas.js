@@ -340,6 +340,7 @@ const notificationSchema = new mongoose.Schema({
   },
   clickAction : {
     type: String,
+    
   },
   actions: [
     {

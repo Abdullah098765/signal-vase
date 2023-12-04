@@ -35,7 +35,7 @@ export async function POST(req, res) {
 
         // Retrieve the signal provider information
         const signalProvider = signal.signalProvider;
-        saveNotificationData(commentData.cDisplayName, `Commented on your signal for: ${signal.cryptoOrStock} ${signal.pair}`, commentData.cProfilePicture, '/signal/' + String(signalId), String(signalProvider._id))
+        saveNotificationData(commentData.cDisplayName, `Commented on your signal for: ${signal.cryptoOrStock} ${signal.pair}`, commentData.cProfilePicture, String('/signal/' + String(signalId)), String(signalProvider._id))
 
 
         if (signalProvider.notificationPreferences.inApp && (signalProvider.profilePicture !== commentData.cProfilePicture)) {
@@ -96,7 +96,7 @@ console.log(notificationData);
             },
             body: JSON.stringify(notificationData),
         });
-        
+
 
         if (response.ok) {
             console.log('Notification data sent successfully');
