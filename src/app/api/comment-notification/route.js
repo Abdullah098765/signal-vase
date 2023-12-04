@@ -96,6 +96,7 @@ console.log(notificationData);
             },
             body: JSON.stringify(notificationData),
         });
+        
 
 
         if (response.ok) {
