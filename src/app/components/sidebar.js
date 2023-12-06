@@ -77,12 +77,22 @@ function Sidebar() {
                                     <p className="text-base leading-4">Following</p>
                                 </div>
 
-                                <Link href={'https://signal-hub.vercel.app/'} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                                <div onClick={() => {
+                                    setRouterLoading(true)
+                                    router.push('/subscription')
+
+                                }} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                                     <FontAwesomeIcon icon={faBell} width="24" height="24" />
 
                                     <p class="text-base leading-4  ">Subscriptions</p>
-                                </Link>
-                                <Link href={'https://signal-hub.vercel.app/'} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                                </div>
+                                <div
+                                    onClick={() => {
+                                        setRouterLoading(true)
+                                        router.push('/EtherealCash')
+
+                                    }}
+                                    class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                                     {/* <svg  width={'24'} height={'24'} viewBox="0 0 67 79" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.5 65.5L24.5 6.00001C27.5 2.00001 35 -4 42 6.00001L44.2389 11.5L65 62.5C67.5 73 65 75.5 58 78.5H11C4.5 77 0.5 73.5 0.5 65.5Z" fill="none" strokeWidth={3} stroke="currentColor" />
                                         <path d="M47.5 32C42.5 42 25.5 52 11.5 52L28.5 8.50001C30.1667 8.50001 32.5 4 37.5 8.50001L47.5 32Z" fill="none"  strokeWidth={3} stroke="currentColor" />
@@ -94,15 +104,21 @@ function Sidebar() {
 
 
                                     <p class="text-base leading-4  ">Ethereal Cash</p>
-                                </Link>
+                                </div>
 
-                                <Link href={'https://signal-hub.vercel.app/notifications'} class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                                <div
+                                    onClick={() => {
+                                        setRouterLoading(true)
+                                        router.push('/notifications')
+
+                                    }}
+                                    class="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10 6H7C6.46957 6 5.96086 6.21071 5.58579 6.58579C5.21071 6.96086 5 7.46957 5 8V17C5 17.5304 5.21071 18.0391 5.58579 18.4142C5.96086 18.7893 6.46957 19 7 19H16C16.5304 19 17.0391 18.7893 17.4142 18.4142C17.7893 18.0391 18 17.5304 18 17V14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         <path d="M17 10C18.6569 10 20 8.65685 20 7C20 5.34314 18.6569 4 17 4C15.3431 4 14 5.34314 14 7C14 8.65685 15.3431 10 17 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                     <p class="text-base leading-4  ">Notifications</p>
-                                </Link>
+                                </div>
 
 
 
