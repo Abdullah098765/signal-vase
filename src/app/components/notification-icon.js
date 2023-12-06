@@ -39,8 +39,8 @@ const Notification_Icon = () => {
 
                     {dropdownOpen && (
                          <div
-                         className="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20 flex flex-col justify-between items-stretch"
-                         style={{ width: '20rem', maxHeight: '30rem', minHeight: '30rem' }}
+                         className="absolute right-0  bg-white rounded-md shadow-lg overflow-hidden z-20 flex flex-col justify-between items-stretch"
+                         style={{ width: '42rem', maxHeight: '30rem', minHeight: '30rem' }}
                        >
                          {/* Notifications list */}
                          <NotificationCardList />
