@@ -42,23 +42,21 @@ function Subscription() {
         }
     }, [user]);
     return (
-        <div>
-            <div className='webkit-fill-available bg-gray-900'>
+        <div className='webkit-fill-available h-full'>
+            <div className='webkit-fill-available h-full'>
                 {user ?
-                    <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1 p-0 md:p-2">
+                    <div className="flex-auto grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-1 p-0 md:p-2">
+                    
                         {/* {Subscriptions.map((subscribed) => ( */}
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
-                            <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                        <SubscriptionCard subscribed={user} key={user._id} />
+                    
 
                         {/* ))} */}
                     </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">

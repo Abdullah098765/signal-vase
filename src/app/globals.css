@@ -19,6 +19,9 @@
 body.__className_20951f {
   font-family: monospace;
   font-style: normal;
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+body {
+  /* --tw-bg-opacity: 1; */
+  /* background-color: rgb(17 24 39 / var(--tw-bg-opacity)); */
 }

@@ -183,7 +183,7 @@ const Card = ({ signal }) => {
     return (
         <div>
 
-            <div className="bg-white p-3 card m-1 " key={signal._id}>
+            <div className="bg-white p-3 card  " key={signal._id}>
                 <div className='flex justify-between'>
                     {/* Signal Type Badge */}
                     <div className={`mb-2 ${signal.longOrShort === 'Long' ? 'bg-green-500' : 'bg-red-500'} text-white py-1 px-2 rounded-md text-xs font-semibold inline-block`}>
