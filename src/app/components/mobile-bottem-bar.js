@@ -42,7 +42,7 @@ function BottomNavbar() {
     };
     return (
         <>
-        
+
             <nav className={`bottomBar bg-gray-900 text-white p-2 flex items-center justify-around fixed bottom-0 left-0 right-0 md:hidden ${visible ? 'bottom-navbar-visible' : 'bottom-navbar-hidden'}`}>
                 {/* Home Icon */}
                 <button
@@ -86,8 +86,11 @@ function BottomNavbar() {
 
                 {/* Profile Icon */}
                 <button
-                    className={`text-gray-400  ${activeIcon === 'profile' ? 'bottam_icon' : ''}`}
-                    onClick={() => handleIconClick('Subscription')}
+                    className={`text-gray-400  ${activeIcon === 'subscription' ? 'bottam_icon' : ''}`}
+                    onClick={() => {
+                        setRouterLoading(true)
+                        router.push('subscription')
+                    }}
                 >
                     <FontAwesomeIcon icon={faUsers} />
                 </button>
