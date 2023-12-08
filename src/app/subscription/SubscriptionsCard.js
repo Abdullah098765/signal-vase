@@ -161,4 +161,4 @@ const SubscribedCard = ({ subscribed }) => {
   );
 };
 
-export default subscribedCard;
+export default SubscribedCard;
