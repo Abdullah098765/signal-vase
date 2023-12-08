@@ -15,7 +15,6 @@ const subscribedCard = ({ subscribed }) => {
       <div class="col-span-1 lg:col-span-9">
         <div class="text-center ">
           <h2 class="text-2xl mt-4 font-bold text-zinc-700">{subscribed.displayName}</h2>
-          <p class="mt-2 font-semibold text-zinc-700">{subscribed.email}</p>
           <p class="mt-4 text-zinc-500">I am a Front End Developer and UI/UX Designer</p>
         </div>
 
