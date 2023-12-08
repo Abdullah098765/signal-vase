@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function Subscription() {
 
     const [subscriptions, setSubscriptions] = useState()
-
+    const [dataLoading, setDataLoading] = useState(true)
     const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
 
@@ -31,6 +31,7 @@ function Subscription() {
                 if (response.ok) {
                     const data = await response.json();
                     setSubscriptions(data);
+                    setDataLoading(false)
                     console.log(data);
                 } else {
                     console.error('Failed to fetch subscribed data');
@@ -49,7 +50,7 @@ function Subscription() {
         <MyContextProvider>
             <div className='webkit-fill-available h-full'>
                 <div className='webkit-fill-available h-full'>
-                    {subscriptions ?
+                    {!dataLoading ?
                         <div className="flex-1 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-1 p-0 md:p-2">
 
                             {subscriptions.map((subscription) => (
@@ -62,7 +63,7 @@ function Subscription() {
 
                     }
 
-                    {subscriptions?.length === 0 && (
+                    {subscriptions?.length === 0 && !dataLoading && (
                         <div className='webkit-fill-available h-full flex justify-center items-center mt-44 text-gray-800'>
                             <div className="flex flex-col items-center">
                                 <FontAwesomeIcon icon={faInfoCircle} className="text-4xl mb-2" />
