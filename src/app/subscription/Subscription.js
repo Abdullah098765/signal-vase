@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Subscription() {
 
-    const [subscriptions, setSubscriptions] = useState([])
+    const [subscriptions, setSubscriptions] = useState()
 
     const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
