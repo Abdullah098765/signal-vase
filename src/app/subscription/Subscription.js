@@ -27,7 +27,10 @@ function Subscription() {
                 if (response.ok) {
                     const data = await response.json();
                     setSubscriptions(data);
-                    setDataLoading(false);
+
+                    setTimeout(() => {
+                        setDataLoading(false);
+                    }, 2000);
                     console.log(data);
                 } else {
                     console.error('Failed to fetch subscribed data');
