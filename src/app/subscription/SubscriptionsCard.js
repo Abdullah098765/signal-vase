@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 import { useRouter } from 'next/navigation';
 
-const subscribedCard = ({ subscribed }) => {
+const SubscribedCard = ({ subscribed }) => {
   const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
   const [iAmSubscriber, setIAmSubscriber] = useState(true)
