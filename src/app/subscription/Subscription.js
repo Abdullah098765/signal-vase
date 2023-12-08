@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import SubscriptionCard from "./SubscriptionsCard.js"
 import { useMyContext } from '../context/context.js';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 function Subscription() {
 
-    const [subscriptions, setSubscriptions] = useState()
+    const [subscriptions, setSubscriptions] = useState([])
 
     const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
@@ -58,6 +60,16 @@ function Subscription() {
                     </div>
 
                 }
+
+                {subscriptions.length === 0 && (
+                    <div className='webkit-fill-available h-full flex justify-center items-center mt-44 text-gray-800'>
+                        <div className="flex flex-col items-center">
+                            <FontAwesomeIcon icon={faInfoCircle} className="text-4xl mb-2" />
+                            <p className="text-lg font-semibold">No Subscriptions</p>
+                            <p className="text-sm">Explore and subscribe providers to get signals.</p>
+                        </div>
+                    </div>
+                )}
             </div>        </div>
     )
 }

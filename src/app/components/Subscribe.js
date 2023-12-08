@@ -120,7 +120,7 @@ const Subscribe = ({ setIsCurrentprofileRoute, targetUser, openModal }) => {
                         });
                     }
                     else {
-                        router.push("/signal-provider/" + targetUser.fireBaseUid + "?review=true")
+                        router.push("/signal-provider/" + targetUser.fIdHash + "?review=true")
                         setRouterLoading(true)
                     }
 
