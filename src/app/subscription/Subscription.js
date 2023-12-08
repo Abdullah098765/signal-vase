@@ -62,7 +62,7 @@ function Subscription() {
 
                     }
 
-                    {subscriptions.length === 0 && (
+                    {subscriptions?.length === 0 && (
                         <div className='webkit-fill-available h-full flex justify-center items-center mt-44 text-gray-800'>
                             <div className="flex flex-col items-center">
                                 <FontAwesomeIcon icon={faInfoCircle} className="text-4xl mb-2" />
