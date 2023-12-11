@@ -125,6 +125,49 @@ export const MyContextProvider = ({ children }) => {
     [user]
   );
 
+  const getSearchResult = async (searchString, filter) => {
+    try {
+      const apiUrl = "/api/search";
+
+      // Prepare the request body
+      const requestBody = {
+        search: searchString,
+        filter: filter || undefined // Optional filter
+      };
+
+      // Make the API request
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+          // Add any additional headers if needed
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      // Check if the request was successful (status code 2xx)
+      if (response.ok) {
+        const data = await response.json();
+
+        // Process the data or update state as needed
+        setSignals(data.signals);
+        console.log("Search results:", data);
+
+        // Your logic for handling the search results goes here
+      } else {
+        // Handle errors if the request was not successful
+        console.error(
+          "Error fetching search results:",
+          response.status,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      // Handle any other errors that may occur during the API request
+      console.error("Error:", error.message);
+    }
+  };
+
   if (routerLoading) {
     setTimeout(() => {
       setRouterLoading(false);
@@ -134,6 +177,7 @@ export const MyContextProvider = ({ children }) => {
   return (
     <MyContext.Provider
       value={{
+        getSearchResult,
         setSearchString,
         searchString,
         _setIsModalOpen,

@@ -28,7 +28,7 @@ const Navbar = () => {
 
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, routerLoading, setRouterLoading, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user,setSearchString,searchString } = useMyContext();
+    const { isOpen, setIsOpen, routerLoading, setRouterLoading,getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user,setSearchString,searchString } = useMyContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -91,7 +91,7 @@ const Navbar = () => {
 
        if(urlParts.length > 1){
         setSearchVisible(true) 
-        setSearchString(urlParts[urlParts.length - 1])
+        setSearchString(decodeURIComponent(urlParts[urlParts.length - 1]))
        }
        else        setSearchVisible(false);
 
@@ -137,13 +137,17 @@ const Navbar = () => {
         };
       
         const handleSearch = () => {
-            if (searchString !== "") {
-
-            router.push("/search?search=" + searchString)
-          }
-          // Your search logic goes here
-          console.log('Performing search...');
-          // You can call your API or update the state based on the search criteria
+            if (searchString.trim() !== "") {
+                // Remove leading and trailing whitespaces and check if the string is not empty
+                // router.push("/search?search=" + encodeURIComponent(searchString));
+                console.log('Performing search...');
+                getSearchResult(searchString)
+                // Your search logic goes here
+                // You can call your API or update the state based on the search criteria
+              } else {
+                console.log('Invalid search string. Please enter a valid search.');
+              }
+              
         };
       
 
