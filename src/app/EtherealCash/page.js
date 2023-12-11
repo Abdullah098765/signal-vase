@@ -4,6 +4,7 @@ import { MyContextProvider } from '../context/context'
 import Sidebar from '../components/sidebar'
 import Navbar from '../components/navbar'
 import RouterLoading from '../components/routerLoading'
+import BottomNavbar from '../components/mobile-bottem-bar'
 
 function page() {
     return (
@@ -16,6 +17,8 @@ function page() {
                 <Sidebar />
                 <EtherealCash />
                 </div>
+                <BottomNavbar />
+                
             </MyContextProvider>
         </div>
     )
