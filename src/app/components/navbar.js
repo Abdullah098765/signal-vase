@@ -28,7 +28,7 @@ const Navbar = () => {
 
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, routerLoading, setRouterLoading,getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user,setSearchString,searchString } = useMyContext();
+    const { isOpen, setIsOpen, routerLoading,getSignals, setRouterLoading,getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user,setSearchString,searchString } = useMyContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -124,7 +124,7 @@ const Navbar = () => {
 
 
   const handleKeyPress = (event) => {
-         
+  
           // Check if the pressed key is 'Enter' (key code 13)
           if (event.key === 'Enter') {
 
@@ -147,6 +147,7 @@ const Navbar = () => {
               } else {
                 console.log('Invalid search string. Please enter a valid search.');
               }
+              
               
         };
       
@@ -189,7 +190,13 @@ const Navbar = () => {
                             placeholder="Search signals"
                             className="w-120 px-3 py-2 rounded-full pl-10 bg-gray-800 text-gray-100 focus:outline-none focus:bg-gray-700"
                           onKeyPress={handleKeyPress}
-                          onChange={(event)=>setSearchString(event.target.value)}
+                          onChange={(event)=>{
+                            if (event.target.value === "") {
+                                console.log('Empty search.');
+                        
+                                getSignals()
+                              }
+                            setSearchString(event.target.value)}}
                           value={searchString}
                       
                       />
@@ -329,7 +336,13 @@ const Navbar = () => {
                                 className="search-input w-120 px-3 py-2 pl-6 pr-10 bg-gray-800 text-gray-100 focus:outline-none focus:bg-gray-700"
                                 ref={searchInputRef}
                                 onKeyPress={handleKeyPress}
-                                onChange={(event)=>setSearchString(event.target.value)}
+                                onChange={(event)=>{
+                                    if (event.target.value === "") {
+                                        console.log('Empty search.');
+                                
+                                        getSignals()
+                                      }
+                                    setSearchString(event.target.value)}}
                                 value={searchString}
                                  />
                       <div onClick={() => { searchString !== "" && handleSearch()}} className="absolute inset-y-0 right-0 cursor-pointer pr-3 flex items-center" style={{ zIndex: 1 }}>

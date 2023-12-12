@@ -15,7 +15,7 @@ export const useMyContext = () => {
 
 export const MyContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [signals, setSignals] = useState([]);
+  const [signals, setSignals] = useState();
   const [selectedSignal, setSelectedSignal] = useState({});
   const [isSignalModalOpen, setisSignalModalOpen] = useState(false);
   const [routerLoading, setRouterLoading] = useState(false);
@@ -54,9 +54,13 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const getSignals = () => {
+    setRouterLoading(true);
     fetch("https://signal-hub.vercel.app/api/get-signals", { method: "POST" })
       .then(response => response.text())
-      .then(result => setSignals(JSON.parse(result)))
+      .then(result => {
+        setRouterLoading(false);
+        setSignals(JSON.parse(result));
+      })
       .catch(error => console.log("error", error));
   };
   const _setIsModalOpen = (is, signal) => {
@@ -126,6 +130,8 @@ export const MyContextProvider = ({ children }) => {
   );
 
   const getSearchResult = async (searchString, filter) => {
+    setRouterLoading(true);
+
     try {
       const apiUrl = "/api/search";
 
@@ -148,7 +154,7 @@ export const MyContextProvider = ({ children }) => {
       // Check if the request was successful (status code 2xx)
       if (response.ok) {
         const data = await response.json();
-
+        setRouterLoading(false);
         // Process the data or update state as needed
         setSignals(data.signals);
         console.log("Search results:", data);

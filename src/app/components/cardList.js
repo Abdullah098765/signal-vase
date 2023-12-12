@@ -51,7 +51,7 @@ const SignalCardList = ({ }) => {
 
   return (
     <div className='webkit-fill-available'>
-      {signals[0]  ? 
+      {signals  ? 
         <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  webkit-fill-available gap-1 p-0 md:p-2">
           {signals.map((signal) => (
             <Card signal={signal} key={signal._id} />
@@ -62,6 +62,7 @@ const SignalCardList = ({ }) => {
         </div>
 
       }
+      {signals?.length < 1 &&  <div>There is No matches!</div>}
     </div>
   );
 };
