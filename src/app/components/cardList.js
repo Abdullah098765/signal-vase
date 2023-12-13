@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import "./components.css"
 import { useMyContext } from '../context/context'
 import Card from './card.js'
+import InfiniteScroll from 'react-infinite-scroll-component';
+
 const SignalCardList = ({ }) => {
 
 
 
-  const { signals, setSignals, user, getSignals, lineClicked, closeSidenav } = useMyContext()
+  const { signals, setSignals, user,hasMore,isSignalsLoading, getSignals, lineClicked, closeSidenav } = useMyContext()
   useEffect(() => {
-    getSignals()
+    // getSignals()
     console.log(signals);
   }, [])
 
@@ -49,21 +51,37 @@ const SignalCardList = ({ }) => {
     console.log(windowWidth);
   }, [windowWidth]);
 
+
+
   return (
     <div className='webkit-fill-available'>
-      {signals  ? 
-        <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  webkit-fill-available gap-1 p-0 md:p-2">
-          {signals.map((signal) => (
-            <Card signal={signal} key={signal._id} />
-           
-          ))}                </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-          <p className="text-white mt-4">Loading...</p>
-        </div>
+    {signals.length > 0 ? (
+        <InfiniteScroll
+          dataLength={signals.length}  // Corrected from 'posts.length'
+          next={getSignals}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+        >
+      <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 webkit-fill-available gap-1 p-0 md:p-2">
 
-      }
-      {signals?.length < 1 &&  <div>There is No matches!</div>}
-    </div>
+          {/* Render your signals */}
+          {signals.map((signal, index) => (
+                     <Card signal={signal} key={signal._id} />
+            
+          ))}
+      </div>
+
+        </InfiniteScroll>
+        
+    ) : (
+      isSignalsLoading &&   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        <p className="text-white mt-4">Loading...</p>
+      </div>
+    )}
+    {signals?.length < 1 && <div>There are no matches!</div>}
+  </div>
+  
   );
 };
 

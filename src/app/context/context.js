@@ -15,18 +15,19 @@ export const useMyContext = () => {
 
 export const MyContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
-  const [signals, setSignals] = useState();
+  const [signals, setSignals] = useState([]);
   const [selectedSignal, setSelectedSignal] = useState({});
   const [isSignalModalOpen, setisSignalModalOpen] = useState(false);
   const [routerLoading, setRouterLoading] = useState(false);
   const [searchString, setSearchString] = useState();
+  const [isSignalsLoading, setIsSignalsLoading] = useState(true);
 
   const [lineClicked, setLineClicked] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
+  const [hasMore, setHasMore] = useState(true);
   const closeSidenav = (is, lineClicked) => {
     setIsSliderOpen(is);
     console.log(isSliderOpen);
@@ -55,11 +56,34 @@ export const MyContextProvider = ({ children }) => {
 
   const getSignals = () => {
     setRouterLoading(true);
-    fetch("https://signal-hub.vercel.app/api/get-signals", { method: "POST" })
+
+    
+
+    var raw = JSON.stringify({
+      skip: signals.length
+    });
+
+    var requestOptions = {
+      method: "POST",
+      // headers: myHeaders,
+      body: raw,
+      redirect: "follow"
+    };
+    fetch("/api/get-signals", requestOptions)
       .then(response => response.text())
       .then(result => {
         setRouterLoading(false);
-        setSignals(JSON.parse(result));
+        let newSignals = JSON.parse(result);
+        var _signals = setSignals(prevSignals => {
+          let updatedSignals = prevSignals.concat(newSignals);
+          console.log("All Signals:", updatedSignals);
+          return updatedSignals; // This value will be the new state
+        });
+        if (newSignals.length === 0) {
+          setHasMore(false);
+        }
+        setIsSignalsLoading(false)
+        console.log("Signals:", _signals);
       })
       .catch(error => console.log("error", error));
   };
@@ -185,6 +209,7 @@ export const MyContextProvider = ({ children }) => {
       value={{
         getSearchResult,
         setSearchString,
+        isSignalsLoading,
         searchString,
         _setIsModalOpen,
         routerLoading,
@@ -194,6 +219,7 @@ export const MyContextProvider = ({ children }) => {
         isEditModalOpen,
         setIsEditModalOpen,
         lineClicked,
+        hasMore,
         selectedSignal,
         setSelectedSignal,
         getSignals,

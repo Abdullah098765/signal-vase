@@ -11,8 +11,8 @@ const Card = ({ signal }) => {
 
     const [liked, setLiked] = useState(false);
     const [disliked, setDisliked] = useState(false);
-    const [likeCount, setLikeCount] = useState(signal.likes.length);
-    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount.length);
+    const [likeCount, setLikeCount] = useState(signal.likes?.length);
+    const [dislikeCount, setDislikeCount] = useState(signal.disLikesCount?.length);
     const { user, isModalOpen, setIsModalOpen, setRouterLoading, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
     const [following, setFollowing] = useState(false);
 
