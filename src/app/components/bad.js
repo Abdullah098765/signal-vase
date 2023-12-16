@@ -5,7 +5,6 @@ import { useMyContext } from '../context/context';
 const BadSignals = ({ badSignals }) => {
     const { setisSignalModalOpen, setSelectedSignal,isSignalModalOpen } = useMyContext();
 
-    console.log(isSignalModalOpen);
     return (
         <div className='flex-1 bg-white  shadow-xl p-8'>
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4">

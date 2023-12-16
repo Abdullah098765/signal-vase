@@ -10,6 +10,8 @@ const CryptoPairSelector = () => {
     pair.toLowerCase().includes(searchText.toLowerCase())
   );
 
+
+  
   return (
     <div>
       <input
@@ -30,7 +32,7 @@ const CryptoPairSelector = () => {
         ))}
       </ul>
       {selectedPair && (
-        <p>You selected: {selectedPair}</p>
+        <p>You selected: {selectedPair + ''}</p>
       )}
     </div>
   );
