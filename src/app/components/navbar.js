@@ -28,7 +28,7 @@ const Navbar = () => {
 
 
     // const [isOpen, setIsOpen] = useState(false);
-    const { isOpen, setIsOpen, routerLoading,getSignals, setRouterLoading,getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user,setSearchString,searchString } = useMyContext();
+    const { isOpen, setIsOpen, routerLoading, getSignals, setIsSkip, searchResultSignals,setSearchResultSignals, setRouterLoading, getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user, setSearchString, searchString } = useMyContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -69,7 +69,7 @@ const Navbar = () => {
 
     const toggleSearch = () => {
         setRouterLoading(true)
-        router.back()
+        router.push('/')
     };
     const searchInputRef = useRef(null);
     const searchParams = usePathname();
@@ -79,9 +79,9 @@ const Navbar = () => {
             // Focus the search input when it becomes visible
             searchInputRef.current.focus();
         }
-      
 
-        
+
+
     }, [searchVisible]);
 
 
@@ -89,18 +89,18 @@ const Navbar = () => {
         const urlParts = window.location.href.split("search=");
         console.log(urlParts);
 
-       if(urlParts.length > 1){
-        setSearchVisible(true) 
-        setSearchString(decodeURIComponent(urlParts[urlParts.length - 1]))
-       }
-       else        setSearchVisible(false);
+        if (urlParts.length > 1) {
+            setSearchVisible(true)
+            setSearchString(decodeURIComponent(urlParts[urlParts.length - 1]))
+        }
+        else setSearchVisible(false);
 
-     
+
     }, [])
     const _signOut = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
-      
+
 
             fetch('https://signal-hub.vercel.app/api/signout', {
                 method: 'POST',
@@ -123,34 +123,39 @@ const Navbar = () => {
     }
 
 
-  const handleKeyPress = (event) => {
-  
-          // Check if the pressed key is 'Enter' (key code 13)
-          if (event.key === 'Enter') {
+    const handleKeyPress = (event) => {
+
+        // Check if the pressed key is 'Enter' (key code 13)
+        if (event.key === 'Enter') {
 
             // Call your search function here
             if (event.target.value !== "") {
-            handleSearch();
-                
+                handleSearch();
+
+
             }
-          }
-        };
-      
-        const handleSearch = () => {
-            if (searchString.trim() !== "") {
-                // Remove leading and trailing whitespaces and check if the string is not empty
-                // router.push("/search?search=" + encodeURIComponent(searchString));
-                console.log('Performing search...');
-                getSearchResult(searchString)
-                // Your search logic goes here
-                // You can call your API or update the state based on the search criteria
-              } else {
-                console.log('Invalid search string. Please enter a valid search.');
-              }
-              
-              
-        };
-      
+            else router.push('/')
+        }
+    };
+
+    const handleSearch = () => {
+        setRouterLoading(true)
+        setSearchResultSignals([])
+        setIsSkip(false)
+        if (searchString.trim() !== "") {
+            // Remove leading and trailing whitespaces and check if the string is not empty
+            router.push("/search?search=" + encodeURIComponent(searchString));
+            console.log('Performing search...');
+            getSearchResult(searchString)
+            // Your search logic goes here
+            // You can call your API or update the state based on the search criteria
+        } else {
+            console.log('Invalid search string. Please enter a valid search.');
+        }
+
+
+    };
+
 
     if (!user) return null
 
@@ -189,18 +194,19 @@ const Navbar = () => {
                             type="text"
                             placeholder="Search signals"
                             className="w-120 px-3 py-2 rounded-full pl-10 bg-gray-800 text-gray-100 focus:outline-none focus:bg-gray-700"
-                          onKeyPress={handleKeyPress}
-                          onChange={(event)=>{
-                            if (event.target.value === "") {
-                                console.log('Empty search.');
-                        
-                                getSignals()
-                              }
-                            setSearchString(event.target.value)}}
-                          value={searchString}
-                      
-                      />
-                        <div  onClick={()=>handleSearch()} className="absolute inset-y-0 left-0 cursor-pointer  pl-3 flex items-center pointer-events-none">
+                            onKeyPress={handleKeyPress}
+                            onChange={(event) => {
+                                if (event.target.value === "") {
+                                    console.log('Empty search.');
+
+                                    // getSignals()
+                                }
+                                setSearchString(event.target.value)
+                            }}
+                            value={searchString}
+
+                        />
+                        <div onClick={() => handleSearch()} className="absolute inset-y-0 left-0 cursor-pointer  pl-3 flex items-center pointer-events-none">
                             {/* Search Icon */}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -236,9 +242,9 @@ const Navbar = () => {
                     </div>
 
 
-             <div >
-    <Notification_Icon/>
-              </div>
+                    <div >
+                        <Notification_Icon />
+                    </div>
                     {/* User Profile */}
                     <div className="flex items-center space-x-4">
 
@@ -320,11 +326,11 @@ const Navbar = () => {
 
 
                             className={`search-container ${searchVisible ? 'active flex w-full flex-row items-center relative' : ''}`}>
-                            <div className='text-white cursor-pointer absolute ml-2' onClick={()=>{
-                                if(searchString ){
-                                toggleSearch()
-                            }
-                           else setSearchVisible(false)
+                            <div className='text-white cursor-pointer absolute ml-2' onClick={() => {
+                                if (searchString) {
+                                    toggleSearch()
+                                }
+                                else setSearchVisible(false)
 
                             }}>
 
@@ -336,33 +342,33 @@ const Navbar = () => {
                                 className="search-input w-120 px-3 py-2 pl-6 pr-10 bg-gray-800 text-gray-100 focus:outline-none focus:bg-gray-700"
                                 ref={searchInputRef}
                                 onKeyPress={handleKeyPress}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     if (event.target.value === "") {
                                         console.log('Empty search.');
-                                
-                                        getSignals()
-                                      }
-                                    setSearchString(event.target.value)}}
+                                        // getSignals()
+                                    }
+                                    setSearchString(event.target.value)
+                                }}
                                 value={searchString}
-                                 />
-                      <div onClick={() => { searchString !== "" && handleSearch()}} className="absolute inset-y-0 right-0 cursor-pointer pr-3 flex items-center" style={{ zIndex: 1 }}>
-                  {/* Search Icon */}
-                                      <svg
-                               xmlns="http://www.w3.org/2000/svg"
-                               className="h-6 w-6 text-gray-100"
-                               fill="none"
-                               viewBox="0 0 24 24"
-                               stroke="currentColor"
-                               >
-                               <path
-                                 strokeLinecap="round"
-                                 strokeLinejoin="round"
-                                 strokeWidth="2"
-                                 d="M21 21l-4.35-4.35"
-                                 />
-                              <circle cx="10" cy="10" r="7" />
-                              </svg>
-</div>
+                            />
+                            <div onClick={() => { searchString !== "" && handleSearch() }} className="absolute inset-y-0 right-0 cursor-pointer pr-3 flex items-center" style={{ zIndex: 1 }}>
+                                {/* Search Icon */}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6 text-gray-100"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M21 21l-4.35-4.35"
+                                    />
+                                    <circle cx="10" cy="10" r="7" />
+                                </svg>
+                            </div>
 
 
 
@@ -377,7 +383,7 @@ const Navbar = () => {
                             className="text-gray-400 hover:text-gray-100 mr-2"
                         >
                             <svg
-                                onClick={()=>setSearchVisible(true)}
+                                onClick={() => setSearchVisible(true)}
 
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"

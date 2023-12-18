@@ -1,7 +1,13 @@
-import React from 'react';
+"use client"
+import React, { useEffect } from 'react';
 import { FaCog } from 'react-icons/fa'; // Import the desired icon from react-icons library
+import { useMyContext } from '../context/context';
 
 function EtherealCash() {
+    const { isOpen, setIsOpen, routerLoading, getSignals, setRouterLoading, getSearchResult, setIsSliderOpen, isSliderOpen, closeSidenav, isModalOpen, setIsModalOpen, user, setSearchString, searchString } = useMyContext();
+    useEffect(() => {
+        setRouterLoading(false)
+    }, [])
     return (
         <div className='flex mt-48 items-center justify-center webkit-fill-available text-gray-800'>
             <div className='flex flex-col items-center'>

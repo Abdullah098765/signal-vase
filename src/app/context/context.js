@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import io from "socket.io-client";
 import { app } from "../../../firebaseConfig";
 import { isSupported } from "firebase/messaging";
+import { usePathname, useRouter } from "next/navigation";
 
 const MyContext = createContext();
 
@@ -16,18 +17,21 @@ export const useMyContext = () => {
 export const MyContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [signals, setSignals] = useState([]);
+  const [searchResultSignals, setSearchResultSignals] = useState([]);
+  const [searchResultUsers, setsSearchResultUsers] = useState([]);
   const [selectedSignal, setSelectedSignal] = useState({});
   const [isSignalModalOpen, setisSignalModalOpen] = useState(false);
   const [routerLoading, setRouterLoading] = useState(false);
   const [searchString, setSearchString] = useState();
   const [isSignalsLoading, setIsSignalsLoading] = useState(true);
-
+  const [isSkip, setIsSkip] = useState(false);
   const [lineClicked, setLineClicked] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [skip, setSkip] = useState(0);
   const closeSidenav = (is, lineClicked) => {
     setIsSliderOpen(is);
     console.log(isSliderOpen);
@@ -57,7 +61,7 @@ export const MyContextProvider = ({ children }) => {
   const getSignals = () => {
     setRouterLoading(true);
 
-    
+
 
     var raw = JSON.stringify({
       skip: signals.length
@@ -108,7 +112,7 @@ export const MyContextProvider = ({ children }) => {
         })
           .then(currentToken => {
             if (currentToken) {
-              fetch("https://signal-hub.vercel.app/api/store-fcm-token", {
+              fetch("/api/store-fcm-token", {
                 method: "POST",
                 body: JSON.stringify({
                   userId: user._id,
@@ -132,7 +136,8 @@ export const MyContextProvider = ({ children }) => {
       }
     });
   };
-
+  const router = useRouter();
+  const pathname = usePathname()
   useEffect(() => {
     if (localStorage.getItem("uid")) {
       getUser();
@@ -141,9 +146,9 @@ export const MyContextProvider = ({ children }) => {
   }, []);
   useEffect(
     () => {
+
       user &&
         isSupported().then(hasFirebaseMessagingSupport => {
-          console.log(hasFirebaseMessagingSupport);
           if (hasFirebaseMessagingSupport) {
             const messaging = getMessaging(app);
             requestPermission(messaging);
@@ -152,15 +157,24 @@ export const MyContextProvider = ({ children }) => {
     },
     [user]
   );
+  useEffect(() => {
+    if (searchString && searchResultSignals.length === 0 && pathname === "/search") {
+      getSearchResult(searchString)
+    }
+    setSkip(0)
+    if (searchString === "") {
+      router.push('/')
+    }
+  }, [searchString]);
 
   const getSearchResult = async (searchString, filter) => {
-    setRouterLoading(true);
 
     try {
       const apiUrl = "/api/search";
 
       // Prepare the request body
       const requestBody = {
+        skip: isSkip ? searchResultSignals.length : 0,
         search: searchString,
         filter: filter || undefined // Optional filter
       };
@@ -177,12 +191,22 @@ export const MyContextProvider = ({ children }) => {
 
       // Check if the request was successful (status code 2xx)
       if (response.ok) {
+        setIsSkip(true)
         const data = await response.json();
         setRouterLoading(false);
         // Process the data or update state as needed
-        setSignals(data.signals);
-        console.log("Search results:", data);
 
+        let newSignals = data.signals;
+        setSearchResultSignals(prevSignals => {
+          let updatedSignals = prevSignals.concat(newSignals);
+          console.log(updatedSignals);
+          return updatedSignals; // This value will be the new state
+        });
+
+        if (newSignals.length === 0) {
+          setHasMore(false);
+        }
+        setIsSignalsLoading(false)
         // Your logic for handling the search results goes here
       } else {
         // Handle errors if the request was not successful
@@ -235,7 +259,10 @@ export const MyContextProvider = ({ children }) => {
         getUser,
         setIsModalOpen,
         user,
-        setUser
+        setUser,
+        searchResultSignals, setSearchResultSignals,
+        searchResultUsers, setsSearchResultUsers,
+        setIsSkip
       }}
     >
       {children}

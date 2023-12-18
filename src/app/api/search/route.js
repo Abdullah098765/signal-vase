@@ -7,7 +7,7 @@ connectDB();
 export async function POST(req, res) {
   try {
     // Parse the request body
-    const { search, filter } = await req.json();
+    const { search, filter, skip } = await req.json();
 
     // Ensure that search is provided
     if (!search) {
@@ -36,7 +36,8 @@ export async function POST(req, res) {
         { longOrShort: { $regex: new RegExp(search, "i") } },
         { status: { $regex: new RegExp(search, "i") } }
       ]
-    }).populate('signalProvider');
+    }).populate('signalProvider').skip(skip)
+      .limit(8);
 
     // Apply additional filtering if filter object is provided
     // Example: { status: 'active' }

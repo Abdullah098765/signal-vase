@@ -60,7 +60,7 @@ const SignalCardList = ({ }) => {
           dataLength={signals.length}  // Corrected from 'posts.length'
           next={getSignals}
           hasMore={hasMore}
-          loader={<h4>Loading...</h4>}
+          
         >
       <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 webkit-fill-available gap-1 p-0 md:p-2">
 
@@ -79,7 +79,6 @@ const SignalCardList = ({ }) => {
         <p className="text-white mt-4">Loading...</p>
       </div>
     )}
-    {signals?.length < 1 && <div>There are no matches!</div>}
   </div>
   
   );
