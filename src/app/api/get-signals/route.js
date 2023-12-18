@@ -80,7 +80,7 @@ export async function POST(req, res) {
       },
 
       { $skip: skip },
-      { $limit: 40 }
+      { $limit: 21}
     ];
 
     // Perform the aggregation

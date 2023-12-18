@@ -37,7 +37,7 @@ export async function POST(req, res) {
         { status: { $regex: new RegExp(search, "i") } }
       ]
     }).populate('signalProvider').skip(skip)
-      .limit(8);
+      .limit(10);
 
     // Apply additional filtering if filter object is provided
     // Example: { status: 'active' }

@@ -59,7 +59,6 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const getSignals = () => {
-    setRouterLoading(true);
 
 
 
@@ -162,7 +161,7 @@ export const MyContextProvider = ({ children }) => {
       getSearchResult(searchString)
     }
     setSkip(0)
-    if (searchString === "") {
+    if (searchString === "999998y97gi87g98g98u") {
       router.push('/')
     }
   }, [searchString]);
