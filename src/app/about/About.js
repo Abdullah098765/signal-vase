@@ -5,10 +5,10 @@ const About = () => {
             <div className="bg-gray-100 p-8 w-full">
                   <div className="max-w-4xl mx-auto">
                         <h1 className="text-4xl font-bold mb-6">About Signal Hub</h1>
-
+                        <hr />
 
                         <p className="text-lg text-gray-700 mb-8">
-                              Welcome to Signal Hub - Your Gateway to Informed Trading!<br/> At Signal Hub, we believe in empowering individuals to navigate the complex world of trading with confidence and security.
+                              Welcome to Signal Hub - Your Gateway to Informed Trading!<br /> At Signal Hub, we believe in empowering individuals to navigate the complex world of trading with confidence and security.
                         </p>
 
                         <div className="mb-8">
@@ -32,9 +32,9 @@ const About = () => {
                         </div>
 
                         <p className="text-lg text-gray-700 mb-8">
-                        Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Hub welcomes you to a community driven by trust, transparency, and innovation. Together, let's redefine the trading landscape and ensure that every trader gets what they deserve.
+                              Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Hub welcomes you to a community driven by trust, transparency, and innovation. Together, let's redefine the trading landscape and ensure that every trader gets what they deserve.
 
-</p>
+                        </p>
 
                         <p className="text-lg text-gray-700">
                               Signal Hub - Trading with Trust, Trading with Signal Hub.
