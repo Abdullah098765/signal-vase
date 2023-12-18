@@ -24,7 +24,7 @@ const About = () => {
                                     <li className="mb-2">Scam Protection</li>
                                     <p className="text-lg text-gray-700 mb-4">
                                           Our primary goal is to shield users from scams prevalent on social media platforms. Signal Hub is a secure space designed to eliminate the risks associated with unreliable signals, providing you with a trustworthy platform to enhance your trading journey.                                    </p>
-                                    <li className="mb-2">EtherealCash Integration</li>
+                                    <li className="mb-2">EtherealCash Integration (Under Development!)</li>
                                     <p className="text-lg text-gray-700 mb-4">
                                           To facilitate seamless transactions between signal providers and followers, Signal Hub introduces EtherealCash, a digital currency exclusive to our platform. Users can buy and sell signals using EtherealCash, ensuring a convenient and secure payment system.                                    </p>
 
@@ -32,8 +32,9 @@ const About = () => {
                         </div>
 
                         <p className="text-lg text-gray-700 mb-8">
-                              Join us in shaping the future of trading! Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Hub welcomes you to a community driven by trust, transparency, and innovation.
-                        </p>
+                        Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Hub welcomes you to a community driven by trust, transparency, and innovation. Together, let's redefine the trading landscape and ensure that every trader gets what they deserve.
+
+</p>
 
                         <p className="text-lg text-gray-700">
                               Signal Hub - Trading with Trust, Trading with Signal Hub.
