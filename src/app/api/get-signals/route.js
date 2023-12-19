@@ -15,28 +15,25 @@ export async function POST(req, res) {
 
     // Find the user by uid
     // const signals = await Schemas.Signal.find().populate({ path: 'signalProvider', model: Schemas.User })
+    const specificSignalId = "65814b9a9c4c21973bc67c87"; // Replace with the actual signal ID
+
     const pipeline = [
       {
-        $lookup: {
-          from: "users", // The name of the User collection
-          localField: "signalProvider",
-          foreignField: "_id",
-          as: "signalProvider"
+        $addFields: {
+          isSpecificSignal: { $eq: ["$_id", specificSignalId] }
         }
       },
       {
-        $unwind: {
-          path: "$signalProvider",
-          preserveNullAndEmptyArrays: true
+        $sort: {
+          isSpecificSignal: -1, // Sort in descending order to bring the specific signal to the top
+          status: 1,
+          followerCount: -1,
+          likesCount: -1,
+          commentsCount: -1,
+          "signalProvider.reviews": -1
+          // Add other sorting criteria as needed
         }
       },
-      // Match only active signals
-      {
-        $match: {
-          // status: 'Expired',
-        }
-      },
-      // Add fields for follower count, likes count, and comments count
       {
         $addFields: {
           followerCount: { $size: "$followers" },
@@ -44,20 +41,9 @@ export async function POST(req, res) {
           commentsCount: { $size: "$comments" }
         }
       },
-      // Sort by various criteria
-      {
-        $sort: {
-          status: 1, // Sort by status in ascending order (Activated first)
-          followerCount: -1, // Sort by followers in descending order
-          likesCount: -1, // Then by likes in descending order
-          commentsCount: -1, // Then by comments in descending order
-          "signalProvider.reviews": -1 // Then by signal provider's reviews count in descending order
-        }
-      },
-      // Project the desired fields
       {
         $project: {
-          signalProvider: 1, // Include the signal provider object
+          signalProvider: 1,
           cryptoOrStock: 1,
           duration: 1,
           entry1: 1,
@@ -78,10 +64,12 @@ export async function POST(req, res) {
           comments: 1
         }
       },
-
       { $skip: skip },
-      { $limit: 23}
+      { $limit: 23 }
     ];
+    
+    // Use the pipeline in your MongoDB aggregation query
+    
 
     // Perform the aggregation
     const signals = await Schemas.Signal.aggregate(pipeline, {
