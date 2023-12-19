@@ -477,7 +477,7 @@ function Signal() {
 
 
                                     <h3 className="text-lg font-semibold text-black mt-4 mb-2">Explanation</h3>
-                                    <p className="text-gray-500 text-lg">{signal.explanation}</p>
+                                    <pre className="text-gray-500 text-lg text-wrap-balance">{signal.explanation}</pre>
                                 </div>
 
 
