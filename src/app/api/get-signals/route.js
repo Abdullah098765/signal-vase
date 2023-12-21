@@ -3,7 +3,7 @@ import Schemas from "../Modals/schemas.js";
 import connectDB from "../db.js";
 import {
   updateSuccess,
-  updateUsersSignalStatus
+  updateUsersSignalStatus,
 } from "../check-Success/check-success.js";
 import schemas from "../Modals/schemas.js";
 
@@ -16,30 +16,51 @@ export async function POST(req, res) {
     // Find the user by uid
     // const signals = await Schemas.Signal.find().populate({ path: 'signalProvider', model: Schemas.User })
     const specificSignalId = "65814b9a9c4c21973bc67c87"; // Replace with the actual signal ID
+    const currentTimeInMillis = Date.now(); // Get the current time in milliseconds
 
     const pipeline = [
       {
-        $addFields: {
-          isSpecificSignal: { $eq: ["$_id", specificSignalId] }
+        $match: {
+          duration: { $gt: currentTimeInMillis }
         }
       },
       {
+        $lookup: {
+          from: "users", // The name of the User collection
+          localField: "signalProvider",
+          foreignField: "_id",
+          as: "signalProvider",
+        },
+      },
+      {
+        $unwind: {
+          path: "$signalProvider",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $addFields: {
+          isSpecificSignal: { $eq: ["$_id", specificSignalId] },
+        },
+      },
+      {
+       
         $sort: {
           isSpecificSignal: -1, // Sort in descending order to bring the specific signal to the top
           status: 1,
           followerCount: -1,
           likesCount: -1,
           commentsCount: -1,
-          "signalProvider.reviews": -1
+          "signalProvider.reviews": -1,
           // Add other sorting criteria as needed
-        }
+        },
       },
       {
         $addFields: {
           followerCount: { $size: "$followers" },
           likesCount: { $size: "$likes" },
-          commentsCount: { $size: "$comments" }
-        }
+          commentsCount: { $size: "$comments" },
+        },
       },
       {
         $project: {
@@ -61,19 +82,18 @@ export async function POST(req, res) {
           disLikesCount: 1,
           followers: 1,
           createdAt: 1,
-          comments: 1
-        }
+          comments: 1,
+        },
       },
       { $skip: skip },
-      { $limit: 23 }
+      { $limit: 23 },
     ];
-    
+
     // Use the pipeline in your MongoDB aggregation query
-    
 
     // Perform the aggregation
     const signals = await Schemas.Signal.aggregate(pipeline, {
-      maxTimeMS: 60000
+      maxTimeMS: 60000,
     });
     const cacheControlHeader = "no-cache, no-store"; // You can adjust max-age as needed
     // const num = await Schemas.Num.find().skip(skip).limit(10);
@@ -81,16 +101,16 @@ export async function POST(req, res) {
       return new Response(JSON.stringify(signals), {
         headers: {
           "Cache-Control": cacheControlHeader,
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       });
     } else {
       // User not found, return an appropriate response
       return new Response(JSON.stringify({ error: "signals not found" }), {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        status: 404 // Use the appropriate status code
+        status: 404, // Use the appropriate status code
       });
     }
   } catch (error) {
@@ -99,9 +119,9 @@ export async function POST(req, res) {
     // Send a JSON response with a 500 status code (Internal Server Error)
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      status: 500 // Use the appropriate status code
+      status: 500, // Use the appropriate status code
     });
   }
 }
