@@ -52,7 +52,7 @@ export const MyContextProvider = ({ children }) => {
       redirect: "follow"
     };
 
-    fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
+    fetch("/api/get-user", requestOptions)
       .then(response => response.text())
       .then(result => setUser(JSON.parse(result)))
       .catch(error => console.log("error", error));

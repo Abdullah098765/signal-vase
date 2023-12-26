@@ -11,7 +11,22 @@ const numSchema = new mongoose.Schema({
 })
 
 const userSchema = new mongoose.Schema({
-
+  personalInfo: {
+    // The personalInfo field containing the specified structure
+    fullName: String,
+    age: String,
+    socialMediaLinks: [
+      {
+        title: String,
+        link: String
+      }
+    ],
+    mobile: String,
+    email: String,
+    market: String,
+    languages: String,
+    country: String
+  },
   displayName: {
     type: String,
     required: true,
@@ -338,9 +353,9 @@ const notificationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  clickAction : {
+  clickAction: {
     type: String,
-    
+
   },
   actions: [
     {
