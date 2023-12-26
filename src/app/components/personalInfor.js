@@ -2,20 +2,9 @@ import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 
-const PersonalInfor = () => {
+const PersonalInfor = ({ user }) => {
   // State to hold personal information
-  const [personalInformation, setPersonalInformation] = useState({
-    fullName: 'Amanda S. Ross',
-    age: '24 Jul, 1991',
-    socialMediaLinks: [],
-    mobile: '',
-    email: '',
-    market: '',
-    languages: '',
-    country: '',
-    // Add other fields as needed
-  });
-
+  const [personalInformation, setPersonalInformation] = useState(user.personalInfo);
   // Function to handle changes in personal information
   const handleChange = (e, field) => {
     setPersonalInformation({
@@ -54,13 +43,13 @@ const PersonalInfor = () => {
       }
 
       if (title && link) {
-       
-        
+
+
         personalInformation.socialMediaLinks.push({
           title,
           link
         })
-        
+
         closeModal();
       }
     };
@@ -126,7 +115,7 @@ const PersonalInfor = () => {
         </h4>
         <div className="mt-2 text-gray-700">
           <div className="flex border-y py-2">
-            <span className="font-bold w-24">Full name:</span>
+            <span className="font-bold w-24">Full name: </span>
             <input
               type="text"
               value={personalInformation.fullName}
@@ -134,7 +123,7 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Age:</span>
+            <span className="font-bold w-24">Age: </span>
             <input
               type="text"
               value={personalInformation.age}
@@ -143,7 +132,7 @@ const PersonalInfor = () => {
           </div>
 
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Mobile:</span>
+            <span className="font-bold w-24">Mobile: </span>
             <input
               type="text"
               value={personalInformation.mobile}
@@ -151,7 +140,7 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Email:</span>
+            <span className="font-bold w-24">Email: </span>
             <input
               type="text"
               value={personalInformation.email}
@@ -159,7 +148,7 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Market:</span>
+            <span className="font-bold w-24">Market: </span>
             <input
               type="text"
               value={personalInformation.market}
@@ -167,7 +156,7 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Languages:</span>
+            <span className="font-bold w-24">Languages: </span>
             <input
               type="text"
               value={personalInformation.languages}
@@ -175,7 +164,7 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2">
-            <span className="font-bold w-24">Country:</span>
+            <span className="font-bold w-24">Country: </span>
             <input
               type="text"
               value={personalInformation.country}
@@ -183,9 +172,11 @@ const PersonalInfor = () => {
             />
           </div>
           <div className="flex border-b py-2 items-center">
-            <span className="font-bold w-24 inline">Links:</span>
-            <a href="link-to-instagram" className="text-blue-500 hover:text-blue-700">Instagram</a>
+            <span className="font-bold w-24 inline">Links: </span>
 
+            {personalInformation.socialMediaLinks && personalInformation.socialMediaLinks.map((link, index) =>
+              <a target="_blank" key={index} href={link.link} className="text-blue-500 ml-4 hover:text-blue-700">{link.title}</a>
+            )}
             <FontAwesomeIcon className='cursor-pointer hover:text-lg mx-2' onClick={() => setShowModal(true)} icon={faAdd} />
             {/* <input
               type="text"

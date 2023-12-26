@@ -251,7 +251,7 @@ function User() {
             </div>
 
             <Career user={user} />
-            <PersonalInfo />
+            <PersonalInfo user={user} />
             <div>
               <div class="w-full flex flex-col cursor-pointer mt-3">
                 <div class="bg-white ">
