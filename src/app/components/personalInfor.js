@@ -198,10 +198,11 @@ const PersonalInfor = ({ user }) => {
             <span className="font-bold  w-24 inline">Links: </span>
 
             {personalInformation.socialMediaLinks && personalInformation.socialMediaLinks.map((link, index) =>
-              <div className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
+              <div 
+              key={index}
+              className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
                 <a
                   target="_blank"
-                  key={index}
                   href={link.link}
                   className=""
                 >
@@ -280,10 +281,11 @@ const PersonalInfor = ({ user }) => {
                 <span className="font-bold  w-24 inline">Links: </span>
 
                 {personalInformation.socialMediaLinks && personalInformation.socialMediaLinks.map((link, index) =>
-                  <div className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
+                  <div 
+                  key={index}
+                   className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
                     <a
                       target="_blank"
-                      key={index}
                       href={link.link}
                       className=""
                     >
