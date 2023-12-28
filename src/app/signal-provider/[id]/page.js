@@ -28,6 +28,7 @@ import ShareModal from '@/app/components/shareModal';
 import Modal from '@/app/components/signUp-Model';
 import BottomNavbar from '@/app/components/mobile-bottem-bar';
 import ProfileSignalCards from '../../components/profile-signal-cards';
+import PersonalInfor from '@/app/components/personalInfor';
 
 function User() {
     const router = useRouter()
@@ -245,7 +246,7 @@ function User() {
 
 
                             <Career user={user} />
-                            <PersonalInfo user={user} />
+                            <PersonalInfor user={user} />
 
                             <div>
                                 <div class="w-full flex flex-col  mt-3 cursor-pointer">
