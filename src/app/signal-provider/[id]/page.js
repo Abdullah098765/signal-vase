@@ -90,7 +90,7 @@ function User() {
             redirect: 'follow'
         };
 
-        fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
+        fetch("/api/get-user", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setUser(JSON.parse(result))
@@ -129,7 +129,7 @@ function User() {
             redirect: 'follow'
         };
 
-        fetch("https://signal-hub.vercel.app/api/all-user-signals", requestOptions)
+        fetch("/api/all-user-signals", requestOptions)
             .then(response => response.text())
             .then(result => {
                 let allSignals = JSON.parse(result).goodSignals.concat(JSON.parse(result).badSignals, JSON.parse(result).neutralSignals);

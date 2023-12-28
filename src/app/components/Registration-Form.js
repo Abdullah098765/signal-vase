@@ -55,7 +55,16 @@ const RegistrationForm = () => {
               profilePicture: result.user.photoURL,
               phone: result.user.phoneNumber,
               SubscribersFCMTokens: [],
-              fIdHash: fIdHash + randomId
+              fIdHash: fIdHash + randomId,
+              personalInfo:{
+                fullName:result.user.displayName,
+                age:'No Info',
+                mobile:"No Info",
+                email:result.user.email,
+                market:"Any Market",
+                languages:"No Infor",
+                country:"No Info"
+              }
             }
           ),
 
