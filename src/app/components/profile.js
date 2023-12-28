@@ -150,7 +150,6 @@ function User() {
   const closeModal = () => {
     setIsShareModalOpen(false);
   };
-  const pathName = usePathname();
   function formatRegistrationDate(timestamp) {
     const date = new Date(timestamp);
 
