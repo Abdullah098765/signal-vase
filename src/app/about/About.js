@@ -26,7 +26,7 @@ const About = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Support the Development of Ethereal Cash (ERCH) And Mobile App</h2>
           <p className="text-lg text-gray-700 mb-4">
-            We want to keep you informed about the development of ERCH and Signal Hub mobile application. Currently, progress is hindered due to limited funds. The immobility in ERCH's development is a direct result of financial constraints.
+            We want to keep you informed about the development of ERCH and Signal Hub mobile application. Currently, progress is hindered due to limited funds. The immobility in {"ERCH's"} development is a direct result of financial constraints.
           </p>
           <p className="text-lg text-gray-700 mb-4">
             Your support can make a significant difference. By contributing to Signal Hub, you are not only supporting the platform itself but also helping to accelerate the development of ERCH and its mobile app. Together, we can overcome these challenges and continue to innovate in the world of trading.
