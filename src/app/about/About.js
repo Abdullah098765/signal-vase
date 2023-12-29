@@ -24,7 +24,7 @@ const About = () => {
 
         {/* Add a section about ERCH funding challenges */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Support the Development of Ethereal Cash (ERCH)</h2>
+          <h2 className="text-2xl font-bold mb-4">Support the Development of Ethereal Cash (ERCH) And Mobile App</h2>
           <p className="text-lg text-gray-700 mb-4">
             We want to keep you informed about the development of ERCH and Signal Hub mobile application. Currently, progress is hindered due to limited funds. The immobility in ERCH's development is a direct result of financial constraints.
           </p>
