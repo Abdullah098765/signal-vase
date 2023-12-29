@@ -13,12 +13,41 @@ const PersonalInfor = ({ user }) => {
       [field]: e.target.value,
     });
   };
+  const [isLoading, setIsLoading] = useState(false);
 
   // Function to save the updated information
-  const handleSave = () => {
-    console.log('Updated Personal Information:', personalInformation);
-    setIsEditing(false)
+  const handleSave = async () => {
+    setIsLoading(true)
+    try {
+      // Define the user ID and personalInformation object (adjust this based on your actual data structure)
+      const userId = user._id; // Replace with actual user ID
+
+
+      // Send a PUT request to your API route
+      const response = await fetch('/api/edit-personal-info', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId,
+          personalInformation,
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Response:', data);
+
+      // Update local state or perform other actions based on the response
+      setIsEditing(false);
+      setIsLoading(false)
+    } catch (error) {
+      console.error('Error saving personal information:', error);
+      setIsLoading(false)
+      alert("Error saving personal information")
+    }
   };
+
   const [showModal, setShowModal] = useState(false);
 
   const AddLinkModal = () => {
@@ -118,10 +147,13 @@ const PersonalInfor = ({ user }) => {
 
     {isEditing ? <div className="mt-4 w-full flex flex-col">
       <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
-        <div className='absolute right-12'>
+        <div className='absolute right-12 flex'>
           <button
             className="text-sm px-2 py-1 mr-2 rounded bg-gray-500 text-white hover:bg-gray-600 cursor-pointer "
-            onClick={handleSave}
+            onClick={() => {
+              setPersonalInformation(user.personalInfo)
+              setIsEditing(false)
+            }}
           >
             Reset
           </button>
@@ -129,7 +161,10 @@ const PersonalInfor = ({ user }) => {
             className="text-sm px-2 py-1 rounded bg-red-700 text-white hover:bg-red-900  cursor-pointer "
             onClick={handleSave}
           >
-            Save
+
+            {isLoading ?
+              <div className="w-5 h-5 border-t-2 border-blue-500 border-solid rounded-full animate-spin"></div>
+              : 'Save'}
           </button>
         </div>
         <AddLinkModal />
@@ -198,9 +233,9 @@ const PersonalInfor = ({ user }) => {
             <span className="font-bold  w-24 inline">Links: </span>
 
             {personalInformation.socialMediaLinks && personalInformation.socialMediaLinks.map((link, index) =>
-              <div 
-              key={index}
-              className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
+              <div
+                key={index}
+                className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
                 <a
                   target="_blank"
                   href={link.link}
@@ -240,7 +275,7 @@ const PersonalInfor = ({ user }) => {
           <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
             <div className='absolute right-12'>
               {localStorage.getItem('uid').toLowerCase() === user.fireBaseUid && <button
-                className="text-sm px-2 py-1 mr-2 rounded bg-gray-500 text-white hover:bg-gray-600 cursor-pointer "
+                className="text-sm px-2 py-1 mr-2 text-blue-500 md:mr-4 hover:text-blue-700 cursor-pointer "
                 onClick={() => setIsEditing(true)}
               >
                 Edit
@@ -281,9 +316,9 @@ const PersonalInfor = ({ user }) => {
                 <span className="font-bold  w-24 inline">Links: </span>
 
                 {personalInformation.socialMediaLinks && personalInformation.socialMediaLinks.map((link, index) =>
-                  <div 
-                  key={index}
-                   className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
+                  <div
+                    key={index}
+                    className="relative text-blue-500 md:mr-4 mr-0 hover:text-blue-700">
                     <a
                       target="_blank"
                       href={link.link}

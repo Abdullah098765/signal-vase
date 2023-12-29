@@ -61,8 +61,8 @@ const RegistrationForm = () => {
                 age:'No Info',
                 mobile:"No Info",
                 email:result.user.email,
-                market:"Any Market",
-                languages:"No Infor",
+                market:"All Markets",
+                languages:"No Info",
                 country:"No Info"
               }
             }

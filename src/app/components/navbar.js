@@ -245,9 +245,9 @@ const Navbar = () => {
             {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
           </div>
 
-          <div>
+          {uid && <div>
             <Notification_Icon />
-          </div>
+          </div>}
           {/* User Profile */}
           <div className="flex items-center space-x-4">
             <div className="absolute right-5 group">
@@ -312,9 +312,8 @@ const Navbar = () => {
       />
 
       <nav
-        className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${
-          searchVisible ? "justify-end" : "justify-between"
-        } ${visible ? "navbar-visible" : "navbar-hidden"}`}
+        className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${searchVisible ? "justify-end" : "justify-between"
+          } ${visible ? "navbar-visible" : "navbar-hidden"}`}
       >
         {/* Left Side: Logo */}
         {!searchVisible && (
@@ -325,20 +324,18 @@ const Navbar = () => {
         {/* Right Side: Search, Create, Profile */}
         <div className={`flex items-center ${searchVisible ? " w-full" : ""} `}>
           <div
-            className={`mobile-navbar flex flex-row  justify-around items-center ${
-              searchVisible ? " w-full" : ""
-            }`}
+            className={`mobile-navbar flex flex-row  justify-around items-center ${searchVisible ? " w-full" : ""
+              }`}
           >
             {/* Search Icon */}
 
             {/* Search Input Field */}
 
             <div
-              className={`search-container ${
-                searchVisible
+              className={`search-container ${searchVisible
                   ? "active flex w-full flex-row items-center relative"
                   : ""
-              }`}
+                }`}
             >
               <div
                 className="text-white cursor-pointer absolute ml-2"

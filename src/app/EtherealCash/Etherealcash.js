@@ -31,7 +31,7 @@ function EtherealCash() {
           Ethereal Cash is Under Development
         </p>
         <p className="text-sm text-center">
-          Ethereal Cash is the exclusive currency on our platform. Use it to
+          Ethereal Cash is the exclusive currency on Signal Hub. Use it to
           purchase signals or subscribe to premium signal providers. Exciting
           features coming soon!
         </p>
