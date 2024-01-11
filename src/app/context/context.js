@@ -98,7 +98,7 @@ export const MyContextProvider = ({ children }) => {
   function _setIsEditModalOpen(params) {
     setIsEditModalOpen(params);
   }
-
+  var fcmTokenSent = false
   const requestPermission = messaging => {
     console.log("Requesting permission...");
     Notification.requestPermission().then(permission => {
@@ -122,6 +122,8 @@ export const MyContextProvider = ({ children }) => {
                 "Send the token to your server and update the UI if necssary",
                 currentToken
               );
+              fcmTokenSent = true
+
             } else {
               // Show permission request UI
               console.log(
@@ -143,12 +145,13 @@ export const MyContextProvider = ({ children }) => {
     }
     getSignals();
   }, []);
+
   useEffect(
     () => {
 
       user &&
         isSupported().then(hasFirebaseMessagingSupport => {
-          if (hasFirebaseMessagingSupport) {
+          if (hasFirebaseMessagingSupport && !fcmTokenSent) {
             const messaging = getMessaging(app);
             requestPermission(messaging);
           }
