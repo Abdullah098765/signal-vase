@@ -124,7 +124,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             {review.rDisplayName}
                         </p>
                     </div>
-                    <pre className='mt-2 text-sm text-black'>{review.text}</pre>
+                    <pre className='mt-2 text-sm text-black text-wrap-balance '>{review.text}</pre>
 
                     <p className='mt-1 text-xs text-gray-500'>
                         {formatDistanceToNow(new Date(review.createdAt), { addSuffix: true })}
