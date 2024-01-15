@@ -140,7 +140,6 @@ const PersonalInfor = ({ user }) => {
       socialMediaLinks: updatedLinks
     }));
   };
-  console.log(localStorage.getItem('uid').toLowerCase(), user.fireBaseUid);
 
   return (<>
 
@@ -274,7 +273,7 @@ const PersonalInfor = ({ user }) => {
 
           <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
             <div className='absolute right-12'>
-              {localStorage.getItem('uid').toLowerCase() === user.fireBaseUid && <button
+              {localStorage.getItem('uid')?.toLowerCase() === user.fireBaseUid && <button
                 className="text-sm px-2 py-1 mr-2 text-blue-500 md:mr-4 hover:text-blue-700 cursor-pointer "
                 onClick={() => setIsEditing(true)}
               >
