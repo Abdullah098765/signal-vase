@@ -120,9 +120,9 @@ const Reviews = ({ provider, loggedIn }) => {
                                 className='w-6 h-6 object-cover rounded-full'
                             />
                         )}
-                        <p className={`ml-2 font-semibold text-black ${review.rProfilePicture ? 'mt-1' : ''}`}>
+                        <pre className={`ml-2 font-semibold text-black ${review.rProfilePicture ? 'mt-1' : ''}`}>
                             {review.rDisplayName}
-                        </p>
+                        </pre>
                     </div>
                     <p className='mt-2 text-sm text-black'>{review.text}</p>
 

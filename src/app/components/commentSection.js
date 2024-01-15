@@ -137,7 +137,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
                                 {comment.cDisplayName}
                             </p>
                         </div>
-                        <p className="mt-2 text-sm text-black">{comment.text}</p>
+                        <pre className="mt-2 text-sm text-black">{comment.text}</pre>
 
                         {/* Display timestamp */}
                         <p className="mt-1 text-xs text-gray-500">
