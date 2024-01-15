@@ -120,11 +120,11 @@ const Reviews = ({ provider, loggedIn }) => {
                                 className='w-6 h-6 object-cover rounded-full'
                             />
                         )}
-                        <pre className={`ml-2 font-semibold text-black ${review.rProfilePicture ? 'mt-1' : ''}`}>
+                        <p className={`ml-2 font-semibold text-black ${review.rProfilePicture ? 'mt-1' : ''}`}>
                             {review.rDisplayName}
-                        </pre>
+                        </p>
                     </div>
-                    <p className='mt-2 text-sm text-black'>{review.text}</p>
+                    <pre className='mt-2 text-sm text-black'>{review.text}</pre>
 
                     <p className='mt-1 text-xs text-gray-500'>
                         {formatDistanceToNow(new Date(review.createdAt), { addSuffix: true })}
@@ -180,22 +180,22 @@ const Reviews = ({ provider, loggedIn }) => {
                     <button
                         className={`bg-black cursor-pointer text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
                             }`}
-                            onClick={() => {
-                                if (localStorage.getItem('uid')) {
-                                    console.log("there is uid");
-                                    if (!loading && newReview !== '') {
-                                        // if (illigible) {
-                                        handleReviewSubmit();
-                                        // }
-                                        // else alert ("Only Subscribers Can review")
-                                        
+                        onClick={() => {
+                            if (localStorage.getItem('uid')) {
+                                console.log("there is uid");
+                                if (!loading && newReview !== '') {
+                                    // if (illigible) {
+                                    handleReviewSubmit();
+                                    // }
+                                    // else alert ("Only Subscribers Can review")
+
                                     console.log("Conditions are true");
-                                    }
-                                } else {
-                                    setIsModalOpen(true);
-                                    console.log('there is not uid');
                                 }
-                            }}
+                            } else {
+                                setIsModalOpen(true);
+                                console.log('there is not uid');
+                            }
+                        }}
                     >
                         {loading ? (
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
