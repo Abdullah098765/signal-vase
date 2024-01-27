@@ -174,7 +174,6 @@ const userSchema = new mongoose.Schema({
   },
   market: {
     type: String,
-    enum: ['Crypto', 'Forex', 'Crypto/Forex'],
     default: 'Crypto/Forex',
   },
   registrationDate: {
@@ -195,7 +194,6 @@ const signalSchema = new mongoose.Schema({
   cryptoOrStock: {
     type: String,
     required: true,
-    enum: ['Crypto', 'Stock'], // You can expand this enum as needed
   },
 
   // Duration of the signal
