@@ -86,7 +86,7 @@ export async function POST(req, res) {
         },
       },
       { $skip: skip },
-      { $limit: 23 },
+      { $limit: 3 },
     ];
 
     // Use the pipeline in your MongoDB aggregation query
