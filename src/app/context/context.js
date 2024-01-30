@@ -58,12 +58,12 @@ export const MyContextProvider = ({ children }) => {
       .catch(error => console.log("error", error));
   };
 
-  const getSignals = () => {
+  const getSignals = (page) => {
 
 
 
     var raw = JSON.stringify({
-      skip: signals.length
+      skip: page
     });
 
     var requestOptions = {
@@ -143,7 +143,7 @@ export const MyContextProvider = ({ children }) => {
     if (localStorage.getItem("uid")) {
       getUser();
     }
-    getSignals();
+    // getSignals();
   }, []);
 
   useEffect(

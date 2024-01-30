@@ -9,10 +9,11 @@ const SignalCardList = ({ }) => {
 
 
   const { signals, setSignals, user,hasMore,isSignalsLoading, getSignals, lineClicked, closeSidenav } = useMyContext()
+  const [page, setPage] = useState(1);
   useEffect(() => {
-    // getSignals()
+    getSignals(page)
     console.log(signals);
-  }, [])
+  }, [page])
 
   const [windowWidth, setWindowWidth] = useState();
   useEffect(() => {
@@ -58,7 +59,7 @@ const SignalCardList = ({ }) => {
     {signals.length > 0 ? (
         <InfiniteScroll
           dataLength={signals.length}  // Corrected from 'posts.length'
-          next={getSignals}
+          next={() => setPage((prevPage) => prevPage + 1)}
           hasMore={hasMore}
           
         >
