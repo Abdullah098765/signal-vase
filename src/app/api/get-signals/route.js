@@ -85,6 +85,18 @@ export async function POST(req, res) {
           comments: 1,
         },
       },
+      {
+        $group: {
+          _id: "$_id", // Use a unique identifier (can be any field that makes each document unique)
+          data: { $first: "$$ROOT" }, // Preserve the document data
+        },
+      },
+      {
+        $replaceRoot: {
+          newRoot: "$data", // Replace the root with the grouped document
+        },
+      },
+
       { $skip: (skip - 1) * 8 },
       { $limit: 8 },
     ];
