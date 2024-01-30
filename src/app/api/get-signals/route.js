@@ -44,7 +44,7 @@ export async function POST(req, res) {
         },
       },
       {
-       
+
         $sort: {
           isSpecificSignal: -1, // Sort in descending order to bring the specific signal to the top
           status: 1,
@@ -85,7 +85,7 @@ export async function POST(req, res) {
           comments: 1,
         },
       },
-      { $skip: skip },
+      { $skip: (skip - 1) * 8 },
       { $limit: 3 },
     ];
 
