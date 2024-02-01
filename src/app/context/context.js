@@ -58,8 +58,9 @@ export const MyContextProvider = ({ children }) => {
       .catch(error => console.log("error", error));
   };
 
-  const getSignals = (page) => {
+  const getSignals = (page, setIsMoreSignalsLoading) => {
 
+    setIsMoreSignalsLoading(true)
 
 
     var raw = JSON.stringify({
@@ -77,11 +78,18 @@ export const MyContextProvider = ({ children }) => {
       .then(result => {
         setRouterLoading(false);
         let newSignals = JSON.parse(result);
-        var _signals = setSignals(prevSignals => {
-          let updatedSignals = prevSignals.concat(newSignals);
+        setSignals(prevSignals => {
+          // Check if each signal in newSignals already exists in prevSignals based on a specific condition
+          let uniqueNewSignals = newSignals.filter(newSignal =>
+            !prevSignals.some(prevSignal => prevSignal._id === newSignal._id)
+          );
+
+          let updatedSignals = prevSignals.concat(uniqueNewSignals);
           console.log("All Signals:", updatedSignals);
+          setIsMoreSignalsLoading(false)
           return updatedSignals; // This value will be the new state
         });
+
         if (newSignals.length === 0) {
           setHasMore(false);
         }

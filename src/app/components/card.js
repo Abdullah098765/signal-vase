@@ -179,7 +179,6 @@ const Card = ({ signal }) => {
     const likeIconColor = liked ? 'text-green-500  mr-1' : '  mr-1 border-gray-400 hover:text-green-700 cursor-pointer hover:text-green-500';
     const dislikeIconColor = disliked ? 'text-red-500 ml-2 mr-1' : 'border-gray-400 ml-2 mr-1 cursor-pointer hover:text-red-500 focus:text-red-500';
 
-
     return (
         <div>
 
@@ -255,7 +254,7 @@ const Card = ({ signal }) => {
                     <p>Followers: {signal.followers.length}</p>
                 </div>
 
- 
+
 
 
                 {/* Action Buttons */}

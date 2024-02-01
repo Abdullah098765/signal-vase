@@ -1,29 +1,24 @@
 const cron = require('node-cron');
 import Schemas from '../Modals/schemas.js'
 
-
-
 export default async function signal_Expirations() {
-
-    // Define a cron job to run every minute
     try {
-        // Find all active signals
         const activeSignals = await Schemas.Signal.find({ status: 'Active' });
-
-        // Get the current timestamp
         const currentTime = new Date().getTime();
 
-        // Check each active signal for expiration
-        activeSignals.forEach(async (signal) => {
+        // Use map to create an array of promises
+        const updatePromises = activeSignals.map(async (signal) => {
             if (currentTime >= signal.duration) {
-                console.log(signal);
-
-                // Update the signal status to "Expired"
-                var done = await Schemas.Signal.findByIdAndUpdate(signal._id, { status: 'Expired' });
-
+                console.log("signal_Expirations LINE 12:",signal);
+                return Schemas.Signal.findByIdAndUpdate(signal._id, { status: 'Expired' });
             }
         });
+
+        // Use Promise.all to wait for all updates to complete
+        await Promise.all(updatePromises);
     } catch (error) {
         console.error('Error checking and updating signals:', error);
     }
 }
+
+
