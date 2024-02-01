@@ -55,9 +55,15 @@ const SignalCardList = ({ }) => {
   }, [windowWidth]);
 
 
-  if (!signals[0]?._id) return <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
-    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
-    <p className="text-white mt-4">Loading...</p>
+  if (!signals[0]?._id) return <div className="flex-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 webkit-fill-available gap-1 p-0 md:p-2">
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
+    <SkeletonCard />
   </div>
   return (
     <div className='webkit-fill-available'>
@@ -78,7 +84,7 @@ const SignalCardList = ({ }) => {
               <Card signal={signal} key={signal._id} />
 
             ))}
-            {isMoreSignalsLoading && <>
+            {true && <>
               <SkeletonCard />
               <SkeletonCard />
               <SkeletonCard />
