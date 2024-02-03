@@ -94,7 +94,6 @@ export const MyContextProvider = ({ children }) => {
           setHasMore(false);
         }
         setIsSignalsLoading(false)
-        console.log("Signals:", _signals);
       })
       .catch(error => console.log("error", error));
   };

@@ -40,7 +40,7 @@ console.log("notification recieved");
       data: {
         clickAction: clickAction,
       },
-      actions: actions,
+      // actions: actions,
     })
   );
 });
@@ -52,26 +52,28 @@ self.addEventListener('notificationclick', (event) => {
 
 
   // Handle different action buttons
-  if (action === 'goodSignal') {
-    // Add your custom logic here
-    addGood(clickAction.split('/')[2], clickAction.split('/')[3])
-    neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
-    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+  // if (action === 'goodSignal') {
+  //   // Add your custom logic here
+  //   addGood(clickAction.split('/')[2], clickAction.split('/')[3])
+  //   neutralDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+  //   badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
 
-  } else if (action === 'neutralSignal') {
-    // Code to run when the "Neutral Signal" button is clicked
-    console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
-    addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
-    goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
-    badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
-    // Add your custom logic here
-  } else {
+  // } else if (action === 'neutralSignal') {
+  //   // Code to run when the "Neutral Signal" button is clicked
+  //   console.log('User clicked Neutral Signal', clickAction.split('/')[2], clickAction.split('/')[3]);
+  //   addNeutral(clickAction.split('/')[2], clickAction.split('/')[3])
+  //   goodDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+  //   badDiscount(clickAction.split('/')[2], clickAction.split('/')[3])
+  //   // Add your custom logic here
+  // } 
+  
+   {
     // Code to run when the notification is clicked (not on an action button)
     console.log('User clicked the notification', clickAction.split('/')[2], clickAction.split('/')[3]);
     if (clickAction) {
 
 
-      if (event.notification.title === "Signal Expiration") {
+      if (event.notification.title === "Signal Expiration" ) {
         const originalString = clickAction
         const lastSlashIndex = originalString.lastIndexOf("/");
         const stringWithoutLastPart = originalString.substring(0, lastSlashIndex + 1);

@@ -52,7 +52,7 @@ function Signal() {
             redirect: 'follow'
         };
 
-        fetch("https://signal-hub.vercel.app/api/get-signal", requestOptions)
+        fetch("/api/get-signal", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setSignal(JSON.parse(result))
