@@ -116,14 +116,15 @@ export async function POST(req, res) {
           },
         };
 
+        var savedNotification = await saveNotificationData(message)
+        var notificationSending = await pushNotification(message)
+        return new Response(JSON.stringify({ notificationSending, savedNotification }));
 
-        saveNotificationData(message)
-        pushNotification(message)
       }
 
-
-
       return new Response(JSON.stringify(signals));
+
+
     } else {
       // signals not found, return an appropriate response
       return new Response(JSON.stringify({ error: "signals not found" }));
@@ -174,6 +175,8 @@ const pushNotification = async (message) => {
 
     if (response.successCount > 0) {
       console.log(`${response.successCount} messages were sent successfully.`);
+
+      return `${response.successCount} messages were sent successfully.`
     }
 
     if (response.failureCount > 0) {
@@ -181,6 +184,7 @@ const pushNotification = async (message) => {
       response.responses.forEach((resp, index) => {
         if (!resp.success) {
           console.error(`Error sending notification to token ${followersWithInAppTokens[index]}:`, resp.error);
+          return `Error sending notification to token ${followersWithInAppTokens[index]}:`, resp.error
         }
       });
     }
