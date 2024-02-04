@@ -1,6 +1,6 @@
 
 
-export async function POST(req, res) {
+export async function GET(req, res) {
 
   console.log('Scheduled task is running!');
 
