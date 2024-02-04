@@ -1,7 +1,10 @@
 {
-  "functions": {
-    "scheduled-task": {
+  "crons": [
+    {
+      "path": "/api/scheduled-task",
       "schedule": "*/10 * * * * *"
+
     }
-  }
+
+  ]
 }
