@@ -1,6 +1,6 @@
 "use client";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MyContextProvider, useMyContext } from "../context/context";
+import { MyContextProvider, useMyContext } from "../context/context.js";
 import {
   faAdd,
   faChartArea,
@@ -17,32 +17,26 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import Career from "./creer.js";
 import PersonalInfo from "./personalInfor.js";
-import AllSignals from "./all";
-import GoodSignals from "./good";
-import BadSignals from "./bad";
-import NeutralSignals from "./neutral";
-import CryptoSignals from "./crypto";
-import ForexSignals from "./forex";
-import Subscribe from "./Subscribe";
-import ActiveSignals from "./active";
-import Reviews from "./reviews";
-import About from "./About";
-import EditButtons from "./editButtons";
+
+import Reviews from "./reviews.js";
+import About from "./About.js";
+import EditButtons from "./editButtons.js";
 import "./components.css";
 import { useEffect, useState } from "react";
-import SignalsPieChart from "./career-chart";
+import SignalsPieChart from "./career-chart.js";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"; // Import the ScrollToPlugin
 import ShareModal from "./shareModal.js";
 import gsap from "gsap";
-import SignalModal from "./signalModal";
-import EditProfileModal from "./edit-profile-modal";
+import SignalModal from "./signalModal.js";
+import EditProfileModal from "./edit-profile-modal.js";
 import { usePathname } from "next/navigation";
 import ProfileSignalCards from "./profile-signal-cards.js";
 
-function User() {
+function ProfileContent() {
   const { user, setRouterLoading, isModalOpen, setIsModalOpen } =
     useMyContext();
   const [isScrolled, setIsScrolled] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [currentprofileRoute, setIsCurrentprofileRoute] = useState("All");
   gsap.registerPlugin(ScrollToPlugin); // Register the plugin
@@ -68,45 +62,9 @@ function User() {
   function handleGetRoute(params) {
     setIsCurrentprofileRoute(params);
   }
-  const [allSignals, setAllSignals] = useState([]);
   const [isSignInButtinShown, setIsSignInButtinShown] = useState(false);
-  const [Signals, setSignals] = useState([]);
-  const [cryptoSignals, setCryptoSignals] = useState([]);
-  const [forexSignals, setForexSignals] = useState([]);
-  const getAllSignals = () => {
-    var myHeaders = new Headers();
-    myHeaders.append("a", "dni");
-    myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({
-      uid: user._id,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://signal-hub.vercel.app/api/all-user-signals", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        let allSignals = JSON.parse(result).goodSignals.concat(
-          JSON.parse(result).badSignals,
-          JSON.parse(result).neutralSignals
-        );
-
-        setAllSignals(allSignals);
-        setSignals(JSON.parse(result));
-
-        console.log(allSignals);
-      })
-      .catch((error) => console.log("error", error));
-  };
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    getAllSignals();
     setRouterLoading(false);
     if (user) {
       setIsLoading(false);
@@ -116,17 +74,6 @@ function User() {
       setIsSignInButtinShown(true);
     }
   }, [user]);
-
-  useEffect(() => {
-    const cryptoSignals = allSignals.filter(
-      (signal) => signal.cryptoOrStock === "Crypto"
-    );
-    const stockSignals = allSignals.filter(
-      (signal) => signal.cryptoOrStock === "Stock"
-    );
-    setCryptoSignals(cryptoSignals);
-    setForexSignals(stockSignals);
-  }, [allSignals]);
 
   const handleScroll = (direction) => {
     const scrollContainer = document.getElementById("scroll-container");
@@ -302,11 +249,11 @@ function User() {
                         Crypto
                       </li>
                       <li
-                        onClick={() => handleGetRoute("Forex")}
-                        class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === "Forex" ? "bg-gray-100" : ""
+                        onClick={() => handleGetRoute("Stock")}
+                        class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === "Stock" ? "bg-gray-100" : ""
                           }`}
                       >
-                        Forex
+                        Stock
                       </li>
                       <li
                         onClick={() => handleGetRoute("About")}
@@ -344,32 +291,9 @@ function User() {
                 </div>
               </div>
             </div>
-            <MyContextProvider>
-              {currentprofileRoute === "All" && (
-                <ProfileSignalCards signals={allSignals} />
-              )}
-              {currentprofileRoute === "Good" && (
-                <ProfileSignalCards signals={Signals.goodSignals} />
-              )}
-              {currentprofileRoute === "Active" && (
-                <ProfileSignalCards signals={Signals.activeSignals} />
-              )}
-              {currentprofileRoute === "Neutral" && (
-                <ProfileSignalCards signals={Signals.neutralSignals} />
-              )}
-              {currentprofileRoute === "Bad" && (
-                <ProfileSignalCards signals={Signals.badSignals} />
-              )}
-              {currentprofileRoute === "Crypto" && (
-                <ProfileSignalCards signals={cryptoSignals} />
-              )}
-              {currentprofileRoute === "Forex" && (
-                <ProfileSignalCards signals={forexSignals} />
-              )}
-              {currentprofileRoute === "Reviews" && <Reviews provider={user} />}
-              {currentprofileRoute === "About" && <About about={user.about} />}
-              <SignalModal />
-            </MyContextProvider>
+            {<ProfileSignalCards currentprofileRoute={currentprofileRoute} user_id={user._id} />}
+            {currentprofileRoute === 'Reviews' && <Reviews provider={user} />}
+            {currentprofileRoute === 'About' && <About />}
 
           </div>
         )}
@@ -396,4 +320,4 @@ function User() {
   );
 }
 
-export default User;
+export default ProfileContent;

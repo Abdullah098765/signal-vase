@@ -328,7 +328,17 @@ const CreateSignalForm = () => {
                                         onChange={handleInputChange}
                                     >
                                         <option value="Crypto">Crypto</option>
+                                        <option value="Currency">Currency</option>
                                         <option value="Stock">Stock</option>
+                                        <option value="Gold">Gold</option>
+                                        <option value="Commodities">Commodities</option>
+                                        <option value="Indices">Indices</option>
+                                        <option value="Bonds">Bonds</option>
+                                        <option value="Options">Options</option>
+                                        <option value="ETFs">ETFs</option>
+                                        <option value="Crypto Pairs">Cryptocurrency Pairs</option>
+                                        <option value="Forex Crosses">Forex Crosses</option>
+                                        <option value="Precious Metals">Precious Metals</option>
                                     </select>
                                 </div>
                                 <div>

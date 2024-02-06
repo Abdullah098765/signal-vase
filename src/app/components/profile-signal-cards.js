@@ -1,18 +1,109 @@
 import { formatDistanceToNow } from 'date-fns'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useMyContext } from '../context/context';
+import SkeletonSmallCard from './SkeletonSmallCard.js';
 
-export default function ProfileSignalCards({ signals }) {
+export default function ProfileSignalCards({ currentprofileRoute, user_id, isOnlyCount }) {
     const { setRouterLoading } = useMyContext();
-
     const router = useRouter()
+    const [isMoreSignalsLoading, setIsMoreSignalsLoading] = useState(true);
+
+    const [signals, setSignals] = useState([])
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        setIsMoreSignalsLoading(true)
+
+        const fetchData = async () => {
+
+            try {
+                // Replace 'yourId' with the actual value of _id
+
+                const response = await fetch('/api/get-profile-signal-data', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        currentprofileRoute,
+                        _id: user_id,
+                        page: page,
+                        isOnlyCount
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (!signals) {
+                        setSignals([])
+                    }
+                    if (Array.isArray(data)) {
+                        setSignals(prevSignals => {
+                            // Concatenate the new data to the existing signals array
+                            const updatedSignals = [...prevSignals, ...data];
+
+                            // Use a set to efficiently remove duplicates based on a specific condition
+                            const uniqueSignals = Array.from(new Set(updatedSignals.map(signal => signal._id)))
+                                .map(_id => updatedSignals.find(signal => signal._id === _id));
+
+                            return uniqueSignals;
+                        });
+                    } else {
+                        console.error('Invalid data format:', data);
+                        // Handle the case where the data is not an array, log an error, or take appropriate action.
+                    }
+                    console.log(data);
+                    setIsMoreSignalsLoading(false)
+
+                } else {
+                    console.error('Error fetching data');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, [page, currentprofileRoute]);
+
+    const containerRef = useRef(null);
+    useEffect(() => {
+        const handleScroll = () => {
+            const container = containerRef.current;
+
+            if (container) {
+                const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight;
+
+                if (isAtBottom) {
+                    console.log('Scrolled to the bottom!');
+                    setPage((prevPage) => prevPage + 1)
+                }
+            }
+        };
+
+        const container = containerRef.current;
+
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+
+            return () => {
+                container.removeEventListener('scroll', handleScroll);
+            };
+        }
+    }, []);
+    useEffect(() => {
+        setSignals([])
+        setPage(1)
+    }, [currentprofileRoute]);
+    if (currentprofileRoute === "About" || currentprofileRoute === "Reviews") {
+        return <div ref={containerRef} style={{ overflowY: 'auto' }} className='flex-1 bg-white shadow-md lg:shadow-xl '></div>;
+      }
+      
     return (
-        <div className='flex-1 bg-white shadow-md lg:shadow-xl lg:p-8 p-0 '>
-            {signals?.length === 0 ? (
+        <div ref={containerRef} style={{ height: '1000px', overflowY: 'auto' }} className='flex-1 bg-white shadow-md lg:shadow-xl lg:p-8 p-0 '>
+            {signals?.length === 0 && !isMoreSignalsLoading ? (
                 <p className="text-center pt-20 pb-32 text-gray-500">No signals available.</p>
             ) : <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-4 ">
-                {signals && signals.map((signal, index) => (
+
+                {signals[0]?._id && signals.map((signal, index) => (
                     <div key={index}>
 
                         <div className="bg-white p-3 card  " key={signal._id}>
@@ -105,14 +196,12 @@ export default function ProfileSignalCards({ signals }) {
                                         See Details
                                     </button>
                                 }
-
-                                {/* Details Button */}
-
-
                             </div>
                         </div>
                     </div>
                 ))}
+                {isMoreSignalsLoading && <><SkeletonSmallCard /></>}
+
             </div>}
         </div>
     )

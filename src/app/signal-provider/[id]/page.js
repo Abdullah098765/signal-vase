@@ -15,7 +15,7 @@ import ActiveSignals from '../../components/active'
 import Reviews from '../../components/reviews'
 import About from '../../components/About'
 import '../../components/components.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import gsap from 'gsap';
 import SignalModal from '../../components/signalModal';
@@ -30,7 +30,7 @@ import BottomNavbar from '@/app/components/mobile-bottem-bar';
 import ProfileSignalCards from '../../components/profile-signal-cards';
 import PersonalInfor from '@/app/components/personalInfor';
 
-function User() {
+function SignalProvider() {
     const router = useRouter()
     const searchParams = usePathname()
 
@@ -109,48 +109,16 @@ function User() {
     function handleGetRoute(params) {
         setIsCurrentprofileRoute(params);
     }
-    const [allSignals, setAllSignals] = useState([])
     const [Signals, setSignals] = useState([])
     const [cryptoSignals, setCryptoSignals] = useState([])
     const [forexSignals, setForexSignals] = useState([])
-    const getAllSignals = () => {
-        var myHeaders = new Headers();
-        myHeaders.append("a", "dni");
-        myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            "uid": user._id
-        });
-
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-        };
-
-        fetch("/api/all-user-signals", requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                let allSignals = JSON.parse(result).goodSignals.concat(JSON.parse(result).badSignals, JSON.parse(result).neutralSignals);
-
-                setAllSignals(allSignals)
-                setSignals(JSON.parse(result))
-
-
-            })
-            .catch(error => console.log('error', error));
-
-    };
-    useEffect(() => {
-        user && getAllSignals()
-    }, [user])
-    useEffect(() => {
-        const cryptoSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Crypto');
-        const stockSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Stock');
-        setCryptoSignals(cryptoSignals)
-        setForexSignals(stockSignals)
-    }, [allSignals])
+    // useEffect(() => {
+    //     const cryptoSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Crypto');
+    //     const stockSignals = allSignals.filter((signal) => signal.cryptoOrStock === 'Stock');
+    //     setCryptoSignals(cryptoSignals)
+    //     setForexSignals(stockSignals)
+    // }, [allSignals])
 
     const handleScroll = (direction) => {
         const scrollContainer = document.getElementById('scroll-container');
@@ -273,8 +241,8 @@ function User() {
                                                 <li onClick={() => handleGetRoute('Crypto')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'Crypto' ? 'bg-gray-100' : ''}`}>
                                                     Crypto
                                                 </li>
-                                                <li onClick={() => handleGetRoute('Forex')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'Forex' ? 'bg-gray-100' : ''}`}>
-                                                    Forex
+                                                <li onClick={() => handleGetRoute('Stock')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'Stock' ? 'bg-gray-100' : ''}`}>
+                                                    Stock
                                                 </li>
                                                 <li onClick={() => handleGetRoute('About')} class={`scroll-item text-gray-500 hover:bg-gray-100 p-3 w-full justify-center flex ${currentprofileRoute === 'About' ? 'bg-gray-100' : ''}`}>
                                                     About
@@ -307,19 +275,19 @@ function User() {
                             </div>
 
 
-                            {currentprofileRoute === 'All' && <ProfileSignalCards signals={allSignals} />}
-                            {currentprofileRoute === 'Good' && <ProfileSignalCards signals={Signals.goodSignals} />}
+                            {<ProfileSignalCards currentprofileRoute={currentprofileRoute} user_id={user._id} />}
+                            {/* {currentprofileRoute === 'Good' && <ProfileSignalCards signals={Signals.goodSignals} />}
                             {currentprofileRoute === 'Active' && <ProfileSignalCards signals={Signals.activeSignals} />}
                             {currentprofileRoute === 'Neutral' && <ProfileSignalCards signals={Signals.neutralSignals} />}
                             {currentprofileRoute === 'Bad' && <ProfileSignalCards signals={Signals.badSignals} />}
                             {currentprofileRoute === 'Crypto' && <ProfileSignalCards signals={cryptoSignals} />}
-                            {currentprofileRoute === 'Forex' && <ProfileSignalCards signals={forexSignals} />}
+                            {currentprofileRoute === 'Forex' && <ProfileSignalCards signals={forexSignals} />} */}
                             {currentprofileRoute === 'Reviews' && <Reviews provider={user} />}
                             {currentprofileRoute === 'About' && <About />}
                             <SignalModal />
                             <Modal />
 
-                          
+
 
                         </div> : <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-75 z-50">
                             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
@@ -337,4 +305,4 @@ function User() {
     );
 }
 
-export default User;
+export default SignalProvider;

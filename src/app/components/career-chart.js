@@ -3,15 +3,14 @@ import Chart from 'chart.js/auto';
 
 const SignalsPieChart = ({ goodCount, badCount, neutralCount }) => {
   const chartRef = useRef(null);
-
   useEffect(() => {
     const ctx = chartRef.current.getContext('2d');
-
-    // Check if the chart already exists, and destroy it
-    if (chartRef.current.chart) {
-      chartRef.current.chart.destroy();
+  
+    // Check if the chart already exists and has a destroy method
+    if (chartRef.current.chart && typeof chartRef.current.chart.destroy === 'function') {
+      chartRef.current?.chart?.destroy();
     }
-
+  
     // Create a new chart
     chartRef.current.chart = new Chart(ctx, {
       type: 'pie',
@@ -26,6 +25,7 @@ const SignalsPieChart = ({ goodCount, badCount, neutralCount }) => {
       },
     });
   }, [goodCount, badCount, neutralCount]);
+  
 
 
   return (
