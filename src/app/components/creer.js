@@ -6,6 +6,7 @@ import SignalsPieChart from './career-chart'
 import React, { useEffect, useState } from 'react';
 import GoodSignals from './good';
 import BadSignals from './bad';
+import { useMyContext } from '../context/context';
 
 const Creer = ({ user }) => {
 
@@ -14,51 +15,13 @@ const Creer = ({ user }) => {
     const [badCount, setBadCount] = useState(null);
     const [neutralCount, setNeutralCount] = useState(null);
     const [activeCount, setActiveCount] = useState(null);
-
+    const { fetchCounts, getCounts } = useMyContext()
     var reviewsCount = user.reviews && user.reviews.length || 0
 
-    const fetchData = async (type) => {
 
-        try {
-            // Replace 'yourId' with the actual value of _id
-
-            const response = await fetch('/api/get-profile-signal-data', {
-                method: 'POST',
-                body: JSON.stringify({
-                    currentprofileRoute: type,
-                    _id: user?._id,
-                    page: 1,
-                    isOnlyCount: true
-                }),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                if (!data[0]) {
-                    return 0
-                }
-                else return data[0].count
-            } else {
-                console.error('Error fetching data');
-            }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
     useEffect(() => {
-        async function runUseEffect(params) {
-            let allCount = await fetchData("All");
-            setAllCount(allCount)
-            let goodCount = await fetchData("Good");
-            setGoodCount(goodCount)
-            let neutralCount = await fetchData("Neutral");
-            setNeutralCount(neutralCount)
-            let badCount = await fetchData("Bad");
-            setBadCount(badCount)
-            let activeCount = await fetchData("Active");
-            setActiveCount(activeCount)
-        }
-        runUseEffect()
+
+        getCounts(setAllCount, setGoodCount, setNeutralCount, setBadCount, setActiveCount, user._id)
     }, []);
 
     function TotalSignal({ count }) {

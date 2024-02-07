@@ -18,7 +18,7 @@ import CommentSection from '../../components/commentSection';
 
 
 function Signal() {
-    const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
+    const { user, setRouterLoading, getCounts, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
     const router = useRouter()
 
@@ -402,12 +402,17 @@ function Signal() {
     const closeModal = () => {
         setIsShareModalOpen(false);
     };
-
+    const [allCount, setAllCount] = useState(null);
+    const [goodCount, setGoodCount] = useState(null);
+    const [badCount, setBadCount] = useState(null);
+    const [neutralCount, setNeutralCount] = useState(null);
+    const [activeCount, setActiveCount] = useState(null)
+    useEffect(() => {
+        getCounts(setAllCount, setGoodCount, setNeutralCount, setBadCount, setActiveCount, signal?.signalProvider?._id)
+    }, [signal?.signalProvider?._id]);
     return (
 
         <>
-
-
             <div className='w-full'>
                 {signal._id ?
                     <div class="h-full bg-gray-200 md:p-8 p-4 ">
@@ -616,11 +621,11 @@ function Signal() {
                                             </div>
                                         </div>
                                         <div className="flex flex-col   justify-stretch  items-center mt-4 w-full lg:w-96  lg:mt-4  lg:flex-row">
-                                            <div className="signal-info bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                                {signal.signalProvider.goodSignals.length} Good Signals
+                                            <div className="signal-info flex flex-row items-center gap-2 bg-gray-200 text-xs text-black p-2  xl:mt-0 rounded-full mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
+                                                {goodCount !== null ? goodCount : < div className="animate-spin rounded-full h-3 w-3 border-t-2  border-gray-600"></div>} Good Signals
                                             </div>
-                                            <div className="signal-info bg-gray-200 text-xs text-black p-2 rounded-full  xl:mt-0 mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
-                                                {signal.signalProvider.badSignals.length} Bad Signalse
+                                            <div className="signal-info flex flex-row  items-center gap-2 bg-gray-200 text-xs text-black p-2 rounded-full  xl:mt-0 mb-2 lg:mt-4 lg:mb-0 lg:mr-2">
+                                                {badCount !== null ? badCount : < div className="animate-spin rounded-full h-3 w-3 border-t-2  border-gray-600"></div>} Bad Signalse
                                             </div>
                                             <div className="signal-info bg-gray-200 text-xs text-black p-2 mb-2 lg:mb-0  xl:mt-0 lg:mt-4 rounded-full">
                                                 {signal.signalProvider.Subscribers.length} Subscribers

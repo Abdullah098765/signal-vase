@@ -236,10 +236,51 @@ export const MyContextProvider = ({ children }) => {
       setRouterLoading(false);
     }, 10000);
   }
+  const fetchCounts = async (type, pId) => {
 
+    try {
+      // Replace 'yourId' with the actual value of _id
+
+      const response = await fetch('/api/get-profile-signal-data', {
+        method: 'POST',
+        body: JSON.stringify({
+          currentprofileRoute: type,
+          _id: pId,
+          page: 1,
+          isOnlyCount: true
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (!data[0]) {
+          return 0
+        }
+        else return data[0].count
+      } else {
+        console.error('Error fetching data');
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  async function getCounts(setAllCount, setGoodCount, setNeutralCount, setBadCount, setActiveCount, pId) {
+    let allCount = await fetchCounts("All", pId);
+    setAllCount(allCount)
+    let goodCount = await fetchCounts("Good", pId);
+    setGoodCount(goodCount)
+    let neutralCount = await fetchCounts("Neutral", pId);
+    setNeutralCount(neutralCount)
+    let badCount = await fetchCounts("Bad", pId);
+    setBadCount(badCount)
+    let activeCount = await fetchCounts("Active", pId);
+    setActiveCount(activeCount)
+  }
   return (
     <MyContext.Provider
       value={{
+        getCounts,
+        fetchCounts,
         getSearchResult,
         setSearchString,
         isSignalsLoading,
