@@ -53,7 +53,7 @@ const SignalCardList = () => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/followed-signals", requestOptions)
+        fetch("/api/followed-signals", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setFollowedSignals(JSON.parse(result))

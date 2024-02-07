@@ -45,18 +45,20 @@ const Creer = ({ user }) => {
             console.error('Error fetching data:', error);
         }
     };
-    useEffect(async () => {
-        let allCount = await fetchData("All");
-        setAllCount(allCount)
-        let goodCount = await fetchData("Good");
-        setGoodCount(goodCount)
-        let neutralCount = await fetchData("Neutral");
-        setNeutralCount(neutralCount)
-        let badCount = await fetchData("Bad");
-        setBadCount(badCount)
-        let activeCount = await fetchData("Active");
-        setActiveCount(activeCount)
-
+    useEffect(() => {
+        async function runUseEffect(params) {
+            let allCount = await fetchData("All");
+            setAllCount(allCount)
+            let goodCount = await fetchData("Good");
+            setGoodCount(goodCount)
+            let neutralCount = await fetchData("Neutral");
+            setNeutralCount(neutralCount)
+            let badCount = await fetchData("Bad");
+            setBadCount(badCount)
+            let activeCount = await fetchData("Active");
+            setActiveCount(activeCount)
+        }
+        runUseEffect()
     }, []);
 
     function TotalSignal({ count }) {
