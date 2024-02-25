@@ -40,7 +40,9 @@ export const MyContextProvider = ({ children }) => {
     }
   };
 
+
   const getUser = () => {
+
     var raw = JSON.stringify({
       uid: localStorage.getItem("uid")
     });
