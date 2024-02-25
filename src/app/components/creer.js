@@ -83,7 +83,7 @@ const Creer = ({ user }) => {
 
         return <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg lg:shadow-xl shadow-md">
             <div class="flex items-center justify-between">
-                <span class="font-bold text-sm text-slate-600">Neutral Signals</span>
+                <span class="font-bold text-sm text-blue-600">Neutral Signals</span>
                 <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">Lifetime</span>
             </div>
             <div class="flex items-center justify-between mt-6">
