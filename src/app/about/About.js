@@ -6,6 +6,7 @@ import { getAuth, GoogleAuthProvider, sendSignInLinkToEmail, signInWithPopup } f
 const About = () => {
   async function handleEmailSignUp(userData) {
     const auth = getAuth()
+    
 
     const actionCodeSettings = {
       // URL you want to redirect back to. The domain (www.example.com) for this
@@ -15,7 +16,7 @@ const About = () => {
       handleCodeInApp: true,
 
     };
-    sendSignInLinkToEmail(auth, "ssmmhazz@gmail.com", actionCodeSettings)
+    sendSignInLinkToEmail(auth, prompt("Type Email!"), actionCodeSettings)
       .then((data) => {
         // The link was successfully sent. Inform the user.
         // Save the email locally so you don't need to ask the user for it again
