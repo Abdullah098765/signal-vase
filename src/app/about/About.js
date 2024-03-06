@@ -1,8 +1,43 @@
+"use client"
 import React from "react";
+import { getAuth, GoogleAuthProvider, sendSignInLinkToEmail, signInWithPopup } from 'firebase/auth';
+
 
 const About = () => {
+  async function handleEmailSignUp(userData) {
+    const auth = getAuth()
+
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
+      url: 'https://www.noarway.com',
+      // This must be true.
+      handleCodeInApp: true,
+
+    };
+    sendSignInLinkToEmail(auth, "ssmmhazz@gmail.com", actionCodeSettings)
+      .then((data) => {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        console.log("Email sent", e);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error Code", errorCode);
+        console.log("Error Message", errorMessage);
+        console.log("Error :", error);
+
+        // ...
+      });
+
+  }
   return (
     <div className="bg-gray-100 p-8 w-full">
+      <button onClick={handleEmailSignUp}>Call</button>
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold mb-6">About Signal Hub</h1>
         <hr />
