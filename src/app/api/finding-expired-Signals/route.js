@@ -33,45 +33,13 @@ const buttons = [
 ];
 connectDB();
 
-export async function POST(req, res) {
+export async function GET(req, res) {
   try {
-    // const { skip } = await req.json();
 
 
     const currentTimeInMillis = new Date().getTime();
 
-    // const notificationDataFromExpiredSignals = await schemas.Signal.aggregate([
-    //   {
-    //     $match: {
-    //       duration: { $lt: currentTimeInMillis },
-    //       expirationNotificationSent: false
-    //     }
-    //   },
-    //   {
-    //     $unwind: '$followers'
-    //   },
-    //   {
-    //     $lookup: {
-    //       from: 'users', // Replace with the actual name of your followers collection
-    //       localField: 'followers',
-    //       foreignField: '_id',
-    //       as: 'followerData'
-    //     }
-    //   },
-    //   {
-    //     $unwind: '$followerData'
-    //   },
-    //   {
-    //     $project: {
-    //       _id: 1,
-    //       pair: 1,
-    //       cryptoOrStock: 1,
-    //       'follower._id': '$followerData._id',
-    //       'follower.notificationPreferences': '$followerData.notificationPreferences'
-    //     }
-    //   }
-    // ]);
-
+   
     const signals = await schemas.Signal.find({
       duration: { $lt: currentTimeInMillis },
       expirationNotificationSent: false,
