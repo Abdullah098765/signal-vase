@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 import { usePathname, useRouter } from 'next/navigation';
+import { auth } from '../../../firebaseConfig';
 
 const Subscribe = ({ setIsCurrentprofileRoute, targetUser, openModal }) => {
 
@@ -14,7 +15,7 @@ const Subscribe = ({ setIsCurrentprofileRoute, targetUser, openModal }) => {
     async function handleSubscription(action) {
         setIsLoading(true)
         try {
-            const apiUrl = 'https://signal-hub.vercel.app/api/subscribe'; // Adjust the URL to match your API route
+            const apiUrl = '/api/subscribe'; // Adjust the URL to match your API route
 
             // Create a request object with the appropriate method, headers, and body
             const request = {
@@ -81,7 +82,7 @@ const Subscribe = ({ setIsCurrentprofileRoute, targetUser, openModal }) => {
 
             <div class="flex items-center  col-buttons  lg:mt-24 xl:mt-24 mt-3">
                 {!subscribed ? <button onClick={() => {
-                    if (window.localStorage.getItem('uid')) {
+                    if (auth.currentUser) {
                         handleSubscription('subscribe')
 
                     }

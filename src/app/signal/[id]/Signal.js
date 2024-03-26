@@ -15,12 +15,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import BottomNavbar from '../../components/mobile-bottem-bar'
 import ShareModal from '../../components/shareModal';
 import CommentSection from '../../components/commentSection';
+import { auth } from '../../../../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 function Signal() {
     const { user, setRouterLoading, getCounts, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
 
     const router = useRouter()
+    const [currentUser, loading] = useAuthState(auth);
 
 
 
@@ -33,7 +36,7 @@ function Signal() {
 
     const [signalId, setSignalId] = useState(urlParts[urlParts.length - 1]);
     useEffect(() => {
-        if (!localStorage.getItem('uid')) {
+        if (!currentUser && !loading) {
             setLoggedIn(false)
         }
         setRouterLoading(false)
@@ -125,7 +128,7 @@ function Signal() {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/add-follower", requestOptions)
+        fetch("/api/add-follower", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setFollowing(true)
@@ -152,7 +155,7 @@ function Signal() {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/remove-follower", requestOptions)
+        fetch("/api/remove-follower", requestOptions)
             .then(response => response.text())
             .then(result => {
                 setFollowing(false)
@@ -229,7 +232,7 @@ function Signal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/likescount", requestOptions)
+            fetch("/api/likescount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -251,7 +254,7 @@ function Signal() {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
+                fetch("/api/dislikesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -277,7 +280,7 @@ function Signal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
+            fetch("/api/likesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -304,7 +307,7 @@ function Signal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/disLikesCount", requestOptions)
+            fetch("/api/disLikesCount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -325,7 +328,7 @@ function Signal() {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
+                fetch("/api/likesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -350,7 +353,7 @@ function Signal() {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
+            fetch("/api/dislikesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -667,7 +670,7 @@ function Signal() {
                                 {!following ?
                                     < button onClick={
                                         () => {
-                                            if (window.localStorage.getItem('uid')) {
+                                            if (auth?.currentUser) {
                                                 handleFollow()
                                             }
                                             else setIsModalOpen(true)
@@ -697,7 +700,7 @@ function Signal() {
                                             icon={faThumbsUp}
                                             className={likeIconColor}
                                             onClick={() => {
-                                                if (window.localStorage.getItem('uid')) {
+                                                if (auth?.currentUser) {
                                                     handleLikeClick()
                                                 }
                                                 else setIsModalOpen(true)
@@ -715,7 +718,7 @@ function Signal() {
                                             flip="horizontal"
                                             className={dislikeIconColor}
                                             onClick={() => {
-                                                if (window.localStorage.getItem('uid')) {
+                                                if (auth?.currentUser) {
                                                     handleDislikeClick()
 
                                                 }

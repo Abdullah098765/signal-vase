@@ -6,6 +6,7 @@ import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMyContext } from '../context/context';
 import { useRouter } from 'next/navigation';
+import { auth } from '../../../firebaseConfig';
 const Card = ({ signal }) => {
     const router = useRouter();
 
@@ -33,7 +34,7 @@ const Card = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/likescount", requestOptions)
+            fetch("/api/likescount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -55,7 +56,7 @@ const Card = ({ signal }) => {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
+                fetch("/api/dislikesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -81,7 +82,7 @@ const Card = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
+            fetch("/api/likesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -108,7 +109,7 @@ const Card = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/disLikesCount", requestOptions)
+            fetch("/api/disLikesCount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -129,7 +130,7 @@ const Card = ({ signal }) => {
                     body: raw,
                     redirect: 'follow'
                 };
-                fetch("https://signal-hub.vercel.app/api/likesdiscount", requestOptions)
+                fetch("/api/likesdiscount", requestOptions)
                     .then(response => response.text())
                     .then(result => console.log(result))
                     .catch(error => console.log('error', error));
@@ -154,7 +155,7 @@ const Card = ({ signal }) => {
                 body: raw,
                 redirect: 'follow'
             };
-            fetch("https://signal-hub.vercel.app/api/dislikesdiscount", requestOptions)
+            fetch("/api/dislikesdiscount", requestOptions)
                 .then(response => response.text())
                 .then(result => console.log(result))
                 .catch(error => console.log('error', error));
@@ -292,7 +293,7 @@ const Card = ({ signal }) => {
                                 icon={faThumbsUp}
                                 className={likeIconColor}
                                 onClick={() => {
-                                    if (window.localStorage.getItem('uid')) {
+                                    if (auth.currentUser) {
                                         handleLikeClick()
                                     }
                                     else setIsModalOpen(true)
@@ -310,7 +311,7 @@ const Card = ({ signal }) => {
                                 flip="horizontal"
                                 className={dislikeIconColor}
                                 onClick={() => {
-                                    if (window.localStorage.getItem('uid')) {
+                                    if (auth.currentUser) {
                                         handleDislikeClick()
 
                                     }

@@ -4,9 +4,10 @@
 import { getMessaging, getToken } from "firebase/messaging";
 import { createContext, useContext, useEffect, useState } from "react";
 import io from "socket.io-client";
-import { app } from "../../../firebaseConfig";
+import { app, auth } from "../../../firebaseConfig";
 import { isSupported } from "firebase/messaging";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const MyContext = createContext();
 
@@ -32,6 +33,8 @@ export const MyContextProvider = ({ children }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [skip, setSkip] = useState(0);
+  const [currentUser, loading, error] = useAuthState(auth);
+
   const closeSidenav = (is, lineClicked) => {
     setIsSliderOpen(is);
     console.log(isSliderOpen);
@@ -44,7 +47,7 @@ export const MyContextProvider = ({ children }) => {
   const getUser = () => {
 
     var raw = JSON.stringify({
-      uid: localStorage.getItem("uid")
+      uid: auth?.currentUser?.uid
     });
 
     var requestOptions = {
@@ -149,11 +152,10 @@ export const MyContextProvider = ({ children }) => {
   const router = useRouter();
   const pathname = usePathname()
   useEffect(() => {
-    if (localStorage.getItem("uid")) {
+    if (auth?.currentUser?.uid) {
       getUser();
     }
-    // getSignals();
-  }, []);
+  }, [auth.currentUser,currentUser,loading]);
 
   useEffect(
     () => {
@@ -166,7 +168,7 @@ export const MyContextProvider = ({ children }) => {
           }
         });
     },
-    [user]
+    [user, auth.currentUser]
   );
   useEffect(() => {
     if (searchString && searchResultSignals.length === 0 && pathname === "/search") {
@@ -241,8 +243,6 @@ export const MyContextProvider = ({ children }) => {
   const fetchCounts = async (type, pId) => {
 
     try {
-      // Replace 'yourId' with the actual value of _id
-
       const response = await fetch('/api/get-profile-signal-data', {
         method: 'POST',
         body: JSON.stringify({
@@ -266,6 +266,7 @@ export const MyContextProvider = ({ children }) => {
       console.error('Error fetching data:', error);
     }
   };
+
   async function getCounts(setAllCount, setGoodCount, setNeutralCount, setBadCount, setActiveCount, pId) {
     let allCount = await fetchCounts("All", pId);
     setAllCount(allCount)

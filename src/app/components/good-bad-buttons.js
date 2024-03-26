@@ -29,7 +29,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/neutral-count", requestOptions)
+        fetch("/api/neutral-count", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)})
@@ -53,7 +53,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/good-count", requestOptions)
+        fetch("/api/good-count", requestOptions)
             .then(response => response.text())
             .then(result => {
 
@@ -81,7 +81,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/bad-count", requestOptions)
+        fetch("/api/bad-count", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)
@@ -105,7 +105,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/good-discount", requestOptions)
+        fetch("/api/good-discount", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -128,7 +128,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/bad-discount", requestOptions)
+        fetch("/api/bad-discount", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
@@ -151,7 +151,7 @@ const GoodBadButtons = ({ signal }) => {
             body: raw,
             redirect: 'follow'
         };
-        fetch("https://signal-hub.vercel.app/api/neutral-discount", requestOptions)
+        fetch("/api/neutral-discount", requestOptions)
             .then(response => response.text())
             .then(result => {
                 console.log(result)

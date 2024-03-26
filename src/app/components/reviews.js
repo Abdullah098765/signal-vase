@@ -5,6 +5,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/context';
+import { auth } from '../../../firebaseConfig';
+import SlidrModel from './imageSlider';
 
 const Reviews = ({ provider, loggedIn }) => {
     const [reviews, setReviews] = useState(provider.reviews);
@@ -15,6 +17,8 @@ const Reviews = ({ provider, loggedIn }) => {
     const router = useRouter();
     const { user, setIsModalOpen } = useMyContext();
     const [illigible, setIlligible] = useState(true);
+    const [openedImage, setOpenedImage] = useState(null);
+
     useEffect(() => {
 
         if (!provider.Subscribers.includes(user._id)) {
@@ -24,7 +28,7 @@ const Reviews = ({ provider, loggedIn }) => {
 
     async function sendNotification(providerId, reviewData) {
         try {
-            const response = await fetch('https://signal-hub.vercel.app/api/review-notification', {
+            const response = await fetch('/api/review-notification', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +76,7 @@ const Reviews = ({ provider, loggedIn }) => {
         };
 
         // Assume you have an API endpoint to handle reviews similar to the comment section
-        const apiUrl = 'https://signal-hub.vercel.app/api/review';
+        const apiUrl = '/api/review';
         const requestBody = { reviewData, providerId: provider._id };
 
         try {
@@ -133,8 +137,12 @@ const Reviews = ({ provider, loggedIn }) => {
                     {review.image && (
                         <div className='mt-2'>
                             <img
+                            
                                 onClick={() => {
-                                    window.open(review.image);
+                                    setOpenedImage({
+                                        url: review.image,
+                                        caption: review.text,
+                                    })
                                 }}
                                 src={review.image}
                                 alt={`Review Image by ${review.image}`}
@@ -144,6 +152,7 @@ const Reviews = ({ provider, loggedIn }) => {
                     )}
                 </div>
             ))}
+                                {openedImage && <SlidrModel openedImage={openedImage} setOpenedImage={setOpenedImage} />}
 
             <div className='mt-6'>
                 {provider._id !== user._id && <div className='flex flex-col items-stretch justify-center'>
@@ -181,7 +190,7 @@ const Reviews = ({ provider, loggedIn }) => {
                         className={`bg-black cursor-pointer text-white flex justify-center mt-3 mb-3 p-2 rounded hover:bg-gray-900 ml-2 ${loading ? 'bg-gray-900 cursor-not-allowed' : ''
                             }`}
                         onClick={() => {
-                            if (localStorage.getItem('uid')) {
+                            if (auth?.currentUser) {
                                 console.log("there is uid");
                                 if (!loading && newReview !== '') {
                                     // if (illigible) {
@@ -201,7 +210,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
                         ) : (
                             <>
-                                {localStorage.getItem('uid') && (
+                                {auth?.currentUser && (
                                     <img
                                         src={user.profilePicture}
                                         alt={user.displayName}

@@ -41,7 +41,7 @@ const RegistrationForm = () => {
       // Generate a 5-character random ID
       const randomId = generateRandomId(5);
 
-
+      const origin = window.origin
       // console.log(result.user.displayName + " is Signed in.");
       try {
         // Send userData to your server to register the user
@@ -56,14 +56,14 @@ const RegistrationForm = () => {
               phone: result.user.phoneNumber,
               SubscribersFCMTokens: [],
               fIdHash: fIdHash + randomId,
-              personalInfo:{
-                fullName:result.user.displayName,
-                age:'No Info',
-                mobile:"No Info",
-                email:result.user.email,
-                market:"All Markets",
-                languages:"No Info",
-                country:"No Info"
+              personalInfo: {
+                fullName: result.user.displayName,
+                age: 'No Info',
+                mobile: "No Info",
+                email: result.user.email,
+                market: "All Markets",
+                languages: "No Info",
+                country: "No Info"
               }
             }
           ),
@@ -73,15 +73,13 @@ const RegistrationForm = () => {
         if (response.ok) {
           // User registration on the server was successful
           console.log('User registered on the server.', response);
-          window.localStorage.setItem('uid', result.user.uid)
           setIsGoogleClicked(false)
 
-          window.location = 'https://signal-hub.vercel.app/' + pathName
+          window.location = origin + '/' + pathName
           console.log(pathName);
         } else {
           // Handle server registration error
-          window.localStorage.setItem('uid', result.user.uid)
-          window.location = 'https://signal-hub.vercel.app/' + pathName
+          window.location = origin + '/' + pathName
           console.log('User Exist in Database', pathName);
 
         }

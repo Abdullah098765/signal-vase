@@ -9,16 +9,19 @@ import Sidebar from '../components/sidebar';
 import BottomNavbar from '../components/mobile-bottem-bar';
 import Modal from '../components/signUp-Model';
 import RouterLoading from '@/app/components/routerLoading';
+import { auth } from '../../../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const CreateSignalForm = () => {
 
     const router = useRouter()
-    const [currentUser, setCurrentUser] = useState({})
+    const [user, setUser] = useState({})
 
     const [isButtonLoading, setIsButtonLoading] = useState(false); // Default duration
     const [selectedDuration, setSelectedDuration] = useState('10m'); // Default duration
     const [durationTimestamp, setDurationTimestamp] = useState(600000 + Date.now()); // Default duration
 
+    const [currentUser, loading, error] = useAuthState(auth);
 
     const handleDurationChange = (e) => {
         setSelectedDuration(e.target.value);
@@ -73,12 +76,12 @@ const CreateSignalForm = () => {
         cryptoOrStock: 'Crypto',
         duration: durationTimestamp,
         longOrShort: 'Long',
-        signalProvider: currentUser._id,
+        signalProvider: user._id,
         status: 'Active'
     });
     useEffect(() => {
         getUser()
-        console.log(currentUser._id);
+        console.log(user._id);
     }, [signalData])
 
     const getUser = () => {
@@ -87,7 +90,7 @@ const CreateSignalForm = () => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "uid": localStorage.getItem('uid')
+            "uid": currentUser.uid
         });
 
         var requestOptions = {
@@ -97,10 +100,10 @@ const CreateSignalForm = () => {
             redirect: 'follow'
         };
 
-        fetch("https://signal-hub.vercel.app/api/get-user", requestOptions)
+        fetch("/api/get-user", requestOptions)
             .then(response => response.text())
             .then(result => {
-                setCurrentUser(JSON.parse(result))
+                setUser(JSON.parse(result))
 
             })
             .catch(error => console.log('error', error));
@@ -118,12 +121,12 @@ const CreateSignalForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsButtonLoading(true)
-        signalData.signalProvider = currentUser._id
+        signalData.signalProvider = user._id
         signalData.duration = durationTimestamp
         console.log(signalData);
         try {
             // Send the form data to the server
-            const response = await fetch('https://signal-hub.vercel.app/api/create-signal', {
+            const response = await fetch('/api/create-signal', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -148,7 +151,7 @@ const CreateSignalForm = () => {
 
 
     useEffect(() => {
-        if (!window.localStorage.getItem("uid")) {
+        if (!currentUser) {
             setIsSignInButtinShown(true)
         }
 

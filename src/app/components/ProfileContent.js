@@ -31,8 +31,13 @@ import SignalModal from "./signalModal.js";
 import EditProfileModal from "./edit-profile-modal.js";
 import { usePathname } from "next/navigation";
 import ProfileSignalCards from "./profile-signal-cards.js";
+import { auth } from "../../../firebaseConfig.js";
+import { useAuthState } from 'react-firebase-hooks/auth';
+
 
 function ProfileContent() {
+  const [currentUser, loading, error] = useAuthState(auth);
+
   const { user, setRouterLoading, isModalOpen, setIsModalOpen } =
     useMyContext();
   const [isScrolled, setIsScrolled] = useState(1);
@@ -69,7 +74,7 @@ function ProfileContent() {
     if (user) {
       setIsLoading(false);
     }
-    if (!window.localStorage.getItem("uid")) {
+    if (!currentUser && !loading) {
       setIsModalOpen(true);
       setIsSignInButtinShown(true);
     }

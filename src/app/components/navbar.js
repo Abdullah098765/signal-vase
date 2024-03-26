@@ -23,9 +23,9 @@ const Navbar = () => {
   const auth = getAuth();
   const [uid, setUid] = useState(null);
   useEffect(() => {
-    setUid(localStorage.getItem("uid"));
-    console.log(uid);
-  }, []);
+    setUid(auth?.currentUser?.uid);
+    console.log(auth?.currentUser?.uid);
+  }, [auth.currentUser]);
   const router = useRouter();
 
   const pathname = usePathname();
@@ -110,11 +110,12 @@ const Navbar = () => {
     } else setSearchVisible(false);
   }, []);
   const _signOut = () => {
+    const origin = window.origin
     signOut(auth)
       .then(() => {
         // Sign-out successful.
 
-        fetch("https://signal-hub.vercel.app/api/signout", {
+        fetch("/api/signout", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -123,9 +124,7 @@ const Navbar = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            window.location = "https://signal-hub.vercel.app/" + pathname;
-            localStorage.removeItem("uid");
-            localStorage.removeItem("userId");
+            window.location = origin + "/" + pathname;
           })
           .catch((error) => console.error("Error:", error));
       })
@@ -160,7 +159,9 @@ const Navbar = () => {
       console.log("Invalid search string. Please enter a valid search.");
     }
   };
-
+console.log('====================================');
+console.log(!auth.currentUser );
+console.log('====================================');
   if (!user) return null;
 
   return (
@@ -251,7 +252,7 @@ const Navbar = () => {
           {/* User Profile */}
           <div className="flex items-center space-x-4">
             <div className="absolute right-5 group">
-              {uid === null ? (
+              {!auth.currentUser  ? (
                 <button
                   name="signin"
                   onClick={() => {
@@ -333,8 +334,8 @@ const Navbar = () => {
 
             <div
               className={`search-container ${searchVisible
-                  ? "active flex w-full flex-row items-center relative"
-                  : ""
+                ? "active flex w-full flex-row items-center relative"
+                : ""
                 }`}
             >
               <div
@@ -419,7 +420,7 @@ const Navbar = () => {
           {/* Profile Picture */}
           {!searchVisible && (
             <div className="relative">
-              {uid === null ? (
+              {!auth.currentUser ? (
                 <div
                   name="signin"
                   onClick={() => {
@@ -434,7 +435,7 @@ const Navbar = () => {
                   <img
                     onClick={toggleMenu}
                     className="h-8 w-8 mr-3 ml-3 object-cover cursor-pointer rounded-full"
-                    src={user.profilePicture}
+                    src={user?.profilePicture}
                     alt="Profile"
                   />
 

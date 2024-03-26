@@ -53,6 +53,7 @@ const EditProfileModal = ({ }) => {
     };
 
     const handleSubmit = async (e) => {
+        const origin = window.origin
         e.preventDefault(); // Prevent the default form submission
         setIsLoading(true)
         try {
@@ -67,7 +68,7 @@ const EditProfileModal = ({ }) => {
             if (response.ok) {
                 const updatedUser = await response.json();
                 console.log('User updated:', updatedUser);
-                window.location = 'https://signal-hub.vercel.app/profile'
+                window.location = origin + '/profile'
                 // Handle success here
             } else {
                 console.error('User update failed');

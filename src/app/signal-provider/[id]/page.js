@@ -29,10 +29,13 @@ import Modal from '@/app/components/signUp-Model';
 import BottomNavbar from '@/app/components/mobile-bottem-bar';
 import ProfileSignalCards from '../../components/profile-signal-cards';
 import PersonalInfor from '@/app/components/personalInfor';
+import { auth } from '../../../../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function SignalProvider() {
     const router = useRouter()
     const searchParams = usePathname()
+    const [currentUser, loading] = useAuthState(auth);
 
     const urlParts = searchParams.split('/');
 
@@ -62,8 +65,8 @@ function SignalProvider() {
 
     useEffect(() => {
 
-        if (localStorage.getItem('uid')) {
-            if (pid?.toLowerCase().slice(0, -5).split('').reverse().join('') === localStorage.getItem('uid')?.toLowerCase()) {
+        if (currentUser && !loading) {
+            if (pid?.toLowerCase().slice(0, -5).split('').reverse().join('') === currentUser?.uid?.toLowerCase()) {
                 // window.location = "https://signal-hub.vercel.app/profile"
                 router.push('/profile')
             }
@@ -200,7 +203,7 @@ function SignalProvider() {
                                         </svg>
                                     </div>
 
-                                    {user && (pid?.toLowerCase() !== localStorage.getItem('uid')?.toLowerCase() ? <Subscribe setIsCurrentprofileRoute={handleGetRoute} targetUser={user} /> : <EditButtons openModal={openModal} />)}
+                                    {user && (pid?.toLowerCase() !== auth.currentUser?.uid?.toLowerCase() ? <Subscribe setIsCurrentprofileRoute={handleGetRoute} targetUser={user} /> : <EditButtons openModal={openModal} />)}
                                     <div
                                         className=" text-gray-600 cursor-pointer mt-3 mtinsm  block md:hidden rounded-md hover:text-gray-800 focus:outline-none"
                                         onClick={openModal}

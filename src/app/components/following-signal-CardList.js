@@ -7,22 +7,25 @@ import "./components.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { useRouter } from 'next/navigation.js';
+import { auth } from '../../../firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 const SignalCardList = () => {
     const [isSignInButtinShown, setIsSignInButtinShown] = useState(false);
     const [followedSignals, setFollowedSignals] = useState([]);
     const [dataLoading, setDataLoading] = useState(true);
-    const { user, closeSidenav, setRouterLoading, lineClicked, setSelectedSignal, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
+    const { user, closeSidenav, setRouterLoading, lineClicked, setIsModalOpen, setisSignalModalOpen, _setIsModalOpen } = useMyContext()
 
     var windowWidth;
+    const [currentUser, loading, error] = useAuthState(auth);
 
     useEffect(() => {
         windowWidth = window.innerWidth;
-        if (!localStorage.getItem('uid')) {
+        if (!currentUser && !loading) {
             setIsSignInButtinShown(true)
         }
-    })
+    }, [currentUser, loading])
     useEffect(() => {
         setRouterLoading(false)
         console.log("Browser window width: " + windowWidth + " pixels");
@@ -138,7 +141,10 @@ const SignalCardList = () => {
         </div>
             :
             <div className=' w-full flex items-center justify-center h-screen'>
-                <button className=''>
+                <button onClick={()=>{
+                    setIsModalOpen(true);
+
+                }} className=''>
                     Sign In
                 </button>
             </div>}

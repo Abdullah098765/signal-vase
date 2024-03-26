@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMyContext } from '../context/context';
 import { useRouter } from 'next/navigation';
+import { auth } from '../../../firebaseConfig';
 
 const SubscribedCard = ({ subscribed }) => {
   const { user, setRouterLoading, isModalOpen, setIsModalOpen, selectedSignal, setSelectedSignal, isSignalModalOpen, setisSignalModalOpen, getSignals } = useMyContext();
@@ -122,7 +123,7 @@ const SubscribedCard = ({ subscribed }) => {
           <div class="mt-6 grid grid-cols-2 gap-4">
             {/* <button class="w-full rounded-xl border-2 border-gray-500 bg-white px-3 py-2 font-semibold text-gray-500 hover:bg-gray-500 hover:text-white">Unsubscribe</button> */}
             {!iAmSubscriber ? <button onClick={() => {
-              if (window.localStorage.getItem('uid')) {
+              if (auth.currentUser) {
                 handleSubscription('subscribe')
 
               }

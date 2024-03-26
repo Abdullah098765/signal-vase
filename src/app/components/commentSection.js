@@ -5,6 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/context';
+import SlidrModel from './imageSlider';
 
 export default function CommentSection({ signal, user, loggedIn }) {
     const [comments, setComments] = useState(signal.comments)
@@ -12,6 +13,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
     const [imageUrl, setImageUrl] = useState();
     const [imageLoading, setImageLoading] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [openedImage, setOpenedImage] = useState(null);
 
     useEffect(() => {
         console.log(signal.comments);
@@ -47,7 +49,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
 
     async function sendNotification(signalId, commentData) {
         try {
-            const response = await fetch('https://signal-hub.vercel.app/api/comment-notification', {
+            const response = await fetch('      /api/comment-notification', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,10 +83,10 @@ export default function CommentSection({ signal, user, loggedIn }) {
         // Add the new comment to your signal.comments array or send it to the backend
         const signalId = signal._id; // Replace with the actual signalId
         const requestBody = { commentData, signalId };
-        
+
 
         try {
-            const response = await fetch('https://signal-hub.vercel.app/api/comment', {
+            const response = await fetch('      /api/comment', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,6 +114,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
     const router = useRouter()
     return (
         <div>
+
             <div
                 id="comment-section"
                 className={`mt-4 border-t border-gray-300 pt-4 '
@@ -149,16 +152,21 @@ export default function CommentSection({ signal, user, loggedIn }) {
                             <div className="mt-2">
                                 <img
                                     onClick={() => {
-                                        window.open(comment.image)
+                                        setOpenedImage({
+                                            url: comment.image,
+                                            caption: comment.text,
+                                        })
                                     }}
                                     src={comment.image}
                                     alt={`Comment Image by ${comment.image}`}
                                     className="w-24 h-24 cursor-pointer hover:opacity-5 object-cover rounded"
                                 />
+
                             </div>
                         )}
                     </div>
                 ))}
+                                {openedImage && <SlidrModel openedImage={openedImage} setOpenedImage={setOpenedImage} />}
 
                 <div className="mt-6">
                     <div className="flex flex-col items-stretch justify-center">
