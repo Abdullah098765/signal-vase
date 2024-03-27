@@ -23,7 +23,7 @@ function ShareModal({ isOpen, onRequestClose, id, title, url, isSignal }) {
                 <ShareButton
                     url={url}
 
-                    description={`Check out this trading signal: ${title}`}
+                    description={`Check out this ${isSignal ? 'Signal' : 'Signal Provider'}: ${title}`}
                 />
 
                 {/* URL Box with Copy Button */}

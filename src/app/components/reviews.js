@@ -210,7 +210,7 @@ const Reviews = ({ provider, loggedIn }) => {
                             <div className='animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400'></div>
                         ) : (
                             <>
-                                {auth?.currentUser && (
+                                {auth?.currentUser?.uid && (
                                     <img
                                         src={user.profilePicture}
                                         alt={user.displayName}

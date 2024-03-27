@@ -6,6 +6,7 @@ import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useMyContext } from '../context/context';
 import SlidrModel from './imageSlider';
+import { auth } from '../../../firebaseConfig';
 
 export default function CommentSection({ signal, user, loggedIn }) {
     const [comments, setComments] = useState(signal.comments)
@@ -166,7 +167,7 @@ export default function CommentSection({ signal, user, loggedIn }) {
                         )}
                     </div>
                 ))}
-                                {openedImage && <SlidrModel openedImage={openedImage} setOpenedImage={setOpenedImage} />}
+                {openedImage && <SlidrModel openedImage={openedImage} setOpenedImage={setOpenedImage} />}
 
                 <div className="mt-6">
                     <div className="flex flex-col items-stretch justify-center">
@@ -210,14 +211,15 @@ export default function CommentSection({ signal, user, loggedIn }) {
 
                             }}
                         >
-                            {loading ? < div className="animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400"></div> : <>{loggedIn && (
+                            {loading ? < div className="animate-spin rounded-full h-5 w-5 border-t-2 border-r-2 border-blue-400"></div> : <>{
+                                auth?.currentUser && (
 
-                                <img
-                                    src={user.profilePicture}
-                                    alt={user.displayName}
-                                    className="w-6 h-6 object-cover rounded-full mr-2"
-                                />
-                            )}
+                                    <img
+                                        src={user.profilePicture}
+                                        alt={user.displayName}
+                                        className="w-6 h-6 object-cover rounded-full mr-2"
+                                    />
+                                )}
                                 Comment
                             </>}
 

@@ -657,7 +657,6 @@ function Signal() {
 
 
 
-
                                 <ShareModal
                                     isOpen={isShareModalOpen}
                                     onRequestClose={closeModal}
@@ -729,7 +728,7 @@ function Signal() {
                                     </div>
                                 </div>
                                 <div
-                                    className=" text-gray-600 cursor-pointer  hidden md:block rounded-md hover:text-gray-800 focus:outline-none"
+                                    className=" text-gray-600 cursor-pointer   md:block rounded-md hover:text-gray-800 focus:outline-none"
                                     onClick={openModal}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24">
