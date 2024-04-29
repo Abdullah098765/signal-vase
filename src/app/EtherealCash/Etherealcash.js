@@ -5,9 +5,8 @@ import { useMyContext } from "../context/context";
 
 function EtherealCash() {
   const {
-
     setRouterLoading,
-   
+  
   } = useMyContext();
   useEffect(() => {
     setRouterLoading(false);
