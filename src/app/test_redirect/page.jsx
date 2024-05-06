@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { isMobile , isIOS} from "react-device-detect";
+import { isMobile, isIOS } from "react-device-detect";
 
 const AndroidRedirect = () => {
   useEffect(() => {
@@ -15,7 +15,7 @@ const AndroidRedirect = () => {
 
   return (
     <div>
-      <h1>Welcome to My Next.js App</h1>
+      <a href="android-app://com.bragtime_mobile_app">Go to Mobile App</a>
     </div>
   ); // This component doesn't render anything visible
 };
