@@ -5,20 +5,8 @@ import { useMyContext } from "../context/context";
 
 function EtherealCash() {
   const {
-    isOpen,
-    setIsOpen,
-    routerLoading,
-    getSignals,
     setRouterLoading,
-    getSearchResult,
-    setIsSliderOpen,
-    isSliderOpen,
-    closeSidenav,
-    isModalOpen,
-    setIsModalOpen,
-    user,
-    setSearchString,
-    searchString,
+  
   } = useMyContext();
   useEffect(() => {
     setRouterLoading(false);
