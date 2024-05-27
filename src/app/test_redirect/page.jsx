@@ -15,7 +15,7 @@ const AndroidRedirect = () => {
 
   return (
     <div>
-      <a href="android-app://com.bragtime_mobile_app">Go to Mobile App</a>
+      <a href="android-app://com.bragtime_mobile_app/">Go to Mobile App</a>
     </div>
   ); // This component doesn't render anything visible
 };
