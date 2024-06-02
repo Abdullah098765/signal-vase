@@ -60,7 +60,7 @@ const About = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p className="text-lg text-gray-700 mb-4">
-            If you have any questions, feedback, or inquiries, please feel free to reach out to us <b>ssmmhazz@gmail.com</b>
+            If you have any questions, feedback, or inquiries, please feel free to reach out to us <strong>contact@signalvase.com</strong>
             . We value your input and look forward to hearing from you.
           </p>
           {/* Add your contact details or a contact form here */}
