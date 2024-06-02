@@ -16,15 +16,16 @@ const About = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Support Signal Vase</h2>
           <p className="text-lg text-gray-700 mb-4">
-            If you find Signal Vase valuable and would like to support us, you can contribute by sending ETH to our MetaMask wallet address:
+            If you find Signal Vase valuable and would like to support us,
             <br />
-            <strong>MetaMask Wallet Address:</strong> 0xa14E189aB649421466435Ed79C0a2B711b71e679
+            we invite investors to invest in EtherealCash and be a part of our growth journey.
           </p>
         </div>
 
+
         {/* Add a section about ERCH funding challenges */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Support the Development of Ethereal Cash (ERCH) And Mobile App</h2>
+          <h2 className="text-2xl font-bold mb-4">Support the Development of EtherealCash (ERCH) And Mobile App</h2>
           <p className="text-lg text-gray-700 mb-4">
             We want to keep you informed about the development of ERCH and Signal Vase mobile application. Currently, progress is hindered due to limited funds. The immobility in {"ERCH's"} development is a direct result of financial constraints.
           </p>

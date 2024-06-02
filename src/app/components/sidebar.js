@@ -105,7 +105,7 @@ function Sidebar() {
                                     </svg>
 
 
-                                    <p class="text-base leading-4  ">Ethereal Cash</p>
+                                    <p class="text-base leading-4  ">EtherealCash</p>
                                 </div>
 
                                 <div
