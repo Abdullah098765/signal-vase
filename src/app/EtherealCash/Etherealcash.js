@@ -25,7 +25,7 @@ function EtherealCash() {
           Join us in this exciting journey and be a part of the future of digital finance!
         </p>
         <a 
-          href="https://polygonscan.com/token/0x5769b9a9fa938c2f583b2a49776ff5ca59e0030a"
+          href="https://polygonscan.com/token/0xe53b2a27dd87ced67f5b1ba4da9754505ac4cf60"
           target="_blank"
           rel="noopener noreferrer"
           className="text-blue-500 underline"
