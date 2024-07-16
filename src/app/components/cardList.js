@@ -84,7 +84,7 @@ const SignalCardList = ({ }) => {
               <Card signal={signal} key={signal._id} />
 
             ))}
-            {true && <>
+            {isMoreSignalsLoading && <>
               <SkeletonCard />
               <SkeletonCard />
               <SkeletonCard />
