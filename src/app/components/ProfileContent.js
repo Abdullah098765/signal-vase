@@ -121,7 +121,7 @@ function ProfileContent() {
               ></div>
               <img
                 src={user.profilePicture}
-                className="w-40 h-40 rounded-full mx-4 border-2 border-gray-500  transition duration-300 object-cover"
+                className="w-40 h-40 min-w-[10rem] min-h-[10rem] rounded-full mx-4 border-2 border-gray-500  transition duration-300 object-cover"
                 alt={user.displayName}
               />
 
