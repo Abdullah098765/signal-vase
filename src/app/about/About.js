@@ -62,10 +62,10 @@ const About = () => {
             </a>
           </h2>
           <p className="text-lg text-gray-700 mb-4">
-            We want to keep you informed about the development of ERCH and the
+            {`We want to keep you informed about the development of ERCH and the
             Signal Vase mobile application. Currently, progress is hindered due
             to limited funds. The immobility in ERCH's development is a direct
-            result of financial constraints.
+            result of financial constraints.`}
           </p>
           <p className="text-lg text-gray-700 mb-4">
             Your support can make a significant difference. By contributing to
