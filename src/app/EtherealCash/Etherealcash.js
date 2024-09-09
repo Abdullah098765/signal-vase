@@ -15,18 +15,32 @@ function EtherealCash() {
       <div className="flex flex-col items-center bg-white p-8 rounded-lg shadow-md w-full">
         <FaCog className="text-black text-5xl mb-4" />
         <p className="text-lg font-semibold mb-2">
-        EtherealCash is Under Development
+          EtherealCash is Under Development
         </p>
         <p className="text-sm text-center mb-4">
-         <a href="https://www.etherealcash.com">EtherealCash</a> (ERCH) is a decentralized digital currency that serves as the exclusive currency within the Ethereal ecosystem, which includes the Signal Vase, payment systems, decentralized applications (dApps), and community platforms. This ecosystem is designed to facilitate secure and efficient financial activities, ensuring a seamless and integrated experience for users. Use EtherealCash to purchase signals or subscribe to premium signal providers on Signal Vase. Exciting features coming soon!
+          <a
+            href="https://www.etherealcash.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            EtherealCash
+          </a> (ERCH) is a decentralized digital currency that serves as the exclusive currency within the Ethereal ecosystem, which includes Signal Vase, payment systems, decentralized applications (dApps), and community platforms. This ecosystem is designed to facilitate secure and efficient financial activities, ensuring a seamless and integrated experience for users. Use EtherealCash to purchase signals or subscribe to premium signal providers on Signal Vase. Exciting features coming soon!
           <br /><br />
           We invite investors to join us in revolutionizing the trading signal industry. By investing in EtherealCash, you will be part of a dynamic ecosystem aimed at providing transparency, security, and efficiency in financial transactions. Together, we can build a future where both seasoned traders and newcomers can thrive in a trustworthy and innovative environment.
           <br /><br />
           Join us in this exciting journey and be a part of the future of digital finance!
-          <br></br>
-          <a href="https://www.etherealcash.com/about">Learn more</a> 
+          <br /><br />
+          <a
+            href="https://www.etherealcash.com/#about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Learn more
+          </a>
         </p>
-        <a 
+        <a
           href="https://polygonscan.com/token/0xe53b2a27dd87ced67f5b1ba4da9754505ac4cf60"
           target="_blank"
           rel="noopener noreferrer"

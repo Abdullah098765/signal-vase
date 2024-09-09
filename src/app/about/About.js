@@ -10,8 +10,15 @@ const About = () => {
         <p className="text-lg text-gray-700 mb-8">
           Welcome to Signal Vase - Your Gateway to Informed Trading!
           <br /> At Signal Vase, we believe in empowering individuals to
-          navigate the complex world of trading with confidence and security.
-          <a href="https://www.signalvase.com/landing">Learn more</a>
+          navigate the complex world of trading with confidence and security.{" "}
+          <a
+            href="https://www.signalvase.com/landing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Learn more
+          </a>
         </p>
 
         <div className="mb-8">
@@ -20,8 +27,15 @@ const About = () => {
             If you find Signal Vase valuable and would like to support us,
             <br />
             we invite investors to invest in{" "}
-            <a href="https://www.etherealcash.com">EtherealCash</a> and be a
-            part of our growth journey.
+            <a
+              href="https://www.etherealcash.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              EtherealCash
+            </a>{" "}
+            and be a part of our growth journey.
           </p>
         </div>
 
@@ -29,14 +43,29 @@ const About = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">
             Support the Development of{" "}
-            <a href="https://www.etherealcash.com">EtherealCash</a> (ERCH) And
-            <a href="https://www.signalvase.com/landing">Mobile App</a>
+            <a
+              href="https://www.etherealcash.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              EtherealCash
+            </a>{" "}
+            (ERCH) And{" "}
+            <a
+              href="https://www.signalvase.com/landing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              Mobile App
+            </a>
           </h2>
           <p className="text-lg text-gray-700 mb-4">
-            We want to keep you informed about the development of ERCH and
+            We want to keep you informed about the development of ERCH and the
             Signal Vase mobile application. Currently, progress is hindered due
-            to limited funds. The immobility in {"ERCH's"} development is a
-            direct result of financial constraints.
+            to limited funds. The immobility in ERCH's development is a direct
+            result of financial constraints.
           </p>
           <p className="text-lg text-gray-700 mb-4">
             Your support can make a significant difference. By contributing to
@@ -51,25 +80,25 @@ const About = () => {
           <ul className="list-disc list-inside">
             <li className="mb-2">Diverse Signal Providers</li>
             <p className="text-lg text-gray-700 mb-4">
-              {`    Signal Vase brings together a diverse community of signal providers, each with their unique trading strategies and expertise. We understand that every trader is different, and that's why we provide you with the flexibility to choose from a variety of signals tailored to your preferences and risk tolerance.`}
+              {`Signal Vase brings together a diverse community of signal providers, each with their unique trading strategies and expertise. We understand that every trader is different, and that's why we provide you with the flexibility to choose from a variety of signals tailored to your preferences and risk tolerance.`}
             </p>
             <li className="mb-2">Transparent Reviews</li>
             <p className="text-lg text-gray-700 mb-4">
-              {`       We understand the importance of trust in the trading community. Signal Vase allows users to provide genuine reviews of signal providers, creating a transparent environment where traders can make informed decisions based on real experiences.         `}{" "}
+              {`We understand the importance of trust in the trading community. Signal Vase allows users to provide genuine reviews of signal providers, creating a transparent environment where traders can make informed decisions based on real experiences.`}
             </p>
             <li className="mb-2">Scam Protection</li>
             <p className="text-lg text-gray-700 mb-4">
-              {`        Our primary goal is to shield users from scams prevalent on social media platforms. Signal Vase is a secure space designed to eliminate the risks associated with unreliable signals, providing you with a trustworthy platform to enhance your trading journey.       `}{" "}
+              {`Our primary goal is to shield users from scams prevalent on social media platforms. Signal Vase is a secure space designed to eliminate the risks associated with unreliable signals, providing you with a trustworthy platform to enhance your trading journey.`}
             </p>
             <li className="mb-2">{`EtherealCash Integration (Under Development!)`}</li>
             <p className="text-lg text-gray-700 mb-4">
-              {`  To facilitate seamless transactions between signal providers and followers, Signal Vase introduces EtherealCash, a digital currency exclusive to our platform. Users can buy and sell signals using EtherealCash, ensuring a convenient and secure payment system.    `}{" "}
+              {`To facilitate seamless transactions between signal providers and followers, Signal Vase introduces EtherealCash, a digital currency exclusive to our platform. Users can buy and sell signals using EtherealCash, ensuring a convenient and secure payment system.`}
             </p>
           </ul>
         </div>
 
         <p className="text-lg text-gray-700 mb-8">
-          {`    Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Vase welcomes you to a community driven by trust, transparency, and innovation. Together, let's redefine the trading landscape and ensure that every trader gets what they deserve.`}{" "}
+          {`Whether you're a seasoned trader looking to share your expertise or a newcomer seeking reliable signals, Signal Vase welcomes you to a community driven by trust, transparency, and innovation. Together, let's redefine the trading landscape and ensure that every trader gets what they deserve.`}
         </p>
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
@@ -81,7 +110,7 @@ const About = () => {
           {/* Add your contact details or a contact form here */}
         </div>
         <p className="text-lg text-gray-700">
-          {`          Signal Vase - Trading with Trust, Trading with Signal Vase.`}
+          {`Signal Vase - Trading with Trust, Trading with Signal Vase.`}
         </p>
       </div>
     </div>
