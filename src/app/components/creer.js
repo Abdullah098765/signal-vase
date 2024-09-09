@@ -159,7 +159,7 @@ const Creer = ({ user }) => {
         <div>
 
             {user && <div class="flex-1 w-full bg-white rounded-lg lg:shadow-xl shadow-md mt-4 lg:p-8 p-4">
-                <h4 class="text-xl text-gray-900 font-bold">Careere</h4>
+                <h4 class="text-xl text-gray-900 font-bold">Performance</h4>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8  mt-4">
                     <TotalSignal count={allCount} />
