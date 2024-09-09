@@ -9,8 +9,9 @@ const About = () => {
 
         <p className="text-lg text-gray-700 mb-8">
           Welcome to Signal Vase - Your Gateway to Informed Trading!
-          <br /> At Signal Vase, we believe in empowering individuals to navigate
-          the complex world of trading with confidence and security.
+          <br /> At Signal Vase, we believe in empowering individuals to
+          navigate the complex world of trading with confidence and security.
+          <a href="https://www.signalvase.com/landing">Learn more</a>
         </p>
 
         <div className="mb-8">
@@ -18,19 +19,31 @@ const About = () => {
           <p className="text-lg text-gray-700 mb-4">
             If you find Signal Vase valuable and would like to support us,
             <br />
-            we invite investors to invest in EtherealCash and be a part of our growth journey.
+            we invite investors to invest in{" "}
+            <a href="https://www.etherealcash.com">EtherealCash</a> and be a
+            part of our growth journey.
           </p>
         </div>
 
-
         {/* Add a section about ERCH funding challenges */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Support the Development of EtherealCash (ERCH) And Mobile App</h2>
+          <h2 className="text-2xl font-bold mb-4">
+            Support the Development of{" "}
+            <a href="https://www.etherealcash.com">EtherealCash</a> (ERCH) And
+            <a href="https://www.signalvase.com/landing">Mobile App</a>
+          </h2>
           <p className="text-lg text-gray-700 mb-4">
-            We want to keep you informed about the development of ERCH and Signal Vase mobile application. Currently, progress is hindered due to limited funds. The immobility in {"ERCH's"} development is a direct result of financial constraints.
+            We want to keep you informed about the development of ERCH and
+            Signal Vase mobile application. Currently, progress is hindered due
+            to limited funds. The immobility in {"ERCH's"} development is a
+            direct result of financial constraints.
           </p>
           <p className="text-lg text-gray-700 mb-4">
-            Your support can make a significant difference. By contributing to Signal Vase, you are not only supporting the platform itself but also helping to accelerate the development of ERCH and its mobile app. Together, we can overcome these challenges and continue to innovate in the world of trading.
+            Your support can make a significant difference. By contributing to
+            Signal Vase, you are not only supporting the platform itself but
+            also helping to accelerate the development of ERCH and its mobile
+            app. Together, we can overcome these challenges and continue to
+            innovate in the world of trading.
           </p>
         </div>
         <div className="mb-8">
@@ -61,8 +74,9 @@ const About = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
           <p className="text-lg text-gray-700 mb-4">
-            If you have any questions, feedback, or inquiries, please feel free to reach out to us <strong>contact@signalvase.com</strong>
-            . We value your input and look forward to hearing from you.
+            If you have any questions, feedback, or inquiries, please feel free
+            to reach out to us <strong>contact@signalvase.com</strong>. We value
+            your input and look forward to hearing from you.
           </p>
           {/* Add your contact details or a contact form here */}
         </div>
