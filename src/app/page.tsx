@@ -1,23 +1,22 @@
 "use client";
-
-import Navbar from "./components/navbar.js";
-import { MyContextProvider } from "./context/context.js";
-import { useMyContext } from "./context/context.js";
-import Sidebar from "./components/sidebar.js";
-import SignalCardList from "./components/cardList.js";
-import Modal from "./components/signUp-Model.js";
-import SignalModal from "./components/signalModal.js";
-import BottomNavbar from "./components/mobile-bottem-bar.js";
-import RouterLoading from "./components/routerLoading.js";
-import firebase from "firebase/app";
 import "firebase/auth";
-import { firebaseConfig } from "../../firebaseConfig.js";
-import { useEffect } from "react";
-import { io } from "socket.io-client";
 import Head from "next/head.js";
+import { useEffect } from "react";
+import { auth } from "../../firebaseConfig";
+import { useRouter } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
 export default function Home() {
+  const [user, loading] = useAuthState(auth);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!loading && user) {
+      router.push("/home");
+    }
+  }, [user]);
+
   return (
-    <div className="">
+    <div className="landing-container w-full h-full border-0">
       <Head>
         <link
           rel="apple-touch-icon"
@@ -38,19 +37,13 @@ export default function Home() {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <MyContextProvider>
-        <RouterLoading/>
-        <Navbar />
-        <div className="flex">
-          <Sidebar />
-          <SignalCardList />
-        </div>
-        {/* <CreateSignalModal isOpen={true} onClose={()=>{}} /> */}
-
-        <Modal />
-        <SignalModal />
-        <BottomNavbar />
-      </MyContextProvider>
+      <iframe
+        src="https://signal-vase-landing.vercel.app"
+        title="Landing Page"
+        className="landing-iframe w-full h-full border-0"
+        frameBorder="0"
+        allowFullScreen
+      ></iframe>
     </div>
   );
 }

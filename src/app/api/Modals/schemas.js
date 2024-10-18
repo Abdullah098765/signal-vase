@@ -180,6 +180,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  balance: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const signalSchema = new mongoose.Schema({

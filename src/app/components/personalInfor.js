@@ -270,7 +270,7 @@ const PersonalInfor = ({ user }) => {
       :
 
       <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
-        <div class="w-full flex flex-col 2xl:w-1/3">
+        <div class="w-full flex flex-col">
 
           <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
             <div className='absolute right-12'>
