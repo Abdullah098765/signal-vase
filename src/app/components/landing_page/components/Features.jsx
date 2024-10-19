@@ -65,7 +65,7 @@ const Features = () => {
   return (
     <div
       id="feature"
-      className="p-8 items-center justify-center flex flex-col overflow-x-hidden pt-[6rem]"
+      className="p-8 items-center justify-center flex flex-col overflow-x-hidden pt-[6rem] bg-[#071c39]"
     >
       <div className="text-center mb-8">
         <h2 className="text-xl font-bold text-orange-500">Our Features</h2>
