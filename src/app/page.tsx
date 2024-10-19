@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { auth } from "../../firebaseConfig";
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
+import LandingPage from "@/app/components/landing_page/LandingPage"
 export default function Home() {
   const [user, loading] = useAuthState(auth);
 
@@ -37,13 +38,7 @@ export default function Home() {
         />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
-      <iframe
-        src="https://signal-vase-landing.vercel.app"
-        title="Landing Page"
-        className="landing-iframe w-full h-full border-0"
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
+    <LandingPage/>
     </div>
   );
 }

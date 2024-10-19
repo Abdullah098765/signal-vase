@@ -83,9 +83,12 @@ export const MyContextProvider = ({ children }) => {
       .then(result => {
         setRouterLoading(false);
         let newSignals = JSON.parse(result);
-        setSignals(prevSignals => {
+        setSignals(prevSignals => { 
+          if (!prevSignals){
+            return
+          }
           // Check if each signal in newSignals already exists in prevSignals based on a specific condition
-          let uniqueNewSignals = newSignals.filter(newSignal =>
+          let uniqueNewSignals = newSignals?.filter(newSignal =>
             !prevSignals.some(prevSignal => prevSignal._id === newSignal._id)
           );
 

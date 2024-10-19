@@ -18,6 +18,7 @@ import {
 import Image from "next/image";
 import logo from "../../../assets/logo.svg";
 import Notification_Icon from "@/app/components/notification-icon";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
   const auth = getAuth();
@@ -50,6 +51,19 @@ const Navbar = () => {
     searchString,
   } = useMyContext();
 
+  const [currentUser, loading] = useAuthState(auth);
+  useEffect(() => {
+    // Get the current URL
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Get the value of the 'signup' parameter
+    const signup = urlParams.get("signup");
+
+    // Check if 'signup' is 'true'
+    if (signup === "true" && !auth.currentUser && !loading) {
+      setIsModalOpen(true);
+    } else setIsModalOpen(false);
+  }, [auth.currentUser, loading]);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -110,7 +124,7 @@ const Navbar = () => {
     } else setSearchVisible(false);
   }, []);
   const _signOut = () => {
-    const origin = window.origin
+    const origin = window.origin;
     signOut(auth)
       .then(() => {
         // Sign-out successful.
@@ -159,9 +173,9 @@ const Navbar = () => {
       console.log("Invalid search string. Please enter a valid search.");
     }
   };
-console.log('====================================');
-console.log(!auth.currentUser );
-console.log('====================================');
+  console.log("====================================");
+  console.log(!auth.currentUser);
+  console.log("====================================");
   if (!user) return null;
 
   return (
@@ -246,13 +260,15 @@ console.log('====================================');
             {/* <BellIcon className=' h-6 w-6 text-gray-100 hover:text-gray-400' /> */}
           </div>
 
-          {uid && <div>
-            <Notification_Icon />
-          </div>}
+          {uid && (
+            <div>
+              <Notification_Icon />
+            </div>
+          )}
           {/* User Profile */}
           <div className="flex items-center space-x-4">
             <div className="absolute right-5 group">
-              {!auth.currentUser  ? (
+              {!auth.currentUser ? (
                 <button
                   name="signin"
                   onClick={() => {
@@ -313,8 +329,9 @@ console.log('====================================');
       />
 
       <nav
-        className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${searchVisible ? "justify-end" : "justify-between"
-          } ${visible ? "navbar-visible" : "navbar-hidden"}`}
+        className={`navbar bg-gray-900 text-white  flex items-center  md:hidden  ${
+          searchVisible ? "justify-end" : "justify-between"
+        } ${visible ? "navbar-visible" : "navbar-hidden"}`}
       >
         {/* Left Side: Logo */}
         {!searchVisible && (
@@ -325,18 +342,20 @@ console.log('====================================');
         {/* Right Side: Search, Create, Profile */}
         <div className={`flex items-center ${searchVisible ? " w-full" : ""} `}>
           <div
-            className={`mobile-navbar flex flex-row  justify-around items-center ${searchVisible ? " w-full" : ""
-              }`}
+            className={`mobile-navbar flex flex-row  justify-around items-center ${
+              searchVisible ? " w-full" : ""
+            }`}
           >
             {/* Search Icon */}
 
             {/* Search Input Field */}
 
             <div
-              className={`search-container ${searchVisible
-                ? "active flex w-full flex-row items-center relative"
-                : ""
-                }`}
+              className={`search-container ${
+                searchVisible
+                  ? "active flex w-full flex-row items-center relative"
+                  : ""
+              }`}
             >
               <div
                 className="text-white cursor-pointer absolute ml-2"
