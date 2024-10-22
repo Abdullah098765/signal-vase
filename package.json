@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "node server"
+    "server": "node server",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -35,6 +36,7 @@
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.2",
     "next": "13.4.19",
+    "next-sitemap": "^4.2.3",
     "node-cron": "^3.0.2",
     "postcss": "8.4.28",
     "react": "18.2.0",
