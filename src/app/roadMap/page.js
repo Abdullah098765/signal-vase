@@ -1,4 +1,4 @@
-import Footer from '@/components/Footer';
+import Footer from "../components/landing_page/components/Footer"
 import React from 'react';
 
 export default function Roadmap() {
